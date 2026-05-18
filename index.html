@@ -2341,7 +2341,6 @@ function cotSetJugPrecio(nombre, val) {
 
 function cotInit() {
   cotCargar();
-  cotRenderPrecios();
   // data es un objeto {0:[...], 1:[...], ...20:[...]}
   const total=data?Object.values(data).reduce((s,r)=>Array.isArray(r)?s+r.reduce((a,b)=>a+b,0):s,0):0;
   const el=document.getElementById('cot-inv-status');
@@ -2375,4 +2374,4 @@ window.cotSetJugPrecio=cotSetJugPrecio;
         <div class="cot-card">
           <h3>📋 Pega la lista del cliente</h3>
           <p style="font-size:0.72rem;color:#64748b;margin-bottom:8px;line-height:1.6">Formatos: <code style="background:#0f172a;padding:1px 5px;border-radius:3px;color:#60a5fa">ARG 14</code> · <code style="background:#0f172a;padding:1px 5px;border-radius:3px;color:#60a5fa">ARG-14</code> · <code style="background:#0f172a;padding:1px 5px;border-radius:3px;color:#60a5fa">ARG 14 x2</code></p>
-          <textarea class="cot-textarea" id="cot-lista-input" placeholder="ARG 14&#10;BRA 1&#10;FWC 3&#10;ESP 14 x2&#10;MEX 15
+          <textarea class="cot-textarea" id="cot-lista-input" placeholder="ARG 14&#10;BRA 1&#10;FWC 3&#10;ESP 14 x2&#10;MEX 15&#10;..."></textarea>
