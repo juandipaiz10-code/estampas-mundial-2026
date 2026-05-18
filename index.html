@@ -2272,11 +2272,11 @@ function cotShowTab(id,btn) {
 function cotRenderPrecios() {
   // Inputs de precios base
   const keys=[
-    ['fwc-emblema','FWC #1 Emblema (FOIL)'],['fwc-normal','FWC #2-8 (Sedes/Mascota)'],['fwc-historia','FWC #9-20 (Historia)'],
-    ['escudo-imp','Escudo FOIL — equipo imp.'],['escudo-norm','Escudo FOIL — equipo normal'],
-    ['foto-imp','Foto grupal — equipo imp.'],['foto-norm','Foto grupal — equipo normal'],
-    ['estrella-top','Jugador estrella TOP'],['estrella-norm','Jugador estrella normal'],
-    ['jug-imp','Jugador normal — equipo imp.'],['jug-norm','Jugador normal — equipo normal']
+    ['fwc-emblema','Prima página (FWC)'],
+    ['escudo-norm','Escudos y equipos normales'],
+    ['escudo-imp','Escudos y equipos importantes'],
+    ['jug-imp','Jugadores importantes'],
+    ['jug-norm','Jugadores normales']
   ];
   document.getElementById('cot-base-precios').innerHTML=keys.map(([k,lbl])=>`
     <div class="cot-prow">
@@ -2374,4 +2374,7 @@ window.cotSetJugPrecio=cotSetJugPrecio;
         <div class="cot-card">
           <h3>📋 Pega la lista del cliente</h3>
           <p style="font-size:0.72rem;color:#64748b;margin-bottom:8px;line-height:1.6">Formatos: <code style="background:#0f172a;padding:1px 5px;border-radius:3px;color:#60a5fa">ARG 14</code> · <code style="background:#0f172a;padding:1px 5px;border-radius:3px;color:#60a5fa">ARG-14</code> · <code style="background:#0f172a;padding:1px 5px;border-radius:3px;color:#60a5fa">ARG 14 x2</code></p>
-          <textarea class="cot-textarea" id="cot-lista-input" placeholder="ARG 14&#10;BRA 1&#10;FW
+          <textarea class="cot-textarea" id="cot-lista-input" placeholder="ARG 14&#10;BRA 1&#10;FWC 3&#10;ESP 14 x2&#10;MEX 15&#10;..."></textarea>
+          <div style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap">
+            <button class="cot-btn cot-btn-red" onclick="cotCotizar()">⚡ Cotizar lista</button>
+            <button class="cot-btn cot-btn-ghost" onclick=
