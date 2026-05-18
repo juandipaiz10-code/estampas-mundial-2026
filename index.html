@@ -880,7 +880,28 @@ function setupRealtime() {
       localStorage.setItem(NEG_KEY, JSON.stringify(negData));
       buildAll();
     })
+    .on('postgres_changes', { event: 'UPDATE', schema: 'public', table: 'cotizador' }, (payload) => {
+      if (!payload.new) return;
+      const r = payload.new;
+      if (r.precios) { cotPrecios = r.precios; localStorage.setItem(COT_KEY_PRECIOS, JSON.stringify(cotPrecios)); }
+      if (r.equipos) { cotEquiposImp = new Set(r.equipos); localStorage.setItem(COT_KEY_EQUIPOS, JSON.stringify(r.equipos)); }
+      if (r.estrellas) { cotEstrellas = new Set(r.estrellas); localStorage.setItem(COT_KEY_ESTRELLAS, JSON.stringify(r.estrellas)); }
+      if (r.jugprecios) { cotJugPrecios = r.jugprecios; localStorage.setItem(COT_KEY_JUGPRECIOS, JSON.stringify(r.jugprecios)); }
+    })
     .subscribe();
+}
+
+async function loadCotizadorFromSupabase() {
+  if (!supaClient) return false;
+  try {
+    const { data: res } = await supaClient.from('cotizador').select('*').eq('id', 'default').single();
+    if (!res) return false;
+    if (res.precios) { cotPrecios = res.precios; localStorage.setItem(COT_KEY_PRECIOS, JSON.stringify(cotPrecios)); }
+    if (res.equipos) { cotEquiposImp = new Set(res.equipos); localStorage.setItem(COT_KEY_EQUIPOS, JSON.stringify(res.equipos)); }
+    if (res.estrellas) { cotEstrellas = new Set(res.estrellas); localStorage.setItem(COT_KEY_ESTRELLAS, JSON.stringify(res.estrellas)); }
+    if (res.jugprecios) { cotJugPrecios = res.jugprecios; localStorage.setItem(COT_KEY_JUGPRECIOS, JSON.stringify(res.jugprecios)); }
+    return true;
+  } catch(e) { return false; }
 }
 
 // ---- Init principal ----
@@ -895,6 +916,7 @@ async function initFirebase() {
     supaClient = window.supabase.createClient(SUPA_URL, SUPA_KEY);
     const loaded = await loadFromSupabase();
     const negRemote = await loadNegFromSupabase();
+    const cotRemote = await loadCotizadorFromSupabase();
     if (negRemote) {
       negData = negRemote;
       localStorage.setItem(NEG_KEY, JSON.stringify(negData));
@@ -908,7 +930,8 @@ async function initFirebase() {
       await Promise.all([
         supaUpsert('inventario', { id: 'default', data: data, updated_at: new Date().toISOString() }),
         supaUpsert('albums', { id: 'default', data: albums, updated_at: new Date().toISOString() }),
-        supaUpsert('negocio', { id: 'default', data: negData, updated_at: new Date().toISOString() })
+        supaUpsert('negocio', { id: 'default', data: negData, updated_at: new Date().toISOString() }),
+        supaUpsert('cotizador', { id: 'default', precios: cotPrecios, equipos: [...cotEquiposImp], estrellas: [...cotEstrellas], jugprecios: cotJugPrecios, updated_at: new Date().toISOString() })
       ]);
     }
     setupRealtime();
@@ -2078,6 +2101,15 @@ function cotGuardar() {
   localStorage.setItem(COT_KEY_EQUIPOS,   JSON.stringify([...cotEquiposImp]));
   localStorage.setItem(COT_KEY_ESTRELLAS, JSON.stringify([...cotEstrellas]));
   localStorage.setItem(COT_KEY_JUGPRECIOS,JSON.stringify(cotJugPrecios));
+  // Sync a Supabase
+  supaUpsert('cotizador', {
+    id: 'default',
+    precios: cotPrecios,
+    equipos: [...cotEquiposImp],
+    estrellas: [...cotEstrellas],
+    jugprecios: cotJugPrecios,
+    updated_at: new Date().toISOString()
+  });
 }
 
 function cotGetPrecio(col, ri) {
@@ -2237,6 +2269,7 @@ function cotShowTab(id,btn) {
 
 // ── Renderizado de configuración de precios ────────────────
 function cotRenderPrecios() {
+  if (!document.getElementById('cot-base-precios')) return;
   // Inputs de precios base
   const keys=[
     ['fwc-emblema','FWC #1 Emblema (FOIL)'],['fwc-normal','FWC #2-8 (Sedes/Mascota)'],['fwc-historia','FWC #9-20 (Historia)'],
@@ -2342,48 +2375,4 @@ window.cotSetJugPrecio=cotSetJugPrecio;
         <div class="cot-card">
           <h3>📋 Pega la lista del cliente</h3>
           <p style="font-size:0.72rem;color:#64748b;margin-bottom:8px;line-height:1.6">Formatos: <code style="background:#0f172a;padding:1px 5px;border-radius:3px;color:#60a5fa">ARG 14</code> · <code style="background:#0f172a;padding:1px 5px;border-radius:3px;color:#60a5fa">ARG-14</code> · <code style="background:#0f172a;padding:1px 5px;border-radius:3px;color:#60a5fa">ARG 14 x2</code></p>
-          <textarea class="cot-textarea" id="cot-lista-input" placeholder="ARG 14&#10;BRA 1&#10;FWC 3&#10;ESP 14 x2&#10;MEX 15&#10;..."></textarea>
-          <div style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap">
-            <button class="cot-btn cot-btn-red" onclick="cotCotizar()">⚡ Cotizar lista</button>
-            <button class="cot-btn cot-btn-ghost" onclick="cotLimpiar()">✕ Limpiar</button>
-          </div>
-        </div>
-        <div class="cot-card" style="margin-top:12px">
-          <div id="cot-inv-status" style="font-size:0.75rem;color:#64748b"></div>
-        </div>
-      </div>
-      <div id="cot-resultado" style="min-height:200px">
-        <div class="cot-empty">🧾 Pega una lista y presiona <strong>Cotizar</strong></div>
-      </div>
-    </div>
-  </div>
-
-  <!-- PRECIOS BASE -->
-  <div class="cot-sub-page" id="cot-p-precios" style="display:none;margin-top:16px">
-    <div class="cot-precio-card" style="max-width:500px">
-      <h3>💲 Precios base por categoría</h3>
-      <div id="cot-base-precios"></div>
-    </div>
-  </div>
-
-  <!-- ESTRELLAS + PRECIO INDIVIDUAL -->
-  <div class="cot-sub-page" id="cot-p-estrellas" style="display:none;margin-top:16px">
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;flex-wrap:wrap">
-      <div class="cot-precio-card">
-        <h3>⭐ Marcar jugadores estrella</h3>
-        <p style="font-size:0.72rem;color:#64748b;margin-bottom:10px">Dorado = precio estrella. Clic para marcar o desmarcar.</p>
-        <div id="cot-estrellas-toggle" style="display:flex;flex-wrap:wrap;gap:5px"></div>
-      </div>
-      <div class="cot-precio-card">
-        <h3>💲 Precio individual por jugador</h3>
-        <p style="font-size:0.72rem;color:#64748b;margin-bottom:10px">Deja vacío = usar precio de categoría. Tiene prioridad máxima.</p>
-        <div id="cot-jug-precios"></div>
-      </div>
-    </div>
-  </div>
-
-  <!-- EQUIPOS IMPORTANTES -->
-  <div class="cot-sub-page" id="cot-p-equipos" style="display:none;margin-top:16px">
-    <div class="cot-precio-card">
-      <h3>🏆 Equipos importantes — clic para marcar/desmarcar</h3>
-      <p
+          <textarea class="cot-textarea" id="cot-lista-input" placeholder="ARG 14&#10;BRA 1&#10;FWC 3&#10;ESP 14 x
