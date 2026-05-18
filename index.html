@@ -56,7 +56,7 @@ body { font-family: 'Inter', sans-serif; background: #0a0e1a; color: #e2e8f0; mi
 .btn-ghost { background: transparent; color: #94a3b8; border: 1px solid #334155; } .btn-ghost:hover { background: #1e2435; color: #e2e8f0; }
 .saved-badge { margin-left: auto; font-size: 0.7rem; color: #166534; background: #052e16; border: 1px solid #166534; border-radius: 4px; padding: 3px 9px; }
 
-/* CELDA DE ENTRADA RÃPIDA (fila 00 en tabla) */
+/* CELDA DE ENTRADA RÁPIDA (fila 00 en tabla) */
 .qi-cell-input {
   width: 52px; background: #0d1424; border: 1px solid #2d3748; border-radius: 4px;
   color: #94a3b8; font-size: 0.78rem; font-weight: 700; padding: 3px 4px;
@@ -105,7 +105,7 @@ tfoot td { border: 1px solid #1e2435; border-top: 2px solid #e63946; background:
 tfoot td:first-child { background: #0a0f1e; color: #4b5563; font-size: 0.65rem; letter-spacing: 1px; text-transform: uppercase; position: sticky; left: 0; z-index: 2; }
 tfoot td.col-total { background: #060d1a !important; color: #60a5fa !important; }
 
-/* Celda de valor â sin botones, color de fondo segÃºn cantidad */
+/* Celda de valor — sin botones, color de fondo según cantidad */
 tbody td.cv-cell {
   padding: 0; transition: background 0.2s;
   position: relative; cursor: default;
@@ -124,7 +124,7 @@ td.col-fwc.cv-cell.v0 { background: rgba(167,139,250,0.10) !important; }
 .cv { font-size: 0.82rem; font-weight: 700; text-align: center; color: #f1f5f9; user-select: none; }
 .cv.z  { color: #4a5568; }
 
-/* Tooltip de estampa â usa position:fixed via JS */
+/* Tooltip de estampa — usa position:fixed via JS */
 .stk-tip { display: none; }
 
 /* Borde dorado en celdas estrella */
@@ -190,7 +190,7 @@ tbody td.cv-cell.estrella.v3p { box-shadow: inset 0 0 0 1px #f59e0b, inset 0 0 7
 .neg-gen-stat .l { font-size: 0.62rem; color: #64748b; text-transform: uppercase; letter-spacing: 0.8px; margin-top: 2px; }
 .neg-empty { color: #374151; font-size: 0.78rem; text-align: center; padding: 20px; }
 
-/* ÃLBUMES */
+/* ÁLBUMES */
 .alb-section { padding: 20px 28px 40px; }
 .alb-section h2 { font-family: 'Bebas Neue', sans-serif; font-size: 1.6rem; letter-spacing: 2px; color: #e2e8f0; margin-bottom: 4px; }
 .alb-sub { font-size: 0.78rem; color: #64748b; margin-bottom: 16px; }
@@ -214,7 +214,7 @@ tbody td.cv-cell.estrella.v3p { box-shadow: inset 0 0 0 1px #f59e0b, inset 0 0 7
 .alb-foot { margin-top: 16px; padding: 10px 18px; background: #0f172a; border: 1px solid #1e2435; border-radius: 8px; display: flex; gap: 18px; flex-wrap: wrap; align-items: center; font-size: 0.78rem; color: #64748b; }
 .alb-foot strong { color: #e2e8f0; }
 
-/* ANÃLISIS */
+/* ANÁLISIS */
 .ana-wrap { padding: 20px 28px 40px; }
 .ana-wrap h2 { font-family: 'Bebas Neue', sans-serif; font-size: 1.6rem; letter-spacing: 2px; color: #e2e8f0; margin-bottom: 3px; }
 .ana-sub { font-size: 0.78rem; color: #64748b; margin-bottom: 18px; }
@@ -239,7 +239,7 @@ tbody td.cv-cell.estrella.v3p { box-shadow: inset 0 0 0 1px #f59e0b, inset 0 0 7
 .pi-v { font-size: 1.1rem; font-weight: 700; }
 .pi-v.r { color: #e63946; } .pi-v.y { color: #f59e0b; } .pi-v.b { color: #60a5fa; } .pi-v.g { color: #34d399; }
 
-/* ââ Ana quick stats âââââââââââââââââââ */
+/* ── Ana quick stats ─────────────────── */
 .ana-stats-row { display:flex; gap:12px; flex-wrap:wrap; margin-bottom:18px; }
 .ana-qs { background:#111827; border:1px solid #1e2435; border-radius:8px; padding:12px 18px; text-align:center; flex:1; min-width:100px; }
 .ana-qs-v { font-size:1.5rem; font-weight:700; }
@@ -247,7 +247,7 @@ tbody td.cv-cell.estrella.v3p { box-shadow: inset 0 0 0 1px #f59e0b, inset 0 0 7
 .ana-card-wide { grid-column: span 2; }
 @media(max-width:700px){ .ana-card-wide { grid-column: span 1; } }
 
-/* ââ Stock pills âââââââââââââââââââââââ */
+/* ── Stock pills ─────────────────────── */
 .stock-pill { background:#111827; border:1px solid #1e2435; border-radius:8px; padding:12px 20px; text-align:center; min-width:120px; }
 .stock-v { font-size:1.6rem; font-weight:700; }
 .stock-v.ok  { color:#34d399; }
@@ -255,7 +255,7 @@ tbody td.cv-cell.estrella.v3p { box-shadow: inset 0 0 0 1px #f59e0b, inset 0 0 7
 .stock-v.err { color:#e63946; }
 .stock-l { font-size:0.68rem; color:#64748b; margin-top:4px; }
 
-/* ââ Cajas stock grid ââââââââââââââââââ */
+/* ── Cajas stock grid ────────────────── */
 .stock-cajas-grid { display:flex; gap:14px; flex-wrap:wrap; margin-bottom:18px; }
 .scaja-pill { background:#111827; border:1px solid #1e2435; border-radius:10px; padding:16px 22px; text-align:center; flex:1; min-width:140px; }
 .scaja-num { font-size:2rem; font-weight:700; }
@@ -264,7 +264,7 @@ tbody td.cv-cell.estrella.v3p { box-shadow: inset 0 0 0 1px #f59e0b, inset 0 0 7
 .scaja-label { font-size:0.78rem; font-weight:600; color:#e2e8f0; margin-top:4px; }
 .scaja-sub { font-size:0.65rem; color:#4b5563; margin-top:2px; }
 
-/* ââ rank-table header âââââââââââââââââ */
+/* ── rank-table header ───────────────── */
 .rank-table thead th { font-size:0.65rem; color:#4b5563; text-transform:uppercase; padding:4px 6px; border-bottom:1px solid #1e2435; }
 .neg-hist-row.pend { background: rgba(251,146,60,0.07); border-left: 3px solid #fb923c; }
 .neg-hist-tipo.p { background:#7c2d12; color:#fb923c; font-size:0.62rem; padding:2px 6px; border-radius:3px; white-space:nowrap; font-weight:700; }
@@ -342,10 +342,10 @@ tbody td.cv-cell.estrella.v3p { box-shadow: inset 0 0 0 1px #f59e0b, inset 0 0 7
 <body>
 
 <div class="nav">
-  <button class="nav-btn active" onclick="showPage('p-inv',this)">ð¦ Inventario</button>
-  <button class="nav-btn" onclick="showPage('p-neg',this)">ð° Compras</button>
-  <button class="nav-btn" onclick="showPage('p-ana',this)">ð AnÃ¡lisis</button>
-  <button class="nav-btn" onclick="showPage('p-cotiz',this)">ð§¾ Cotizador</button>
+  <button class="nav-btn active" onclick="showPage('p-inv',this)">📦 Inventario</button>
+  <button class="nav-btn" onclick="showPage('p-neg',this)">💰 Compras</button>
+  <button class="nav-btn" onclick="showPage('p-ana',this)">📊 Análisis</button>
+  <button class="nav-btn" onclick="showPage('p-cotiz',this)">🧾 Cotizador</button>
   <div class="sync-indicator" id="sync-ind">
     <span class="sync-dot"></span>
     <span id="sync-txt">Offline</span>
@@ -360,7 +360,7 @@ tbody td.cv-cell.estrella.v3p { box-shadow: inset 0 0 0 1px #f59e0b, inset 0 0 7
     <h1>Estampas Mundial 2026</h1>
     <div class="sub">Juandi y Emilio</div>
   </div>
-  <span class="badge">49 paÃ­ses</span>
+  <span class="badge">49 países</span>
   <span class="badge">980 estampas totales</span>
   <span class="badge" id="b-conseg">Conseguidas: 0</span>
   <span class="badge" id="b-falt">No conseguidas: 980</span>
@@ -368,16 +368,16 @@ tbody td.cv-cell.estrella.v3p { box-shadow: inset 0 0 0 1px #f59e0b, inset 0 0 7
 
 <div class="stats-row">
   <div class="stat-card sc-total" ><div class="sc-v" id="s-total">0</div><div class="sc-l">En inventario</div></div>
-  <div class="stat-card sc-conseg"><div class="sc-v" id="s-conseg">0</div><div class="sc-l">Conseguidas (Ãºnicas)</div></div>
+  <div class="stat-card sc-conseg"><div class="sc-v" id="s-conseg">0</div><div class="sc-l">Conseguidas (únicas)</div></div>
   <div class="stat-card sc-faltan"><div class="sc-v" id="s-faltan">980</div><div class="sc-l">No conseguidas</div></div>
   <div class="stat-card sc-rep"   ><div class="sc-v" id="s-repet">0</div><div class="sc-l">Repetidas</div></div>
   <div class="stat-card sc-esp"   ><div class="sc-v" id="s-esp">0</div><div class="sc-l">Especiales</div></div>
-  <div class="stat-card sc-mas"   ><div class="sc-v" id="s-mas">â</div><div class="sc-l">MÃ¡s repetida</div></div>
+  <div class="stat-card sc-mas"   ><div class="sc-v" id="s-mas">—</div><div class="sc-l">Más repetida</div></div>
 </div>
 
 <div class="controls">
-  <button class="btn btn-red"   onclick="exportCSV()">â¬ Exportar CSV</button>
-  <span class="saved-badge" id="save-badge">ð¾ Guardado automÃ¡tico</span>
+  <button class="btn btn-red"   onclick="exportCSV()">⬇ Exportar CSV</button>
+  <span class="saved-badge" id="save-badge">💾 Guardado automático</span>
 </div>
 
 
@@ -404,10 +404,10 @@ tbody td.cv-cell.estrella.v3p { box-shadow: inset 0 0 0 1px #f59e0b, inset 0 0 7
 
   <!-- SUB-TABS -->
   <div class="neg-tabs">
-    <button class="neg-tab active" onclick="negTab('cajas',this)">ð¦ Cajas</button>
-    <button class="neg-tab" onclick="negTab('alb',this)">ð Ãlbumes</button>
-    <button class="neg-tab" onclick="negTab('est',this)">ð´ Estampas sueltas</button>
-    <button class="neg-tab" onclick="negTab('listas',this)">ð Pedidos de listas</button>
+    <button class="neg-tab active" onclick="negTab('cajas',this)">📦 Cajas</button>
+    <button class="neg-tab" onclick="negTab('alb',this)">📒 Álbumes</button>
+    <button class="neg-tab" onclick="negTab('est',this)">🎴 Estampas sueltas</button>
+    <button class="neg-tab" onclick="negTab('listas',this)">📋 Pedidos de listas</button>
   </div>
 
   <!-- ======= CAJAS ======= -->
@@ -419,7 +419,7 @@ tbody td.cv-cell.estrella.v3p { box-shadow: inset 0 0 0 1px #f59e0b, inset 0 0 7
     <div class="neg-2col">
       <!-- PRECIOS -->
       <div class="neg-card">
-        <div class="neg-card-title">âï¸ Precios</div>
+        <div class="neg-card-title">⚙️ Precios</div>
         <div class="price-row"><label>Costo caja (tuyo)</label><div class="price-inp-wrap"><span class="price-pre">Q</span><input class="price-inp" id="pc-caja" type="number" min="0" step="1" value="180"></div></div>
         <div class="price-row"><label>Venta caja completa</label><div class="price-inp-wrap"><span class="price-pre">Q</span><input class="price-inp" id="pv-caja" type="number" min="0" step="1" value="250"></div></div>
         <div class="price-row"><label>Venta sobre suelto</label><div class="price-inp-wrap"><span class="price-pre">Q</span><input class="price-inp" id="pv-sobre" type="number" min="0" step="0.5" value="3"></div></div>
@@ -428,10 +428,10 @@ tbody td.cv-cell.estrella.v3p { box-shadow: inset 0 0 0 1px #f59e0b, inset 0 0 7
 
       <!-- REGISTRAR COMPRA DE CAJAS -->
       <div class="neg-card">
-        <div class="neg-card-title">ð¥ Registrar compra de cajas</div>
+        <div class="neg-card-title">📥 Registrar compra de cajas</div>
         <div class="form-row"><label>Cajas para vender completas</label><input class="neg-inp" id="caja-buy-vender" type="number" min="0" value="0" placeholder="0"></div>
         <div class="form-row"><label>Cajas para vender por sobres</label><input class="neg-inp" id="caja-buy-sobres" type="number" min="0" value="0" placeholder="0"></div>
-        <div class="form-row"><label>Cajas para abrir (colecciÃ³n)</label><input class="neg-inp" id="caja-buy-colec" type="number" min="0" value="0" placeholder="0"></div>
+        <div class="form-row"><label>Cajas para abrir (colección)</label><input class="neg-inp" id="caja-buy-colec" type="number" min="0" value="0" placeholder="0"></div>
         <div class="form-row"><label>Precio por caja</label><div class="price-inp-wrap"><span class="price-pre">Q</span><input class="neg-inp" id="caja-buy-price" type="number" min="0" step="1" placeholder="Auto"></div></div>
         <div class="form-row"><label>Nota</label><input class="neg-inp" id="caja-buy-note" type="text" placeholder="Opcional"></div>
         <button class="neg-btn buy" onclick="cajasReg()">+ Registrar compra</button>
@@ -441,43 +441,43 @@ tbody td.cv-cell.estrella.v3p { box-shadow: inset 0 0 0 1px #f59e0b, inset 0 0 7
     <!-- VENTAS -->
     <div class="neg-2col" style="margin-top:14px">
       <div class="neg-card">
-        <div class="neg-card-title">ð¤ Vender caja completa</div>
+        <div class="neg-card-title">📤 Vender caja completa</div>
         <div class="form-row"><label>Cantidad</label><input class="neg-inp" id="caja-sell-qty" type="number" min="1" value="1"></div>
         <div class="form-row"><label>Precio unitario</label><div class="price-inp-wrap"><span class="price-pre">Q</span><input class="neg-inp" id="caja-sell-price" type="number" min="0" step="1" placeholder="Auto"></div></div>
         <div class="form-row"><label>Comprador</label><input class="neg-inp" id="caja-sell-note" type="text" placeholder="Opcional"></div>
-        <button class="neg-btn sell" onclick="cajasSellCaja()">â Vender caja</button>
+        <button class="neg-btn sell" onclick="cajasSellCaja()">− Vender caja</button>
       </div>
       <div class="neg-card">
-        <div class="neg-card-title">ð¤ Vender sobres sueltos</div>
+        <div class="neg-card-title">📤 Vender sobres sueltos</div>
         <div class="form-row"><label>Sobres</label><input class="neg-inp" id="sobre-sell-qty" type="number" min="1" value="1"></div>
         <div class="form-row"><label>Precio por sobre</label><div class="price-inp-wrap"><span class="price-pre">Q</span><input class="neg-inp" id="sobre-sell-price" type="number" min="0" step="0.5" placeholder="Auto"></div></div>
         <div class="form-row"><label>Comprador</label><input class="neg-inp" id="sobre-sell-note" type="text" placeholder="Opcional"></div>
-        <button class="neg-btn sell" onclick="cajasSellSobre()">â Vender sobres</button>
+        <button class="neg-btn sell" onclick="cajasSellSobre()">− Vender sobres</button>
       </div>
     </div>
 
     <!-- HISTORIAL CAJAS -->
     <div class="neg-card" style="margin-top:14px">
-      <div class="neg-card-title">ð Historial de cajas</div>
+      <div class="neg-card-title">📋 Historial de cajas</div>
       <div class="neg-hist" id="hist-cajas"></div>
     </div>
     <div id="resumen-cajas" class="neg-resumen"></div>
   </div>
 
-  <!-- ======= ÃLBUMES ======= -->
+  <!-- ======= ÁLBUMES ======= -->
   <div id="neg-alb" class="neg-section" style="display:none">
     <!-- STOCK -->
     <div id="stock-alb-display" style="display:flex;gap:18px;flex-wrap:wrap;margin-bottom:14px"></div>
     <div class="neg-2col">
       <div class="neg-card">
-        <div class="neg-card-title">âï¸ Precios</div>
+        <div class="neg-card-title">⚙️ Precios</div>
         <div class="price-row"><label>Costo Pasta Blanda</label><div class="price-inp-wrap"><span class="price-pre">Q</span><input class="price-inp" id="pc-alb-b" type="number" min="0" step="0.5" value="25"></div></div>
         <div class="price-row"><label>Costo Pasta Dura</label><div class="price-inp-wrap"><span class="price-pre">Q</span><input class="price-inp" id="pc-alb-d" type="number" min="0" step="0.5" value="35"></div></div>
         <div class="price-row"><label>Venta Pasta Blanda</label><div class="price-inp-wrap"><span class="price-pre">Q</span><input class="price-inp" id="pv-alb-b" type="number" min="0" step="0.5" value="40"></div></div>
         <div class="price-row"><label>Venta Pasta Dura</label><div class="price-inp-wrap"><span class="price-pre">Q</span><input class="price-inp" id="pv-alb-d" type="number" min="0" step="0.5" value="55"></div></div>
       </div>
       <div class="neg-card">
-        <div class="neg-card-title">ð¥ Compra / ð¤ Venta de Ã¡lbumes</div>
+        <div class="neg-card-title">📥 Compra / 📤 Venta de álbumes</div>
         <div class="form-row"><label>Tipo</label>
           <select class="neg-sel" id="alb-tipo"><option value="b">Pasta Blanda</option><option value="d">Pasta Dura</option></select></div>
         <div class="form-row"><label>Cantidad</label><input class="neg-inp" id="alb-qty" type="number" min="1" value="1"></div>
@@ -485,12 +485,12 @@ tbody td.cv-cell.estrella.v3p { box-shadow: inset 0 0 0 1px #f59e0b, inset 0 0 7
         <div class="form-row"><label>Nota</label><input class="neg-inp" id="alb-note" type="text" placeholder="Opcional"></div>
         <div style="display:flex;gap:8px;margin-top:6px">
           <button class="neg-btn buy" style="flex:1" onclick="negAlbReg('compra')">+ Compra</button>
-          <button class="neg-btn sell" style="flex:1" onclick="negAlbReg('venta')">â Venta</button>
+          <button class="neg-btn sell" style="flex:1" onclick="negAlbReg('venta')">− Venta</button>
         </div>
       </div>
     </div>
     <div class="neg-card" style="margin-top:14px">
-      <div class="neg-card-title">ð Historial Ã¡lbumes</div>
+      <div class="neg-card-title">📋 Historial álbumes</div>
       <div class="neg-hist" id="hist-alb"></div>
     </div>
     <div id="resumen-alb" class="neg-resumen"></div>
@@ -500,25 +500,25 @@ tbody td.cv-cell.estrella.v3p { box-shadow: inset 0 0 0 1px #f59e0b, inset 0 0 7
   <div id="neg-est" class="neg-section" style="display:none">
     <div class="neg-2col">
       <div class="neg-card">
-        <div class="neg-card-title">âï¸ Precios estampa suelta</div>
+        <div class="neg-card-title">⚙️ Precios estampa suelta</div>
         <div class="price-row"><label>Costo unitario</label><div class="price-inp-wrap"><span class="price-pre">Q</span><input class="price-inp" id="pc-estampa" type="number" min="0" step="0.25" value="0.3"></div></div>
         <div class="price-row"><label>Venta unitaria</label><div class="price-inp-wrap"><span class="price-pre">Q</span><input class="price-inp" id="pv-estampa" type="number" min="0" step="0.25" value="1"></div></div>
       </div>
       <div class="neg-card">
-        <div class="neg-card-title">ð¥ Compra / ð¤ Venta de estampa suelta</div>
-        <div class="form-row"><label>PaÃ­s</label><select class="neg-sel" id="est-buy-pais"></select></div>
+        <div class="neg-card-title">📥 Compra / 📤 Venta de estampa suelta</div>
+        <div class="form-row"><label>País</label><select class="neg-sel" id="est-buy-pais"></select></div>
         <div class="form-row"><label>Estampa # (1-20)</label><input class="neg-inp" id="est-buy-num" type="number" min="1" max="20" placeholder="1-20"></div>
         <div class="form-row"><label>Cantidad</label><input class="neg-inp" id="est-buy-qty" type="number" min="1" value="1"></div>
         <div class="form-row"><label>Precio unitario</label><div class="price-inp-wrap"><span class="price-pre">Q</span><input class="neg-inp" id="est-buy-price" type="number" min="0" step="0.25" placeholder="Auto"></div></div>
         <div class="form-row"><label>Nota / Comprador</label><input class="neg-inp" id="est-buy-note" type="text" placeholder="Opcional"></div>
         <div style="display:flex;gap:8px;margin-top:6px">
           <button class="neg-btn buy" style="flex:1" onclick="negEstReg('compra')">+ Compra</button>
-          <button class="neg-btn sell" style="flex:1" onclick="negEstReg('venta')">â Venta</button>
+          <button class="neg-btn sell" style="flex:1" onclick="negEstReg('venta')">− Venta</button>
         </div>
       </div>
     </div>
     <div class="neg-card" style="margin-top:14px">
-      <div class="neg-card-title">ð Historial estampas sueltas</div>
+      <div class="neg-card-title">📋 Historial estampas sueltas</div>
       <div class="neg-hist" id="hist-est"></div>
     </div>
     <div id="resumen-est" class="neg-resumen"></div>
@@ -528,27 +528,27 @@ tbody td.cv-cell.estrella.v3p { box-shadow: inset 0 0 0 1px #f59e0b, inset 0 0 7
   <div id="neg-listas" class="neg-section" style="display:none">
     <div class="neg-2col">
       <div class="neg-card">
-        <div class="neg-card-title">ð Pega la lista del cliente</div>
+        <div class="neg-card-title">📋 Pega la lista del cliente</div>
         <p style="font-size:0.72rem;color:#64748b;margin-bottom:8px;line-height:1.6">
-          Formatos: <code style="background:#0f172a;padding:1px 5px;border-radius:3px;color:#60a5fa">ARG 14</code> Â· 
-          <code style="background:#0f172a;padding:1px 5px;border-radius:3px;color:#60a5fa">ARG-14</code> Â· 
+          Formatos: <code style="background:#0f172a;padding:1px 5px;border-radius:3px;color:#60a5fa">ARG 14</code> · 
+          <code style="background:#0f172a;padding:1px 5px;border-radius:3px;color:#60a5fa">ARG-14</code> · 
           <code style="background:#0f172a;padding:1px 5px;border-radius:3px;color:#60a5fa">ARG 14 x2</code>
         </p>
         <textarea id="lista-pedido-input" style="width:100%;height:200px;background:#0f172a;border:1px solid #374151;border-radius:6px;color:#e2e8f0;font-size:0.82rem;padding:10px;resize:vertical;font-family:monospace;line-height:1.6;outline:none" placeholder="ARG 14&#10;BRA 1&#10;ESP 14 x2&#10;..."></textarea>
         <div style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap">
-          <button class="neg-btn buy" onclick="cotizarPedido()">â¡ Calcular precio</button>
-          <button class="neg-btn" style="background:#1e2435;color:#94a3b8;border:1px solid #374151" onclick="limpiarPedido()">â Limpiar</button>
+          <button class="neg-btn buy" onclick="cotizarPedido()">⚡ Calcular precio</button>
+          <button class="neg-btn" style="background:#1e2435;color:#94a3b8;border:1px solid #374151" onclick="limpiarPedido()">✕ Limpiar</button>
         </div>
       </div>
       <div class="neg-card" id="lista-precios-config">
-        <div class="neg-card-title">ð² Precios del pedido</div>
-        <p style="font-size:0.72rem;color:#64748b;margin-bottom:10px">Se leen del cotizador si estÃ¡n guardados, o usa estos defaults:</p>
+        <div class="neg-card-title">💲 Precios del pedido</div>
+        <p style="font-size:0.72rem;color:#64748b;margin-bottom:10px">Se leen del cotizador si están guardados, o usa estos defaults:</p>
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;font-size:0.75rem" id="lista-precios-grid">
           <!-- Se genera con JS -->
         </div>
         <div style="margin-top:10px;font-size:0.72rem;color:#64748b">
           Para configurar precios detallados ve al 
-          <a href="cotizador_listas.html" target="_blank" style="color:#e63946">Cotizador de Listas â</a>
+          <a href="cotizador_listas.html" target="_blank" style="color:#e63946">Cotizador de Listas ↗</a>
         </div>
       </div>
     </div>
@@ -564,64 +564,64 @@ tbody td.cv-cell.estrella.v3p { box-shadow: inset 0 0 0 1px #f59e0b, inset 0 0 7
 </div>
 </div>
 
-<!-- ===== ANÃLISIS ===== -->
+<!-- ===== ANÁLISIS ===== -->
 <div id="p-ana" class="page">
 <div class="ana-wrap">
-  <h2>AnÃ¡lisis de tu ColecciÃ³n</h2>
+  <h2>Análisis de tu Colección</h2>
   <p class="ana-sub">Estado real de tu inventario, repetidas para vender y valor estimado</p>
 
-  <!-- FILA 1: resumen rÃ¡pido -->
+  <!-- FILA 1: resumen rápido -->
   <div class="ana-stats-row" id="ana-quick"></div>
 
   <div class="cards-grid">
-    <!-- Progreso por paÃ­s -->
-    <div class="ana-card ana-card-wide"><h3>ð Progreso por paÃ­s</h3><div id="paises-comp"></div></div>
+    <!-- Progreso por país -->
+    <div class="ana-card ana-card-wide"><h3>📊 Progreso por país</h3><div id="paises-comp"></div></div>
 
     <!-- Top repetidas (para vender) -->
-    <div class="ana-card"><h3>ð Top repetidas (para vender)</h3><table class="rank-table" id="rank-rep"></table></div>
+    <div class="ana-card"><h3>🔁 Top repetidas (para vender)</h3><table class="rank-table" id="rank-rep"></table></div>
 
-    <!-- PaÃ­ses con 0 estampas -->
-    <div class="ana-card"><h3>â PaÃ­ses sin ninguna estampa</h3><div id="paises-cero"></div></div>
+    <!-- Países con 0 estampas -->
+    <div class="ana-card"><h3>❌ Países sin ninguna estampa</h3><div id="paises-cero"></div></div>
 
     <!-- Valor del inventario -->
-    <div class="ana-card"><h3>ð° Valor estimado</h3><div class="info-box" id="inv-valor"></div></div>
+    <div class="ana-card"><h3>💰 Valor estimado</h3><div class="info-box" id="inv-valor"></div></div>
 
     <!-- Precios sugeridos -->
     <div class="ana-card">
-      <h3>ð·ï¸ Precio de venta sugerido</h3>
+      <h3>🏷️ Precio de venta sugerido</h3>
       <div class="precio-grid">
-        <div class="pi"><div class="pi-l">FWC Historia (foil)</div><div class="pi-v r">Q60â120</div></div>
-        <div class="pi"><div class="pi-l">Escudo FOIL #1</div><div class="pi-v r">Q40â80</div></div>
-        <div class="pi"><div class="pi-l">Foto grupal #13</div><div class="pi-v y">Q25â50</div></div>
-        <div class="pi"><div class="pi-l">Estrella mundial â­</div><div class="pi-v y">Q30â100</div></div>
-        <div class="pi"><div class="pi-l">Jugador regular</div><div class="pi-v b">Q8â25</div></div>
-        <div class="pi"><div class="pi-l">Repetida comÃºn</div><div class="pi-v g">Q4â8</div></div>
+        <div class="pi"><div class="pi-l">FWC Historia (foil)</div><div class="pi-v r">Q60–120</div></div>
+        <div class="pi"><div class="pi-l">Escudo FOIL #1</div><div class="pi-v r">Q40–80</div></div>
+        <div class="pi"><div class="pi-l">Foto grupal #13</div><div class="pi-v y">Q25–50</div></div>
+        <div class="pi"><div class="pi-l">Estrella mundial ⭐</div><div class="pi-v y">Q30–100</div></div>
+        <div class="pi"><div class="pi-l">Jugador regular</div><div class="pi-v b">Q8–25</div></div>
+        <div class="pi"><div class="pi-l">Repetida común</div><div class="pi-v g">Q4–8</div></div>
       </div>
     </div>
 
-    <!-- MatemÃ¡tica del sobre -->
+    <!-- Matemática del sobre -->
     <div class="ana-card">
-      <h3>ð² MatemÃ¡tica del sobre</h3>
+      <h3>🎲 Matemática del sobre</h3>
       <div class="info-box">
-        <strong>7 estampas/sobre Â· 104 sobres/caja</strong><br>
-        â¢ Una estampa especÃ­fica: <strong>1/980 â 0.10%</strong><br>
-        â¢ FWC especiales (19): <strong>~2%</strong> por sobre<br>
-        â¢ Escudos FOIL #1 (49): <strong>~5%</strong> por sobre<br>
-        â¢ Fotos grupales #13 (49): <strong>~5%</strong> por sobre<br>
-        â¢ Jugadores normales: <strong>~88%</strong><br><br>
-        Para completar: <strong>~140â160 sobres</strong>.<br>
-        Las FWC son las mÃ¡s difÃ­ciles: solo 19 de 980.
+        <strong>7 estampas/sobre · 104 sobres/caja</strong><br>
+        • Una estampa específica: <strong>1/980 ≈ 0.10%</strong><br>
+        • FWC especiales (19): <strong>~2%</strong> por sobre<br>
+        • Escudos FOIL #1 (49): <strong>~5%</strong> por sobre<br>
+        • Fotos grupales #13 (49): <strong>~5%</strong> por sobre<br>
+        • Jugadores normales: <strong>~88%</strong><br><br>
+        Para completar: <strong>~140–160 sobres</strong>.<br>
+        Las FWC son las más difíciles: solo 19 de 980.
       </div>
     </div>
   </div>
 </div>
 </div>
 
-<div id="toast">â Guardado</div>
+<div id="toast">✓ Guardado</div>
 <div id="col-tooltip"></div>
 <div id="stk-tooltip"></div>
 
-<!-- BotÃ³n reset discreto al fondo -->
+<!-- Botón reset discreto al fondo -->
 <div style="text-align:center;padding:40px 0 16px;opacity:0.25;font-size:0.65rem">
   <button onclick="resetTodo()" style="background:none;border:1px solid #374151;color:#64748b;padding:4px 10px;border-radius:4px;cursor:pointer;font-size:0.65rem">Borrar todos los datos</button>
 </div>
@@ -629,58 +629,58 @@ tbody td.cv-cell.estrella.v3p { box-shadow: inset 0 0 0 1px #f59e0b, inset 0 0 7
 <script>
 
 const COLS = ['FWC','ALG','ARG','AUS','AUT','BEL','BIH','BRA','CAN','CIV','COD','COL','CPV','CRO','CUW','CZE','ECU','EGY','ENG','ESP','FRA','GER','GHA','HAI','IRN','IRQ','JOR','JPN','KOR','KSA','MAR','MEX','NED','NOR','NZL','PAN','PAR','POR','QAT','RSA','SCO','SEN','SUI','SWE','TUN','TUR','URU','USA','UZB'];
-const PAIS = {'ALG':'Algeria','ARG':'Argentina','AUS':'Australia','AUT':'Austria','BEL':'BÃ©lgica','BIH':'Bosnia y Herz.','BRA':'Brasil','CAN':'CanadÃ¡','CIV':'Costa de Marfil','COD':'RD Congo','COL':'Colombia','CPV':'Cabo Verde','CRO':'Croacia','CUW':'Curazao','CZE':'Rep. Checa','ECU':'Ecuador','EGY':'Egipto','ENG':'Inglaterra','ESP':'EspaÃ±a','FRA':'Francia','GER':'Alemania','GHA':'Ghana','HAI':'HaitÃ­','IRN':'IrÃ¡n','IRQ':'Iraq','JOR':'Jordania','JPN':'JapÃ³n','KOR':'Corea del Sur','KSA':'Arabia Saudita','MAR':'Marruecos','MEX':'MÃ©xico','NED':'PaÃ­ses Bajos','NOR':'Noruega','NZL':'Nueva Zelanda','PAN':'PanamÃ¡','PAR':'Paraguay','POR':'Portugal','QAT':'Qatar','RSA':'SudÃ¡frica','SCO':'Escocia','SEN':'Senegal','SUI':'Suiza','SWE':'Suecia','TUN':'TÃºnez','TUR':'TurquÃ­a','URU':'Uruguay','USA':'USA','UZB':'UzbekistÃ¡n'};
+const PAIS = {'ALG':'Algeria','ARG':'Argentina','AUS':'Australia','AUT':'Austria','BEL':'Bélgica','BIH':'Bosnia y Herz.','BRA':'Brasil','CAN':'Canadá','CIV':'Costa de Marfil','COD':'RD Congo','COL':'Colombia','CPV':'Cabo Verde','CRO':'Croacia','CUW':'Curazao','CZE':'Rep. Checa','ECU':'Ecuador','EGY':'Egipto','ENG':'Inglaterra','ESP':'España','FRA':'Francia','GER':'Alemania','GHA':'Ghana','HAI':'Haití','IRN':'Irán','IRQ':'Iraq','JOR':'Jordania','JPN':'Japón','KOR':'Corea del Sur','KSA':'Arabia Saudita','MAR':'Marruecos','MEX':'México','NED':'Países Bajos','NOR':'Noruega','NZL':'Nueva Zelanda','PAN':'Panamá','PAR':'Paraguay','POR':'Portugal','QAT':'Qatar','RSA':'Sudáfrica','SCO':'Escocia','SEN':'Senegal','SUI':'Suiza','SWE':'Suecia','TUN':'Túnez','TUR':'Turquía','URU':'Uruguay','USA':'USA','UZB':'Uzbekistán'};
 
 const SNAMES = {
-  FWC:{1:'Emblema Oficial (FOIL)',2:'Emblema Oficial 2/2',3:'Mascotas Oficiales',4:'Slogan Oficial',5:'BalÃ³n Oficial',6:'CanadÃ¡ - Sede',7:'MÃ©xico - Sede',8:'USA - Sede',9:'Italia 1934',10:'Uruguay 1950',11:'Alemania Occ. 1954',12:'Brasil 1962',13:'Alemania Occ. 1974',14:'Argentina 1986',15:'Brasil 1994',16:'Brasil 2002',17:'Italia 2006',18:'Alemania 2014',19:'Argentina 2022',20:'Historia del Mundial'},
-  ALG:{1:'Escudo Algeria (FOIL)',2:'Alexis Guendouz',3:'Ramy Bensebaini',4:'Youcef Atal',5:'Rayan AÃ¯t-Nouri',6:'Mohamed Amine Tougai',7:'AÃ¯ssa Mandi',8:'Ismael Bennacer',9:'Houssem Aquar',10:'Hicham Boudaoui',11:'Ramiz Zerrouki',12:'Nabil Bentalab',13:'Foto Grupal Algeria',14:'FarÃ©s Chaibi',15:'Riyad Mahrez',16:'Said Benrhama',17:'Anis Hadj Moussa',18:'Amine Gouiri',19:'Baghdad Bounedjah',20:'Mohammed Amoura'},
+  FWC:{1:'Emblema Oficial (FOIL)',2:'Emblema Oficial 2/2',3:'Mascotas Oficiales',4:'Slogan Oficial',5:'Balón Oficial',6:'Canadá - Sede',7:'México - Sede',8:'USA - Sede',9:'Italia 1934',10:'Uruguay 1950',11:'Alemania Occ. 1954',12:'Brasil 1962',13:'Alemania Occ. 1974',14:'Argentina 1986',15:'Brasil 1994',16:'Brasil 2002',17:'Italia 2006',18:'Alemania 2014',19:'Argentina 2022',20:'Historia del Mundial'},
+  ALG:{1:'Escudo Algeria (FOIL)',2:'Alexis Guendouz',3:'Ramy Bensebaini',4:'Youcef Atal',5:'Rayan Aït-Nouri',6:'Mohamed Amine Tougai',7:'Aïssa Mandi',8:'Ismael Bennacer',9:'Houssem Aquar',10:'Hicham Boudaoui',11:'Ramiz Zerrouki',12:'Nabil Bentalab',13:'Foto Grupal Algeria',14:'Farés Chaibi',15:'Riyad Mahrez',16:'Said Benrhama',17:'Anis Hadj Moussa',18:'Amine Gouiri',19:'Baghdad Bounedjah',20:'Mohammed Amoura'},
   ARG:{1:'Escudo Argentina (FOIL)',2:'Emiliano Martinez',3:'Nahuel Molina',4:'Cristian Romero',5:'Nicolas Otamendi',6:'Nicolas Tagliafico',7:'Leonardo Balerdi',8:'Enzo Fernandez',9:'Alexis Mac Allister',10:'Rodrigo De Paul',11:'Exequiel Palacios',12:'Leandro Paredes',13:'Foto Grupal Argentina',14:'Nico Paz',15:'Franco Mastantuono',16:'Nico Gonzalez',17:'Lionel Messi',18:'Lautaro Martinez',19:'Julian Alvarez',20:'Giuliano Simeone'},
-  AUS:{1:'Escudo Australia (FOIL)',2:'Mathew Ryan',3:'Joe Gauci',4:'Harry Souttar',5:'Alessandro Circati',6:'Jordan Bos',7:'Aziz Behich',8:'Cameron Burgess',9:'Lewis Miller',10:'Milos Degenek',11:'Jackson Irvine',12:'Riley McGree',13:'Foto Grupal Australia',14:'Aiden O\'Neill',15:'Connor Metcalfe',16:'Patrick Yazbek',17:'Craig Goodwin',18:'Kusini Vengi',19:'Nestory Irankunda',20:'Mohamed TourÃ©'},
-  AUT:{1:'Escudo Austria (FOIL)',2:'Alexander Schlager',3:'Patrick Pentz',4:'David Alaba',5:'Kevin Danso',6:'Philipp Lienhart',7:'Stefan Bosch',8:'Phillipp Mwene',9:'Alexander Prass',10:'Xavier Schlager',11:'Marcel Sabitzer',12:'Konrad Laimer',13:'Foto Grupal Austria',14:'Florian Grillitsch',15:'Nicolas Seiwald',16:'Romano Schmid',17:'Patrick Wimmer',18:'Christoph Baumgartner',19:'Michael Gregoritsch',20:'Marko ArnautoviÄ'},
-  BEL:{1:'Escudo BÃ©lgica (FOIL)',2:'Thibaut Courtois',3:'Arthur Theate',4:'Timothy Castagne',5:'Zeno Debast',6:'Brandon Mechele',7:'Maxim De Cuyper',8:'Thomas Meunier',9:'Youri Tielemans',10:'Amadou Onana',11:'Nicolas Raskin',12:'Alexis Saelemaekers',13:'Foto Grupal BÃ©lgica',14:'Hans Vanaken',15:'Kevin De Bruyne',16:'JÃ©rÃ©my Doku',17:'Charles De Ketelaere',18:'Leandro Trossard',19:'LoÃ¯s Openda',20:'Romelu Lukaku'},
+  AUS:{1:'Escudo Australia (FOIL)',2:'Mathew Ryan',3:'Joe Gauci',4:'Harry Souttar',5:'Alessandro Circati',6:'Jordan Bos',7:'Aziz Behich',8:'Cameron Burgess',9:'Lewis Miller',10:'Milos Degenek',11:'Jackson Irvine',12:'Riley McGree',13:'Foto Grupal Australia',14:'Aiden O\'Neill',15:'Connor Metcalfe',16:'Patrick Yazbek',17:'Craig Goodwin',18:'Kusini Vengi',19:'Nestory Irankunda',20:'Mohamed Touré'},
+  AUT:{1:'Escudo Austria (FOIL)',2:'Alexander Schlager',3:'Patrick Pentz',4:'David Alaba',5:'Kevin Danso',6:'Philipp Lienhart',7:'Stefan Bosch',8:'Phillipp Mwene',9:'Alexander Prass',10:'Xavier Schlager',11:'Marcel Sabitzer',12:'Konrad Laimer',13:'Foto Grupal Austria',14:'Florian Grillitsch',15:'Nicolas Seiwald',16:'Romano Schmid',17:'Patrick Wimmer',18:'Christoph Baumgartner',19:'Michael Gregoritsch',20:'Marko Arnautović'},
+  BEL:{1:'Escudo Bélgica (FOIL)',2:'Thibaut Courtois',3:'Arthur Theate',4:'Timothy Castagne',5:'Zeno Debast',6:'Brandon Mechele',7:'Maxim De Cuyper',8:'Thomas Meunier',9:'Youri Tielemans',10:'Amadou Onana',11:'Nicolas Raskin',12:'Alexis Saelemaekers',13:'Foto Grupal Bélgica',14:'Hans Vanaken',15:'Kevin De Bruyne',16:'Jérémy Doku',17:'Charles De Ketelaere',18:'Leandro Trossard',19:'Loïs Openda',20:'Romelu Lukaku'},
   BIH:{1:'Escudo Bosnia y Herzegovina (FOIL)',2:'Nikola Vasilj',3:'Amer Dedic',4:'Sead Kolasinac',5:'Tarik Muharemovic',6:'Nihad Mujakic',7:'Nikola Katic',8:'Amir Hadziahmetovic',9:'Benjamin Tahirovic',10:'Armin Gigovic',11:'Ivan Sunjic',12:'Ivan Basic',13:'Foto Grupal Bosnia y Herzegovina',14:'Dzenis Burnic',15:'Esmir Bajraktarevic',16:'Amar Memic',17:'Ermedin Demirovic',18:'Edin Dzeko',19:'Samed Bazdar',20:'Haris Tabakovic'},
-  BRA:{1:'Escudo Brasil (FOIL)',2:'Alisson',3:'Bento',4:'Marquinhos',5:'Ãder MilitÃ£o',6:'Gabriel MagalhÃ£es',7:'Danilo',8:'Wesley',9:'Lucas PaquetÃ¡',10:'Casemiro',11:'Bruno GuimarÃ£es',12:'Luiz Henrique',13:'Foto Grupal Brasil',14:'Vinicius JÃºnior',15:'Rodrygo',16:'JoÃ£o Pedro',17:'Matheus Cunha',18:'Gabriel Martinelli',19:'Raphinha',20:'EstÃ©vÃ£o'},
-  CAN:{1:'Escudo CanadÃ¡ (FOIL)',2:'Dayne St.Clair',3:'Alphonso Davies',4:'Alistair Johnston',5:'Samuel Adekugbe',6:'Riche Larvea',7:'Derek Cornelius',8:'MoÃ¯se Bombito',9:'Kamal Miller',10:'Stephen EustÃ¡quio',11:'IsmaÃ«l KonÃ©',12:'Jonathan Osorio',13:'Foto Grupal CanadÃ¡',14:'Jacob Shaffelburg',15:'Mathieu ChoiniÃ¨re',16:'Niko Sigur',17:'Tajon Buchanan',18:'Liam Millar',19:'Cyle Larin',20:'Jonathan David'},
-  CIV:{1:'Escudo Costa de Marfil (FOIL)',2:'Yahia Fofana',3:'Ghislain Konan',4:'Wilfried Singo',5:'Odilon Kossounou',6:'Evan Ndicka',7:'Willy Boly',8:'Emmanuel Agbadou',9:'Ousmane Diomande',10:'Franck Kessie',11:'Seko Fofana',12:'Ibrahim Sangare',13:'Foto Grupal Costa de Marfil',14:'Jean-Philippe Gbamin',15:'Amad Diallo',16:'SÃ©bastien Haller',17:'Simon Adringa',18:'Yan Diomande',19:'Evann Guessand',20:'Oumar Diakite'},
-  COD:{1:'Escudo RD Congo (FOIL)',2:'Lionel Mpasi',3:'Aaron Wan-Bissaka',4:'Axel Tuanzebe',5:'Arthur Masuaku',6:'Chancel Mbemba',7:'Joris Kayembe',8:'Charles Pickel',9:'Ngal\'ayel Mukau',10:'Edo Kayembe',11:'Samuel Moutoussamy',12:'Noah Sadiki',13:'Foto Grupal RD Congo',14:'ThÃ©o Bongonda',15:'Meschak Elia',16:'Yoane Wissa',17:'Brian Cipenga',18:'Fiston Mayele',19:'CÃ©dric Bakambu',20:'NathanaÃ«l Mbuku'},
-  COL:{1:'Escudo Colombia (FOIL)',2:'Camilo Vargas',3:'David Ospina',4:'DÃ¡vinson SÃ¡nchez',5:'Yerry Mina',6:'Daniel Munoz',7:'Johan Mojica',8:'Jhon LucumÃ­',9:'Santiago Arias',10:'Jefferson Lerma',11:'Kevin CastaÃ±o',12:'Richard Rios',13:'Foto Grupal Colombia',14:'James Rodriguez',15:'Juan Fernando Quintero',16:'Jorge Carrascal',17:'Jhon Arias',18:'Jhon Cordova',19:'Luis Suarez',20:'Luis Diaz'},
+  BRA:{1:'Escudo Brasil (FOIL)',2:'Alisson',3:'Bento',4:'Marquinhos',5:'Éder Militão',6:'Gabriel Magalhães',7:'Danilo',8:'Wesley',9:'Lucas Paquetá',10:'Casemiro',11:'Bruno Guimarães',12:'Luiz Henrique',13:'Foto Grupal Brasil',14:'Vinicius Júnior',15:'Rodrygo',16:'João Pedro',17:'Matheus Cunha',18:'Gabriel Martinelli',19:'Raphinha',20:'Estévão'},
+  CAN:{1:'Escudo Canadá (FOIL)',2:'Dayne St.Clair',3:'Alphonso Davies',4:'Alistair Johnston',5:'Samuel Adekugbe',6:'Riche Larvea',7:'Derek Cornelius',8:'Moïse Bombito',9:'Kamal Miller',10:'Stephen Eustáquio',11:'Ismaël Koné',12:'Jonathan Osorio',13:'Foto Grupal Canadá',14:'Jacob Shaffelburg',15:'Mathieu Choinière',16:'Niko Sigur',17:'Tajon Buchanan',18:'Liam Millar',19:'Cyle Larin',20:'Jonathan David'},
+  CIV:{1:'Escudo Costa de Marfil (FOIL)',2:'Yahia Fofana',3:'Ghislain Konan',4:'Wilfried Singo',5:'Odilon Kossounou',6:'Evan Ndicka',7:'Willy Boly',8:'Emmanuel Agbadou',9:'Ousmane Diomande',10:'Franck Kessie',11:'Seko Fofana',12:'Ibrahim Sangare',13:'Foto Grupal Costa de Marfil',14:'Jean-Philippe Gbamin',15:'Amad Diallo',16:'Sébastien Haller',17:'Simon Adringa',18:'Yan Diomande',19:'Evann Guessand',20:'Oumar Diakite'},
+  COD:{1:'Escudo RD Congo (FOIL)',2:'Lionel Mpasi',3:'Aaron Wan-Bissaka',4:'Axel Tuanzebe',5:'Arthur Masuaku',6:'Chancel Mbemba',7:'Joris Kayembe',8:'Charles Pickel',9:'Ngal\'ayel Mukau',10:'Edo Kayembe',11:'Samuel Moutoussamy',12:'Noah Sadiki',13:'Foto Grupal RD Congo',14:'Théo Bongonda',15:'Meschak Elia',16:'Yoane Wissa',17:'Brian Cipenga',18:'Fiston Mayele',19:'Cédric Bakambu',20:'Nathanaël Mbuku'},
+  COL:{1:'Escudo Colombia (FOIL)',2:'Camilo Vargas',3:'David Ospina',4:'Dávinson Sánchez',5:'Yerry Mina',6:'Daniel Munoz',7:'Johan Mojica',8:'Jhon Lucumí',9:'Santiago Arias',10:'Jefferson Lerma',11:'Kevin Castaño',12:'Richard Rios',13:'Foto Grupal Colombia',14:'James Rodriguez',15:'Juan Fernando Quintero',16:'Jorge Carrascal',17:'Jhon Arias',18:'Jhon Cordova',19:'Luis Suarez',20:'Luis Diaz'},
   CPV:{1:'Escudo Cabo Verde (FOIL)',2:'Vozinha',3:'Logan Costa',4:'Pico',5:'Diney',6:'Steven Moreira',7:'Wagner Pina',8:'Joao Paulo',9:'Yannick Semedo',10:'Kevin Pina',11:'Patrick Andrade',12:'Jamiro Monteiro',13:'Foto Grupal Cabo Verde',14:'Deroy Duarte',15:'Garry Rodrigues',16:'Jovane Cabral',17:'Ryan Mendes',18:'Dailon Livramento',19:'Willy Semedo',20:'Bebe'},
-  CRO:{1:'Escudo Croacia (FOIL)',2:'Dominik LivakoviÄ',3:'Duje Caleta-Car',4:'Josko Gvardiol',5:'Josip StaniÅ¡iÄ',6:'Luka VuÅ¡koviÄ',7:'Josip Sutalo',8:'Kristijan Jakic',9:'Luka ModriÄ',10:'Mateo Kovacic',11:'Martin Baturina',12:'Lovro Majer',13:'Foto Grupal Croacia',14:'Mario Pasalic',15:'Petar Sucic',16:'Ivan PeriÅ¡iÄ',17:'Marco Pasalic',18:'Ante Budimir',19:'Andrej KramariÄ',20:'Franjo Ivanovic'},
+  CRO:{1:'Escudo Croacia (FOIL)',2:'Dominik Livaković',3:'Duje Caleta-Car',4:'Josko Gvardiol',5:'Josip Stanišić',6:'Luka Vušković',7:'Josip Sutalo',8:'Kristijan Jakic',9:'Luka Modrić',10:'Mateo Kovacic',11:'Martin Baturina',12:'Lovro Majer',13:'Foto Grupal Croacia',14:'Mario Pasalic',15:'Petar Sucic',16:'Ivan Perišić',17:'Marco Pasalic',18:'Ante Budimir',19:'Andrej Kramarić',20:'Franjo Ivanovic'},
   CUW:{1:'Escudo Curazao (FOIL)',2:'Eloy Room',3:'Armando Obispo',4:'Sherel Floranus',5:'Jurien Gaari',6:'Joshua Brenet',7:'Roshon Van Eijma',8:'Shurandy Sambo',9:'Livano Comenencia',10:'Godfried Roemeratoe',11:'Leandro Bacuna',12:'Juninho Bacuna',13:'Foto Grupal Curazao',14:'Tahith Chong',15:'Kenji Gorre',16:'Jearl Margaritha',17:'Jurgen Locadia',18:'Jeremy Antonisse',19:'Gervane Kastaneer',20:'Sontje Hansen'},
-  CZE:{1:'Escudo RepÃºblica Checa (FOIL)',2:'Matej Kovar',3:'Jindrich Stanek',4:'Ladislav Krejci',5:'Vladimir Coufal',6:'Jaroslav Zeleny',7:'Tomas Holes',8:'David Zima',9:'Michal Sadilek',10:'Lukas Provod',11:'Lukas Cerv',12:'Tomas Soucek',13:'Foto Grupal RepÃºblica Checa',14:'Pavel Sulc',15:'Matej Vydra',16:'Vasil Kusej',17:'Tomas Chory',18:'Vacilav Cerny',19:'Adam Hlozek',20:'Patrik Schick'},
-  ECU:{1:'Escudo Ecuador (FOIL)',2:'HernÃ¡n GalÃ­ndez',3:'Gonzalo Valle',4:'Piero HincapiÃ©',5:'Pervis EstupiÃ±Ã¡n',6:'Willian Pacho',7:'Ãngelo Preciado',8:'Joel OrdÃ³Ã±ez',9:'Moises Caicedo',10:'Alan Franco',11:'Kendry Paez',12:'Pedro Vite',13:'Foto Grupal Ecuador',14:'John Veboah',15:'Leonardo Campana',16:'Gonzalo Plata',17:'Nilson Angulo',18:'Alan Minda',19:'Kevin Rodriguez',20:'Enner Valencia'},
+  CZE:{1:'Escudo República Checa (FOIL)',2:'Matej Kovar',3:'Jindrich Stanek',4:'Ladislav Krejci',5:'Vladimir Coufal',6:'Jaroslav Zeleny',7:'Tomas Holes',8:'David Zima',9:'Michal Sadilek',10:'Lukas Provod',11:'Lukas Cerv',12:'Tomas Soucek',13:'Foto Grupal República Checa',14:'Pavel Sulc',15:'Matej Vydra',16:'Vasil Kusej',17:'Tomas Chory',18:'Vacilav Cerny',19:'Adam Hlozek',20:'Patrik Schick'},
+  ECU:{1:'Escudo Ecuador (FOIL)',2:'Hernán Galíndez',3:'Gonzalo Valle',4:'Piero Hincapié',5:'Pervis Estupiñán',6:'Willian Pacho',7:'Ángelo Preciado',8:'Joel Ordóñez',9:'Moises Caicedo',10:'Alan Franco',11:'Kendry Paez',12:'Pedro Vite',13:'Foto Grupal Ecuador',14:'John Veboah',15:'Leonardo Campana',16:'Gonzalo Plata',17:'Nilson Angulo',18:'Alan Minda',19:'Kevin Rodriguez',20:'Enner Valencia'},
   EGY:{1:'Escudo Egipto (FOIL)',2:'Mohamed El Shenawy',3:'Mohamed Hany',4:'Mohamed Hamdy',5:'Yasser Ibrahim',6:'Khaled Sobhi',7:'Ramy Rabia',8:'Hossam Abdelmaguid',9:'Ahmed Fatouh',10:'Marwan Attia',11:'Zizo',12:'Hamdy Fathy',13:'Foto Grupal Egipto',14:'Mohamed Lasheen',15:'Emam Ashour',16:'Osama Faisal',17:'Mohamed Salah',18:'Mostafa Mohamed',19:'Trezeguet',20:'Omar Marsmoush'},
-  ENG:{1:'Escudo Inglaterra (FOIL)',2:'Jordan Pickford',3:'John Stones',4:'Maric GuÃ©hi',5:'Ezri Konsa',6:'Trent Alexander-Arnold',7:'Reece James',8:'Dan Burn',9:'Jordan Henderson',10:'Declan Rice',11:'Jude Bellingham',12:'Cole Palmer',13:'Foto Grupal Inglaterra',14:'Morgan Rogers',15:'Anthony Gordon',16:'Phil Foden',17:'Bukayo Saka',18:'Harry Kane',19:'Marcus Rashford',20:'Ollie Watkins'},
-  ESP:{1:'Escudo EspaÃ±a (FOIL)',2:'Unai Simon',3:'Robin Le Normand',4:'Aymeric Laporte',5:'Dean Huijsen',6:'Pedro Porro',7:'Dani Carvajal',8:'Marc Cucurella',9:'MartÃ­n Zubimendi',10:'Rodri',11:'Pedri',12:'Fabian Ruiz',13:'Foto Grupal EspaÃ±a',14:'Mikel Merino',15:'Lamine Yamal',16:'Dani Olmo',17:'Nico Williams',18:'Ferran Torres',19:'Ãlvaro Morata',20:'Mikel Oyarzabal'},
-  FRA:{1:'Escudo Francia (FOIL)',2:'Mike Maignan',3:'Theo Hernandez',4:'William Saliba',5:'Jules Kounde',6:'Ibrahima Konate',7:'Dayot Upamecano',8:'Lucas Digne',9:'AurÃ©lien TchouamÃ©ni',10:'Eduardo Camavinga',11:'Manu Kone',12:'Adrien Rabiot',13:'Foto Grupal Francia',14:'Michael Olise',15:'Ousmane Dembele',16:'Bradley Barcola',17:'DÃ©sirÃ© DouÃ©',18:'Kingsley Coman',19:'Hugo Ekitike',20:'Kylian Mbappe'},
-  GER:{1:'Escudo Alemania (FOIL)',2:'Marc-AndrÃ© ter Stegen',3:'Jonathan Tah',4:'David Raum',5:'Nico Schlotterbeck',6:'Antonio RÃ¼diger',7:'Waldemar Anton',8:'Ridle Baku',9:'Maximilian Mittelstadt',10:'Joshua Kimmich',11:'Florian Wirtz',12:'Felix Nmecha',13:'Foto Grupal Alemania',14:'Leon Goretzka',15:'Jamal Musiala',16:'Serge Gnabry',17:'Kai Havertz',18:'Leroy Sane',19:'Karim Adeyemi',20:'Nick Woltemade'},
+  ENG:{1:'Escudo Inglaterra (FOIL)',2:'Jordan Pickford',3:'John Stones',4:'Maric Guéhi',5:'Ezri Konsa',6:'Trent Alexander-Arnold',7:'Reece James',8:'Dan Burn',9:'Jordan Henderson',10:'Declan Rice',11:'Jude Bellingham',12:'Cole Palmer',13:'Foto Grupal Inglaterra',14:'Morgan Rogers',15:'Anthony Gordon',16:'Phil Foden',17:'Bukayo Saka',18:'Harry Kane',19:'Marcus Rashford',20:'Ollie Watkins'},
+  ESP:{1:'Escudo España (FOIL)',2:'Unai Simon',3:'Robin Le Normand',4:'Aymeric Laporte',5:'Dean Huijsen',6:'Pedro Porro',7:'Dani Carvajal',8:'Marc Cucurella',9:'Martín Zubimendi',10:'Rodri',11:'Pedri',12:'Fabian Ruiz',13:'Foto Grupal España',14:'Mikel Merino',15:'Lamine Yamal',16:'Dani Olmo',17:'Nico Williams',18:'Ferran Torres',19:'Álvaro Morata',20:'Mikel Oyarzabal'},
+  FRA:{1:'Escudo Francia (FOIL)',2:'Mike Maignan',3:'Theo Hernandez',4:'William Saliba',5:'Jules Kounde',6:'Ibrahima Konate',7:'Dayot Upamecano',8:'Lucas Digne',9:'Aurélien Tchouaméni',10:'Eduardo Camavinga',11:'Manu Kone',12:'Adrien Rabiot',13:'Foto Grupal Francia',14:'Michael Olise',15:'Ousmane Dembele',16:'Bradley Barcola',17:'Désiré Doué',18:'Kingsley Coman',19:'Hugo Ekitike',20:'Kylian Mbappe'},
+  GER:{1:'Escudo Alemania (FOIL)',2:'Marc-André ter Stegen',3:'Jonathan Tah',4:'David Raum',5:'Nico Schlotterbeck',6:'Antonio Rüdiger',7:'Waldemar Anton',8:'Ridle Baku',9:'Maximilian Mittelstadt',10:'Joshua Kimmich',11:'Florian Wirtz',12:'Felix Nmecha',13:'Foto Grupal Alemania',14:'Leon Goretzka',15:'Jamal Musiala',16:'Serge Gnabry',17:'Kai Havertz',18:'Leroy Sane',19:'Karim Adeyemi',20:'Nick Woltemade'},
   GHA:{1:'Escudo Ghana (FOIL)',2:'Lawrence Ati Zigi',3:'Tariq Lamptey',4:'Mohammed Salisu',5:'Alidu Seidu',6:'Alexander Djiku',7:'Gideon Mensah',8:'Caleb Yirenkyi',9:'Abdul Issahaku Fatawu',10:'Thomas Partey',11:'Salis Abdul Samed',12:'Kamaldeen Sulemana',13:'Foto Grupal Ghana',14:'Mohammed Kudus',15:'Inaki Williams',16:'Jordan Ayew',17:'Andrew Ayew',18:'Joseph Paintsil',19:'Osman Bukari',20:'Antoine Semenyo'},
-  HAI:{1:'Escudo HaitÃ­ (FOIL)',2:'Johny Placide',3:'Carlens Arcus',4:'Martin ExpÃ©rience',5:'Jean-Kevin Duverne',6:'Ricardo AdÃ©',7:'Duke Lacroix',8:'Garven Metusala',9:'Hannes Delcroix',10:'Leverton Pierre',11:'Danley Jean Jacques',12:'Jean-Ricner Bellegarde',13:'Foto Grupal HaitÃ­',14:'Christopher Attys',15:'Derrick Etienne Jr.',16:'Josue Casimir',17:'Ruben Providence',18:'Duckens Nazon',19:'Louicius Deedson',20:'Frantzdy Pierrot'},
-  IRN:{1:'Escudo IrÃ¡n (FOIL)',2:'Alirez Beiranvand',3:'Morteza Pouraliganji',4:'Ehsan Hajsafi',5:'Milad Mohammadi',6:'Shojae Khalilzadeh',7:'Ramin Rezaeian',8:'Hossein Kanaani',9:'Sadegh Moharrami',10:'Saleh Hardani',11:'Saeed Ezatolahi',12:'Saman Ghoddos',13:'Foto Grupal IrÃ¡n',14:'Omid Noorafkan',15:'Roozbeh Cheshmi',16:'Mohammad Mohebi',17:'Sardar Azmoun',18:'Mehdi Taremi',19:'Alireza Jahanbakhsh',20:'Ali Gholizadeh'},
+  HAI:{1:'Escudo Haití (FOIL)',2:'Johny Placide',3:'Carlens Arcus',4:'Martin Expérience',5:'Jean-Kevin Duverne',6:'Ricardo Adé',7:'Duke Lacroix',8:'Garven Metusala',9:'Hannes Delcroix',10:'Leverton Pierre',11:'Danley Jean Jacques',12:'Jean-Ricner Bellegarde',13:'Foto Grupal Haití',14:'Christopher Attys',15:'Derrick Etienne Jr.',16:'Josue Casimir',17:'Ruben Providence',18:'Duckens Nazon',19:'Louicius Deedson',20:'Frantzdy Pierrot'},
+  IRN:{1:'Escudo Irán (FOIL)',2:'Alirez Beiranvand',3:'Morteza Pouraliganji',4:'Ehsan Hajsafi',5:'Milad Mohammadi',6:'Shojae Khalilzadeh',7:'Ramin Rezaeian',8:'Hossein Kanaani',9:'Sadegh Moharrami',10:'Saleh Hardani',11:'Saeed Ezatolahi',12:'Saman Ghoddos',13:'Foto Grupal Irán',14:'Omid Noorafkan',15:'Roozbeh Cheshmi',16:'Mohammad Mohebi',17:'Sardar Azmoun',18:'Mehdi Taremi',19:'Alireza Jahanbakhsh',20:'Ali Gholizadeh'},
   IRQ:{1:'Escudo Iraq (FOIL)',2:'Jalal Hassan',3:'Rebin Sulaka',4:'Hussein Ali',5:'Akam Hashem',6:'Merchas Doski',7:'Zaid Tahseen',8:'Manaf Younis',9:'Zidane Iqbal',10:'Amir Al-Ammari',11:'Ibrahim Bavesh',12:'Ali Jasim',13:'Foto Grupal Iraq',14:'Youssef Amyn',15:'Aimar Sher',16:'Marko Farji',17:'Osama Rashid',18:'Ali Al-Hamadi',19:'Aymen Hussein',20:'Mohanad Ali'},
   JOR:{1:'Escudo Jordania (FOIL)',2:'Yazeed Abulaila',3:'Ihsan Haddad',4:'Mohammad Abu Hashish',5:'Yazan Al-Arab',6:'Abdallah Nasib',7:'Saleem Obaid',8:'Mohammad Abualnadi',9:'Ibrahim Saadeh',10:'Nizar Al-Rashdan',11:'Noor Al-Rawabdeh',12:'Mohannad Abu Taha',13:'Foto Grupal Jordania',14:'Amer Jamous',15:'Mousa Al-Taamari',16:'Yazan Al-Naimat',17:'Mahmoud Al-Mardi',18:'Ali Olwan',19:'Mohammad Abu Zrayq',20:'Ibrahim Sabra'},
-  JPN:{1:'Escudo JapÃ³n (FOIL)',2:'Zion Suzuki',3:'Henry Heroki Mochizuki',4:'Ayumu Seko',5:'Junnosuke Suzuki',6:'Shogo Taniguchi',7:'Tsuyoshi Watanabe',8:'Kaishu Sano',9:'Yuki Soma',10:'Ao Tanaka',11:'Daichi Kamada',12:'Takefusa Kubo',13:'Foto Grupal JapÃ³n',14:'Ritsu Doan',15:'Keito Nakamura',16:'Takumi Minamino',17:'Shuto Machino',18:'Junya Ito',19:'Koki Ogawa',20:'Ayase Ueda'},
+  JPN:{1:'Escudo Japón (FOIL)',2:'Zion Suzuki',3:'Henry Heroki Mochizuki',4:'Ayumu Seko',5:'Junnosuke Suzuki',6:'Shogo Taniguchi',7:'Tsuyoshi Watanabe',8:'Kaishu Sano',9:'Yuki Soma',10:'Ao Tanaka',11:'Daichi Kamada',12:'Takefusa Kubo',13:'Foto Grupal Japón',14:'Ritsu Doan',15:'Keito Nakamura',16:'Takumi Minamino',17:'Shuto Machino',18:'Junya Ito',19:'Koki Ogawa',20:'Ayase Ueda'},
   KOR:{1:'Escudo Corea del Sur (FOIL)',2:'Hyeon-woo Jo',3:'Seung-Gyu Kim',4:'Min-jae Kim',5:'Yu-min Cho',6:'Young-woo Seol',7:'Han-beom Lee',8:'Tae-seok Lee',9:'Myung-jae Lee',10:'Jae-sung Lee',11:'In-beom Hwang',12:'Kang-in Lee',13:'Foto Grupal Corea del Sur',14:'Seung-ho Paik',15:'Jens Castrop',16:'Dongg-yeong Lee',17:'Gue-sung Cho',18:'Heung-min Son',19:'Hee-chan Hwang',20:'Hyeon-Gyu Oh'},
   KSA:{1:'Escudo Arabia Saudita (FOIL)',2:'Nawaf Alaqidi',3:'Abdulrahman Al-Sanbi',4:'Saud Abdulhamid',5:'Nawaf Bouwashl',6:'Jihad Thakri',7:'Moteb Al-Harbi',8:'Hassan Altambakti',9:'Musab Aljuwayr',10:'Ziyad Aljohani',11:'Abdullah Alkhaibari',12:'Nasser Aldawsari',13:'Foto Grupal Arabia Saudita',14:'Saleh Abu Alshamat',15:'Marwan Alsahafi',16:'Salem Aldawsari',17:'Abdulrahman Al-Aboud',18:'Feras Akbrikan',19:'Saleh Alshehri',20:'Abdullah Al-Hamdan'},
   MAR:{1:'Escudo Marruecos (FOIL)',2:'Yassine Bounou',3:'Munir El Kajoui',4:'Achraf Hakimi',5:'Noussair Mazraoui',6:'Nayef Aguerd',7:'Roman Saiss',8:'Jawad El Yamio',9:'Adam Masina',10:'Sofyan Amrabat',11:'Azzedine Ounahi',12:'Eliesse Ben Seghir',13:'Foto Grupal Marruecos',14:'Bilal El Khannouss',15:'Ismael Saibari',16:'Youssef En-Nesyri',17:'Abde Ezzalzouli',18:'Soufiane Rahimi',19:'Brahim Diaz',20:'Ayoub El Kaabi'},
-  MEX:{1:'Escudo MÃ©xico (FOIL)',2:'Luis MalagÃ³n',3:'Johan Vasquez',4:'Jorge SÃ¡nchez',5:'Cesar Montes',6:'Jesus Gallardo',7:'Israel Reyes',8:'Diego Lainez',9:'Carlos Rodriguez',10:'Edson Alvarez',11:'Orbelin Pineda',12:'Marcel Ruiz',13:'Foto Grupal MÃ©xico',14:'Ãrick SÃ¡nchez',15:'Hirving Lozano',16:'Santiago GimÃ©nez',17:'RaÃºl JimÃ©nez',18:'Alexis Vega',19:'Roberto Alvarado',20:'Cesar Huerta'},
-  NED:{1:'Escudo PaÃ­ses Bajos (FOIL)',2:'Bart Verbruggen',3:'Virgil van Dijk',4:'Micky van de Ven',5:'Jurien Timber',6:'Denzel Dumfries',7:'Nathan AkÃ©',8:'Jereme Frimpong',9:'Jan Paul van Hecke',10:'Tijjani Reijnders',11:'Ryan Gravenberch',12:'Teun Koopmeiners',13:'Foto Grupal PaÃ­ses Bajos',14:'Frenkie de Jong',15:'Xavi Simons',16:'Justin Kluivert',17:'Memphis Depay',18:'Donyell Malen',19:'Wout Weghorst',20:'Cody Gakpo'},
-  NOR:{1:'Escudo Noruega (FOIL)',2:'Orjan Nyland',3:'Julian Ryerson',4:'Leo OstigÃ¥rd',5:'Kristoffer Vassbakk Ajer',6:'Marcus Holmgren Pedersen',7:'David MÃ¸ller Wolfe',8:'TorbjÃ¸rn Heggem',9:'Morten Thorsby',10:'Martin Ãdegaard',11:'Sander Berge',12:'Andreas Schjelderup',13:'Foto Grupal Noruega',14:'Patrick Berg',15:'Erling Haaland',16:'Alexander SÃ¸rloth',17:'Aron DÃ¸nnum',18:'Jorgen Strand Larsen',19:'Antonio Nusa',20:'Oscar Bobb'},
-  NZL:{1:'Escudo Nueva Zelanda (FOIL)',2:'Max Crocombe Payne',3:'Alex Paulsen',4:'Michael Boxall',5:'Liberato Cacace',6:'Tim Payne',7:'Tyler Bindon',8:'Francis de Vries',9:'Finn Surman',10:'Joe Bell',11:'Sarpreet Singh',12:'Ryan Thomas',13:'Foto Grupal Nueva Zelanda',14:'Matthew Garbett',15:'Marko StameniÄ',16:'Ben Old',17:'Chris Wood',18:'Elijah Just',19:'Callum McCowatt',20:'Kosta Barbarouses'},
-  PAN:{1:'Escudo PanamÃ¡ (FOIL)',2:'Orlando Mosquera',3:'Luis Mejia',4:'Fidel Escobar',5:'Andres Andrade',6:'Michael Amir Murillo',7:'Eric Davis',8:'Jose Cordoba',9:'Cesar Blackman',10:'Cristian Martinez',11:'AnÃ­bal Godoy',12:'Adalberto Carrasquilla',13:'Foto Grupal PanamÃ¡',14:'Ãdgar BÃ¡rcenas',15:'Carlos Harvey',16:'Ismael DÃ­az',17:'Jose Fajardo',18:'Cecilio Waterman',19:'Jose Luiz Rodriguez',20:'Alberto Quintero'},
-  PAR:{1:'Escudo Paraguay (FOIL)',2:'Roberto Fernandez',3:'Orlando Gill',4:'Gustavo Gomez',5:'FabiÃ¡n Balbuena',6:'Juan JosÃ© CÃ¡ceres',7:'Omar Alderete',8:'Junior Alonso',9:'MathÃ­as Villasanti',10:'Diego Gomez',11:'DamiÃ¡n Bobadilla',12:'Andres Cubas',13:'Foto Grupal Paraguay',14:'Matias Galarza Fonda',15:'Julio Enciso',16:'Alejandro Romero Gamarra',17:'Miguel AlmirÃ³n',18:'Ramon Sosa',19:'Angel Romero',20:'Antonio Sanabria'},
-  POR:{1:'Escudo Portugal (FOIL)',2:'Diogo Costa',3:'JosÃ© SÃ¡',4:'RÃºben Dias',5:'JoÃ£o Cancelo',6:'Diogo Dalot',7:'Nuno Mendes',8:'GonÃ§alo InÃ¡cio',9:'Bernardo Silva',10:'Bruno Fernandes',11:'JoÃ£o Neves',12:'Vitinha',13:'Foto Grupal Portugal',14:'Rafael LeÃ£o',15:'Cristiano Ronaldo',16:'Francisco TrincÃ£o',17:'JoÃ£o FÃ©lix',18:'GonÃ§alo Ramos',19:'Pedro Neto',20:'Rafael LeÃ£o'},
+  MEX:{1:'Escudo México (FOIL)',2:'Luis Malagón',3:'Johan Vasquez',4:'Jorge Sánchez',5:'Cesar Montes',6:'Jesus Gallardo',7:'Israel Reyes',8:'Diego Lainez',9:'Carlos Rodriguez',10:'Edson Alvarez',11:'Orbelin Pineda',12:'Marcel Ruiz',13:'Foto Grupal México',14:'Érick Sánchez',15:'Hirving Lozano',16:'Santiago Giménez',17:'Raúl Jiménez',18:'Alexis Vega',19:'Roberto Alvarado',20:'Cesar Huerta'},
+  NED:{1:'Escudo Países Bajos (FOIL)',2:'Bart Verbruggen',3:'Virgil van Dijk',4:'Micky van de Ven',5:'Jurien Timber',6:'Denzel Dumfries',7:'Nathan Aké',8:'Jereme Frimpong',9:'Jan Paul van Hecke',10:'Tijjani Reijnders',11:'Ryan Gravenberch',12:'Teun Koopmeiners',13:'Foto Grupal Países Bajos',14:'Frenkie de Jong',15:'Xavi Simons',16:'Justin Kluivert',17:'Memphis Depay',18:'Donyell Malen',19:'Wout Weghorst',20:'Cody Gakpo'},
+  NOR:{1:'Escudo Noruega (FOIL)',2:'Orjan Nyland',3:'Julian Ryerson',4:'Leo Ostigård',5:'Kristoffer Vassbakk Ajer',6:'Marcus Holmgren Pedersen',7:'David Møller Wolfe',8:'Torbjørn Heggem',9:'Morten Thorsby',10:'Martin Ødegaard',11:'Sander Berge',12:'Andreas Schjelderup',13:'Foto Grupal Noruega',14:'Patrick Berg',15:'Erling Haaland',16:'Alexander Sørloth',17:'Aron Dønnum',18:'Jorgen Strand Larsen',19:'Antonio Nusa',20:'Oscar Bobb'},
+  NZL:{1:'Escudo Nueva Zelanda (FOIL)',2:'Max Crocombe Payne',3:'Alex Paulsen',4:'Michael Boxall',5:'Liberato Cacace',6:'Tim Payne',7:'Tyler Bindon',8:'Francis de Vries',9:'Finn Surman',10:'Joe Bell',11:'Sarpreet Singh',12:'Ryan Thomas',13:'Foto Grupal Nueva Zelanda',14:'Matthew Garbett',15:'Marko Stamenić',16:'Ben Old',17:'Chris Wood',18:'Elijah Just',19:'Callum McCowatt',20:'Kosta Barbarouses'},
+  PAN:{1:'Escudo Panamá (FOIL)',2:'Orlando Mosquera',3:'Luis Mejia',4:'Fidel Escobar',5:'Andres Andrade',6:'Michael Amir Murillo',7:'Eric Davis',8:'Jose Cordoba',9:'Cesar Blackman',10:'Cristian Martinez',11:'Aníbal Godoy',12:'Adalberto Carrasquilla',13:'Foto Grupal Panamá',14:'Édgar Bárcenas',15:'Carlos Harvey',16:'Ismael Díaz',17:'Jose Fajardo',18:'Cecilio Waterman',19:'Jose Luiz Rodriguez',20:'Alberto Quintero'},
+  PAR:{1:'Escudo Paraguay (FOIL)',2:'Roberto Fernandez',3:'Orlando Gill',4:'Gustavo Gomez',5:'Fabián Balbuena',6:'Juan José Cáceres',7:'Omar Alderete',8:'Junior Alonso',9:'Mathías Villasanti',10:'Diego Gomez',11:'Damián Bobadilla',12:'Andres Cubas',13:'Foto Grupal Paraguay',14:'Matias Galarza Fonda',15:'Julio Enciso',16:'Alejandro Romero Gamarra',17:'Miguel Almirón',18:'Ramon Sosa',19:'Angel Romero',20:'Antonio Sanabria'},
+  POR:{1:'Escudo Portugal (FOIL)',2:'Diogo Costa',3:'José Sá',4:'Rúben Dias',5:'João Cancelo',6:'Diogo Dalot',7:'Nuno Mendes',8:'Gonçalo Inácio',9:'Bernardo Silva',10:'Bruno Fernandes',11:'João Neves',12:'Vitinha',13:'Foto Grupal Portugal',14:'Rafael Leão',15:'Cristiano Ronaldo',16:'Francisco Trincão',17:'João Félix',18:'Gonçalo Ramos',19:'Pedro Neto',20:'Rafael Leão'},
   QAT:{1:'Escudo Qatar (FOIL)',2:'Meshaal Barsham',3:'Sultan Albrake',4:'Lucas Mendes',5:'Homam Ahmed',6:'Boualem Khoukhi',7:'Pedro Miguel',8:'Tarek Salman',9:'Mohamed Al-Mannai',10:'Karim Boudiaf',11:'Assim Madibo',12:'Ahmed Fatehi',13:'Foto Grupal Qatar',14:'Mohammed Waad',15:'Abdulaziz Hatem',16:'Hassan Al-Haydos',17:'Edmilson Junior',18:'Akram Hassan Afif',19:'Ahmed Al Ganehi',20:'Almoez Ali'},
-  RSA:{1:'Escudo SudÃ¡frica (FOIL)',2:'Ronwen Williams',3:'Sipho Chaine',4:'Aubrey Modiba',5:'Samukele Kabini',6:'Mbekezeli Mbokazi',7:'Khulumani Ndamane',8:'Siyabonga Ngezana',9:'Khuliso Mudau',10:'Nkosinathi Sibisi',11:'Teboho Mokoena',12:'Thalente Mbatha',13:'Foto Grupal SudÃ¡frica',14:'Bathasi Aubaas',15:'Yaya Sithole',16:'Sipho Mbule',17:'Lyle Foster',18:'Iqraam Rayners',19:'Mohau Nkota',20:'Oswin Appollis'},
+  RSA:{1:'Escudo Sudáfrica (FOIL)',2:'Ronwen Williams',3:'Sipho Chaine',4:'Aubrey Modiba',5:'Samukele Kabini',6:'Mbekezeli Mbokazi',7:'Khulumani Ndamane',8:'Siyabonga Ngezana',9:'Khuliso Mudau',10:'Nkosinathi Sibisi',11:'Teboho Mokoena',12:'Thalente Mbatha',13:'Foto Grupal Sudáfrica',14:'Bathasi Aubaas',15:'Yaya Sithole',16:'Sipho Mbule',17:'Lyle Foster',18:'Iqraam Rayners',19:'Mohau Nkota',20:'Oswin Appollis'},
   SCO:{1:'Escudo Escocia (FOIL)',2:'Angus Gunn',3:'Jack Hendry',4:'Kieran Tierney',5:'Aaron Hickey',6:'Andrew Robertson',7:'Scott McKenna',8:'John Souttar',9:'Anthony Ralston',10:'Grant Hanley',11:'Scott McTominay',12:'Billy Gilmour',13:'Foto Grupal Escocia',14:'Lewis Ferguson',15:'Ryan Christie',16:'Kenny McLean',17:'John McGinn',18:'Lyndon Dykes',19:'Che Adams',20:'Ben Gannon-Doak'},
-  SEN:{1:'Escudo Senegal (FOIL)',2:'Eduardo Mendy',3:'Yehvann Diouf',4:'Moussa NiakhatÃ©',5:'Abdoulaye Seck',6:'Ismail Jakobs',7:'El Hadji Malick Diouf',8:'Kalidou Koulibaly',9:'Idrissa Gana Gueye',10:'Pape Matar Sarr',11:'Pape Gueye',12:'Habib Diarra',13:'Foto Grupal Senegal',14:'Lamine Camara',15:'Sadio Mane',16:'IsmaÃ¯la Sarr',17:'Boulaye Dia',18:'Iliman Ndiaye',19:'Nicolas Jackson',20:'Krepin Diatta'},
-  SUI:{1:'Escudo Suiza (FOIL)',2:'Gregor Kobel',3:'Yvon Mvogo',4:'Manuel Akanji',5:'Ricardo Rodriguez',6:'Nico Elvedi',7:'AurÃ¨le Amenda',8:'Silvan Widmer',9:'Granit Xhaka',10:'Denis Zakaria',11:'Remo Freuler',12:'Fabian Rieder',13:'Foto Grupal Suiza',14:'Ardon Jashari',15:'Johan Manzambi',16:'Michel Aebischer',17:'Breel Embolo',18:'Ruben Vargas',19:'Dan Ndoye',20:'Zeki Amdouni'},
-  SWE:{1:'Escudo Suecia (FOIL)',2:'Victor Johansson',3:'Isak Hien',4:'Gabriel Gudmundsson',5:'Emil Holm',6:'Victor Nilsson LindelÃ¶f',7:'Gustaf Lagerbielke',8:'Lucas Bergvall',9:'Hugo Larsson',10:'Jesper KarlstrÃ¶m',11:'Yasin Ayari',12:'Mattias Svanberg',13:'Foto Grupal Suecia',14:'Daniel Svensson',15:'Ken Sema',16:'Roony Bardghji',17:'Dejan Kulusevski',18:'Anthony Elanga',19:'Alexander Isak',20:'Viktor GyÃ¶keres'},
-  TUN:{1:'Escudo TÃºnez (FOIL)',2:'Bechir Ben Said',3:'Aymen Dahmen',4:'Van Valery',5:'Montassar Talbi',6:'Yassine Meriah',7:'Ali Abdi',8:'Dylan Bronn',9:'Ellyes Skhiri',10:'Aissa Laidouni',11:'Ferjani Sassi',12:'Mohamed Ali Ben Romdhane',13:'Foto Grupal TÃºnez',14:'Hannibal Mejbri',15:'Elias Achouri',16:'Elias Saad',17:'Hazem Mastouri',18:'Ismael Gharbi',19:'Sayfallah Ltaief',20:'Naim Sliti'},
-  TUR:{1:'Escudo TurquÃ­a (FOIL)',2:'Ugurcan Cakir',3:'Mert Muldur',4:'Zeki Celik',5:'Abdulkerim Bardakci',6:'Caglar Soyunku',7:'Merih Demiral',8:'Ferdi Kadioglu',9:'Kaan Ayhan',10:'Ismail Yuksek',11:'Hakan Calhanoglu',12:'Orkun Kokcu',13:'Foto Grupal TurquÃ­a',14:'Arda Guler',15:'Irfan Can Kahvecu',16:'Yunus Akgun',17:'Can Uzun',18:'Baris Alper Yilmaz',19:'Kerem Akturkoglu',20:'Kenan Yildiz'},
-  URU:{1:'Escudo Uruguay (FOIL)',2:'Sergio Rochet',3:'Santiago Mele',4:'Ronald Araujo',5:'JosÃ© MarÃ­a GimÃ©nez',6:'Sebastian Caceres',7:'Mathias Olivera',8:'Guillermo Varela',9:'Nahitan Nandez',10:'Federico Valverde',11:'Giorgian De Arrascaeta',12:'Rodrigo Bentancur',13:'Foto Grupal Uruguay',14:'Manuel Ugarte',15:'NicolÃ¡s de la Cruz',16:'Maxi Araujo',17:'Darwin NÃºÃ±ez',18:'Federico ViÃ±as',19:'Rodrigo Aguirre',20:'Facundo Pellistri'},
+  SEN:{1:'Escudo Senegal (FOIL)',2:'Eduardo Mendy',3:'Yehvann Diouf',4:'Moussa Niakhaté',5:'Abdoulaye Seck',6:'Ismail Jakobs',7:'El Hadji Malick Diouf',8:'Kalidou Koulibaly',9:'Idrissa Gana Gueye',10:'Pape Matar Sarr',11:'Pape Gueye',12:'Habib Diarra',13:'Foto Grupal Senegal',14:'Lamine Camara',15:'Sadio Mane',16:'Ismaïla Sarr',17:'Boulaye Dia',18:'Iliman Ndiaye',19:'Nicolas Jackson',20:'Krepin Diatta'},
+  SUI:{1:'Escudo Suiza (FOIL)',2:'Gregor Kobel',3:'Yvon Mvogo',4:'Manuel Akanji',5:'Ricardo Rodriguez',6:'Nico Elvedi',7:'Aurèle Amenda',8:'Silvan Widmer',9:'Granit Xhaka',10:'Denis Zakaria',11:'Remo Freuler',12:'Fabian Rieder',13:'Foto Grupal Suiza',14:'Ardon Jashari',15:'Johan Manzambi',16:'Michel Aebischer',17:'Breel Embolo',18:'Ruben Vargas',19:'Dan Ndoye',20:'Zeki Amdouni'},
+  SWE:{1:'Escudo Suecia (FOIL)',2:'Victor Johansson',3:'Isak Hien',4:'Gabriel Gudmundsson',5:'Emil Holm',6:'Victor Nilsson Lindelöf',7:'Gustaf Lagerbielke',8:'Lucas Bergvall',9:'Hugo Larsson',10:'Jesper Karlström',11:'Yasin Ayari',12:'Mattias Svanberg',13:'Foto Grupal Suecia',14:'Daniel Svensson',15:'Ken Sema',16:'Roony Bardghji',17:'Dejan Kulusevski',18:'Anthony Elanga',19:'Alexander Isak',20:'Viktor Gyökeres'},
+  TUN:{1:'Escudo Túnez (FOIL)',2:'Bechir Ben Said',3:'Aymen Dahmen',4:'Van Valery',5:'Montassar Talbi',6:'Yassine Meriah',7:'Ali Abdi',8:'Dylan Bronn',9:'Ellyes Skhiri',10:'Aissa Laidouni',11:'Ferjani Sassi',12:'Mohamed Ali Ben Romdhane',13:'Foto Grupal Túnez',14:'Hannibal Mejbri',15:'Elias Achouri',16:'Elias Saad',17:'Hazem Mastouri',18:'Ismael Gharbi',19:'Sayfallah Ltaief',20:'Naim Sliti'},
+  TUR:{1:'Escudo Turquía (FOIL)',2:'Ugurcan Cakir',3:'Mert Muldur',4:'Zeki Celik',5:'Abdulkerim Bardakci',6:'Caglar Soyunku',7:'Merih Demiral',8:'Ferdi Kadioglu',9:'Kaan Ayhan',10:'Ismail Yuksek',11:'Hakan Calhanoglu',12:'Orkun Kokcu',13:'Foto Grupal Turquía',14:'Arda Guler',15:'Irfan Can Kahvecu',16:'Yunus Akgun',17:'Can Uzun',18:'Baris Alper Yilmaz',19:'Kerem Akturkoglu',20:'Kenan Yildiz'},
+  URU:{1:'Escudo Uruguay (FOIL)',2:'Sergio Rochet',3:'Santiago Mele',4:'Ronald Araujo',5:'José María Giménez',6:'Sebastian Caceres',7:'Mathias Olivera',8:'Guillermo Varela',9:'Nahitan Nandez',10:'Federico Valverde',11:'Giorgian De Arrascaeta',12:'Rodrigo Bentancur',13:'Foto Grupal Uruguay',14:'Manuel Ugarte',15:'Nicolás de la Cruz',16:'Maxi Araujo',17:'Darwin Núñez',18:'Federico Viñas',19:'Rodrigo Aguirre',20:'Facundo Pellistri'},
   USA:{1:'Escudo USA (FOIL)',2:'Matt Freese',3:'Chris Richards',4:'Tim Ream',5:'Mark McKenzie',6:'Alex Freeman',7:'Antonee Robinson',8:'Tyler Adams',9:'Tanner Tessmann',10:'Weston McKennie',11:'Christian Roldan',12:'Timothy Weah',13:'Foto Grupal USA',14:'Diego Luna',15:'Malim Tillman',16:'Christian Pulisic',17:'Brenden Aaronson',18:'Ricardo Pepi',19:'Haji Wright',20:'Folarin Balogun'},
-  UZB:{1:'Escudo UzbekistÃ¡n (FOIL)',2:'Utkir Yusupov',3:'Farrukh Savfiev',4:'Sherzod Nasrullaev',5:'Umar Eshmurodov',6:'Husniddin Aliqulov',7:'Rustamjon Ashurmatov',8:'Khojiakbar Alijonov',9:'Abdukodir Khusanov',10:'Odiljon Hamrobekov',11:'Otabek Shukurov',12:'Jamshid Iskanderov',13:'Foto Grupal UzbekistÃ¡n',14:'Azizbek Turgunboev',15:'Khojimat Erkinov',16:'Eldor Shomurodov',17:'Oston Urunov',18:'Jaloliddin Masharipov',19:'Igor Sergeev',20:'Abbosbek Fayzullaev'},
+  UZB:{1:'Escudo Uzbekistán (FOIL)',2:'Utkir Yusupov',3:'Farrukh Savfiev',4:'Sherzod Nasrullaev',5:'Umar Eshmurodov',6:'Husniddin Aliqulov',7:'Rustamjon Ashurmatov',8:'Khojiakbar Alijonov',9:'Abdukodir Khusanov',10:'Odiljon Hamrobekov',11:'Otabek Shukurov',12:'Jamshid Iskanderov',13:'Foto Grupal Uzbekistán',14:'Azizbek Turgunboev',15:'Khojimat Erkinov',16:'Eldor Shomurodov',17:'Oston Urunov',18:'Jaloliddin Masharipov',19:'Igor Sergeev',20:'Abbosbek Fayzullaev'},
 };
 
 function sname(col, row) {
@@ -693,23 +693,23 @@ function sname(col, row) {
 
 // Jugadores / estampas con borde dorado
 const ESTRELLAS = new Set([
-  'Lionel Messi','JuliÃ¡n Ãlvarez','Lautaro MartÃ­nez','Alejandro Garnacho','Ãngel Di MarÃ­a','Paulo Dybala','Rodrigo De Paul',
-  'Kylian MbappÃ©','Antoine Griezmann','Ousmane DembÃ©lÃ©','Marcus Thuram','Bradley Barcola','Warren ZaÃ¯re-Emery','Michael Olise',
-  'Cristiano Ronaldo','Bruno Fernandes','Bernardo Silva','Rafael LeÃ£o','Pedro Neto','JoÃ£o FÃ©lix',
-  'Vinicius Junior','Endrick','Rodrygo','Raphinha','Gabriel Martinelli','Richarlison','Savinho','EstÃªvÃ£o',
-  'Lamine Yamal','Pedri','Rodri','Nico Williams','Dani Olmo','Gavi','Ãlvaro Morata',
+  'Lionel Messi','Julián Álvarez','Lautaro Martínez','Alejandro Garnacho','Ángel Di María','Paulo Dybala','Rodrigo De Paul',
+  'Kylian Mbappé','Antoine Griezmann','Ousmane Dembélé','Marcus Thuram','Bradley Barcola','Warren Zaïre-Emery','Michael Olise',
+  'Cristiano Ronaldo','Bruno Fernandes','Bernardo Silva','Rafael Leão','Pedro Neto','João Félix',
+  'Vinicius Junior','Endrick','Rodrygo','Raphinha','Gabriel Martinelli','Richarlison','Savinho','Estêvão',
+  'Lamine Yamal','Pedri','Rodri','Nico Williams','Dani Olmo','Gavi','Álvaro Morata',
   'Jude Bellingham','Harry Kane','Bukayo Saka','Phil Foden','Cole Palmer','Marcus Rashford','Trent Alexander-Arnold',
-  'Florian Wirtz','Jamal Musiala','Leroy SanÃ©','Kai Havertz','Thomas MÃ¼ller',
-  'Darwin NÃºÃ±ez','Federico Valverde','Ronald AraÃºjo','Manuel Ugarte',
-  'Luis DÃ­az','James RodrÃ­guez','Radamel Falcao','Jhon DurÃ¡n',
-  'Hirving Lozano','Santiago GimÃ©nez','RaÃºl JimÃ©nez','Edson Ãlvarez',
+  'Florian Wirtz','Jamal Musiala','Leroy Sané','Kai Havertz','Thomas Müller',
+  'Darwin Núñez','Federico Valverde','Ronald Araújo','Manuel Ugarte',
+  'Luis Díaz','James Rodríguez','Radamel Falcao','Jhon Durán',
+  'Hirving Lozano','Santiago Giménez','Raúl Jiménez','Edson Álvarez',
   'Christian Pulisic','Gio Reyna','Weston McKennie',
   'Alphonso Davies','Jonathan David','Tajon Buchanan',
-  'Luka ModriÄ','JoÅ¡ko Gvardiol','Mateo KovaÄiÄ','Andrej KramariÄ',
-  'Mohammed Kudus','IÃ±aki Williams','Thomas Partey',
+  'Luka Modrić','Joško Gvardiol','Mateo Kovačić','Andrej Kramarić',
+  'Mohammed Kudus','Iñaki Williams','Thomas Partey',
   'Percy Tau','Evidence Makgopa',
-  'Emiliano MartÃ­nez','Alisson','Manuel Neuer','Jordan Pickford','RÃºben Dias',
-  // Emblema Oficial FWC tambiÃ©n es especial (ya lo cubre col=FWC)
+  'Emiliano Martínez','Alisson','Manuel Neuer','Jordan Pickford','Rúben Dias',
+  // Emblema Oficial FWC también es especial (ya lo cubre col=FWC)
 ]);
 
 function isEstrella(col, ri) {
@@ -803,7 +803,7 @@ function saveLocal() {
       supaUpsert('inventario', { id: 'default', data: data, updated_at: new Date().toISOString() }),
       supaUpsert('albums', { id: 'default', data: albums, updated_at: new Date().toISOString() })
     ]);
-    setSyncStatus('online', 'Guardado â');
+    setSyncStatus('online', 'Guardado ✓');
   }, 1500);
 }
 
@@ -865,7 +865,7 @@ function setupRealtime() {
         if (!data[0]) data[0] = new Array(COLS.length).fill(0);
         localStorage.setItem(SK, JSON.stringify(data));
         buildAll();
-        setSyncStatus('online', 'Sync â');
+        setSyncStatus('online', 'Sync ✓');
       }
     })
     .on('postgres_changes', { event: 'UPDATE', schema: 'public', table: 'albums' }, (payload) => {
@@ -901,10 +901,10 @@ async function initFirebase() {
     }
     if (loaded || negRemote) {
       buildAll(); // reconstruir con datos remotos
-      setSyncStatus('online', 'Supabase â');
+      setSyncStatus('online', 'Supabase ✓');
     } else {
-      setSyncStatus('online', 'Local â');
-      // Subir datos locales a Supabase si estÃ¡n vacÃ­os
+      setSyncStatus('online', 'Local ✓');
+      // Subir datos locales a Supabase si están vacíos
       await Promise.all([
         supaUpsert('inventario', { id: 'default', data: data, updated_at: new Date().toISOString() }),
         supaUpsert('albums', { id: 'default', data: albums, updated_at: new Date().toISOString() }),
@@ -914,13 +914,13 @@ async function initFirebase() {
     setupRealtime();
   } catch(e) {
     console.warn('Supabase init error:', e);
-    setSyncStatus('offline', 'Sin conexiÃ³n');
+    setSyncStatus('offline', 'Sin conexión');
   }
 }
 
 
 // ============================================================
-// LÃGICA DE CAMBIO DE CELDA
+// LÓGICA DE CAMBIO DE CELDA
 // ============================================================
 
 function flash() {
@@ -961,7 +961,7 @@ function changeCell(ri, ci, delta) {
   const rtel = document.getElementById('rt-' + ri);
   if (rtel) rtel.textContent = rt;
   updateColTots(); updateStats(); flash();
-  // Si se restÃ³ una estampa (delta < 0 y sÃ­ habÃ­a), crear transacciÃ³n pendiente
+  // Si se restó una estampa (delta < 0 y sí había), crear transacción pendiente
   if (delta < 0 && antes > 0) {
     crearTxPendiente(ri, ci, Math.abs(delta));
   }
@@ -977,7 +977,7 @@ function crearTxPendiente(ri, ci, qty) {
     tipoEst: 'estampa',
     qty,
     price: 0,
-    desc: '[PENDIENTE] ' + nombre + ' Ã ' + qty,
+    desc: '[PENDIENTE] ' + nombre + ' × ' + qty,
     ri, ci,
     pendiente: true,
     date: today()
@@ -985,10 +985,10 @@ function crearTxPendiente(ri, ci, qty) {
   saveNeg();
   // Mostrar toast especial
   const t = document.getElementById('toast');
-  t.textContent = 'ð TransacciÃ³n pendiente creada';
+  t.textContent = '📝 Transacción pendiente creada';
   t.style.display = 'block';
   clearTimeout(toastT);
-  toastT = setTimeout(() => { t.style.display = 'none'; t.textContent = 'â Guardado'; }, 2000);
+  toastT = setTimeout(() => { t.style.display = 'none'; t.textContent = '✓ Guardado'; }, 2000);
 }
 
 // Detectar Shift para click-restar
@@ -1057,7 +1057,7 @@ function handleRowInput(input) {
 // ============================================================
 
 function calcStats() {
-  let total=0, uniq=0, rep=0, esp=0, maxV=0, maxL='â';
+  let total=0, uniq=0, rep=0, esp=0, maxV=0, maxL='—';
   for (let r=1; r<=20; r++) {
     COLS.forEach((col,ci) => {
       const v = data[r]?.[ci] || 0;
@@ -1077,7 +1077,7 @@ function updateStats() {
   document.getElementById('s-faltan').textContent = s.faltan;
   document.getElementById('s-repet').textContent  = s.rep;
   document.getElementById('s-esp').textContent    = s.esp;
-  document.getElementById('s-mas').textContent    = s.maxV>0 ? s.maxL+' (Ã'+s.maxV+')' : 'â';
+  document.getElementById('s-mas').textContent    = s.maxV>0 ? s.maxL+' (×'+s.maxV+')' : '—';
   document.getElementById('b-conseg').textContent = 'Conseguidas: '+s.uniq;
   document.getElementById('b-falt').textContent   = 'No conseguidas: '+s.faltan;
 }
@@ -1129,7 +1129,7 @@ function buildTable() {
   h += '<th class="th-total"><div class="th-inner"><span class="th-code">TOT</span></div></th></tr></thead><tbody>';
 
   // Fila 00
-  h += `<tr class="r-00"><td title="Escribe # estampa + Enter. -N resta. Flechas para moverte.">âµ</td>`;
+  h += `<tr class="r-00"><td title="Escribe # estampa + Enter. -N resta. Flechas para moverte.">↵</td>`;
   COLS.forEach((col,ci) => {
     h += `<td class="${ci===0?'col-fwc':''}"><input class="qi-cell-input" data-ci="${ci}" data-col="${col}" placeholder="#"></td>`;
   });
@@ -1161,7 +1161,7 @@ function buildTable() {
 }
 
 // ============================================================
-// ÃLBUMES
+// ÁLBUMES
 // ============================================================
 
 function buildAlbums() {
@@ -1171,7 +1171,7 @@ function buildAlbums() {
     const pct = Math.min(100, Math.round(a.pegadas/981*100));
     return `<div class="alb-card">
       <div class="alb-tipo ${a.tipo}">${a.tipo==='b'?'Pasta Blanda':'Pasta Dura'}</div>
-      <input class="alb-inp" placeholder="Nombre del dueÃ±o..." value="${a.nombre}" oninput="setAN(${a.id},this.value)">
+      <input class="alb-inp" placeholder="Nombre del dueño..." value="${a.nombre}" oninput="setAN(${a.id},this.value)">
       <div class="alb-row">
         <span class="alb-lbl">Estampas pegadas</span>
         <div class="alb-ctrl">
@@ -1180,7 +1180,7 @@ function buildAlbums() {
           <button class="ba" onclick="chAlb(${a.id},1)">+</button>
         </div>
       </div>
-      <div class="alb-pct" id="apct-${a.id}">${pct}% Â· faltan ${981-a.pegadas}</div>
+      <div class="alb-pct" id="apct-${a.id}">${pct}% · faltan ${981-a.pegadas}</div>
       <div class="alb-bar"><div class="alb-fill ${a.tipo}" id="abar-${a.id}" style="width:${pct}%"></div></div>
     </div>`;
   }).join('');
@@ -1194,7 +1194,7 @@ function chAlb(id,d) {
   const a=albums.find(x=>x.id===id);
   const pct=Math.min(100,Math.round(a.pegadas/981*100));
   document.getElementById('av-'+id).textContent=a.pegadas;
-  document.getElementById('apct-'+id).textContent=pct+'% Â· faltan '+(981-a.pegadas);
+  document.getElementById('apct-'+id).textContent=pct+'% · faltan '+(981-a.pegadas);
   document.getElementById('abar-'+id).style.width=pct+'%';
   updAlbFoot(); flash();
 }
@@ -1205,12 +1205,12 @@ function updAlbFoot() {
   document.getElementById('alb-foot').innerHTML=
     `<span>Blanda: <strong>${albums.filter(a=>a.tipo==='b').length}</strong></span>`+
     `<span>Dura: <strong>${albums.filter(a=>a.tipo==='d').length}</strong></span>`+
-    `<span>MÃ¡s completo: <strong>${ts}</strong></span>`+
+    `<span>Más completo: <strong>${ts}</strong></span>`+
     `<span style="margin-left:auto;font-size:0.68rem;color:#166534;background:#052e16;border:1px solid #166534;border-radius:4px;padding:2px 8px">Guardado</span>`;
 }
 
 // ============================================================
-// NEGOCIO â datos
+// NEGOCIO — datos
 // ============================================================
 
 const NEG_KEY = 'neg_v1';
@@ -1242,39 +1242,39 @@ function negTab(which, btn) {
 function fmt(n) { return 'Q'+parseFloat(n).toFixed(2); }
 function today() { return new Date().toLocaleDateString('es-MX',{day:'2-digit',month:'2-digit',year:'2-digit'}); }
 
-// ---- ÃLBUMES: registrar ----
+// ---- ÁLBUMES: registrar ----
 function negAlbReg(tipo) {
   const isBuy  = tipo==='compra';
   const tipoAlb = document.getElementById('alb-tipo').value;
   const qty     = parseInt(document.getElementById('alb-qty').value)||0;
   const note    = document.getElementById('alb-note').value.trim();
-  if (qty<1) { alert('Cantidad invÃ¡lida'); return; }
+  if (qty<1) { alert('Cantidad inválida'); return; }
   const priceEl = document.getElementById('alb-price');
   const refKey  = isBuy ? (tipoAlb==='b'?'pc-alb-b':'pc-alb-d') : (tipoAlb==='b'?'pv-alb-b':'pv-alb-d');
   const price   = parseFloat(priceEl.value) || getNegPrice(refKey);
   priceEl.value = '';
-  const desc = (tipoAlb==='b'?'Pasta Blanda':'Pasta Dura')+' Ã '+qty+(note?' â '+note:'');
+  const desc = (tipoAlb==='b'?'Pasta Blanda':'Pasta Dura')+' × '+qty+(note?' — '+note:'');
   negData.txs.unshift({ id:Date.now(), cat:'alb', tipo, tipoAlb, qty, price, desc, date:today() });
   saveNeg(); renderNeg(); flash();
 }
 
-// ââ CAJAS ââââââââââââââââââââââââââââââââââââââââââââââââââ
+// ── CAJAS ──────────────────────────────────────────────────
 function cajasReg() {
   const qVender = parseInt(document.getElementById('caja-buy-vender').value)||0;
   const qSobres = parseInt(document.getElementById('caja-buy-sobres').value)||0;
   const qColec  = parseInt(document.getElementById('caja-buy-colec').value)||0;
   const total   = qVender + qSobres + qColec;
-  if (total < 1) { alert('Pon al menos 1 caja en algÃºn destino'); return; }
+  if (total < 1) { alert('Pon al menos 1 caja en algún destino'); return; }
   const priceEl = document.getElementById('caja-buy-price');
   const price   = parseFloat(priceEl.value) || getNegPrice('pc-caja');
   const note    = document.getElementById('caja-buy-note').value.trim();
   priceEl.value = '';
   document.getElementById('caja-buy-note').value = '';
-  // Registrar una transacciÃ³n por destino
+  // Registrar una transacción por destino
   const ts = Date.now();
-  if (qVender>0) negData.txs.unshift({ id:ts+1, cat:'caja', tipo:'compra', dest:'vender', qty:qVender, price, desc:'Cajas para vender completas Ã '+qVender+(note?' â '+note:''), date:today() });
-  if (qSobres>0) negData.txs.unshift({ id:ts+2, cat:'caja', tipo:'compra', dest:'sobres', qty:qSobres, price, desc:'Cajas para vender por sobres Ã '+qSobres+(note?' â '+note:''), date:today() });
-  if (qColec>0)  negData.txs.unshift({ id:ts+3, cat:'caja', tipo:'compra', dest:'colec',  qty:qColec,  price, desc:'Cajas para colecciÃ³n (abrir) Ã '+qColec+(note?' â '+note:''), date:today() });
+  if (qVender>0) negData.txs.unshift({ id:ts+1, cat:'caja', tipo:'compra', dest:'vender', qty:qVender, price, desc:'Cajas para vender completas × '+qVender+(note?' — '+note:''), date:today() });
+  if (qSobres>0) negData.txs.unshift({ id:ts+2, cat:'caja', tipo:'compra', dest:'sobres', qty:qSobres, price, desc:'Cajas para vender por sobres × '+qSobres+(note?' — '+note:''), date:today() });
+  if (qColec>0)  negData.txs.unshift({ id:ts+3, cat:'caja', tipo:'compra', dest:'colec',  qty:qColec,  price, desc:'Cajas para colección (abrir) × '+qColec+(note?' — '+note:''), date:today() });
   // Resetear inputs
   ['caja-buy-vender','caja-buy-sobres','caja-buy-colec'].forEach(id=>document.getElementById(id).value=0);
   saveNeg(); renderNeg(); flash();
@@ -1282,7 +1282,7 @@ function cajasReg() {
 
 function cajasSellCaja() {
   const qty   = parseInt(document.getElementById('caja-sell-qty').value)||0;
-  if (qty<1) { alert('Cantidad invÃ¡lida'); return; }
+  if (qty<1) { alert('Cantidad inválida'); return; }
   const priceEl = document.getElementById('caja-sell-price');
   const price   = parseFloat(priceEl.value) || getNegPrice('pv-caja');
   const note    = document.getElementById('caja-sell-note').value.trim();
@@ -1290,13 +1290,13 @@ function cajasSellCaja() {
   // Verificar stock
   const stk = cajasStock();
   if (stk.vender < qty) { alert('Solo tienes '+stk.vender+' cajas para vender completas'); return; }
-  negData.txs.unshift({ id:Date.now(), cat:'caja', tipo:'venta', dest:'vender', qty, price, desc:'Venta caja completa Ã '+qty+(note?' â '+note:''), date:today() });
+  negData.txs.unshift({ id:Date.now(), cat:'caja', tipo:'venta', dest:'vender', qty, price, desc:'Venta caja completa × '+qty+(note?' — '+note:''), date:today() });
   saveNeg(); renderNeg(); flash();
 }
 
 function cajasSellSobre() {
   const qty   = parseInt(document.getElementById('sobre-sell-qty').value)||0;
-  if (qty<1) { alert('Cantidad invÃ¡lida'); return; }
+  if (qty<1) { alert('Cantidad inválida'); return; }
   const priceEl = document.getElementById('sobre-sell-price');
   const price   = parseFloat(priceEl.value) || getNegPrice('pv-sobre');
   const note    = document.getElementById('sobre-sell-note').value.trim();
@@ -1304,7 +1304,7 @@ function cajasSellSobre() {
   // Verificar sobres disponibles (cajas dest=sobres * 104 - sobres vendidos)
   const stk = cajasStock();
   if (stk.sobresDisp < qty) { alert('Solo tienes '+stk.sobresDisp+' sobres disponibles'); return; }
-  negData.txs.unshift({ id:Date.now(), cat:'caja', tipo:'venta', dest:'sobres', qty, price, desc:'Venta sobres Ã '+qty+(note?' â '+note:''), date:today() });
+  negData.txs.unshift({ id:Date.now(), cat:'caja', tipo:'venta', dest:'sobres', qty, price, desc:'Venta sobres × '+qty+(note?' — '+note:''), date:today() });
   saveNeg(); renderNeg(); flash();
 }
 
@@ -1318,7 +1318,7 @@ function cajasStock() {
   const ventSobres = cajaTxs.filter(t=>t.tipo==='venta'&&t.dest==='sobres').reduce((s,t)=>s+t.qty,0); // sobres vendidos
   const cajasAbiertas = compSobres; // cajas ya abiertas para sobres
   const sobresDisp = cajasAbiertas * 104 - ventSobres;
-  // Cajas para colecciÃ³n
+  // Cajas para colección
   const compColec = cajaTxs.filter(t=>t.tipo==='compra'&&t.dest==='colec').reduce((s,t)=>s+t.qty,0);
   return { vender: compVender - ventVender, sobresDisp: Math.max(0,sobresDisp), colec: compColec, cajasAbiertas, compSobres };
 }
@@ -1331,7 +1331,7 @@ function renderStockCajas() {
   el.innerHTML = `
     <div class="stock-pill"><div class="stock-v ${stk.vender>0?'ok':stk.vender===0?'warn':'err'}">${Math.max(0,stk.vender)}</div><div class="stock-l">Cajas para vender</div></div>
     <div class="stock-pill"><div class="stock-v ${stk.sobresDisp>0?'ok':stk.sobresDisp===0?'warn':'err'}">${stk.sobresDisp}</div><div class="stock-l">Sobres disponibles</div></div>
-    <div class="stock-pill"><div class="stock-v ok">${stk.colec}</div><div class="stock-l">Cajas colecciÃ³n</div></div>`;
+    <div class="stock-pill"><div class="stock-v ok">${stk.colec}</div><div class="stock-l">Cajas colección</div></div>`;
 }
 
 function renderResumenCajas(cajaTxs) {
@@ -1355,8 +1355,8 @@ function negEstReg(tipo) {
   const num   = parseInt(document.getElementById('est-buy-num').value);
   const qty   = parseInt(document.getElementById('est-buy-qty').value)||0;
   const note  = document.getElementById('est-buy-note').value.trim();
-  if (!pais || isNaN(num)||num<1||num>20) { alert('Elige paÃ­s y nÃºmero (1-20)'); return; }
-  if (qty<1) { alert('Cantidad invÃ¡lida'); return; }
+  if (!pais || isNaN(num)||num<1||num>20) { alert('Elige país y número (1-20)'); return; }
+  if (qty<1) { alert('Cantidad inválida'); return; }
   const priceEl = document.getElementById('est-buy-price');
   const price   = parseFloat(priceEl.value) || getNegPrice(isBuy?'pc-estampa':'pv-estampa');
   priceEl.value = '';
@@ -1371,7 +1371,7 @@ function negEstReg(tipo) {
     saveLocal(); updateCellDOM(ri,ci,data[ri][ci],-1); updateColTots(); updateStats();
   }
   const paisName = PAIS[pais]||pais;
-  const desc = (isBuy?'Compra':'Venta')+' estampa suelta ['+paisName+' #'+num+'] Ã '+qty+(note?' â '+note:'');
+  const desc = (isBuy?'Compra':'Venta')+' estampa suelta ['+paisName+' #'+num+'] × '+qty+(note?' — '+note:'');
   negData.txs.unshift({ id:Date.now(), cat:'est', tipo, tipoEst:'estampa', qty, price, desc, ri, ci, date:today() });
   saveNeg(); renderNeg(); flash();
 }
@@ -1395,8 +1395,8 @@ function completarTx(id, precio) {
 function notarTx(id, nota) {
   negData.txs = negData.txs.map(t => {
     if (t.id !== id) return t;
-    const base = t.desc.replace('[PENDIENTE] ','').split(' â ')[0];
-    return { ...t, desc: base + (nota ? ' â ' + nota : '') };
+    const base = t.desc.replace('[PENDIENTE] ','').split(' — ')[0];
+    return { ...t, desc: base + (nota ? ' — ' + nota : '') };
   });
   saveNeg();
 }
@@ -1405,16 +1405,16 @@ function renderNeg() {
   function txRow(t) {
     if (t.pendiente) return `
       <div class="neg-hist-row pend">
-        <span class="neg-hist-tipo p">â³ PEND.</span>
+        <span class="neg-hist-tipo p">⏳ PEND.</span>
         <span class="neg-hist-desc" style="flex:1">${t.desc.replace('[PENDIENTE] ','')}</span>
         <input class="pend-price" type="number" min="0" step="0.5" placeholder="Q precio"
                onchange="completarTx(${t.id}, this.value)"
                style="width:75px;background:#0f172a;border:1px solid #374151;color:#e2e8f0;padding:3px 6px;border-radius:4px;font-size:0.75rem">
-        <input class="pend-note" type="text" placeholder="Â¿A quiÃ©n?"
+        <input class="pend-note" type="text" placeholder="¿A quién?"
                onblur="notarTx(${t.id}, this.value)"
                style="width:90px;background:#0f172a;border:1px solid #374151;color:#e2e8f0;padding:3px 6px;border-radius:4px;font-size:0.75rem">
         <span class="neg-hist-date">${t.date}</span>
-        <span class="neg-hist-del" onclick="negDelTx(${t.id})" title="Eliminar">â</span>
+        <span class="neg-hist-del" onclick="negDelTx(${t.id})" title="Eliminar">✕</span>
       </div>`;
     return `
       <div class="neg-hist-row">
@@ -1422,11 +1422,11 @@ function renderNeg() {
         <span class="neg-hist-desc" style="flex:1">${t.desc}</span>
         <span class="neg-hist-price">${fmt(t.price * t.qty)}</span>
         <span class="neg-hist-date">${t.date}</span>
-        <span class="neg-hist-del" onclick="negDelTx(${t.id})" title="Eliminar">â</span>
+        <span class="neg-hist-del" onclick="negDelTx(${t.id})" title="Eliminar">✕</span>
       </div>`;
   }
   function histHTML(txs) {
-    return txs.length ? txs.map(txRow).join('') : '<div class="neg-empty">Sin transacciones aÃºn</div>';
+    return txs.length ? txs.map(txRow).join('') : '<div class="neg-empty">Sin transacciones aún</div>';
   }
 
   const cajaTxs = negData.txs.filter(t=>t.cat==='caja');
@@ -1446,7 +1446,7 @@ function renderNeg() {
 }
 
 function renderStock() {
-  // Stock Ã¡lbumes: compras - ventas
+  // Stock álbumes: compras - ventas
   const albTxs = negData.txs.filter(t=>t.cat==='alb');
   const stockAlbB = albTxs.filter(t=>t.tipoAlb==='b').reduce((s,t)=>s+(t.tipo==='compra'?t.qty:-t.qty),0);
   const stockAlbD = albTxs.filter(t=>t.tipoAlb==='d').reduce((s,t)=>s+(t.tipo==='compra'?t.qty:-t.qty),0);
@@ -1492,7 +1492,7 @@ function renderResumenGeneral() {
   const totalV  = ventas.reduce((s,t)=>s+t.price*t.qty, 0);
   const gan     = totalV - totalC;
   const txCount = all.length;
-  const margen  = totalV>0 ? ((gan/totalV)*100).toFixed(1)+'%' : 'â';
+  const margen  = totalV>0 ? ((gan/totalV)*100).toFixed(1)+'%' : '—';
 
   document.getElementById('resumen-general').innerHTML = `
     <h3>Resumen General</h3>
@@ -1504,11 +1504,11 @@ function renderResumenGeneral() {
       <div class="neg-gen-stat"><div class="v" style="color:#60a5fa">${compras.reduce((s,t)=>s+t.qty,0)}</div><div class="l">Unidades compradas</div></div>
       <div class="neg-gen-stat"><div class="v" style="color:#a78bfa">${ventas.reduce((s,t)=>s+t.qty,0)}</div><div class="l">Unidades vendidas</div></div>
       <div class="neg-gen-stat"><div class="v" style="color:#fb923c">${txCount}</div><div class="l">Transacciones</div></div>
-      <div class="neg-gen-stat"><div class="v" style="color:#94a3b8">${ventas.filter(t=>t.cat==='alb').reduce((s,t)=>s+t.qty,0)}</div><div class="l">Ãlbumes vendidos</div></div>
+      <div class="neg-gen-stat"><div class="v" style="color:#94a3b8">${ventas.filter(t=>t.cat==='alb').reduce((s,t)=>s+t.qty,0)}</div><div class="l">Álbumes vendidos</div></div>
     </div>`;
 }
 
-// Poblar selects de paÃ­ses para estampas
+// Poblar selects de países para estampas
 function initNegSelects() {
   ['est-buy-pais'].forEach(id => {
     const sel = document.getElementById(id);
@@ -1516,29 +1516,29 @@ function initNegSelects() {
     sel.innerHTML = '';
     COLS.forEach(c => {
       const o = document.createElement('option');
-      o.value = c; o.textContent = c+' â '+(PAIS[c]||c);
+      o.value = c; o.textContent = c+' — '+(PAIS[c]||c);
       sel.appendChild(o);
     });
   });
 }
 
 // ============================================================
-// ANÃLISIS
+// ANÁLISIS
 // ============================================================
 
 function buildAnalysis() {
   const s = calcStats();
 
-  // ââ Resumen rÃ¡pido ââââââââââââââââââââââââââââââââââââââââââ
+  // ── Resumen rápido ──────────────────────────────────────────
   const pctComp = ((s.uniq/980)*100).toFixed(1);
   document.getElementById('ana-quick').innerHTML = `
     <div class="ana-qs"><div class="ana-qs-v" style="color:#60a5fa">${s.total}</div><div class="ana-qs-l">Total estampas</div></div>
-    <div class="ana-qs"><div class="ana-qs-v" style="color:#34d399">${s.uniq}</div><div class="ana-qs-l">Ãnicas (${pctComp}%)</div></div>
+    <div class="ana-qs"><div class="ana-qs-v" style="color:#34d399">${s.uniq}</div><div class="ana-qs-l">Únicas (${pctComp}%)</div></div>
     <div class="ana-qs"><div class="ana-qs-v" style="color:#e63946">${s.faltan}</div><div class="ana-qs-l">Te faltan</div></div>
     <div class="ana-qs"><div class="ana-qs-v" style="color:#f59e0b">${s.rep}</div><div class="ana-qs-l">Repetidas (para vender)</div></div>
     <div class="ana-qs"><div class="ana-qs-v" style="color:#a78bfa">${s.esp}</div><div class="ana-qs-l">Especiales conseguidas</div></div>`;
 
-  // ââ Progreso por paÃ­s (todas) ââââââââââââââââââââââââââââââââ
+  // ── Progreso por país (todas) ────────────────────────────────
   const paisData = COLS.map((col,ci)=>{
     const got = 0; // contar filas 1-20 con v>0
     let g=0;
@@ -1549,9 +1549,9 @@ function buildAnalysis() {
     const pct = Math.round(p.got/20*100);
     const col = pct>=80?'#34d399':pct>=60?'#86efac':pct>=40?'#f59e0b':pct>=20?'#fb923c':'#60a5fa';
     return `<div class="prob-row"><div class="prob-label"><span style="color:#94a3b8">${p.name}</span><span style="color:#e2e8f0;font-weight:600">${p.got}/20</span></div><div class="prob-bar-bg"><div class="prob-bar-fill" style="width:${pct}%;background:${col}"></div></div></div>`;
-  }).join('') || '<p style="color:#4b5563;font-size:0.78rem">Sin datos aÃºn</p>';
+  }).join('') || '<p style="color:#4b5563;font-size:0.78rem">Sin datos aún</p>';
 
-  // ââ Top repetidas ââââââââââââââââââââââââââââââââââââââââââââ
+  // ── Top repetidas ────────────────────────────────────────────
   let cells=[];
   for(let r=1;r<=20;r++) COLS.forEach((col,ci)=>{
     const v=data[r]?.[ci]||0;
@@ -1561,23 +1561,23 @@ function buildAnalysis() {
   document.getElementById('rank-rep').innerHTML = cells.slice(0,15).length
     ? `<thead><tr><th>#</th><th>Estampa</th><th>Tienes</th><th>Vender</th></tr></thead><tbody>`+
       cells.slice(0,15).map((c,i)=>{
-        const star = c.esp ? ' â­' : '';
+        const star = c.esp ? ' ⭐' : '';
         const sell = c.v - 1;
-        return `<tr><td style="color:#64748b">${i+1}</td><td class="rn">${c.l.length>28?c.l.slice(0,27)+'â¦':c.l}${star}</td><td style="color:#60a5fa">Ã${c.v}</td><td style="color:#34d399">+${sell}</td></tr>`;
+        return `<tr><td style="color:#64748b">${i+1}</td><td class="rn">${c.l.length>28?c.l.slice(0,27)+'…':c.l}${star}</td><td style="color:#60a5fa">×${c.v}</td><td style="color:#34d399">+${sell}</td></tr>`;
       }).join('')+'</tbody>'
-    : '<tr><td colspan="4" style="color:#4b5563;padding:16px;text-align:center">Sin repetidas aÃºn â Â¡empieza a registrar!</td></tr>';
+    : '<tr><td colspan="4" style="color:#4b5563;padding:16px;text-align:center">Sin repetidas aún — ¡empieza a registrar!</td></tr>';
 
-  // ââ PaÃ­ses sin ninguna estampa âââââââââââââââââââââââââââââââ
+  // ── Países sin ninguna estampa ───────────────────────────────
   const sinNada = COLS.filter((col,ci)=>{
     for(let r=1;r<=20;r++) if((data[r]?.[ci]||0)>0) return false;
     return true;
   });
   document.getElementById('paises-cero').innerHTML = sinNada.length
-    ? `<p style="color:#64748b;font-size:0.72rem;margin-bottom:8px">Te faltan estampas de ${sinNada.length} paÃ­ses:</p>`+
-      sinNada.map(col=>`<span style="display:inline-block;background:#1e2435;border:1px solid #374151;border-radius:4px;padding:3px 8px;margin:3px;font-size:0.72rem;color:#94a3b8">${col} â ${(PAIS[col]||col).substring(0,15)}</span>`).join('')
-    : '<p style="color:#34d399;font-size:0.78rem">ð Â¡Tienes al menos una estampa de cada paÃ­s!</p>';
+    ? `<p style="color:#64748b;font-size:0.72rem;margin-bottom:8px">Te faltan estampas de ${sinNada.length} países:</p>`+
+      sinNada.map(col=>`<span style="display:inline-block;background:#1e2435;border:1px solid #374151;border-radius:4px;padding:3px 8px;margin:3px;font-size:0.72rem;color:#94a3b8">${col} — ${(PAIS[col]||col).substring(0,15)}</span>`).join('')
+    : '<p style="color:#34d399;font-size:0.78rem">🎉 ¡Tienes al menos una estampa de cada país!</p>';
 
-  // ââ Valor estimado âââââââââââââââââââââââââââââââââââââââââââ
+  // ── Valor estimado ───────────────────────────────────────────
   // Calcular especiales (FWC + escudos foil + fotos grupales + estrellas)
   let repComunes=0, repEsp=0, repFoil=0;
   for(let r=1;r<=20;r++) COLS.forEach((col,ci)=>{
@@ -1591,18 +1591,18 @@ function buildAnalysis() {
   });
   const valFoil  = repFoil  * 60;   // Q60 promedio foil
   const valEsp   = repEsp   * 35;   // Q35 promedio estrella
-  const valComun = repComunes * 6;  // Q6 promedio comÃºn
+  const valComun = repComunes * 6;  // Q6 promedio común
   const valTotal = valFoil + valEsp + valComun;
   document.getElementById('inv-valor').innerHTML =
     `<div style="margin-bottom:10px">
       <strong style="color:#e2e8f0">Repetidas disponibles para vender:</strong><br>
-      <span style="color:#a78bfa">FOIL/especiales:</span> ${repFoil} estampas â <strong style="color:#a78bfa">~Q${valFoil}</strong><br>
-      <span style="color:#f59e0b">Estrellas:</span> ${repEsp} estampas â <strong style="color:#f59e0b">~Q${valEsp}</strong><br>
-      <span style="color:#60a5fa">Comunes:</span> ${repComunes} estampas â <strong style="color:#60a5fa">~Q${valComun}</strong>
+      <span style="color:#a78bfa">FOIL/especiales:</span> ${repFoil} estampas → <strong style="color:#a78bfa">~Q${valFoil}</strong><br>
+      <span style="color:#f59e0b">Estrellas:</span> ${repEsp} estampas → <strong style="color:#f59e0b">~Q${valEsp}</strong><br>
+      <span style="color:#60a5fa">Comunes:</span> ${repComunes} estampas → <strong style="color:#60a5fa">~Q${valComun}</strong>
     </div>
     <div style="border-top:1px solid #374151;padding-top:10px">
       <strong style="font-size:1.1rem;color:#34d399">Total estimado: ~Q${valTotal}</strong><br>
-      <span style="color:#4b5563;font-size:0.7rem">Basado en precios de mercado guatemalteco (Q4-8 comÃºn, Q30-100 estrella, Q40-120 foil)</span>
+      <span style="color:#4b5563;font-size:0.7rem">Basado en precios de mercado guatemalteco (Q4-8 común, Q30-100 estrella, Q40-120 foil)</span>
     </div>`;
 }
 
@@ -1658,33 +1658,33 @@ window.negAlbReg        = negAlbReg;
 window.negEstReg        = negEstReg;
 window.negDelTx         = negDelTx;
 // ============================================================
-// PEDIDOS DE LISTAS â cotizar y confirmar venta
+// PEDIDOS DE LISTAS — cotizar y confirmar venta
 // ============================================================
 
-// Datos del Ã¡lbum para el cotizador (mismos que en cotizador_listas.html)
+// Datos del álbum para el cotizador (mismos que en cotizador_listas.html)
 const COTIZ_SNAMES = {
-  FWC:{1:'Emblema Oficial (FOIL)',2:'Emblema 2',3:'Mascotas Oficiales',4:'Slogan Oficial',5:'BalÃ³n Oficial',6:'CanadÃ¡ - Sede',7:'MÃ©xico - Sede',8:'USA - Sede',9:'Italia 1934',10:'Uruguay 1950',11:'Alemania Occ. 1954',12:'Brasil 1962',13:'Alemania Occ. 1974',14:'Argentina 1986',15:'Brasil 1994',16:'Brasil 2002',17:'Italia 2006',18:'Alemania 2014',19:'Argentina 2022',20:'Historia del Mundial'},
-  MEX:{1:'Escudo MÃ©xico (FOIL)',14:'Lionel Messi',13:'Foto Grupal MÃ©xico'},
+  FWC:{1:'Emblema Oficial (FOIL)',2:'Emblema 2',3:'Mascotas Oficiales',4:'Slogan Oficial',5:'Balón Oficial',6:'Canadá - Sede',7:'México - Sede',8:'USA - Sede',9:'Italia 1934',10:'Uruguay 1950',11:'Alemania Occ. 1954',12:'Brasil 1962',13:'Alemania Occ. 1974',14:'Argentina 1986',15:'Brasil 1994',16:'Brasil 2002',17:'Italia 2006',18:'Alemania 2014',19:'Argentina 2022',20:'Historia del Mundial'},
+  MEX:{1:'Escudo México (FOIL)',14:'Lionel Messi',13:'Foto Grupal México'},
   ARG:{1:'Escudo Argentina (FOIL)',13:'Foto Grupal Argentina',14:'Lionel Messi'},
   BRA:{1:'Escudo Brasil (FOIL)',13:'Foto Grupal Brasil',14:'Vinicius Junior'},
-  ESP:{1:'Escudo EspaÃ±a (FOIL)',13:'Foto Grupal EspaÃ±a',14:'Lamine Yamal'},
-  FRA:{1:'Escudo Francia (FOIL)',13:'Foto Grupal Francia',14:'Kylian MbappÃ©'},
+  ESP:{1:'Escudo España (FOIL)',13:'Foto Grupal España',14:'Lamine Yamal'},
+  FRA:{1:'Escudo Francia (FOIL)',13:'Foto Grupal Francia',14:'Kylian Mbappé'},
   POR:{1:'Escudo Portugal (FOIL)',13:'Foto Grupal Portugal',14:'Cristiano Ronaldo'},
   GER:{1:'Escudo Alemania (FOIL)',13:'Foto Grupal Alemania',14:'Florian Wirtz'},
   ENG:{1:'Escudo Inglaterra (FOIL)',13:'Foto Grupal Inglaterra',7:'Jude Bellingham'},
-  URU:{1:'Escudo Uruguay (FOIL)',13:'Foto Grupal Uruguay',14:'Darwin NÃºÃ±ez'},
-  COL:{1:'Escudo Colombia (FOIL)',13:'Foto Grupal Colombia',14:'Luis DÃ­az'},
-  CRO:{1:'Escudo Croacia (FOIL)',13:'Foto Grupal Croacia',7:'Luka ModriÄ'},
+  URU:{1:'Escudo Uruguay (FOIL)',13:'Foto Grupal Uruguay',14:'Darwin Núñez'},
+  COL:{1:'Escudo Colombia (FOIL)',13:'Foto Grupal Colombia',14:'Luis Díaz'},
+  CRO:{1:'Escudo Croacia (FOIL)',13:'Foto Grupal Croacia',7:'Luka Modrić'},
   USA:{1:'Escudo USA (FOIL)',13:'Foto Grupal USA',11:'Christian Pulisic'},
-  CAN:{1:'Escudo CanadÃ¡ (FOIL)',13:'Foto Grupal CanadÃ¡',12:'Alphonso Davies'},
+  CAN:{1:'Escudo Canadá (FOIL)',13:'Foto Grupal Canadá',12:'Alphonso Davies'},
 };
-const TOP_STARS_COTIZ = new Set(['Lionel Messi','Kylian MbappÃ©','Cristiano Ronaldo','Vinicius Junior','Lamine Yamal','Jude Bellingham']);
-const ESTRELLAS_COTIZ = new Set(['Lionel Messi','Kylian MbappÃ©','Cristiano Ronaldo','Vinicius Junior','Lamine Yamal','Jude Bellingham','Florian Wirtz','Darwin NÃºÃ±ez','Luis DÃ­az','Luka ModriÄ','Christian Pulisic','Alphonso Davies']);
+const TOP_STARS_COTIZ = new Set(['Lionel Messi','Kylian Mbappé','Cristiano Ronaldo','Vinicius Junior','Lamine Yamal','Jude Bellingham']);
+const ESTRELLAS_COTIZ = new Set(['Lionel Messi','Kylian Mbappé','Cristiano Ronaldo','Vinicius Junior','Lamine Yamal','Jude Bellingham','Florian Wirtz','Darwin Núñez','Luis Díaz','Luka Modrić','Christian Pulisic','Alphonso Davies']);
 
-let _pedidoItems = []; // items parseados del Ãºltimo cotizado
+let _pedidoItems = []; // items parseados del último cotizado
 
 function getCotizPrecios() {
-  // Leer precios del cotizador â usa las mismas claves que el cotizador nuevo
+  // Leer precios del cotizador — usa las mismas claves que el cotizador nuevo
   const defs = {
     'fwc-emblema':120,'fwc-normal':40,'fwc-historia':60,
     'escudo-imp':80,'escudo-norm':40,
@@ -1720,13 +1720,13 @@ function getEstrellasSet() {
     const s = localStorage.getItem('cotiz_estrellas_v1');
     if (s) return new Set(JSON.parse(s));
   } catch(e) {}
-  return new Set(['Lionel Messi','Kylian MbappÃ©','Cristiano Ronaldo','Vinicius Junior','Lamine Yamal','Jude Bellingham']);
+  return new Set(['Lionel Messi','Kylian Mbappé','Cristiano Ronaldo','Vinicius Junior','Lamine Yamal','Jude Bellingham']);
 }
 
 function getPrecioCotiz(col, ri, precios, equiposImp) {
   const imp = equiposImp.has(col);
-  const nombre = sname(col, ri); // usa la funciÃ³n principal que cubre todos los paÃ­ses
-  // Precio individual tiene prioridad mÃ¡xima
+  const nombre = sname(col, ri); // usa la función principal que cubre todos los países
+  // Precio individual tiene prioridad máxima
   const jugPrecios = getJugPrecios();
   if (jugPrecios[nombre] !== undefined) return jugPrecios[nombre];
   if (col === 'FWC') {
@@ -1759,7 +1759,7 @@ function parsearListaPedido(texto) {
       return;
     }
     let qty=1;
-    const qc=clean.replace(/[xÃ*]\s*(\d+)/i,(_,n)=>{qty=parseInt(n)||1;return '';}).trim();
+    const qc=clean.replace(/[x×*]\s*(\d+)/i,(_,n)=>{qty=parseInt(n)||1;return '';}).trim();
     let col=null,ri=null;
     let m=qc.match(/^([A-Z]{2,3})[\s\-_](\d{1,2})$/i); if(m){col=m[1].toUpperCase();ri=parseInt(m[2]);}
     if(!col){m=qc.match(/^(\d{1,2})[\s\-_]([A-Z]{2,3})$/i);if(m){col=m[2].toUpperCase();ri=parseInt(m[1]);}}
@@ -1801,8 +1801,8 @@ function cotizarPedido() {
     </tr>`;
   });
 
-  const errHtml = errores.length ? `<div class="pedido-warn">â ï¸ ${errores.join('<br>')}</div>` : '';
-  const stockWarn = sinStock.length ? `<div class="pedido-warn">â ï¸ Sin stock suficiente: ${sinStock.join(', ')}</div>` : '';
+  const errHtml = errores.length ? `<div class="pedido-warn">⚠️ ${errores.join('<br>')}</div>` : '';
+  const stockWarn = sinStock.length ? `<div class="pedido-warn">⚠️ Sin stock suficiente: ${sinStock.join(', ')}</div>` : '';
 
   const allOk = sinStock.length === 0 && items.length > 0;
 
@@ -1811,30 +1811,30 @@ function cotizarPedido() {
     <div class="pedido-total">
       <div>
         <div class="pedido-total-num">Q${totalQ.toFixed(0)}</div>
-        <div class="pedido-total-sub">${items.reduce((s,i)=>s+i.qty,0)} estampas Â· ${items.length} lÃ­neas</div>
+        <div class="pedido-total-sub">${items.reduce((s,i)=>s+i.qty,0)} estampas · ${items.length} líneas</div>
       </div>
       <div style="font-size:0.75rem;color:#64748b;text-align:right">
-        Precios leÃ­dos del Cotizador<br>
-        <span style="color:${allOk?'#34d399':'#f59e0b'}">${allOk?'â Stock OK para todo':'â ï¸ Stock insuficiente en algunas'}</span>
+        Precios leídos del Cotizador<br>
+        <span style="color:${allOk?'#34d399':'#f59e0b'}">${allOk?'✅ Stock OK para todo':'⚠️ Stock insuficiente en algunas'}</span>
       </div>
     </div>
 
     <div class="pedido-detalle">
       <table>
-        <thead><tr><th>CÃ³digo</th><th>Nombre</th><th>Cant.</th><th>Stock</th><th>Precio</th><th>Subtotal</th></tr></thead>
+        <thead><tr><th>Código</th><th>Nombre</th><th>Cant.</th><th>Stock</th><th>Precio</th><th>Subtotal</th></tr></thead>
         <tbody>${filas.join('')}</tbody>
       </table>
     </div>
 
     <div class="pedido-confirm-bar">
       <div style="flex:1;min-width:200px">
-        <div style="font-size:0.75rem;color:#34d399;font-weight:700;margin-bottom:4px">â Confirmar venta de esta lista</div>
+        <div style="font-size:0.75rem;color:#34d399;font-weight:700;margin-bottom:4px">✅ Confirmar venta de esta lista</div>
         <div style="font-size:0.7rem;color:#64748b">Descuenta del inventario y registra en historial</div>
       </div>
       <input id="pedido-comprador" type="text" placeholder="Nombre del cliente" style="flex:1;min-width:140px">
       <input id="pedido-precio-final" type="number" min="0" step="1" placeholder="Q total (auto: ${totalQ.toFixed(0)})" style="width:160px">
       <button class="neg-btn" style="background:#166534;color:#4ade80;border:1px solid #166534;white-space:nowrap" onclick="confirmarPedido(${totalQ.toFixed(0)})">
-        â Confirmar venta
+        ✅ Confirmar venta
       </button>
     </div>`;
 }
@@ -1872,12 +1872,12 @@ function confirmarPedido(totalAuto) {
 
   // Registrar UNA sola tx de tipo "lista" en historial
   const totalItems = desglose.reduce((s,i)=>s+(i.qty||0),0);
-  const desc = 'Venta lista (' + totalItems + ' estampas)' + (comprador ? ' â ' + comprador : '');
+  const desc = 'Venta lista (' + totalItems + ' estampas)' + (comprador ? ' — ' + comprador : '');
   negData.txs.unshift({
     id: ts, cat: 'est', tipo: 'venta', tipoEst: 'lista',
     qty: totalItems, price: precioFinal / Math.max(1, totalItems),
     desc, date: today(),
-    lista: desglose.map(i => i.col + ' #' + i.ri + ' Ã' + i.qty)
+    lista: desglose.map(i => i.col + ' #' + i.ri + ' ×' + i.qty)
   });
   saveNeg(); renderNeg();
 
@@ -1886,9 +1886,9 @@ function confirmarPedido(totalAuto) {
   document.getElementById('lista-pedido-input').value = '';
   document.getElementById('lista-resultado').innerHTML = `
     <div style="background:#052e16;border:1px solid #166534;border-radius:10px;padding:20px;text-align:center">
-      <div style="font-size:1.8rem;margin-bottom:8px">â</div>
-      <div style="font-size:1rem;font-weight:700;color:#4ade80">Venta confirmada â Q${precioFinal.toFixed(0)}</div>
-      <div style="font-size:0.75rem;color:#64748b;margin-top:6px">${totalItems} estampas descontadas del inventario${comprador?' Â· Cliente: '+comprador:''}</div>
+      <div style="font-size:1.8rem;margin-bottom:8px">✅</div>
+      <div style="font-size:1rem;font-weight:700;color:#4ade80">Venta confirmada — Q${precioFinal.toFixed(0)}</div>
+      <div style="font-size:0.75rem;color:#64748b;margin-top:6px">${totalItems} estampas descontadas del inventario${comprador?' · Cliente: '+comprador:''}</div>
     </div>`;
 }
 
@@ -1922,10 +1922,10 @@ window._shiftDown = false;
 document.addEventListener('keydown', e=>{if(e.key==='Shift') window._shiftDown=true;});
 document.addEventListener('keyup',   e=>{if(e.key==='Shift') window._shiftDown=false;});
 
-// ââ NavegaciÃ³n por celdas ââââââââââââââââââââââââââââââââââââ
-// ESPACIO activa la Ãºltima celda editada. Flechas mueven. Click suma. Doble click resta.
-// Con celda activa: nÃºmeros suman directo, "-N" resta N. Escape desactiva.
- // si el prÃ³ximo nÃºmero serÃ¡ negativo
+// ── Navegación por celdas ────────────────────────────────────
+// ESPACIO activa la última celda editada. Flechas mueven. Click suma. Doble click resta.
+// Con celda activa: números suman directo, "-N" resta N. Escape desactiva.
+ // si el próximo número será negativo
 
 function _setActive(ri, ci) {
   if (_activeRi !== null) {
@@ -1960,7 +1960,7 @@ function markLastEdited(ri, ci) { _lastRi = ri; _lastCi = ci; }
 document.addEventListener('keydown', e => {
   if (e.target.tagName === 'INPUT') return;
 
-  // Espacio: toggle activaciÃ³n en Ãºltima celda editada
+  // Espacio: toggle activación en última celda editada
   if (e.key === ' ') {
     e.preventDefault();
     if (_activeRi !== null) _deactivate();
@@ -1977,16 +1977,16 @@ document.addEventListener('keydown', e => {
   if (e.key === 'ArrowUp')    { e.preventDefault(); _flushBuf(); _setActive(Math.max(_activeRi-1, 0), _activeCi); return; }
   if (e.key === 'Enter')      { e.preventDefault(); _flushBuf(); return; }
 
-  // "-" inicia nÃºmero negativo
+  // "-" inicia número negativo
   if (e.key === '-') { e.preventDefault(); _numBuf = ''; _negPending = true; return; }
 
-  // DÃ­gitos: acumular
+  // Dígitos: acumular
   if (/^[0-9]$/.test(e.key)) { e.preventDefault(); _numBuf += e.key; return; }
 });
 
 window.markLastEdited = markLastEdited;
 
-// Tooltips (paÃ­ses y estampas)
+// Tooltips (países y estampas)
 (function(){
   const tip=document.getElementById('col-tooltip');
   const stk=document.getElementById('stk-tooltip');
@@ -2005,8 +2005,8 @@ window.markLastEdited = markLastEdited;
       if(col&&ri){
         const nombre=sname(col,parseInt(ri));
         const v=data[ri]?.[ci]||0;
-        const star=isEstrella(col,parseInt(ri))?' â­':'';
-        stk.innerHTML='<strong>'+nombre+star+'</strong><br><span style="color:#64748b;font-size:0.68rem">'+(PAIS[col]||col)+' Â· Estampa #'+ri+' Â· Tienes: '+v+'</span>';
+        const star=isEstrella(col,parseInt(ri))?' ⭐':'';
+        stk.innerHTML='<strong>'+nombre+star+'</strong><br><span style="color:#64748b;font-size:0.68rem">'+(PAIS[col]||col)+' · Estampa #'+ri+' · Tienes: '+v+'</span>';
         stk.style.display='block';
       }
     }
@@ -2026,7 +2026,7 @@ window.markLastEdited = markLastEdited;
 initFirebase();
 
 function resetTodo() {
-  if (!confirm('Â¿Borrar TODOS los datos del inventario? Esto no se puede deshacer.')) return;
+  if (!confirm('¿Borrar TODOS los datos del inventario? Esto no se puede deshacer.')) return;
   localStorage.removeItem('mundial2026_est');
   localStorage.removeItem('mundial2026_alb');
   localStorage.removeItem('neg_v1');
@@ -2035,7 +2035,7 @@ function resetTodo() {
 }
 
 // ============================================================
-// COTIZADOR â lÃ³gica completa, usa SNAMES/COLS/PAIS del inventario
+// COTIZADOR — lógica completa, usa SNAMES/COLS/PAIS del inventario
 // ============================================================
 
 const COT_KEY_PRECIOS  = 'cotiz_precios_v1';
@@ -2046,14 +2046,14 @@ const COT_KEY_JUGPRECIOS='cotiz_jugprecios_v1'; // precio por jugador individual
 let cotPrecios = {};
 let cotEquiposImp = new Set(['ARG','BRA','ESP','FRA','GER','POR','ENG','URU','COL','MEX','CRO','USA','CAN']);
 let cotEstrellas = new Set([
-  'Lionel Messi','Kylian MbappÃ©','Cristiano Ronaldo','Vinicius Junior','Lamine Yamal','Jude Bellingham',
-  'JuliÃ¡n Ãlvarez','Lautaro MartÃ­nez','Alejandro Garnacho','Ãngel Di MarÃ­a','Paulo Dybala','Rodrigo De Paul',
-  'Antoine Griezmann','Ousmane DembÃ©lÃ©','Marcus Thuram','Bradley Barcola','Florian Wirtz','Jamal Musiala',
-  'Bruno Fernandes','Bernardo Silva','Rafael LeÃ£o','Pedro Neto','Rodrygo','Raphinha','Endrick','EstÃªvÃ£o',
+  'Lionel Messi','Kylian Mbappé','Cristiano Ronaldo','Vinicius Junior','Lamine Yamal','Jude Bellingham',
+  'Julián Álvarez','Lautaro Martínez','Alejandro Garnacho','Ángel Di María','Paulo Dybala','Rodrigo De Paul',
+  'Antoine Griezmann','Ousmane Dembélé','Marcus Thuram','Bradley Barcola','Florian Wirtz','Jamal Musiala',
+  'Bruno Fernandes','Bernardo Silva','Rafael Leão','Pedro Neto','Rodrygo','Raphinha','Endrick','Estêvão',
   'Pedri','Rodri','Nico Williams','Dani Olmo','Gavi','Harry Kane','Bukayo Saka','Phil Foden','Cole Palmer',
-  'Darwin NÃºÃ±ez','Federico Valverde','Ronald AraÃºjo','Luis DÃ­az','James RodrÃ­guez','Luka ModriÄ','JoÅ¡ko Gvardiol',
-  'Christian Pulisic','Alphonso Davies','Jonathan David','Mohammed Kudus','IÃ±aki Williams','Thomas Partey',
-  'Hirving Lozano','Santiago GimÃ©nez','Emiliano MartÃ­nez','Alisson','Manuel Neuer','RÃºben Dias'
+  'Darwin Núñez','Federico Valverde','Ronald Araújo','Luis Díaz','James Rodríguez','Luka Modrić','Joško Gvardiol',
+  'Christian Pulisic','Alphonso Davies','Jonathan David','Mohammed Kudus','Iñaki Williams','Thomas Partey',
+  'Hirving Lozano','Santiago Giménez','Emiliano Martínez','Alisson','Manuel Neuer','Rúben Dias'
 ]);
 let cotJugPrecios = {}; // { "Lionel Messi": 200, ... }
 
@@ -2064,7 +2064,7 @@ var COT_PRECIOS_DEFAULT = {
   'estrella-top':100,'estrella-norm':50,
   'jug-imp':15,'jug-norm':8
 };
-const COT_TOP_STARS = new Set(['Lionel Messi','Kylian MbappÃ©','Cristiano Ronaldo','Vinicius Junior','Lamine Yamal','Jude Bellingham']);
+const COT_TOP_STARS = new Set(['Lionel Messi','Kylian Mbappé','Cristiano Ronaldo','Vinicius Junior','Lamine Yamal','Jude Bellingham']);
 
 function cotCargar() {
   try { const s=localStorage.getItem(COT_KEY_PRECIOS); if(s) cotPrecios={...COT_PRECIOS_DEFAULT,...JSON.parse(s)}; else cotPrecios={...COT_PRECIOS_DEFAULT}; } catch(e){ cotPrecios={...COT_PRECIOS_DEFAULT}; }
@@ -2082,7 +2082,7 @@ function cotGuardar() {
 
 function cotGetPrecio(col, ri) {
   const nombre = SNAMES[col]?.[ri] || '';
-  // Precio individual tiene prioridad mÃ¡xima
+  // Precio individual tiene prioridad máxima
   if (cotJugPrecios[nombre] !== undefined) return cotJugPrecios[nombre];
   const imp = cotEquiposImp.has(col);
   if (col === 'FWC') {
@@ -2126,7 +2126,7 @@ function cotParsear(texto) {
     }
     // Formato clasico: "ARG 14", "ARG-14", "14 ARG", "ARG14", con "x2" opcional
     let qty=1;
-    const qc=clean.replace(/[xÃ*]\s*(\d+)/i,(_,n)=>{qty=parseInt(n)||1;return '';}).trim();
+    const qc=clean.replace(/[x×*]\s*(\d+)/i,(_,n)=>{qty=parseInt(n)||1;return '';}).trim();
     let col=null,ri=null;
     let m=qc.match(/^([A-Z]{2,3})[\s\-_](\d{1,2})$/i); if(m){col=m[1].toUpperCase();ri=parseInt(m[2]);}
     if(!col){m=qc.match(/^(\d{1,2})[\s\-_]([A-Z]{2,3})$/i);if(m){col=m[2].toUpperCase();ri=parseInt(m[1]);}}
@@ -2146,7 +2146,7 @@ function cotCotizar() {
   const {items,errs}=cotParsear(texto);
   _cotItems=items;
   let total=0; const sinStk=[];
-  // Contadores por categorÃ­a
+  // Contadores por categoría
   const cat={fwc:0,escudo:0,foto:0,estrella:0,jugImp:0,jugNorm:0};
   const catQ={fwc:0,escudo:0,foto:0,estrella:0,jugImp:0,jugNorm:0};
   const filas=items.map(({col,ri,qty})=>{
@@ -2165,17 +2165,17 @@ function cotCotizar() {
     else { const t=cotGetTipo(col,ri); if(t==='estrella'){cat.estrella+=qty;catQ.estrella+=sub;} else if(t==='jugImp'){cat.jugImp+=qty;catQ.jugImp+=sub;} else{cat.jugNorm+=qty;catQ.jugNorm+=sub;} }
     return `<tr><td style="color:#64748b">${col} #${ri}</td><td>${nombre}</td><td style="text-align:center">${qty}</td><td style="text-align:center;color:${sc}">${stk}</td><td style="text-align:right">Q${precio}</td><td style="text-align:right;font-weight:600;color:#34d399">Q${sub.toFixed(0)}</td></tr>`;
   });
-  const errH=errs.length?`<div class="cot-warn">â ï¸ ${errs.join('<br>')}</div>`:'';
-  const stkH=sinStk.length?`<div class="cot-warn">â ï¸ Stock insuficiente: ${sinStk.join(', ')}</div>`:'';
+  const errH=errs.length?`<div class="cot-warn">⚠️ ${errs.join('<br>')}</div>`:'';
+  const stkH=sinStk.length?`<div class="cot-warn">⚠️ Stock insuficiente: ${sinStk.join(', ')}</div>`:'';
   const allOk=sinStk.length===0&&items.length>0;
-  // Generar chips de resumen (solo categorÃ­as con estampas)
+  // Generar chips de resumen (solo categorías con estampas)
   const chips=[
-    {k:'fwc',   label:'ð FWC',      color:'#a78bfa'},
-    {k:'escudo', label:'ð¡ï¸ Escudos',  color:'#60a5fa'},
-    {k:'foto',   label:'ð¥ Fotos',    color:'#fb923c'},
-    {k:'estrella',label:'â­ Estrellas',color:'#fbbf24'},
-    {k:'jugImp', label:'ð¤ Imp.',     color:'#34d399'},
-    {k:'jugNorm',label:'ð¤ Normal',   color:'#64748b'},
+    {k:'fwc',   label:'🏆 FWC',      color:'#a78bfa'},
+    {k:'escudo', label:'🛡️ Escudos',  color:'#60a5fa'},
+    {k:'foto',   label:'👥 Fotos',    color:'#fb923c'},
+    {k:'estrella',label:'⭐ Estrellas',color:'#fbbf24'},
+    {k:'jugImp', label:'👤 Imp.',     color:'#34d399'},
+    {k:'jugNorm',label:'👤 Normal',   color:'#64748b'},
   ].filter(c=>cat[c.k]>0).map(c=>`
     <div style="background:#0f172a;border:1px solid #1e2435;border-radius:8px;padding:8px 12px;text-align:center;min-width:80px">
       <div style="font-size:0.7rem;color:#64748b;margin-bottom:2px">${c.label}</div>
@@ -2185,21 +2185,21 @@ function cotCotizar() {
   document.getElementById('cot-resultado').innerHTML=`
     ${errH}${stkH}
     <div class="cot-result-total">
-      <div><div class="cot-total-num">Q${total.toFixed(0)}</div><div style="font-size:0.73rem;color:#64748b">${items.reduce((s,i)=>s+i.qty,0)} estampas Â· ${items.length} lÃ­neas</div></div>
-      <span style="font-size:0.75rem;color:${allOk?'#34d399':'#f59e0b'}">${allOk?'â Stock OK':'â ï¸ Falta stock en algunas'}</span>
+      <div><div class="cot-total-num">Q${total.toFixed(0)}</div><div style="font-size:0.73rem;color:#64748b">${items.reduce((s,i)=>s+i.qty,0)} estampas · ${items.length} líneas</div></div>
+      <span style="font-size:0.75rem;color:${allOk?'#34d399':'#f59e0b'}">${allOk?'✅ Stock OK':'⚠️ Falta stock en algunas'}</span>
     </div>
     <div style="display:flex;flex-wrap:wrap;gap:8px;margin:10px 0">${chips}</div>
     <div class="cot-card" style="margin-bottom:14px">
       <table class="cot-table">
-        <thead><tr><th>CÃ³digo</th><th>Nombre</th><th>Cant.</th><th>Stock</th><th>Precio</th><th>Subtotal</th></tr></thead>
+        <thead><tr><th>Código</th><th>Nombre</th><th>Cant.</th><th>Stock</th><th>Precio</th><th>Subtotal</th></tr></thead>
         <tbody>${filas.join('')}</tbody>
       </table>
     </div>
     <div class="cot-confirm-bar">
-      <div style="flex:1"><div style="font-size:0.75rem;color:#34d399;font-weight:700">â Confirmar venta</div><div style="font-size:0.68rem;color:#64748b">Descuenta del inventario y registra en historial</div></div>
+      <div style="flex:1"><div style="font-size:0.75rem;color:#34d399;font-weight:700">✅ Confirmar venta</div><div style="font-size:0.68rem;color:#64748b">Descuenta del inventario y registra en historial</div></div>
       <input id="cot-comprador" type="text" placeholder="Nombre del cliente" style="background:#0f172a;border:1px solid #374151;border-radius:5px;color:#e2e8f0;padding:6px 10px;outline:none;font-family:inherit;font-size:0.78rem;flex:1;min-width:130px">
       <input id="cot-precio-final" type="number" min="0" placeholder="Q total (auto: ${total.toFixed(0)})" style="background:#0f172a;border:1px solid #374151;border-radius:5px;color:#e2e8f0;padding:6px 10px;outline:none;font-family:inherit;font-size:0.78rem;width:150px">
-      <button class="cot-btn cot-btn-green" onclick="cotConfirmar(${total.toFixed(0)})">â Confirmar</button>
+      <button class="cot-btn cot-btn-green" onclick="cotConfirmar(${total.toFixed(0)})">✅ Confirmar</button>
     </div>`;
 }
 
@@ -2214,17 +2214,17 @@ function cotConfirmar(autoTotal) {
     if(usar>0){data[ri][ci]=Math.max(0,(data[ri][ci]||0)-usar);updateCellDOM(ri,ci,data[ri][ci],-1);totalItems+=usar;}
   });
   saveLocal(); updateColTots(); updateStats();
-  const desc='Venta lista ('+totalItems+' estampas)'+(comprador?' â '+comprador:'');
+  const desc='Venta lista ('+totalItems+' estampas)'+(comprador?' — '+comprador:'');
   negData.txs.unshift({id:Date.now(),cat:'est',tipo:'venta',tipoEst:'lista',qty:totalItems,price:precioFinal/Math.max(1,totalItems),desc,date:today()});
   saveNeg(); renderNeg();
   _cotItems=[];
   document.getElementById('cot-lista-input').value='';
-  document.getElementById('cot-resultado').innerHTML=`<div style="background:#052e16;border:1px solid #166534;border-radius:10px;padding:20px;text-align:center"><div style="font-size:1.6rem;margin-bottom:6px">â</div><div style="color:#4ade80;font-weight:700">Venta confirmada â Q${precioFinal.toFixed(0)}</div><div style="font-size:0.73rem;color:#64748b;margin-top:4px">${totalItems} estampas descontadas${comprador?' Â· '+comprador:''}</div></div>`;
+  document.getElementById('cot-resultado').innerHTML=`<div style="background:#052e16;border:1px solid #166534;border-radius:10px;padding:20px;text-align:center"><div style="font-size:1.6rem;margin-bottom:6px">✅</div><div style="color:#4ade80;font-weight:700">Venta confirmada — Q${precioFinal.toFixed(0)}</div><div style="font-size:0.73rem;color:#64748b;margin-top:4px">${totalItems} estampas descontadas${comprador?' · '+comprador:''}</div></div>`;
 }
 
 function cotLimpiar() {
   document.getElementById('cot-lista-input').value='';
-  document.getElementById('cot-resultado').innerHTML='<div class="cot-empty">ð§¾ Pega una lista y presiona Cotizar</div>';
+  document.getElementById('cot-resultado').innerHTML='<div class="cot-empty">🧾 Pega una lista y presiona Cotizar</div>';
   _cotItems=[];
 }
 
@@ -2235,15 +2235,15 @@ function cotShowTab(id,btn) {
   btn.classList.add('active');
 }
 
-// ââ Renderizado de configuraciÃ³n de precios ââââââââââââââââ
+// ── Renderizado de configuración de precios ────────────────
 function cotRenderPrecios() {
   // Inputs de precios base
   const keys=[
     ['fwc-emblema','FWC #1 Emblema (FOIL)'],['fwc-normal','FWC #2-8 (Sedes/Mascota)'],['fwc-historia','FWC #9-20 (Historia)'],
-    ['escudo-imp','Escudo FOIL â equipo imp.'],['escudo-norm','Escudo FOIL â equipo normal'],
-    ['foto-imp','Foto grupal â equipo imp.'],['foto-norm','Foto grupal â equipo normal'],
+    ['escudo-imp','Escudo FOIL — equipo imp.'],['escudo-norm','Escudo FOIL — equipo normal'],
+    ['foto-imp','Foto grupal — equipo imp.'],['foto-norm','Foto grupal — equipo normal'],
     ['estrella-top','Jugador estrella TOP'],['estrella-norm','Jugador estrella normal'],
-    ['jug-imp','Jugador normal â equipo imp.'],['jug-norm','Jugador normal â equipo normal']
+    ['jug-imp','Jugador normal — equipo imp.'],['jug-norm','Jugador normal — equipo normal']
   ];
   document.getElementById('cot-base-precios').innerHTML=keys.map(([k,lbl])=>`
     <div class="cot-prow">
@@ -2282,7 +2282,7 @@ function cotRenderPrecios() {
       <span class="jug-nombre">${n}</span>
       <span class="jug-pais-tag">${col}</span>
       <input class="jug-inp" type="number" min="0" placeholder="auto" value="${precio}"
-        onchange="cotSetJugPrecio('${n.replace(/'/g,"\\'")}',this.value)" title="Precio individual (deja vacÃ­o para usar precio de estrella)">
+        onchange="cotSetJugPrecio('${n.replace(/'/g,"\\'")}',this.value)" title="Precio individual (deja vacío para usar precio de estrella)">
     </div>`;
   }).join('');
 }
@@ -2312,7 +2312,7 @@ function cotInit() {
   // data es un objeto {0:[...], 1:[...], ...20:[...]}
   const total=data?Object.values(data).reduce((s,r)=>Array.isArray(r)?s+r.reduce((a,b)=>a+b,0):s,0):0;
   const el=document.getElementById('cot-inv-status');
-  if(el) el.textContent=total>0?'â Inventario conectado â '+total+' estampas':'â ï¸ Sin estampas en inventario aÃºn';
+  if(el) el.textContent=total>0?'✅ Inventario conectado — '+total+' estampas':'⚠️ Sin estampas en inventario aún';
 }
 
 window.cotCotizar=cotCotizar;
@@ -2329,10 +2329,10 @@ window.cotSetJugPrecio=cotSetJugPrecio;
 <div id="p-cotiz" class="page">
 <div style="padding:20px 28px 40px">
   <div class="cot-sub-tabs">
-    <button class="cot-sub-tab active" onclick="cotShowTab('cot-p-cotizar',this)">ð§¾ Cotizar lista</button>
-    <button class="cot-sub-tab" onclick="cotShowTab('cot-p-precios',this)">ð² Precios</button>
-    <button class="cot-sub-tab" onclick="cotShowTab('cot-p-estrellas',this)">â­ Estrellas</button>
-    <button class="cot-sub-tab" onclick="cotShowTab('cot-p-equipos',this)">ð Equipos</button>
+    <button class="cot-sub-tab active" onclick="cotShowTab('cot-p-cotizar',this)">🧾 Cotizar lista</button>
+    <button class="cot-sub-tab" onclick="cotShowTab('cot-p-precios',this)">💲 Precios</button>
+    <button class="cot-sub-tab" onclick="cotShowTab('cot-p-estrellas',this)">⭐ Estrellas</button>
+    <button class="cot-sub-tab" onclick="cotShowTab('cot-p-equipos',this)">🏆 Equipos</button>
   </div>
 
   <!-- COTIZAR -->
@@ -2340,12 +2340,12 @@ window.cotSetJugPrecio=cotSetJugPrecio;
     <div class="cotiz-layout" style="margin-top:16px">
       <div>
         <div class="cot-card">
-          <h3>ð Pega la lista del cliente</h3>
-          <p style="font-size:0.72rem;color:#64748b;margin-bottom:8px;line-height:1.6">Formatos: <code style="background:#0f172a;padding:1px 5px;border-radius:3px;color:#60a5fa">ARG 14</code> Â· <code style="background:#0f172a;padding:1px 5px;border-radius:3px;color:#60a5fa">ARG-14</code> Â· <code style="background:#0f172a;padding:1px 5px;border-radius:3px;color:#60a5fa">ARG 14 x2</code></p>
+          <h3>📋 Pega la lista del cliente</h3>
+          <p style="font-size:0.72rem;color:#64748b;margin-bottom:8px;line-height:1.6">Formatos: <code style="background:#0f172a;padding:1px 5px;border-radius:3px;color:#60a5fa">ARG 14</code> · <code style="background:#0f172a;padding:1px 5px;border-radius:3px;color:#60a5fa">ARG-14</code> · <code style="background:#0f172a;padding:1px 5px;border-radius:3px;color:#60a5fa">ARG 14 x2</code></p>
           <textarea class="cot-textarea" id="cot-lista-input" placeholder="ARG 14&#10;BRA 1&#10;FWC 3&#10;ESP 14 x2&#10;MEX 15&#10;..."></textarea>
           <div style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap">
-            <button class="cot-btn cot-btn-red" onclick="cotCotizar()">â¡ Cotizar lista</button>
-            <button class="cot-btn cot-btn-ghost" onclick="cotLimpiar()">â Limpiar</button>
+            <button class="cot-btn cot-btn-red" onclick="cotCotizar()">⚡ Cotizar lista</button>
+            <button class="cot-btn cot-btn-ghost" onclick="cotLimpiar()">✕ Limpiar</button>
           </div>
         </div>
         <div class="cot-card" style="margin-top:12px">
@@ -2353,7 +2353,7 @@ window.cotSetJugPrecio=cotSetJugPrecio;
         </div>
       </div>
       <div id="cot-resultado" style="min-height:200px">
-        <div class="cot-empty">ð§¾ Pega una lista y presiona <strong>Cotizar</strong></div>
+        <div class="cot-empty">🧾 Pega una lista y presiona <strong>Cotizar</strong></div>
       </div>
     </div>
   </div>
@@ -2361,7 +2361,7 @@ window.cotSetJugPrecio=cotSetJugPrecio;
   <!-- PRECIOS BASE -->
   <div class="cot-sub-page" id="cot-p-precios" style="display:none;margin-top:16px">
     <div class="cot-precio-card" style="max-width:500px">
-      <h3>ð² Precios base por categorÃ­a</h3>
+      <h3>💲 Precios base por categoría</h3>
       <div id="cot-base-precios"></div>
     </div>
   </div>
@@ -2370,13 +2370,13 @@ window.cotSetJugPrecio=cotSetJugPrecio;
   <div class="cot-sub-page" id="cot-p-estrellas" style="display:none;margin-top:16px">
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;flex-wrap:wrap">
       <div class="cot-precio-card">
-        <h3>â­ Marcar jugadores estrella</h3>
+        <h3>⭐ Marcar jugadores estrella</h3>
         <p style="font-size:0.72rem;color:#64748b;margin-bottom:10px">Dorado = precio estrella. Clic para marcar o desmarcar.</p>
         <div id="cot-estrellas-toggle" style="display:flex;flex-wrap:wrap;gap:5px"></div>
       </div>
       <div class="cot-precio-card">
-        <h3>ð² Precio individual por jugador</h3>
-        <p style="font-size:0.72rem;color:#64748b;margin-bottom:10px">Deja vacÃ­o = usar precio de categorÃ­a. Tiene prioridad mÃ¡xima.</p>
+        <h3>💲 Precio individual por jugador</h3>
+        <p style="font-size:0.72rem;color:#64748b;margin-bottom:10px">Deja vacío = usar precio de categoría. Tiene prioridad máxima.</p>
         <div id="cot-jug-precios"></div>
       </div>
     </div>
@@ -2385,14 +2385,5 @@ window.cotSetJugPrecio=cotSetJugPrecio;
   <!-- EQUIPOS IMPORTANTES -->
   <div class="cot-sub-page" id="cot-p-equipos" style="display:none;margin-top:16px">
     <div class="cot-precio-card">
-      <h3>ð Equipos importantes â clic para marcar/desmarcar</h3>
-      <p style="font-size:0.72rem;color:#64748b;margin-bottom:10px">Verde = importante (precio diferenciado en escudos, fotos y jugadores).</p>
-      <div id="cot-equipos-toggle" style="display:flex;flex-wrap:wrap;gap:6px"></div>
-    </div>
-  </div>
-
-</div>
-</div>
-
-</body>
-</html>
+      <h3>🏆 Equipos importantes — clic para marcar/desmarcar</h3>
+      <p
