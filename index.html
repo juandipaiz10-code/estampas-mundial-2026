@@ -2223,6 +2223,7 @@ function cotCotizar() {
   // Contadores por categoría
   const cat={fwc:0,escudo:0,foto:0,estrella:0,jugImp:0,jugNorm:0};
   const catQ={fwc:0,escudo:0,foto:0,estrella:0,jugImp:0,jugNorm:0};
+  const catItems={fwc:[],escudo:[],foto:[],estrella:[],jugNorm:[]};
   const filas=items.map(({col,ri,qty})=>{
     const ci=COLS.indexOf(col);
     const stk=data[ri]?.[ci]||0;
@@ -2232,11 +2233,12 @@ function cotCotizar() {
     if(stk<qty) sinStk.push(col+' #'+ri);
     const sc=stk===0?'#e63946':stk<qty?'#f59e0b':'#34d399';
     const nombre=sname(col,ri);
+    const etiq=qty>1?` x${qty}`:'';
     // Clasificar
-    if(col==='FWC'){cat.fwc+=qty;catQ.fwc+=sub;}
-    else if(ri===1){cat.escudo+=qty;catQ.escudo+=sub;}
-    else if(ri===13){cat.foto+=qty;catQ.foto+=sub;}
-    else { const t=cotGetTipo(col,ri); if(t==='estrella'){cat.estrella+=qty;catQ.estrella+=sub;} else{cat.jugNorm+=qty;catQ.jugNorm+=sub;} }
+    if(col==='FWC'){cat.fwc+=qty;catQ.fwc+=sub;catItems.fwc.push(nombre+etiq);}
+    else if(ri===1){cat.escudo+=qty;catQ.escudo+=sub;catItems.escudo.push(nombre+etiq);}
+    else if(ri===13){cat.foto+=qty;catQ.foto+=sub;catItems.foto.push(nombre+etiq);}
+    else { const t=cotGetTipo(col,ri); if(t==='estrella'){cat.estrella+=qty;catQ.estrella+=sub;catItems.estrella.push(nombre+etiq);} else{cat.jugNorm+=qty;catQ.jugNorm+=sub;catItems.jugNorm.push(nombre+etiq);} }
     return `<tr><td style="color:#64748b">${col} #${ri}</td><td>${nombre}</td><td style="text-align:center">${qty}</td><td style="text-align:center;color:${sc}">${stk}</td><td style="text-align:right">Q${precio}</td><td style="text-align:right;font-weight:600;color:#34d399">Q${sub.toFixed(0)}</td></tr>`;
   });
   const errH=errs.length?`<div class="cot-warn">⚠️ ${errs.join('<br>')}</div>`:'';
@@ -2244,17 +2246,21 @@ function cotCotizar() {
   const allOk=sinStk.length===0&&items.length>0;
   // Generar chips de resumen (solo categorías con estampas)
   const chips=[
-    {k:'fwc',   label:'🏆 FWC',      color:'#a78bfa'},
+    {k:'fwc',    label:'🏆 FWC',      color:'#a78bfa'},
     {k:'escudo', label:'🛡️ Escudos',  color:'#60a5fa'},
     {k:'foto',   label:'👥 Fotos',    color:'#fb923c'},
     {k:'estrella',label:'⭐ Estrellas',color:'#fbbf24'},
     {k:'jugNorm',label:'👤 Normal',   color:'#64748b'},
-  ].filter(c=>cat[c.k]>0).map(c=>`
-    <div style="background:#0f172a;border:1px solid #1e2435;border-radius:8px;padding:8px 12px;text-align:center;min-width:80px">
+  ].filter(c=>cat[c.k]>0).map(c=>{
+    const lista=catItems[c.k].join(', ');
+    return `
+    <div onclick="cotToggleDetalle('det-${c.k}')" style="background:#0f172a;border:1px solid #1e2435;border-radius:8px;padding:8px 12px;text-align:center;min-width:80px;cursor:pointer;transition:border-color 0.15s" onmouseover="this.style.borderColor='${c.color}'" onmouseout="this.style.borderColor='#1e2435'">
       <div style="font-size:0.7rem;color:#64748b;margin-bottom:2px">${c.label}</div>
       <div style="font-weight:700;color:${c.color};font-size:1rem">${cat[c.k]}</div>
       <div style="font-size:0.65rem;color:#4b5563">Q${catQ[c.k].toFixed(0)}</div>
-    </div>`).join('');
+    </div>
+    <div id="det-${c.k}" style="display:none;width:100%;background:#0f172a;border:1px solid #1e2435;border-radius:8px;padding:10px 14px;margin-top:-4px;font-size:0.75rem;color:#94a3b8;line-height:1.8">${lista}</div>`;
+  }).join('');
   document.getElementById('cot-resultado').innerHTML=`
     ${errH}${stkH}
     <div class="cot-result-total">
@@ -2437,6 +2443,11 @@ function cotInit() {
   if(el) el.textContent=total>0?'✅ Inventario conectado — '+total+' estampas':'⚠️ Sin estampas en inventario aún';
 }
 
+function cotToggleDetalle(id) {
+  const el=document.getElementById(id); if(!el) return;
+  el.style.display=el.style.display==='none'?'block':'none';
+}
+window.cotToggleDetalle=cotToggleDetalle;
 window.cotCotizar=cotCotizar;
 window.cotConfirmar=cotConfirmar;
 window.cotLimpiar=cotLimpiar;
