@@ -559,6 +559,22 @@ tbody td.cv-cell.estrella.v3p { box-shadow: inset 0 0 0 1px #f59e0b, inset 0 0 7
     </div>
   </div>
 
+  <!-- AJUSTES MANUALES -->
+  <div class="neg-resumen-general" style="margin-top:16px">
+    <h3>⚙️ Ajustes Manuales</h3>
+    <p style="font-size:0.75rem;color:#64748b;margin-bottom:12px">Para gastos o ingresos que no pasaron por el sistema. Se suman al resumen general.</p>
+    <div id="adj-lista" style="margin-bottom:10px"></div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
+      <input id="adj-desc" class="neg-inp" style="flex:2;min-width:140px" type="text" placeholder="Descripción (ej: transporte)">
+      <input id="adj-monto" class="neg-inp" style="flex:1;min-width:100px" type="number" step="0.01" placeholder="Monto">
+      <select id="adj-tipo" class="neg-inp" style="flex:1;min-width:100px">
+        <option value="gasto">Gasto</option>
+        <option value="ingreso">Ingreso</option>
+      </select>
+      <button class="neg-btn buy" style="white-space:nowrap" onclick="adjAgregar()">+ Agregar</button>
+    </div>
+  </div>
+
   <!-- RESUMEN GENERAL -->
   <div id="resumen-general" class="neg-resumen-general"></div>
 </div>
@@ -628,7 +644,7 @@ tbody td.cv-cell.estrella.v3p { box-shadow: inset 0 0 0 1px #f59e0b, inset 0 0 7
 
 <script>
 
-const COLS = ['FWC','ALG','ARG','AUS','AUT','BEL','BIH','BRA','CAN','CIV','COD','COL','CPV','CRO','CUW','CZE','ECU','EGY','ENG','ESP','FRA','GER','GHA','HAI','IRN','IRQ','JOR','JPN','KOR','KSA','MAR','MEX','NED','NOR','NZL','PAN','PAR','POR','QAT','RSA','SCO','SEN','SUI','SWE','TUN','TUR','URU','USA','UZB'];
+const COLS = ['FWC','MEX','RSA','KOR','CZE','CAN','BIH','QAT','SUI','BRA','MAR','HAI','SCO','USA','PAR','AUS','TUR','GER','ECU','CIV','CUW','NED','JPN','TUN','SWE','BEL','EGY','IRN','NZL','ESP','CPV','KSA','URU','FRA','IRQ','SEN','NOR','ARG','ALG','AUT','JOR','POR','COD','UZB','COL','ENG','CRO','GHA','PAN'];
 const PAIS = {'ALG':'Algeria','ARG':'Argentina','AUS':'Australia','AUT':'Austria','BEL':'Bélgica','BIH':'Bosnia y Herz.','BRA':'Brasil','CAN':'Canadá','CIV':'Costa de Marfil','COD':'RD Congo','COL':'Colombia','CPV':'Cabo Verde','CRO':'Croacia','CUW':'Curazao','CZE':'Rep. Checa','ECU':'Ecuador','EGY':'Egipto','ENG':'Inglaterra','ESP':'España','FRA':'Francia','GER':'Alemania','GHA':'Ghana','HAI':'Haití','IRN':'Irán','IRQ':'Iraq','JOR':'Jordania','JPN':'Japón','KOR':'Corea del Sur','KSA':'Arabia Saudita','MAR':'Marruecos','MEX':'México','NED':'Países Bajos','NOR':'Noruega','NZL':'Nueva Zelanda','PAN':'Panamá','PAR':'Paraguay','POR':'Portugal','QAT':'Qatar','RSA':'Sudáfrica','SCO':'Escocia','SEN':'Senegal','SUI':'Suiza','SWE':'Suecia','TUN':'Túnez','TUR':'Turquía','URU':'Uruguay','USA':'USA','UZB':'Uzbekistán'};
 
 const SNAMES = {
@@ -874,34 +890,7 @@ function setupRealtime() {
       localStorage.setItem(AK, JSON.stringify(albums));
       renderAlbumes();
     })
-    .on('postgres_changes', { event: 'UPDATE', schema: 'public', table: 'negocio' }, (payload) => {
-      if (!payload.new || !payload.new.data) return;
-      negData = payload.new.data;
-      localStorage.setItem(NEG_KEY, JSON.stringify(negData));
-      buildAll();
-    })
-    .on('postgres_changes', { event: 'UPDATE', schema: 'public', table: 'cotizador' }, (payload) => {
-      if (!payload.new) return;
-      const r = payload.new;
-      if (r.precios) { cotPrecios = r.precios; localStorage.setItem(COT_KEY_PRECIOS, JSON.stringify(cotPrecios)); }
-      if (r.equipos) { cotEquiposImp = new Set(r.equipos); localStorage.setItem(COT_KEY_EQUIPOS, JSON.stringify(r.equipos)); }
-      if (r.estrellas) { cotEstrellas = new Set(r.estrellas); localStorage.setItem(COT_KEY_ESTRELLAS, JSON.stringify(r.estrellas)); }
-      if (r.jugprecios) { cotJugPrecios = r.jugprecios; localStorage.setItem(COT_KEY_JUGPRECIOS, JSON.stringify(r.jugprecios)); }
-    })
     .subscribe();
-}
-
-async function loadCotizadorFromSupabase() {
-  if (!supaClient) return false;
-  try {
-    const { data: res } = await supaClient.from('cotizador').select('*').eq('id', 'default').single();
-    if (!res) return false;
-    if (res.precios) { cotPrecios = res.precios; localStorage.setItem(COT_KEY_PRECIOS, JSON.stringify(cotPrecios)); }
-    if (res.equipos) { cotEquiposImp = new Set(res.equipos); localStorage.setItem(COT_KEY_EQUIPOS, JSON.stringify(res.equipos)); }
-    if (res.estrellas) { cotEstrellas = new Set(res.estrellas); localStorage.setItem(COT_KEY_ESTRELLAS, JSON.stringify(res.estrellas)); }
-    if (res.jugprecios) { cotJugPrecios = res.jugprecios; localStorage.setItem(COT_KEY_JUGPRECIOS, JSON.stringify(res.jugprecios)); }
-    return true;
-  } catch(e) { return false; }
 }
 
 // ---- Init principal ----
@@ -916,7 +905,6 @@ async function initFirebase() {
     supaClient = window.supabase.createClient(SUPA_URL, SUPA_KEY);
     const loaded = await loadFromSupabase();
     const negRemote = await loadNegFromSupabase();
-    const cotRemote = await loadCotizadorFromSupabase();
     if (negRemote) {
       negData = negRemote;
       localStorage.setItem(NEG_KEY, JSON.stringify(negData));
@@ -930,8 +918,7 @@ async function initFirebase() {
       await Promise.all([
         supaUpsert('inventario', { id: 'default', data: data, updated_at: new Date().toISOString() }),
         supaUpsert('albums', { id: 'default', data: albums, updated_at: new Date().toISOString() }),
-        supaUpsert('negocio', { id: 'default', data: negData, updated_at: new Date().toISOString() }),
-        supaUpsert('cotizador', { id: 'default', precios: cotPrecios, equipos: [...cotEquiposImp], estrellas: [...cotEstrellas], jugprecios: cotJugPrecios, updated_at: new Date().toISOString() })
+        supaUpsert('negocio', { id: 'default', data: negData, updated_at: new Date().toISOString() })
       ]);
     }
     setupRealtime();
@@ -1158,9 +1145,9 @@ function buildTable() {
   });
   h += `<td></td></tr>`;
 
-  for (let ri=0; ri<=20; ri++) {
-    const rc = ri===0?'r-0':ri===1?'r-1':ri===13?'r-13':'';
-    h += `<tr class="${rc}"><td>${ri===0?'0':ri}</td>`;
+  for (let ri=1; ri<=20; ri++) {
+    const rc = ri===1?'r-1':ri===13?'r-13':'';
+    h += `<tr class="${rc}"><td>${ri}</td>`;
     const rowTot = COLS.reduce((s,_,i)=>s+(data[ri]?.[i]||0),0);
     COLS.forEach((col,ci) => {
       const v   = data[ri]?.[ci]||0;
@@ -1240,10 +1227,52 @@ const NEG_KEY = 'neg_v1';
 let negData = null;
 
 function loadNeg() {
-  try { const s=localStorage.getItem(NEG_KEY); if(s) return JSON.parse(s); } catch(e){}
-  return { txs: [] }; // transactions array
+  try { const s=localStorage.getItem(NEG_KEY); if(s) {
+    const d=JSON.parse(s);
+    if(!d.ajustes) d.ajustes=[];
+    return d;
+  }} catch(e){}
+  return { txs: [], ajustes: [] };
 }
-function saveNeg() { localStorage.setItem(NEG_KEY, JSON.stringify(negData)); saveNegToSupabase(negData); }
+function saveNeg() {
+  if (!negData.ajustes) negData.ajustes = [];
+  localStorage.setItem(NEG_KEY, JSON.stringify(negData));
+  saveNegToSupabase(negData);
+}
+
+// Ajustes manuales
+function adjAgregar() {
+  const desc  = document.getElementById('adj-desc').value.trim();
+  const monto = parseFloat(document.getElementById('adj-monto').value);
+  const tipo  = document.getElementById('adj-tipo').value;
+  if (!desc || isNaN(monto) || monto <= 0) return alert('Pon descripción y monto válido');
+  if (!negData.ajustes) negData.ajustes = [];
+  negData.ajustes.push({ id: Date.now(), desc, monto, tipo });
+  saveNeg();
+  document.getElementById('adj-desc').value = '';
+  document.getElementById('adj-monto').value = '';
+  adjRender();
+  negRenderResumen();
+}
+function adjEliminar(id) {
+  negData.ajustes = (negData.ajustes||[]).filter(a=>a.id!==id);
+  saveNeg();
+  adjRender();
+  negRenderResumen();
+}
+function adjRender() {
+  const lista = negData.ajustes || [];
+  const el = document.getElementById('adj-lista');
+  if (!lista.length) { el.innerHTML = '<div style="color:#64748b;font-size:0.8rem">Sin ajustes aún</div>'; return; }
+  el.innerHTML = lista.map(a=>`
+    <div style="display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid #1e2435">
+      <span style="color:#94a3b8;font-size:0.85rem">${a.desc}</span>
+      <span style="color:${a.tipo==='ingreso'?'#34d399':'#f87171'};font-weight:700;margin:0 12px">
+        ${a.tipo==='ingreso'?'+':'-'}Q${a.monto.toFixed(2)}
+      </span>
+      <button onclick="adjEliminar(${a.id})" style="background:none;border:none;color:#64748b;cursor:pointer;font-size:1rem">✕</button>
+    </div>`).join('');
+}
 
 function getNegPrice(id) {
   const el = document.getElementById(id);
@@ -1464,6 +1493,7 @@ function renderNeg() {
   renderResumen('alb', albTxs);
   renderResumen('est', estTxs);
   renderResumenCajas(cajaTxs);
+  adjRender();
   renderResumenGeneral();
   renderStock();
 }
@@ -1513,17 +1543,23 @@ function renderResumenGeneral() {
   const ventas  = all.filter(t=>t.tipo==='venta');
   const totalC  = compras.reduce((s,t)=>s+t.price*t.qty, 0);
   const totalV  = ventas.reduce((s,t)=>s+t.price*t.qty, 0);
-  const gan     = totalV - totalC;
+  // Ajustes manuales
+  const ajustes = negData.ajustes || [];
+  const adjIng  = ajustes.filter(a=>a.tipo==='ingreso').reduce((s,a)=>s+a.monto, 0);
+  const adjGas  = ajustes.filter(a=>a.tipo==='gasto').reduce((s,a)=>s+a.monto, 0);
+  const totalIngTotal = totalV + adjIng;
+  const totalGasTotal = totalC + adjGas;
+  const gan     = totalIngTotal - totalGasTotal;
   const txCount = all.length;
-  const margen  = totalV>0 ? ((gan/totalV)*100).toFixed(1)+'%' : '—';
+  const margen  = totalIngTotal>0 ? ((gan/totalIngTotal)*100).toFixed(1)+'%' : '—';
 
   document.getElementById('resumen-general').innerHTML = `
     <h3>Resumen General</h3>
     <div class="neg-gen-grid">
-      <div class="neg-gen-stat"><div class="v" style="color:#34d399">${fmt(totalV)}</div><div class="l">Total ingresos</div></div>
-      <div class="neg-gen-stat"><div class="v" style="color:#f87171">${fmt(totalC)}</div><div class="l">Total costos</div></div>
-      <div class="neg-gen-stat"><div class="v" style="color:${gan>=0?'#34d399':'#f87171'}">${fmt(gan)}</div><div class="l">Ganancia neta</div></div>
-      <div class="neg-gen-stat"><div class="v" style="color:#f59e0b">${margen}</div><div class="l">Margen de ganancia</div></div>
+      <div class="neg-gen-stat"><div class="v" style="color:#34d399">${fmt(totalIngTotal)}</div><div class="l">Total ingresos</div></div>
+      <div class="neg-gen-stat"><div class="v" style="color:#f87171">${fmt(totalGasTotal)}</div><div class="l">Total gastos</div></div>
+      <div class="neg-gen-stat"><div class="v" style="color:${gan>=0?'#34d399':'#f87171'}">${fmt(gan)}</div><div class="l">Restante</div></div>
+      <div class="neg-gen-stat"><div class="v" style="color:#f59e0b">${margen}</div><div class="l">Margen</div></div>
       <div class="neg-gen-stat"><div class="v" style="color:#60a5fa">${compras.reduce((s,t)=>s+t.qty,0)}</div><div class="l">Unidades compradas</div></div>
       <div class="neg-gen-stat"><div class="v" style="color:#a78bfa">${ventas.reduce((s,t)=>s+t.qty,0)}</div><div class="l">Unidades vendidas</div></div>
       <div class="neg-gen-stat"><div class="v" style="color:#fb923c">${txCount}</div><div class="l">Transacciones</div></div>
@@ -1634,13 +1670,9 @@ function showPage(id, btn) {
   document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
   document.getElementById(id).classList.add('active');
   btn.classList.add('active');
-  try {
-    if (id==='p-ana') buildAnalysis();
-    if (id==='p-neg') renderNeg();
-    if (id==='p-cotiz') cotInit();
-  } catch(e) {
-    document.getElementById(id).innerHTML = '<div style="color:#f87171;padding:40px;font-family:monospace">ERROR: ' + e.message + '<br><pre>' + e.stack + '</pre></div>';
-  }
+  if (id==='p-ana') { try { buildAnalysis(); } catch(e) { console.error('buildAnalysis error:',e); } }
+  if (id==='p-neg') { try { renderNeg(); } catch(e) { console.error('renderNeg error:',e); } }
+  if (id==='p-cotiz') { try { cotInit(); } catch(e) { console.error('cotInit error:',e); } }
 }
 
 function exportCSV() {
@@ -2081,11 +2113,11 @@ let cotEstrellas = new Set([
 let cotJugPrecios = {}; // { "Lionel Messi": 200, ... }
 
 var COT_PRECIOS_DEFAULT = {
-  'fwc-emblema':120,'fwc-normal':40,'fwc-historia':60,
-  'escudo-imp':80,'escudo-norm':40,
-  'foto-imp':50,'foto-norm':25,
-  'estrella-top':100,'estrella-norm':50,
-  'jug-imp':15,'jug-norm':8
+  'fwc-emblema': 120,
+  'escudo-norm': 40,
+  'escudo-imp':  80,
+  'jug-imp':     15,
+  'jug-norm':    8
 };
 const COT_TOP_STARS = new Set(['Lionel Messi','Kylian Mbappé','Cristiano Ronaldo','Vinicius Junior','Lamine Yamal','Jude Bellingham']);
 
@@ -2096,12 +2128,23 @@ function cotCargar() {
   try { const s=localStorage.getItem(COT_KEY_JUGPRECIOS); if(s) cotJugPrecios=JSON.parse(s); } catch(e){}
 }
 
+async function loadCotizadorFromSupabase() {
+  if(!supaClient) return;
+  try {
+    const {data,error}=await supaClient.from('cotizador').select('*').eq('id','default').single();
+    if(error||!data) return;
+    if(data.precios) { cotPrecios={...COT_PRECIOS_DEFAULT,...data.precios}; localStorage.setItem(COT_KEY_PRECIOS,JSON.stringify(cotPrecios)); }
+    if(data.equipos) { cotEquiposImp=new Set(data.equipos); localStorage.setItem(COT_KEY_EQUIPOS,JSON.stringify(data.equipos)); }
+    if(data.estrellas) { cotEstrellas=new Set(data.estrellas); localStorage.setItem(COT_KEY_ESTRELLAS,JSON.stringify(data.estrellas)); }
+    if(data.jugprecios) { cotJugPrecios=data.jugprecios; localStorage.setItem(COT_KEY_JUGPRECIOS,JSON.stringify(data.jugprecios)); }
+  } catch(e){}
+}
+
 function cotGuardar() {
   localStorage.setItem(COT_KEY_PRECIOS,   JSON.stringify(cotPrecios));
   localStorage.setItem(COT_KEY_EQUIPOS,   JSON.stringify([...cotEquiposImp]));
   localStorage.setItem(COT_KEY_ESTRELLAS, JSON.stringify([...cotEstrellas]));
   localStorage.setItem(COT_KEY_JUGPRECIOS,JSON.stringify(cotJugPrecios));
-  // Sync a Supabase
   supaUpsert('cotizador', {
     id: 'default',
     precios: cotPrecios,
@@ -2114,20 +2157,17 @@ function cotGuardar() {
 
 function cotGetPrecio(col, ri) {
   const nombre = SNAMES[col]?.[ri] || '';
-  // Precio individual tiene prioridad máxima
+  // 1. Precio individual (máxima prioridad)
   if (cotJugPrecios[nombre] !== undefined) return cotJugPrecios[nombre];
   const imp = cotEquiposImp.has(col);
-  if (col === 'FWC') {
-    if (ri === 1) return cotPrecios['fwc-emblema'];
-    if (ri <= 8)  return cotPrecios['fwc-normal'];
-    return cotPrecios['fwc-historia'];
-  }
-  if (ri === 1) return imp ? cotPrecios['escudo-imp'] : cotPrecios['escudo-norm'];
-  if (ri === 13) return imp ? cotPrecios['foto-imp']  : cotPrecios['foto-norm'];
-  if (cotEstrellas.has(nombre)) {
-    return COT_TOP_STARS.has(nombre) ? cotPrecios['estrella-top'] : cotPrecios['estrella-norm'];
-  }
-  return imp ? cotPrecios['jug-imp'] : cotPrecios['jug-norm'];
+  // 2. FWC prima página
+  if (col === 'FWC') return cotPrecios['fwc-emblema'] || 0;
+  // 3. Escudo (fila 1) y foto grupal (fila 13) usan precio de escudo según equipo
+  if (ri === 1)  return imp ? (cotPrecios['escudo-imp'] || 0) : (cotPrecios['escudo-norm'] || 0);
+  if (ri === 13) return imp ? (cotPrecios['escudo-imp'] || 0) : (cotPrecios['escudo-norm'] || 0);
+  // 4. Jugadores: solo importa si está marcado como estrella, no el equipo
+  if (cotEstrellas.has(nombre)) return cotPrecios['jug-imp'] || 0;
+  return cotPrecios['jug-norm'] || 0;
 }
 
 function cotGetTipo(col, ri) {
@@ -2153,7 +2193,7 @@ function cotParsear(texto) {
       if (!COLS.includes(col)) { errs.push('Linea '+(idx+1)+': "'+col+'" no reconocido'); return; }
       const nums = mColon[2].match(/\d{1,2}/g);
       if (!nums) { errs.push('Linea '+(idx+1)+': sin numeros'); return; }
-      nums.forEach(n => { const ri=parseInt(n); if(ri<1||ri>20){errs.push('Linea '+(idx+1)+': #'+ri+' fuera de rango');return;} items.push({col,ri,qty:1}); });
+      nums.forEach(n => { let ri=parseInt(n); if(ri===0&&col==='FWC') ri=1; if(ri<1||ri>20){errs.push('Linea '+(idx+1)+': #'+ri+' fuera de rango');return;} items.push({col,ri,qty:1}); });
       return;
     }
     // Formato clasico: "ARG 14", "ARG-14", "14 ARG", "ARG14", con "x2" opcional
@@ -2164,6 +2204,8 @@ function cotParsear(texto) {
     if(!col){m=qc.match(/^(\d{1,2})[\s\-_]([A-Z]{2,3})$/i);if(m){col=m[2].toUpperCase();ri=parseInt(m[1]);}}
     if(!col){m=qc.match(/^([A-Z]{2,3})(\d{1,2})$/i);if(m){col=m[1].toUpperCase();ri=parseInt(m[2]);}}
     if(!col||!COLS.includes(col)){errs.push('Linea '+(idx+1)+': "'+clean+'" no reconocido');return;}
+    // FWC 0 = FWC 1 (primera página, mismo precio)
+    if(ri===0 && col==='FWC') ri=1;
     if(!ri||ri<1||ri>20){errs.push('Linea '+(idx+1)+': #'+ri+' fuera de rango');return;}
     items.push({col,ri,qty});
   });
@@ -2194,7 +2236,7 @@ function cotCotizar() {
     if(col==='FWC'){cat.fwc+=qty;catQ.fwc+=sub;}
     else if(ri===1){cat.escudo+=qty;catQ.escudo+=sub;}
     else if(ri===13){cat.foto+=qty;catQ.foto+=sub;}
-    else { const t=cotGetTipo(col,ri); if(t==='estrella'){cat.estrella+=qty;catQ.estrella+=sub;} else if(t==='jugImp'){cat.jugImp+=qty;catQ.jugImp+=sub;} else{cat.jugNorm+=qty;catQ.jugNorm+=sub;} }
+    else { const t=cotGetTipo(col,ri); if(t==='estrella'){cat.estrella+=qty;catQ.estrella+=sub;} else{cat.jugNorm+=qty;catQ.jugNorm+=sub;} }
     return `<tr><td style="color:#64748b">${col} #${ri}</td><td>${nombre}</td><td style="text-align:center">${qty}</td><td style="text-align:center;color:${sc}">${stk}</td><td style="text-align:right">Q${precio}</td><td style="text-align:right;font-weight:600;color:#34d399">Q${sub.toFixed(0)}</td></tr>`;
   });
   const errH=errs.length?`<div class="cot-warn">⚠️ ${errs.join('<br>')}</div>`:'';
@@ -2206,7 +2248,6 @@ function cotCotizar() {
     {k:'escudo', label:'🛡️ Escudos',  color:'#60a5fa'},
     {k:'foto',   label:'👥 Fotos',    color:'#fb923c'},
     {k:'estrella',label:'⭐ Estrellas',color:'#fbbf24'},
-    {k:'jugImp', label:'👤 Imp.',     color:'#34d399'},
     {k:'jugNorm',label:'👤 Normal',   color:'#64748b'},
   ].filter(c=>cat[c.k]>0).map(c=>`
     <div style="background:#0f172a;border:1px solid #1e2435;border-radius:8px;padding:8px 12px;text-align:center;min-width:80px">
@@ -2263,14 +2304,16 @@ function cotLimpiar() {
 function cotShowTab(id,btn) {
   document.querySelectorAll('.cot-sub-page').forEach(p=>p.style.display='none');
   document.querySelectorAll('.cot-sub-tab').forEach(b=>b.classList.remove('active'));
-  document.getElementById(id).style.display='block';
+  const el=document.getElementById(id);
+  if(!el){ console.error('cotShowTab: no element with id=',id); return; }
+  el.style.display='block';
   btn.classList.add('active');
-  if (id==='cot-p-precios' || id==='cot-p-estrellas' || id==='cot-p-equipos') cotRenderPrecios();
+  if(id==='cot-p-precios') cotRenderTabPrecios();
+  else if(id==='cot-p-estrellas') cotRenderTabEstrellas();
+  else if(id==='cot-p-equipos') cotRenderTabEquipos();
 }
 
-// ── Renderizado de configuración de precios ────────────────
-function cotRenderPrecios() {
-  // Inputs de precios base
+function cotRenderTabPrecios() {
   const keys=[
     ['fwc-emblema','Prima página (FWC)'],
     ['escudo-norm','Escudos y equipos normales'],
@@ -2278,46 +2321,86 @@ function cotRenderPrecios() {
     ['jug-imp','Jugadores importantes'],
     ['jug-norm','Jugadores normales']
   ];
-  document.getElementById('cot-base-precios').innerHTML=keys.map(([k,lbl])=>`
+  const el=document.getElementById('cot-base-precios');
+  if(!el) return;
+  el.innerHTML=keys.map(([k,lbl])=>`
     <div class="cot-prow">
       <label>${lbl}</label>
       <div class="cot-pinp-wrap"><span class="cot-ppre">Q</span>
         <input class="cot-pinp" type="number" min="0" id="cp-${k}" value="${cotPrecios[k]||0}" onchange="cotPrecios['${k}']=parseFloat(this.value)||0;cotGuardar()">
       </div>
     </div>`).join('');
+}
 
-  // Toggle equipos
-  document.getElementById('cot-equipos-toggle').innerHTML=COLS.filter(c=>c!=='FWC').map(c=>{
+function cotRenderTabEquipos() {
+  const el=document.getElementById('cot-equipos-toggle');
+  if(!el) return;
+  el.innerHTML=COLS.filter(c=>c!=='FWC').map(c=>{
     const on=cotEquiposImp.has(c);
     return `<button class="toggle-btn ${on?'on':'off'}" onclick="cotToggleEquipo('${c}',this)" title="${PAIS[c]||c}">${c}</button>`;
   }).join('');
+}
 
-  // Toggle estrellas
-  const todos={};
+let _cotTodosJug = {}; // cache de jugadores para acceso por índice
+
+function cotRenderTabEstrellas() {
+  _cotTodosJug = {};
   for(const col of COLS){
     if(col==='FWC') continue;
     const sn=SNAMES[col]; if(!sn) continue;
     for(let r=2;r<=20;r++){
       if(r===13) continue;
-      const n=sn[r]; if(n) todos[n]=col;
+      const n=sn[r]; if(n) _cotTodosJug[n]=col;
     }
   }
-  document.getElementById('cot-estrellas-toggle').innerHTML=Object.entries(todos).map(([n,col])=>{
+  const entradas = Object.entries(_cotTodosJug);
+  const elEst=document.getElementById('cot-estrellas-toggle');
+  if(elEst) elEst.innerHTML=entradas.map(([n,col],i)=>{
     const on=cotEstrellas.has(n);
-    return `<button class="toggle-btn ${on?'star-on':'star-off'}" onclick="cotToggleEstrella('${n.replace(/'/g,"\\'")}',this)" title="${col}">${n}</button>`;
+    const safe=encodeURIComponent(n);
+    return `<button class="toggle-btn ${on?'star-on':'star-off'}" onclick="cotToggleEstrellaIdx(${i})" title="${col}">${n}</button>`;
   }).join('');
 
-  // Precios individuales por jugador (todos los que son estrella)
-  document.getElementById('cot-jug-precios').innerHTML=[...cotEstrellas].map(n=>{
-    const precio=cotJugPrecios[n]!==undefined?cotJugPrecios[n]:'';
-    const col=todos[n]||'';
-    return `<div class="jug-precio-row">
-      <span class="jug-nombre">${n}</span>
-      <span class="jug-pais-tag">${col}</span>
-      <input class="jug-inp" type="number" min="0" placeholder="auto" value="${precio}"
-        onchange="cotSetJugPrecio('${n.replace(/'/g,"\\'")}',this.value)" title="Precio individual (deja vacío para usar precio de estrella)">
-    </div>`;
-  }).join('');
+  const elJug=document.getElementById('cot-jug-precios');
+  if(elJug) {
+    const estArr=[...cotEstrellas];
+    elJug.innerHTML=estArr.length===0
+      ? '<div style="color:#64748b;font-size:0.8rem">Marca jugadores arriba para fijar precio individual.</div>'
+      : estArr.map((n,i)=>{
+          const precio=cotJugPrecios[n]!==undefined?cotJugPrecios[n]:'';
+          const col=_cotTodosJug[n]||'';
+          return `<div class="jug-precio-row">
+            <span class="jug-nombre">${n}</span>
+            <span class="jug-pais-tag">${col}</span>
+            <input class="jug-inp" type="number" min="0" placeholder="auto" value="${precio}"
+              onchange="cotSetJugPrecioIdx(${i},this.value)" title="Precio individual">
+          </div>`;
+        }).join('');
+  }
+}
+
+function cotToggleEstrellaIdx(i) {
+  const n = Object.keys(_cotTodosJug)[i];
+  if(!n) return;
+  if(cotEstrellas.has(n)) cotEstrellas.delete(n);
+  else cotEstrellas.add(n);
+  cotGuardar();
+  cotRenderTabEstrellas();
+}
+
+function cotSetJugPrecioIdx(i, val) {
+  const n = [...cotEstrellas][i];
+  if(!n) return;
+  if(val===''||val===null) delete cotJugPrecios[n];
+  else cotJugPrecios[n]=parseFloat(val)||0;
+  cotGuardar();
+}
+
+// ── Renderizado de configuración de precios ────────────────
+function cotRenderPrecios() {
+  cotRenderTabPrecios();
+  cotRenderTabEquipos();
+  cotRenderTabEstrellas();
 }
 
 function cotToggleEquipo(cod,btn) {
@@ -2330,7 +2413,7 @@ function cotToggleEstrella(nombre,btn) {
   if(cotEstrellas.has(nombre)){cotEstrellas.delete(nombre);btn.className='toggle-btn star-off';}
   else{cotEstrellas.add(nombre);btn.className='toggle-btn star-on';}
   cotGuardar();
-  cotRenderPrecios(); // refrescar lista de jugadores individuales
+  cotRenderTabEstrellas();
 }
 
 function cotSetJugPrecio(nombre, val) {
@@ -2339,9 +2422,16 @@ function cotSetJugPrecio(nombre, val) {
   cotGuardar();
 }
 
+let _cotInitDone = false;
 function cotInit() {
   cotCargar();
-  // data es un objeto {0:[...], 1:[...], ...20:[...]}
+  // Renderizar inmediatamente con datos locales (no esperar Supabase)
+  cotRenderPrecios();
+  // Luego actualizar desde Supabase si hay conexión
+  if (!_cotInitDone) {
+    _cotInitDone = true;
+    loadCotizadorFromSupabase().then(()=>{ cotRenderPrecios(); }).catch(()=>{});
+  }
   const total=data?Object.values(data).reduce((s,r)=>Array.isArray(r)?s+r.reduce((a,b)=>a+b,0):s,0):0;
   const el=document.getElementById('cot-inv-status');
   if(el) el.textContent=total>0?'✅ Inventario conectado — '+total+' estampas':'⚠️ Sin estampas en inventario aún';
@@ -2352,6 +2442,8 @@ window.cotConfirmar=cotConfirmar;
 window.cotLimpiar=cotLimpiar;
 window.cotShowTab=cotShowTab;
 window.cotToggleEquipo=cotToggleEquipo;
+window.cotToggleEstrellaIdx=cotToggleEstrellaIdx;
+window.cotSetJugPrecioIdx=cotSetJugPrecioIdx;
 window.cotToggleEstrella=cotToggleEstrella;
 window.cotSetJugPrecio=cotSetJugPrecio;
 
@@ -2377,4 +2469,54 @@ window.cotSetJugPrecio=cotSetJugPrecio;
           <textarea class="cot-textarea" id="cot-lista-input" placeholder="ARG 14&#10;BRA 1&#10;FWC 3&#10;ESP 14 x2&#10;MEX 15&#10;..."></textarea>
           <div style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap">
             <button class="cot-btn cot-btn-red" onclick="cotCotizar()">⚡ Cotizar lista</button>
-            <button class="cot-btn cot-btn-ghost" onclick=
+            <button class="cot-btn cot-btn-ghost" onclick="cotLimpiar()">✕ Limpiar</button>
+          </div>
+        </div>
+        <div class="cot-card" style="margin-top:12px">
+          <div id="cot-inv-status" style="font-size:0.75rem;color:#64748b"></div>
+        </div>
+      </div>
+      <div id="cot-resultado" style="min-height:200px">
+        <div class="cot-empty">🧾 Pega una lista y presiona <strong>Cotizar</strong></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PRECIOS BASE -->
+  <div class="cot-sub-page" id="cot-p-precios" style="display:none;margin-top:16px">
+    <div class="cot-precio-card" style="max-width:500px">
+      <h3>💲 Precios base por categoría</h3>
+      <div id="cot-base-precios"></div>
+    </div>
+  </div>
+
+  <!-- ESTRELLAS + PRECIO INDIVIDUAL -->
+  <div class="cot-sub-page" id="cot-p-estrellas" style="display:none;margin-top:16px">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;flex-wrap:wrap">
+      <div class="cot-precio-card">
+        <h3>⭐ Marcar jugadores estrella</h3>
+        <p style="font-size:0.72rem;color:#64748b;margin-bottom:10px">Dorado = precio estrella. Clic para marcar o desmarcar.</p>
+        <div id="cot-estrellas-toggle" style="display:flex;flex-wrap:wrap;gap:5px"></div>
+      </div>
+      <div class="cot-precio-card">
+        <h3>💲 Precio individual por jugador</h3>
+        <p style="font-size:0.72rem;color:#64748b;margin-bottom:10px">Deja vacío = usar precio de categoría. Tiene prioridad máxima.</p>
+        <div id="cot-jug-precios"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- EQUIPOS IMPORTANTES -->
+  <div class="cot-sub-page" id="cot-p-equipos" style="display:none;margin-top:16px">
+    <div class="cot-precio-card">
+      <h3>🏆 Equipos importantes — clic para marcar/desmarcar</h3>
+      <p style="font-size:0.72rem;color:#64748b;margin-bottom:10px">Verde = importante (precio diferenciado en escudos, fotos y jugadores).</p>
+      <div id="cot-equipos-toggle" style="display:flex;flex-wrap:wrap;gap:6px"></div>
+    </div>
+  </div>
+
+</div>
+</div>
+
+</body>
+</html>
