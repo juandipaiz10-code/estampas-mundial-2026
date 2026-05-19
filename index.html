@@ -648,7 +648,7 @@ const COLS = ['FWC','MEX','RSA','KOR','CZE','CAN','BIH','QAT','SUI','BRA','MAR',
 const PAIS = {'ALG':'Algeria','ARG':'Argentina','AUS':'Australia','AUT':'Austria','BEL':'Bélgica','BIH':'Bosnia y Herz.','BRA':'Brasil','CAN':'Canadá','CIV':'Costa de Marfil','COD':'RD Congo','COL':'Colombia','CPV':'Cabo Verde','CRO':'Croacia','CUW':'Curazao','CZE':'Rep. Checa','ECU':'Ecuador','EGY':'Egipto','ENG':'Inglaterra','ESP':'España','FRA':'Francia','GER':'Alemania','GHA':'Ghana','HAI':'Haití','IRN':'Irán','IRQ':'Iraq','JOR':'Jordania','JPN':'Japón','KOR':'Corea del Sur','KSA':'Arabia Saudita','MAR':'Marruecos','MEX':'México','NED':'Países Bajos','NOR':'Noruega','NZL':'Nueva Zelanda','PAN':'Panamá','PAR':'Paraguay','POR':'Portugal','QAT':'Qatar','RSA':'Sudáfrica','SCO':'Escocia','SEN':'Senegal','SUI':'Suiza','SWE':'Suecia','TUN':'Túnez','TUR':'Turquía','URU':'Uruguay','USA':'USA','UZB':'Uzbekistán'};
 
 const SNAMES = {
-  FWC:{1:'Emblema Oficial (FOIL)',2:'Emblema Oficial 2/2',3:'Mascotas Oficiales',4:'Slogan Oficial',5:'Balón Oficial',6:'Canadá - Sede',7:'México - Sede',8:'USA - Sede',9:'Italia 1934',10:'Uruguay 1950',11:'Alemania Occ. 1954',12:'Brasil 1962',13:'Alemania Occ. 1974',14:'Argentina 1986',15:'Brasil 1994',16:'Brasil 2002',17:'Italia 2006',18:'Alemania 2014',19:'Argentina 2022',20:'Historia del Mundial'},
+  FWC:{0:'Portada Álbum (FOIL)',1:'Emblema Oficial (FOIL)',2:'Emblema Oficial 2/2',3:'Mascotas Oficiales',4:'Slogan Oficial',5:'Balón Oficial',6:'Canadá - Sede',7:'México - Sede',8:'USA - Sede',9:'Italia 1934',10:'Uruguay 1950',11:'Alemania Occ. 1954',12:'Brasil 1962',13:'Alemania Occ. 1974',14:'Argentina 1986',15:'Brasil 1994',16:'Brasil 2002',17:'Italia 2006',18:'Alemania 2014',19:'Argentina 2022',20:'Historia del Mundial'},
   ALG:{1:'Escudo Algeria (FOIL)',2:'Alexis Guendouz',3:'Ramy Bensebaini',4:'Youcef Atal',5:'Rayan Aït-Nouri',6:'Mohamed Amine Tougai',7:'Aïssa Mandi',8:'Ismael Bennacer',9:'Houssem Aquar',10:'Hicham Boudaoui',11:'Ramiz Zerrouki',12:'Nabil Bentalab',13:'Foto Grupal Algeria',14:'Farés Chaibi',15:'Riyad Mahrez',16:'Said Benrhama',17:'Anis Hadj Moussa',18:'Amine Gouiri',19:'Baghdad Bounedjah',20:'Mohammed Amoura'},
   ARG:{1:'Escudo Argentina (FOIL)',2:'Emiliano Martinez',3:'Nahuel Molina',4:'Cristian Romero',5:'Nicolas Otamendi',6:'Nicolas Tagliafico',7:'Leonardo Balerdi',8:'Enzo Fernandez',9:'Alexis Mac Allister',10:'Rodrigo De Paul',11:'Exequiel Palacios',12:'Leandro Paredes',13:'Foto Grupal Argentina',14:'Nico Paz',15:'Franco Mastantuono',16:'Nico Gonzalez',17:'Lionel Messi',18:'Lautaro Martinez',19:'Julian Alvarez',20:'Giuliano Simeone'},
   AUS:{1:'Escudo Australia (FOIL)',2:'Mathew Ryan',3:'Joe Gauci',4:'Harry Souttar',5:'Alessandro Circati',6:'Jordan Bos',7:'Aziz Behich',8:'Cameron Burgess',9:'Lewis Miller',10:'Milos Degenek',11:'Jackson Irvine',12:'Riley McGree',13:'Foto Grupal Australia',14:'Aiden O\'Neill',15:'Connor Metcalfe',16:'Patrick Yazbek',17:'Craig Goodwin',18:'Kusini Vengi',19:'Nestory Irankunda',20:'Mohamed Touré'},
@@ -1119,6 +1119,9 @@ function updateCellDOM(ri, ci, v, animate) {
 }
 
 function rebuildTableDOM() {
+  // Fila 0 (solo FWC)
+  updateCellDOM(0, 0, data[0]?.[0]||0, null);
+  const rtel0=document.getElementById('rt-0'); if(rtel0) rtel0.textContent=data[0]?.[0]||0;
   for (let ri=1; ri<=20; ri++) {
     COLS.forEach((_,ci) => { updateCellDOM(ri, ci, data[ri]?.[ci]||0, null); });
     const rowTot = COLS.reduce((s,_,i)=>s+(data[ri]?.[i]||0),0);
@@ -1144,6 +1147,20 @@ function buildTable() {
     h += `<td class="${ci===0?'col-fwc':''}"><input class="qi-cell-input" data-ci="${ci}" data-col="${col}" placeholder="#"></td>`;
   });
   h += `<td></td></tr>`;
+
+  // Fila 0 solo para FWC (Portada Álbum)
+  h += `<tr class="r-1"><td>00</td>`;
+  COLS.forEach((col,ci) => {
+    if(ci===0) {
+      const v=data[0]?.[0]||0; const vc=cvClass(v);
+      h += `<td class="cv-cell ${vc} col-fwc" id="td-0-0" data-ri="0" data-ci="0" data-col="FWC" onclick="cycleCell(0,0)" ondblclick="dblCell(0,0)">
+        <div class="cv-wrap"><span class="${v===0?'cv z':'cv'}" id="cv-0-0">${v}</span></div>
+      </td>`;
+    } else {
+      h += `<td class="cv-cell z" style="opacity:0.15">—</td>`;
+    }
+  });
+  h += `<td class="col-total" id="rt-0">${data[0]?.[0]||0}</td></tr>`;
 
   for (let ri=1; ri<=20; ri++) {
     const rc = ri===1?'r-1':ri===13?'r-13':'';
@@ -1718,7 +1735,7 @@ window.negDelTx         = negDelTx;
 
 // Datos del álbum para el cotizador (mismos que en cotizador_listas.html)
 const COTIZ_SNAMES = {
-  FWC:{1:'Emblema Oficial (FOIL)',2:'Emblema 2',3:'Mascotas Oficiales',4:'Slogan Oficial',5:'Balón Oficial',6:'Canadá - Sede',7:'México - Sede',8:'USA - Sede',9:'Italia 1934',10:'Uruguay 1950',11:'Alemania Occ. 1954',12:'Brasil 1962',13:'Alemania Occ. 1974',14:'Argentina 1986',15:'Brasil 1994',16:'Brasil 2002',17:'Italia 2006',18:'Alemania 2014',19:'Argentina 2022',20:'Historia del Mundial'},
+  FWC:{0:'Portada Álbum (FOIL)',1:'Emblema Oficial (FOIL)',2:'Emblema 2',3:'Mascotas Oficiales',4:'Slogan Oficial',5:'Balón Oficial',6:'Canadá - Sede',7:'México - Sede',8:'USA - Sede',9:'Italia 1934',10:'Uruguay 1950',11:'Alemania Occ. 1954',12:'Brasil 1962',13:'Alemania Occ. 1974',14:'Argentina 1986',15:'Brasil 1994',16:'Brasil 2002',17:'Italia 2006',18:'Alemania 2014',19:'Argentina 2022',20:'Historia del Mundial'},
   MEX:{1:'Escudo México (FOIL)',14:'Lionel Messi',13:'Foto Grupal México'},
   ARG:{1:'Escudo Argentina (FOIL)',13:'Foto Grupal Argentina',14:'Lionel Messi'},
   BRA:{1:'Escudo Brasil (FOIL)',13:'Foto Grupal Brasil',14:'Vinicius Junior'},
@@ -2193,7 +2210,7 @@ function cotParsear(texto) {
       if (!COLS.includes(col)) { errs.push('Linea '+(idx+1)+': "'+col+'" no reconocido'); return; }
       const nums = mColon[2].match(/\d{1,2}/g);
       if (!nums) { errs.push('Linea '+(idx+1)+': sin numeros'); return; }
-      nums.forEach(n => { let ri=parseInt(n); if(ri===0&&col==='FWC') ri=1; if(ri<1||ri>20){errs.push('Linea '+(idx+1)+': #'+ri+' fuera de rango');return;} items.push({col,ri,qty:1}); });
+      nums.forEach(n => { let ri=parseInt(n); const minRi=(col==='FWC')?0:1; if(ri<minRi||ri>20){errs.push('Linea '+(idx+1)+': #'+ri+' fuera de rango');return;} items.push({col,ri,qty:1}); });
       return;
     }
     // Formato clasico: "ARG 14", "ARG-14", "14 ARG", "ARG14", con "x2" opcional
@@ -2204,9 +2221,8 @@ function cotParsear(texto) {
     if(!col){m=qc.match(/^(\d{1,2})[\s\-_]([A-Z]{2,3})$/i);if(m){col=m[2].toUpperCase();ri=parseInt(m[1]);}}
     if(!col){m=qc.match(/^([A-Z]{2,3})(\d{1,2})$/i);if(m){col=m[1].toUpperCase();ri=parseInt(m[2]);}}
     if(!col||!COLS.includes(col)){errs.push('Linea '+(idx+1)+': "'+clean+'" no reconocido');return;}
-    // FWC 0 = FWC 1 (primera página, mismo precio)
-    if(ri===0 && col==='FWC') ri=1;
-    if(!ri||ri<1||ri>20){errs.push('Linea '+(idx+1)+': #'+ri+' fuera de rango');return;}
+    const minRi=(col==='FWC')?0:1;
+    if(ri===null||ri===undefined||ri<minRi||ri>20){errs.push('Linea '+(idx+1)+': #'+ri+' fuera de rango');return;}
     items.push({col,ri,qty});
   });
   return {items,errs};
