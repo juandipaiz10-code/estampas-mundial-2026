@@ -396,6 +396,13 @@ tbody td.cv-cell.estrella.v3p { box-shadow: inset 0 0 0 1px #f59e0b, inset 0 0 7
   <table id="tabla"></table>
 </div>
 
+<!-- Valor estimado del inventario -->
+<div id="inv-valor-wrap" style="margin:24px 28px 32px;background:#111827;border:1px solid #1e2435;border-radius:12px;padding:20px 24px">
+  <div style="font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:2px;color:#64748b;margin-bottom:14px">💰 VALOR ESTIMADO DEL INVENTARIO</div>
+  <div id="inv-valor-grid" style="display:flex;flex-wrap:wrap;gap:12px"></div>
+  <div style="margin-top:14px;font-size:0.7rem;color:#374151">Calculado con los precios configurados en el Cotizador. Actualiza automáticamente al cambiar precios.</div>
+</div>
+
 </div><!-- /p-inv -->
 
 <!-- ===== COMPRAS ===== -->
@@ -1706,6 +1713,49 @@ function exportCSV() {
   a.download='estampas_mundial2026.csv'; a.click();
 }
 
+function calcValorInventario() {
+  const el = document.getElementById('inv-valor-grid'); if(!el) return;
+  // Asegurar precios cargados
+  if(!cotPrecios || !Object.keys(cotPrecios).length) cotCargar();
+  let totalFWC=0, totalEscImp=0, totalEscNorm=0, totalEst=0, totalNorm=0, totalTodo=0;
+  let cntFWC=0, cntEscImp=0, cntEscNorm=0, cntEst=0, cntNorm=0;
+
+  for(let ri=0; ri<=20; ri++) {
+    COLS.forEach((col,ci) => {
+      const qty = data[ri]?.[ci]||0; if(!qty) return;
+      const precio = cotGetPrecio(col, ri);
+      const sub = precio * qty;
+      totalTodo += sub;
+      if(col==='FWC'){ totalFWC+=sub; cntFWC+=qty; }
+      else if(ri===1||ri===13){
+        if(cotEquiposImp.has(col)){ totalEscImp+=sub; cntEscImp+=qty; }
+        else { totalEscNorm+=sub; cntEscNorm+=qty; }
+      }
+      else if(cotEstrellas.has(SNAMES[col]?.[ri]||'')){ totalEst+=sub; cntEst+=qty; }
+      else { totalNorm+=sub; cntNorm+=qty; }
+    });
+  }
+
+  const fmt = v => 'Q'+Math.round(v).toLocaleString();
+  const chip = (label,color,cnt,val) => `
+    <div style="background:#0f172a;border:1px solid #1e2435;border-radius:8px;padding:10px 14px;text-align:center;min-width:90px">
+      <div style="font-size:0.68rem;color:#64748b;margin-bottom:3px">${label}</div>
+      <div style="font-weight:700;color:${color};font-size:1rem">${fmt(val)}</div>
+      <div style="font-size:0.65rem;color:#4b5563">${cnt} estampas</div>
+    </div>`;
+
+  el.innerHTML =
+    chip('🏆 FWC','#a78bfa',cntFWC,totalFWC) +
+    chip('🛡️ Esc. Imp.','#34d399',cntEscImp,totalEscImp) +
+    chip('🛡️ Esc. Norm.','#60a5fa',cntEscNorm,totalEscNorm) +
+    chip('⭐ Estrellas','#fbbf24',cntEst,totalEst) +
+    chip('👤 Normal','#64748b',cntNorm,totalNorm) +
+    `<div style="background:#1e1b4b;border:1px solid #4f46e5;border-radius:8px;padding:10px 14px;text-align:center;min-width:90px;align-self:center">
+      <div style="font-size:0.68rem;color:#818cf8;margin-bottom:3px">💰 TOTAL</div>
+      <div style="font-weight:700;color:#a78bfa;font-size:1.2rem">${fmt(totalTodo)}</div>
+    </div>`;
+}
+
 function buildAll() {
   negData = loadNeg();
   buildTable();
@@ -1713,6 +1763,7 @@ function buildAll() {
   updateStats();
   initNegSelects();
   renderNeg();
+  setTimeout(calcValorInventario, 100); // esperar que cotPrecios esté listo
 }
 
 // Exponer al scope global
