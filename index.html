@@ -651,7 +651,7 @@ tbody td.cv-cell.estrella.v3p { box-shadow: inset 0 0 0 1px #f59e0b, inset 0 0 7
 
 <script>
 
-const COLS = ['FWC','MEX','RSA','KOR','CZE','CAN','BIH','QAT','SUI','BRA','MAR','HAI','SCO','USA','PAR','AUS','TUR','GER','ECU','CIV','CUW','NED','JPN','TUN','SWE','BEL','EGY','IRN','NZL','ESP','CPV','KSA','URU','FRA','IRQ','SEN','NOR','ARG','ALG','AUT','JOR','POR','COD','UZB','COL','ENG','CRO','GHA','PAN'];
+const COLS = ['FWC','MEX','RSA','KOR','CZE','CAN','BIH','QAT','SUI','BRA','MAR','HAI','SCO','USA','PAR','AUS','TUR','GER','ECU','CIV','CUW','NED','JPN','SWE','TUN','BEL','EGY','IRN','NZL','ESP','CPV','KSA','URU','FRA','IRQ','SEN','NOR','ARG','ALG','AUT','JOR','POR','COD','UZB','COL','ENG','CRO','GHA','PAN'];
 const PAIS = {'ALG':'Algeria','ARG':'Argentina','AUS':'Australia','AUT':'Austria','BEL':'Bélgica','BIH':'Bosnia y Herz.','BRA':'Brasil','CAN':'Canadá','CIV':'Costa de Marfil','COD':'RD Congo','COL':'Colombia','CPV':'Cabo Verde','CRO':'Croacia','CUW':'Curazao','CZE':'Rep. Checa','ECU':'Ecuador','EGY':'Egipto','ENG':'Inglaterra','ESP':'España','FRA':'Francia','GER':'Alemania','GHA':'Ghana','HAI':'Haití','IRN':'Irán','IRQ':'Iraq','JOR':'Jordania','JPN':'Japón','KOR':'Corea del Sur','KSA':'Arabia Saudita','MAR':'Marruecos','MEX':'México','NED':'Países Bajos','NOR':'Noruega','NZL':'Nueva Zelanda','PAN':'Panamá','PAR':'Paraguay','POR':'Portugal','QAT':'Qatar','RSA':'Sudáfrica','SCO':'Escocia','SEN':'Senegal','SUI':'Suiza','SWE':'Suecia','TUN':'Túnez','TUR':'Turquía','URU':'Uruguay','USA':'USA','UZB':'Uzbekistán'};
 
 const SNAMES = {
@@ -1763,7 +1763,6 @@ function buildAll() {
   updateStats();
   initNegSelects();
   renderNeg();
-  setTimeout(calcValorInventario, 100); // esperar que cotPrecios esté listo
 }
 
 // Exponer al scope global
