@@ -651,7 +651,7 @@ tbody td.cv-cell.estrella.v3p { box-shadow: inset 0 0 0 1px #f59e0b, inset 0 0 7
 
 <script>
 
-const COLS = ['FWC','MEX','RSA','KOR','CZE','CAN','BIH','QAT','SUI','BRA','MAR','HAI','SCO','USA','PAR','AUS','TUR','GER','ECU','CIV','CUW','NED','JPN','SWE','TUN','BEL','EGY','IRN','NZL','ESP','CPV','KSA','URU','FRA','IRQ','SEN','NOR','ARG','ALG','AUT','JOR','POR','COD','UZB','COL','ENG','CRO','GHA','PAN'];
+const COLS = ['FWC','MEX','RSA','KOR','CZE','CAN','BIH','QAT','SUI','BRA','MAR','HAI','SCO','USA','PAR','AUS','TUR','GER','CUW','CIV','ECU','NED','JPN','SWE','TUN','BEL','EGY','IRN','NZL','ESP','CPV','KSA','URU','FRA','SEN','IRQ','NOR','ARG','ALG','AUT','JOR','POR','COD','UZB','COL','ENG','CRO','GHA','PAN'];
 const PAIS = {'ALG':'Algeria','ARG':'Argentina','AUS':'Australia','AUT':'Austria','BEL':'Bélgica','BIH':'Bosnia y Herz.','BRA':'Brasil','CAN':'Canadá','CIV':'Costa de Marfil','COD':'RD Congo','COL':'Colombia','CPV':'Cabo Verde','CRO':'Croacia','CUW':'Curazao','CZE':'Rep. Checa','ECU':'Ecuador','EGY':'Egipto','ENG':'Inglaterra','ESP':'España','FRA':'Francia','GER':'Alemania','GHA':'Ghana','HAI':'Haití','IRN':'Irán','IRQ':'Iraq','JOR':'Jordania','JPN':'Japón','KOR':'Corea del Sur','KSA':'Arabia Saudita','MAR':'Marruecos','MEX':'México','NED':'Países Bajos','NOR':'Noruega','NZL':'Nueva Zelanda','PAN':'Panamá','PAR':'Paraguay','POR':'Portugal','QAT':'Qatar','RSA':'Sudáfrica','SCO':'Escocia','SEN':'Senegal','SUI':'Suiza','SWE':'Suecia','TUN':'Túnez','TUR':'Turquía','URU':'Uruguay','USA':'USA','UZB':'Uzbekistán'};
 
 const SNAMES = {
@@ -791,7 +791,29 @@ function setSyncStatus(state, msg) {
 }
 
 // ---- Helpers localStorage (fallback) ----
+// Migración v2: reordena ECU(18)/CIV(19)/CUW(20) → CUW(18)/CIV(19)/ECU(20)
+function migrateColOrder() {
+  const MIG_KEY = 'cols_migrated_v2';
+  if (localStorage.getItem(MIG_KEY)) return; // ya migrado
+  try {
+    const s = localStorage.getItem(SK); if (!s) { localStorage.setItem(MIG_KEY,'1'); return; }
+    const d = JSON.parse(s);
+    for (let r = 0; r <= 20; r++) {
+      if (!d[r]) continue;
+      // Grupo E: swap ECU(18) y CUW(20), CIV(19) queda igual
+      const ecu = d[r][18], cuw = d[r][20];
+      d[r][18] = cuw; d[r][20] = ecu;
+      // Grupo I: swap IRQ(34) y SEN(35)
+      const irq = d[r][34], sen = d[r][35];
+      d[r][34] = sen; d[r][35] = irq;
+    }
+    localStorage.setItem(SK, JSON.stringify(d));
+  } catch(e) {}
+  localStorage.setItem(MIG_KEY, '1');
+}
+
 function initLocalData() {
+  migrateColOrder();
   try { const s = localStorage.getItem(SK); if (s) { data = JSON.parse(s); if (!data[0]) data[0] = new Array(COLS.length).fill(0); return; } } catch(e) {}
   try { const s = localStorage.getItem('est_v3'); if (s) { data = JSON.parse(s); if (!data[0]) data[0] = new Array(COLS.length).fill(0); return; } } catch(e) {}
   data = {};
@@ -815,19 +837,17 @@ async function supaUpsert(table, payload) {
   } catch(e) { console.warn('Supabase upsert exception:', e); }
 }
 
-function saveLocal() {
+async function saveLocal() {
   localStorage.setItem(SK, JSON.stringify(data));
   localStorage.setItem(AK, JSON.stringify(albums));
-  // Guardar a Supabase con debounce 1.5s
-  clearTimeout(_saveDebounce);
   setSyncStatus('saving', 'Guardando...');
-  _saveDebounce = setTimeout(async () => {
-    await Promise.all([
-      supaUpsert('inventario', { id: 'default', data: data, updated_at: new Date().toISOString() }),
-      supaUpsert('albums', { id: 'default', data: albums, updated_at: new Date().toISOString() })
-    ]);
-    setSyncStatus('online', 'Guardado ✓');
-  }, 1500);
+  _saveDebounce = null;
+  await Promise.all([
+    supaUpsert('inventario', { id: 'default', data: data, updated_at: new Date().toISOString() }),
+    supaUpsert('albums', { id: 'default', data: albums, updated_at: new Date().toISOString() })
+  ]);
+  _saveDebounce = null;
+  setSyncStatus('online', 'Guardado ✓');
 }
 
 // ---- Supabase: cargar datos ----
@@ -880,7 +900,8 @@ function setupRealtime() {
   supaClient.channel('inventario-changes')
     .on('postgres_changes', { event: 'UPDATE', schema: 'public', table: 'inventario' }, (payload) => {
       if (!payload.new || !payload.new.data) return;
-      // Solo actualizar si los datos son diferentes
+      // Ignorar si acabamos de guardar nosotros (debounce activo = cambio local reciente)
+      if (_saveDebounce) return;
       const remoteStr = JSON.stringify(payload.new.data);
       const localStr = JSON.stringify(data);
       if (remoteStr !== localStr) {
@@ -1763,6 +1784,7 @@ function buildAll() {
   updateStats();
   initNegSelects();
   renderNeg();
+  setTimeout(calcValorInventario, 300);
 }
 
 // Exponer al scope global
