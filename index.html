@@ -2709,67 +2709,88 @@ function intCalcular() {
   const itemsRec   = intParseLista(txtRec);
   const resDamos = intResumenLista(itemsDamos);
   const resRec   = intResumenLista(itemsRec);
+  const totalDamos = itemsDamos.reduce((s,i)=>s+i.qty, 0);
+  const totalRec   = itemsRec.reduce((s,i)=>s+i.qty, 0);
+  const diff0 = resRec.total - resDamos.total;
+  const col0  = diff0 >= 0 ? '#34d399' : '#f87171';
+  const sign0 = diff0 >= 0 ? '+' : '';
 
-  const dineroMonto = parseFloat((document.getElementById('int-dinero-monto') || {}).value) || 0;
-  const dineroDirEl = document.getElementById('int-dinero-dir');
-  const dineroDir   = dineroDirEl ? dineroDirEl.value : 'recibimos';
-
-  let valorDamos = resDamos.total;
-  let valorRec   = resRec.total;
-  if (dineroMonto > 0) {
-    if (dineroDir === 'recibimos') valorRec += dineroMonto;
-    else valorDamos += dineroMonto;
-  }
-
-  const diff = valorRec - valorDamos;
-
-  const mkList = (items, resum) => {
-    if (!items.length) return '<p style="color:#64748b;font-size:0.85em">Lista vacía</p>';
-    let html = '<ul style="margin:4px 0;padding-left:18px;font-size:0.85em">';
-    for (const {col, ri, qty} of items) {
-      const ci = COLS.indexOf(col);
-      const precio = ci >= 0 ? cotGetPrecio(col, ri) : 0;
-      const nm = sname(ci >= 0 ? ci : 0, ri);
-      html += '<li>' + (qty > 1 ? qty + 'x ' : '') + nm + ' — Q' + precio.toLocaleString() + (qty > 1 ? ' c/u = Q' + (precio * qty).toLocaleString() : '') + '</li>';
-    }
-    html += '</ul>';
-    return html;
+  const CAT_META = {
+    fwc:     {icon:'🏆', color:'#a78bfa'},
+    escudo:  {icon:'🛡️', color:'#60a5fa'},
+    foto:    {icon:'👥', color:'#fb923c'},
+    estrella:{icon:'⭐', color:'#fbbf24'},
+    normal:  {icon:'👤', color:'#64748b'},
   };
+  const allCatKeys = [...new Set([...Object.keys(resDamos.cats), ...Object.keys(resRec.cats)])];
+  const catChips = allCatKeys.map(k => {
+    const m = CAT_META[k] || {icon:'·', color:'#64748b'};
+    const d = resDamos.cats[k] || {qty:0};
+    const r = resRec.cats[k]   || {qty:0};
+    return `<span style="display:inline-flex;align-items:center;gap:3px;background:rgba(255,255,255,0.025);border:1px solid rgba(255,255,255,0.06);border-radius:999px;padding:2px 8px;font-size:0.67rem;white-space:nowrap">${m.icon}<b style="color:${m.color}">${d.qty}</b><span style="color:#374151">/</span><b style="color:${m.color}">${r.qty}</b></span>`;
+  }).join('');
 
-  let catHTML = '';
-  const allCats = new Set([...Object.keys(resDamos.cats), ...Object.keys(resRec.cats)]);
-  for (const cat of allCats) {
-    const d = resDamos.cats[cat] || {qty:0,val:0};
-    const r = resRec.cats[cat]   || {qty:0,val:0};
-    catHTML += '<div class="int-chip"><span style="font-weight:600">' + cat + '</span><span style="color:#94a3b8;font-size:0.8em">Damos: ' + d.qty + ' (Q' + d.val.toLocaleString() + ') | Recibimos: ' + r.qty + ' (Q' + r.val.toLocaleString() + ')</span></div>';
-  }
+  const res = document.getElementById('cot-resultado');
+  if (!res) return;
+  res.innerHTML = `
+    <div style="display:flex;flex-wrap:wrap;align-items:center;gap:4px;margin-bottom:10px">
+      ${catChips}
+      <span style="margin-left:auto;font-size:0.67rem;color:#64748b;white-space:nowrap">${totalDamos+totalRec} est.</span>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px">
+      <input id="int-dinero-doy" type="number" min="0" step="1" placeholder="Q di" class="neg-inp" style="font-size:0.82rem;padding:7px 12px;border-radius:12px;text-align:center" oninput="intUpdateBalance()">
+      <input id="int-dinero-recibo" type="number" min="0" step="1" placeholder="Q me dan" class="neg-inp" style="font-size:0.82rem;padding:7px 12px;border-radius:12px;text-align:center" oninput="intUpdateBalance()">
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px">
+      <div style="background:rgba(248,113,113,0.04);border:1px solid rgba(248,113,113,0.12);border-radius:12px;padding:8px 12px;text-align:center">
+        <div style="font-size:0.63rem;color:#64748b;margin-bottom:1px">${totalDamos} estampas</div>
+        <div id="int-vd-display" style="font-size:0.92rem;font-weight:700;color:#f87171">Q${resDamos.total.toFixed(0)}</div>
+      </div>
+      <div style="background:rgba(52,211,153,0.04);border:1px solid rgba(52,211,153,0.12);border-radius:12px;padding:8px 12px;text-align:center">
+        <div style="font-size:0.63rem;color:#64748b;margin-bottom:1px">${totalRec} estampas</div>
+        <div id="int-vr-display" style="font-size:0.92rem;font-weight:700;color:#34d399">Q${resRec.total.toFixed(0)}</div>
+      </div>
+    </div>
+    <div id="int-balance-display" style="display:flex;align-items:center;justify-content:space-between;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.05);border-radius:999px;padding:4px 14px;margin-bottom:10px">
+      <span style="font-size:0.67rem;color:#4b5563">Q${resDamos.total.toFixed(0)} → Q${resRec.total.toFixed(0)}</span>
+      <span style="font-size:0.8rem;font-weight:700;color:${col0}">${sign0}Q${Math.abs(diff0).toFixed(0)} ${diff0>=0?'✅':'⚠️'}</span>
+    </div>
+    <div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap">
+      <input id="int-cliente" type="text" placeholder="Nombre" class="neg-inp" style="flex:1;min-width:90px;font-size:0.73rem;padding:5px 10px;border-radius:10px">
+      <button class="cot-btn cot-btn-red" style="font-size:0.73rem;padding:5px 12px" onclick="intConfirmar()">✅</button>
+      <button class="cot-btn cot-btn-ghost" style="font-size:0.73rem;padding:5px 10px" onclick="intLimpiar()">✕</button>
+    </div>`;
 
+  window._intPendiente = {itemsDamos, itemsRec, resDamosTotal: resDamos.total, resRecTotal: resRec.total};
+}
+
+function intUpdateBalance() {
+  if (!window._intPendiente) return;
+  const {resDamosTotal, resRecTotal} = window._intPendiente;
+  const doy    = parseFloat(document.getElementById('int-dinero-doy')?.value) || 0;
+  const recibo = parseFloat(document.getElementById('int-dinero-recibo')?.value) || 0;
+  const vD = resDamosTotal + doy;
+  const vR = resRecTotal + recibo;
+  const diff = vR - vD;
   const color = diff >= 0 ? '#34d399' : '#f87171';
   const sign  = diff >= 0 ? '+' : '';
-
-  const res = document.getElementById('int-resultado');
-  if (!res) return;
-  res.innerHTML =
-    '<div class="int-balance-row" style="margin-bottom:10px;gap:8px">' +
-      '<div class="cot-card" style="flex:1"><h4 style="color:#f87171;margin:0 0 6px">📤 Damos — Q' + resDamos.total.toLocaleString() + (dineroMonto>0&&dineroDir==='damos'?' + Q'+dineroMonto.toLocaleString()+' efectivo':'') + '</h4>' + mkList(itemsDamos) + '</div>' +
-      '<div class="cot-card" style="flex:1"><h4 style="color:#34d399;margin:0 0 6px">📥 Recibimos — Q' + resRec.total.toLocaleString() + (dineroMonto>0&&dineroDir==='recibimos'?' + Q'+dineroMonto.toLocaleString()+' efectivo':'') + '</h4>' + mkList(itemsRec) + '</div>' +
-    '</div>' +
-    (catHTML ? '<div style="margin-bottom:10px"><strong style="font-size:0.85em;color:#94a3b8">Desglose por categoría:</strong><div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:6px">' + catHTML + '</div></div>' : '') +
-    '<div class="int-balance-row" style="padding:12px 16px;background:#0f172a;border-radius:8px;align-items:center;border:1px solid #1e2435">' +
-      '<span style="color:#94a3b8">Balance del intercambio:</span>' +
-      '<span style="font-size:1.25em;font-weight:700;color:' + color + '">' + sign + 'Q' + Math.abs(diff).toLocaleString() + (diff >= 0 ? ' a nuestro favor ✅' : ' en contra ⚠️') + '</span>' +
-    '</div>' +
-    '<div style="display:flex;gap:8px;margin-top:12px">' +
-      '<button class="cot-btn cot-btn-red" onclick="intConfirmar()">✅ Confirmar intercambio</button>' +
-      '<button class="cot-btn cot-btn-ghost" onclick="intLimpiar()">🗑 Limpiar</button>' +
-    '</div>';
-
-  window._intPendiente = {itemsDamos, itemsRec, valorDamos, valorRec, diff, dineroMonto, dineroDir};
+  const vdEl  = document.getElementById('int-vd-display');
+  const vrEl  = document.getElementById('int-vr-display');
+  const balEl = document.getElementById('int-balance-display');
+  if (vdEl) vdEl.textContent = 'Q' + vD.toFixed(0);
+  if (vrEl) vrEl.textContent = 'Q' + vR.toFixed(0);
+  if (balEl) balEl.innerHTML = `<span style="font-size:0.67rem;color:#4b5563">Q${vD.toFixed(0)} → Q${vR.toFixed(0)}</span><span style="font-size:0.8rem;font-weight:700;color:${color}">${sign}Q${Math.abs(diff).toFixed(0)} ${diff>=0?'✅':'⚠️'}</span>`;
 }
 
 function intConfirmar() {
   if (!window._intPendiente) { alert('Primero calcula el intercambio'); return; }
-  const {itemsDamos, itemsRec, valorDamos, valorRec, diff, dineroMonto, dineroDir} = window._intPendiente;
+  const cliente = document.getElementById('int-cliente')?.value.trim() || '';
+  const doy    = parseFloat(document.getElementById('int-dinero-doy')?.value) || 0;
+  const recibo = parseFloat(document.getElementById('int-dinero-recibo')?.value) || 0;
+  const {itemsDamos, itemsRec, resDamosTotal, resRecTotal} = window._intPendiente;
+  const valorDamos = resDamosTotal + doy;
+  const valorRec   = resRecTotal + recibo;
+  const diff = valorRec - valorDamos;
 
   for (const {col, ri, qty} of itemsDamos) {
     const ci = COLS.indexOf(col);
@@ -2784,28 +2805,25 @@ function intConfirmar() {
     data[ri][ci] = (data[ri][ci] || 0) + qty;
   }
 
-  const nota = 'Intercambio: damos Q' + valorDamos.toLocaleString() + ' | recibimos Q' + valorRec.toLocaleString() +
-    (dineroMonto > 0 ? ' + Q' + dineroMonto.toLocaleString() + ' efectivo ' + (dineroDir === 'recibimos' ? 'recibido' : 'dado') : '');
+  const nota = 'Intercambio' + (cliente ? ' — ' + cliente : '') +
+    ': damos Q' + valorDamos.toFixed(0) + ' | recibimos Q' + valorRec.toFixed(0) +
+    (doy > 0 ? ' (di Q' + doy.toFixed(0) + ' ef.)' : '') +
+    (recibo > 0 ? ' (recibí Q' + recibo.toFixed(0) + ' ef.)' : '');
 
   if (!negData.txs) negData.txs = [];
   negData.txs.unshift({cat:'intercambio', ts:Date.now(), nota, valorDamos, valorRec, diff});
 
-  saveData();
-  buildTable();
-  renderNeg();
-  intLimpiar();
+  saveLocal(); buildAll(); renderNeg(); intLimpiar();
   alert('✅ Intercambio registrado y inventario actualizado');
 }
 
 function intLimpiar() {
   const d = document.getElementById('int-lista-damos');
   const r = document.getElementById('int-lista-recibimos');
-  const res = document.getElementById('int-resultado');
-  const cash = document.getElementById('int-dinero-monto');
   if (d) d.value = '';
   if (r) r.value = '';
-  if (res) res.innerHTML = '<div class="cot-empty">Pega las listas y presiona Calcular intercambio</div>';
-  if (cash) cash.value = '0';
+  const cotRes = document.getElementById('cot-resultado');
+  if (cotRes) cotRes.innerHTML = '<div class="cot-empty">🧾 Pega una lista y presiona <strong>Cotizar</strong></div>';
   window._intPendiente = null;
 }
 
@@ -2936,23 +2954,10 @@ if ('serviceWorker' in navigator) {
           <textarea class="cot-textarea" id="int-lista-recibimos" placeholder="ESP 15&#10;FRA 3&#10;..."></textarea>
         </div>
       </div>
-      <div class="cot-card" style="margin-bottom:14px">
-        <h3>💵 Venta — dinero adicional</h3>
-        <div style="display:flex;align-items:center;gap:10px;margin-top:8px">
-          <select id="int-dinero-dir" style="display:none"><option value="recibimos">recibimos</option></select>
-          <span style="font-size:0.8rem;color:#64748b">Recibimos</span>
-          <div style="display:flex;align-items:center;background:#0f172a;border:1px solid #374151;border-radius:5px;overflow:hidden">
-            <span style="padding:0 8px;color:#64748b;background:#1e2435;border-right:1px solid #374151;font-size:0.8rem;line-height:34px">Q</span>
-            <input id="int-dinero-monto" type="number" min="0" step="1" value="0" style="width:90px;background:transparent;border:none;color:#e2e8f0;font-size:0.85rem;padding:6px 10px;outline:none;font-family:inherit">
-          </div>
-          <span style="font-size:0.75rem;color:#4b5563">adicionales (0 si es estampa por estampa)</span>
-        </div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:4px">
+        <button class="cot-btn cot-btn-red" onclick="intCalcular()">⚡ Calcular</button>
+        <button class="cot-btn cot-btn-ghost" onclick="intLimpiar()">✕</button>
       </div>
-      <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px">
-        <button class="cot-btn cot-btn-red" onclick="intCalcular()">⚡ Calcular intercambio</button>
-        <button class="cot-btn cot-btn-ghost" onclick="intLimpiar()">✕ Limpiar</button>
-      </div>
-      <div id="int-resultado"><div class="cot-empty">Pega las listas y presiona Calcular intercambio</div></div>
     </div>
   </div>
 
