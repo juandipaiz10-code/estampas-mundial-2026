@@ -1,4 +1,4 @@
-const CACHE = 'mundial26-v1';
+const CACHE = 'mundial26-v3';
 const SHELL = ['./', './manifest.json', './icon-192.png', './icon-512.png'];
 
 self.addEventListener('install', e => {
