@@ -2495,11 +2495,19 @@ function cotCotizar() {
   const errH=errs.length?`<div class="cot-warn">⚠️ ${errs.join('<br>')}</div>`:'';
   const stkH=sinStk.length?`<div class="cot-warn">⚠️ Stock insuficiente: ${sinStk.join(', ')}</div>`:'';
   const allOk=sinStk.length===0&&items.length>0;
-  const rep10H=rep10.length?`
-    <div style="background:rgba(249,115,22,0.08);border:1px solid rgba(249,115,22,0.35);border-radius:10px;padding:10px 14px;margin:10px 0">
-      <div style="font-size:0.75rem;font-weight:700;color:#f97316;margin-bottom:8px">🔥 De esta lista, ya tenés 10+ copias (${rep10.length}):</div>
-      ${rep10.map(h=>`<div style="display:flex;justify-content:space-between;align-items:center;padding:4px 0;border-bottom:1px solid rgba(249,115,22,0.1)"><span style="font-size:0.76rem;color:#94a3b8"><span style="color:#60a5fa;font-weight:700;margin-right:4px">${h.col}</span>${h.nombre}</span><span style="font-weight:700;color:#f97316">×${h.stk}</span></div>`).join('')}
-    </div>`:'';
+  // Llenar card de 10+ en columna izquierda
+  const rep10card=document.getElementById('cot-rep10-card');
+  const rep10el=document.getElementById('cot-rep10');
+  const rep10title=document.getElementById('cot-rep10-title');
+  if(rep10card){
+    if(rep10.length){
+      rep10title.textContent='🔥 De esta lista, ya tenés 10+ copias ('+rep10.length+'):';
+      rep10el.innerHTML=rep10.map(h=>`<div style="display:flex;justify-content:space-between;align-items:center;padding:4px 0;border-bottom:1px solid rgba(249,115,22,0.1)"><span style="font-size:0.76rem;color:#94a3b8"><span style="color:#60a5fa;font-weight:700;margin-right:4px">${h.col}</span>${h.nombre}</span><span style="font-weight:700;color:#f97316">×${h.stk}</span></div>`).join('');
+      rep10card.style.display='block';
+    } else {
+      rep10card.style.display='none';
+    }
+  }
   // Generar chips de resumen (solo categorías con estampas)
   const chips=[
     {k:'fwc',    label:'🏆 FWC',      color:'#a78bfa'},
@@ -2524,7 +2532,6 @@ function cotCotizar() {
       <span style="font-size:0.75rem;color:${allOk?'#34d399':'#f59e0b'}">${allOk?'✅ Stock OK':'⚠️ Falta stock en algunas'}</span>
     </div>
     <div style="display:flex;flex-wrap:wrap;gap:8px;margin:10px 0">${chips}</div>
-    ${rep10H}
     <div class="cot-card" style="margin-bottom:14px">
       <table class="cot-table">
         <thead><tr><th>Código</th><th>Nombre</th><th>Cant.</th><th>Stock</th><th>Precio</th><th>Subtotal</th></tr></thead>
@@ -2561,6 +2568,7 @@ function cotConfirmar(autoTotal) {
 function cotLimpiar() {
   document.getElementById('cot-lista-input').value='';
   document.getElementById('cot-resultado').innerHTML='<div class="cot-empty">🧾 Pega una lista y presiona Cotizar</div>';
+  const c=document.getElementById('cot-rep10-card'); if(c) c.style.display='none';
   _cotItems=[];
 }
 
@@ -2965,6 +2973,10 @@ if ('serviceWorker' in navigator) {
         </div>
         <div class="cot-card" style="margin-top:12px">
           <div id="cot-inv-status" style="font-size:0.75rem;color:#64748b"></div>
+        </div>
+        <div id="cot-rep10-card" style="display:none;margin-top:12px;background:rgba(249,115,22,0.08);border:1px solid rgba(249,115,22,0.35);border-radius:10px;padding:10px 14px">
+          <div id="cot-rep10-title" style="font-size:0.75rem;font-weight:700;color:#f97316;margin-bottom:8px"></div>
+          <div id="cot-rep10"></div>
         </div>
       </div>
       <div id="cot-resultado" style="min-height:200px">
