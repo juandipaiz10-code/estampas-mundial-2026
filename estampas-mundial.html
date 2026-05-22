@@ -2502,7 +2502,7 @@ function cotCotizar() {
   if(rep10card){
     if(rep10.length){
       rep10title.textContent='🔥 De esta lista, ya tenés 10+ copias ('+rep10.length+'):';
-      rep10el.innerHTML=rep10.map(h=>`<div style="display:flex;justify-content:space-between;align-items:center;padding:4px 0;border-bottom:1px solid rgba(249,115,22,0.1)"><span style="font-size:0.76rem;color:#94a3b8"><span style="color:#60a5fa;font-weight:700;margin-right:4px">${h.col}</span>${h.nombre}</span><span style="font-weight:700;color:#f97316">×${h.stk}</span></div>`).join('');
+      rep10el.innerHTML=rep10.map(h=>`<div style="display:flex;justify-content:space-between;align-items:center;padding:4px 0;border-bottom:1px solid rgba(249,115,22,0.1)"><span style="font-size:0.76rem;color:#94a3b8"><span style="color:#60a5fa;font-weight:700;margin-right:4px">${h.col}</span>#${h.ri}</span><span style="font-weight:700;color:#f97316">×${h.stk}</span></div>`).join('');
       rep10card.style.display='block';
     } else {
       rep10card.style.display='none';
