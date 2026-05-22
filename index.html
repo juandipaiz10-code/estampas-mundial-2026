@@ -2,19 +2,25 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Inventario Estampas Mundial 2026</title>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#f97316">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Mundial 26">
+<link rel="apple-touch-icon" href="icon-192.png">
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 * { box-sizing: border-box; margin: 0; padding: 0; }
 body { font-family: 'Inter', sans-serif; background: #0a0e1a; color: #e2e8f0; min-height: 100vh; }
 ::-webkit-scrollbar { height: 6px; width: 6px; }
 ::-webkit-scrollbar-track { background: #1e2435; }
-::-webkit-scrollbar-thumb { background: #e63946; border-radius: 3px; }
+::-webkit-scrollbar-thumb { background: #f97316; border-radius: 3px; }
 
-.nav { display: flex; background: #060910; border-bottom: 2px solid #e63946; align-items: center; }
+.nav { display: flex; background: #060910; border-bottom: 2px solid #f97316; align-items: center; }
 .nav-btn { padding: 13px 26px; font-size: 0.82rem; font-weight: 700; cursor: pointer; border: none; background: transparent; color: #64748b; letter-spacing: 1px; text-transform: uppercase; transition: all 0.2s; border-bottom: 3px solid transparent; margin-bottom: -2px; }
-.nav-btn.active { color: #e63946; border-bottom-color: #e63946; }
+.nav-btn.active { color: #f97316; border-bottom-color: #f97316; }
 .nav-btn:hover:not(.active) { color: #94a3b8; }
 .page { display: none; }
 .page.active { display: block; }
@@ -34,10 +40,10 @@ body { font-family: 'Inter', sans-serif; background: #0a0e1a; color: #e2e8f0; mi
 .sync-indicator.online .sync-dot { background: #34d399; animation: pulse 2s infinite; }
 .sync-indicator.offline { color: #f59e0b; }
 .sync-indicator.offline .sync-dot { background: #f59e0b; }
-.sync-indicator.error { color: #e63946; }
-.sync-indicator.error .sync-dot { background: #e63946; }
+.sync-indicator.error { color: #f97316; }
+.sync-indicator.error .sync-dot { background: #f97316; }
 @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
-.header { background: linear-gradient(135deg, #e63946 0%, #c1121f 40%, #0a0e1a 100%); padding: 18px 28px; display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+.header { background: linear-gradient(135deg, #f97316 0%, #ea580c 40%, #0a0e1a 100%); padding: 18px 28px; display: flex; align-items: center; gap: 14px; flex-wrap: wrap; margin: 12px 14px; border-radius: 24px; }
 .header h1 { font-family: 'Bebas Neue', sans-serif; font-size: 2.2rem; letter-spacing: 3px; color: #fff; }
 .header .sub { font-size: 0.78rem; color: rgba(255,255,255,0.7); margin-top: 2px; }
 .badge { background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3); border-radius: 20px; padding: 4px 12px; font-size: 0.73rem; color: #fff; white-space: nowrap; }
@@ -47,12 +53,12 @@ body { font-family: 'Inter', sans-serif; background: #0a0e1a; color: #e2e8f0; mi
 .stat-card:last-child { border-right: none; }
 .sc-v { font-size: 1.35rem; font-weight: 700; }
 .sc-l { font-size: 0.67rem; color: #64748b; margin-top: 2px; text-transform: uppercase; letter-spacing: 0.8px; }
-.sc-total .sc-v { color: #60a5fa; } .sc-conseg .sc-v { color: #34d399; } .sc-faltan .sc-v { color: #e63946; }
+.sc-total .sc-v { color: #60a5fa; } .sc-conseg .sc-v { color: #34d399; } .sc-faltan .sc-v { color: #f97316; }
 .sc-rep .sc-v { color: #f59e0b; } .sc-esp .sc-v { color: #a78bfa; } .sc-mas .sc-v { color: #fb923c; font-size: 0.82rem; }
 
 .controls { padding: 10px 28px; background: #0f172a; border-bottom: 1px solid #1e2435; display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
 .btn { padding: 7px 16px; border-radius: 6px; font-size: 0.8rem; font-weight: 600; cursor: pointer; border: none; transition: all 0.2s; font-family: inherit; }
-.btn-red { background: #e63946; color: #fff; } .btn-red:hover { background: #c1121f; }
+.btn-red { background: #f97316; color: #fff; } .btn-red:hover { background: #fb923c; }
 .btn-ghost { background: transparent; color: #94a3b8; border: 1px solid #334155; } .btn-ghost:hover { background: #1e2435; color: #e2e8f0; }
 .saved-badge { margin-left: auto; font-size: 0.7rem; color: #166534; background: #052e16; border: 1px solid #166534; border-radius: 4px; padding: 3px 9px; }
 
@@ -62,7 +68,7 @@ body { font-family: 'Inter', sans-serif; background: #0a0e1a; color: #e2e8f0; mi
   color: #94a3b8; font-size: 0.78rem; font-weight: 700; padding: 3px 4px;
   outline: none; font-family: inherit; text-align: center; transition: border 0.15s, color 0.15s;
 }
-.qi-cell-input:focus { border-color: #e63946; color: #e2e8f0; background: #111827; }
+.qi-cell-input:focus { border-color: #f97316; color: #e2e8f0; background: #111827; }
 .qi-cell-input::placeholder { color: #2d3748; font-size: 0.7rem; }
 tr.r-00 td { background: #060b16; }
 tr.r-00 td:first-child { color: #374151 !important; background: #060b16 !important; font-size: 0.68rem; letter-spacing: 1px; }
@@ -78,7 +84,7 @@ table { border-collapse: collapse; }
 thead th { background: #111827; color: #64748b; font-size: 0.66rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; padding: 7px 3px; border: 1px solid #1e2435; white-space: nowrap; min-width: 66px; position: relative; cursor: default; }
 thead th:first-child { background: #0a0f1e; color: #94a3b8; min-width: 46px; position: sticky; left: 0; z-index: 10; }
 thead th.th-total { background: #0a1525; color: #60a5fa; min-width: 56px; }
-thead th.th-activo { color: #e63946; }
+thead th.th-activo { color: #f97316; }
 .th-inner { display: flex; flex-direction: column; align-items: center; gap: 2px; }
 .th-code { font-size: 0.68rem; font-weight: 700; }
 .th-frac { font-size: 0.58rem; color: #374151; font-weight: 400; transition: color 0.15s; }
@@ -93,15 +99,15 @@ td.col-fwc { background: rgba(167,139,250,0.07) !important; }
 
 tr.r-0 td { background: rgba(56,189,248,0.04); } tr.r-0 td:first-child { color: #38bdf8 !important; background: rgba(56,189,248,0.1) !important; }
 tr.r-1 td { background: rgba(167,139,250,0.05); } tr.r-1 td:first-child { color: #a78bfa !important; background: rgba(167,139,250,0.1) !important; }
-tr.r-13 td { background: rgba(251,146,60,0.04); } tr.r-13 td:first-child { color: #fb923c !important; background: rgba(251,146,60,0.1) !important; }
+tr.r-13 td { background: rgba(245,158,11,0.05); } tr.r-13 td:first-child { color: #f59e0b !important; background: rgba(245,158,11,0.12) !important; }
 
 td.cell-flash { animation: cellFlash 0.6s ease; }
 @keyframes cellFlash { 0%{background:#1a3a1a}50%{background:#0f4020}100%{} }
 td.cell-flash-neg { animation: cellFlashNeg 0.6s ease; }
 @keyframes cellFlashNeg { 0%{background:#3a1a1a}50%{background:#401010}100%{} }
-td.cv-cell.cel-active { box-shadow: inset 0 0 0 2px #e63946 !important; z-index: 3; }
+td.cv-cell.cel-active { box-shadow: inset 0 0 0 2px #f97316 !important; z-index: 3; }
 
-tfoot td { border: 1px solid #1e2435; border-top: 2px solid #e63946; background: #0f172a; color: #e63946; font-weight: 700; font-size: 0.82rem; padding: 7px 3px; text-align: center; }
+tfoot td { border: 1px solid #1e2435; border-top: 2px solid #f97316; background: #0f172a; color: #f97316; font-weight: 700; font-size: 0.82rem; padding: 7px 3px; text-align: center; }
 tfoot td:first-child { background: #0a0f1e; color: #4b5563; font-size: 0.65rem; letter-spacing: 1px; text-transform: uppercase; position: sticky; left: 0; z-index: 2; }
 tfoot td.col-total { background: #060d1a !important; color: #60a5fa !important; }
 
@@ -117,7 +123,10 @@ tbody td.cv-cell.v2  { background: #3a2a00; }
 tbody td.cv-cell.v3p { background: #3a1020; }
 /* Mantener tinte especial de filas 1, 13 y col FWC */
 tr.r-1  td.cv-cell.v0 { background: rgba(167,139,250,0.08); }
-tr.r-13 td.cv-cell.v0 { background: rgba(251,146,60,0.06); }
+tr.r-13 td.cv-cell.v0  { background: rgba(245,158,11,0.07); }
+tr.r-13 td.cv-cell.v1  { box-shadow: inset 0 0 0 1px #f59e0b, inset 0 0 5px rgba(245,158,11,0.25); }
+tr.r-13 td.cv-cell.v2  { box-shadow: inset 0 0 0 1px #f59e0b, inset 0 0 6px rgba(245,158,11,0.3); }
+tr.r-13 td.cv-cell.v3p { box-shadow: inset 0 0 0 1px #f59e0b, inset 0 0 7px rgba(245,158,11,0.35); }
 td.col-fwc.cv-cell.v0 { background: rgba(167,139,250,0.10) !important; }
 
 .cv-wrap { display: flex; align-items: center; justify-content: center; width: 100%; height: 100%; min-height: 28px; position: relative; }
@@ -177,7 +186,7 @@ tbody td.cv-cell.estrella.v3p { box-shadow: inset 0 0 0 1px #f59e0b, inset 0 0 7
 .neg-hist-price { color: #f59e0b; font-weight: 700; flex-shrink: 0; }
 .neg-hist-date  { color: #374151; font-size: 0.65rem; flex-shrink: 0; }
 .neg-hist-del   { color: #4b5563; cursor: pointer; font-size: 0.8rem; flex-shrink: 0; padding: 0 4px; }
-.neg-hist-del:hover { color: #e63946; }
+.neg-hist-del:hover { color: #f97316; }
 .neg-resumen { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px; margin-top: 14px; }
 .neg-stat { background: #111827; border: 1px solid #1e2435; border-radius: 8px; padding: 12px 14px; text-align: center; }
 .neg-stat-v { font-size: 1.3rem; font-weight: 700; }
@@ -199,14 +208,14 @@ tbody td.cv-cell.estrella.v3p { box-shadow: inset 0 0 0 1px #f59e0b, inset 0 0 7
 .alb-tipo { font-size: 0.67rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 8px; }
 .alb-tipo.b { color: #60a5fa; } .alb-tipo.d { color: #f59e0b; }
 .alb-inp { width: 100%; background: #0f172a; border: 1px solid #2d3748; border-radius: 5px; color: #e2e8f0; font-size: 0.8rem; padding: 6px 9px; margin-bottom: 10px; outline: none; font-family: inherit; }
-.alb-inp:focus { border-color: #e63946; }
+.alb-inp:focus { border-color: #f97316; }
 .alb-inp::placeholder { color: #4b5563; }
 .alb-row { display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px; }
 .alb-lbl { font-size: 0.73rem; color: #64748b; }
 .alb-ctrl { display: flex; align-items: center; gap: 5px; }
 .alb-val { font-size: 1rem; font-weight: 700; color: #e2e8f0; min-width: 34px; text-align: center; }
 .ba { width: 22px; height: 22px; border: none; border-radius: 4px; cursor: pointer; font-size: 0.85rem; font-weight: 700; background: #1e2435; color: #94a3b8; display: flex; align-items: center; justify-content: center; transition: background 0.12s; font-family: inherit; }
-.ba:hover { background: #e63946; color: #fff; }
+.ba:hover { background: #f97316; color: #fff; }
 .alb-pct { font-size: 0.67rem; color: #4b5563; text-align: right; margin-bottom: 3px; }
 .alb-bar { height: 3px; background: #1e2435; border-radius: 2px; overflow: hidden; }
 .alb-fill { height: 100%; border-radius: 2px; transition: width 0.3s; }
@@ -231,13 +240,13 @@ tbody td.cv-cell.estrella.v3p { box-shadow: inset 0 0 0 1px #f59e0b, inset 0 0 7
 .prob-label { display: flex; justify-content: space-between; font-size: 0.72rem; margin-bottom: 3px; }
 .prob-bar-bg { height: 5px; background: #1e2435; border-radius: 3px; overflow: hidden; }
 .prob-bar-fill { height: 100%; border-radius: 3px; }
-.info-box { background: #0f172a; border-left: 3px solid #e63946; border-radius: 0 6px 6px 0; padding: 11px 14px; font-size: 0.78rem; line-height: 1.7; color: #94a3b8; }
+.info-box { background: #0f172a; border-left: 3px solid #f97316; border-radius: 0 6px 6px 0; padding: 11px 14px; font-size: 0.78rem; line-height: 1.7; color: #94a3b8; }
 .info-box strong { color: #e2e8f0; }
 .precio-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
 .pi { background: #0f172a; border-radius: 6px; padding: 10px; text-align: center; border: 1px solid #1e2435; }
 .pi-l { font-size: 0.64rem; color: #64748b; text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 3px; }
 .pi-v { font-size: 1.1rem; font-weight: 700; }
-.pi-v.r { color: #e63946; } .pi-v.y { color: #f59e0b; } .pi-v.b { color: #60a5fa; } .pi-v.g { color: #34d399; }
+.pi-v.r { color: #f97316; } .pi-v.y { color: #f59e0b; } .pi-v.b { color: #60a5fa; } .pi-v.g { color: #34d399; }
 
 /* ── Ana quick stats ─────────────────── */
 .ana-stats-row { display:flex; gap:12px; flex-wrap:wrap; margin-bottom:18px; }
@@ -252,7 +261,7 @@ tbody td.cv-cell.estrella.v3p { box-shadow: inset 0 0 0 1px #f59e0b, inset 0 0 7
 .stock-v { font-size:1.6rem; font-weight:700; }
 .stock-v.ok  { color:#34d399; }
 .stock-v.warn{ color:#f59e0b; }
-.stock-v.err { color:#e63946; }
+.stock-v.err { color:#f97316; }
 .stock-l { font-size:0.68rem; color:#64748b; margin-top:4px; }
 
 /* ── Cajas stock grid ────────────────── */
@@ -266,8 +275,33 @@ tbody td.cv-cell.estrella.v3p { box-shadow: inset 0 0 0 1px #f59e0b, inset 0 0 7
 
 /* ── rank-table header ───────────────── */
 .rank-table thead th { font-size:0.65rem; color:#4b5563; text-transform:uppercase; padding:4px 6px; border-bottom:1px solid #1e2435; }
+.rank-table-lg td { padding: 8px 8px; font-size: 0.88rem; }
+.rank-table-lg td:first-child { font-size: 0.75rem; width: 26px; }
+.rank-table-lg thead th { font-size: 0.72rem; padding: 6px 8px; }
 .neg-hist-row.pend { background: rgba(251,146,60,0.07); border-left: 3px solid #fb923c; }
 .neg-hist-tipo.p { background:#7c2d12; color:#fb923c; font-size:0.62rem; padding:2px 6px; border-radius:3px; white-space:nowrap; font-weight:700; }
+.neg-hist-tipo.i { background:#1e1b4b; color:#818cf8; font-size:0.62rem; padding:2px 6px; border-radius:3px; white-space:nowrap; font-weight:700; }
+
+/* CAJAS DORADAS */
+.scaja-num { color:#f59e0b !important; }
+.scaja-num.ok { color:#f59e0b !important; }
+.scaja-num.warn { color:#fbbf24 !important; }
+.scaja-num.err { color:#f97316 !important; }
+
+/* INTERCAMBIO */
+.int-section { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:16px; }
+@media(max-width:700px){ .int-section { grid-template-columns:1fr; } }
+.int-summary-grid { display:flex; flex-wrap:wrap; gap:8px; margin:10px 0; }
+.int-chip { background:#0f172a; border:1px solid #1e2435; border-radius:8px; padding:8px 12px; text-align:center; min-width:80px; }
+.int-chip-val { font-size:1rem; font-weight:700; }
+.int-chip-lbl { font-size:0.62rem; color:#64748b; margin-top:2px; text-transform:uppercase; }
+.int-balance-row { display:flex; justify-content:space-between; align-items:center; padding:6px 0; border-bottom:1px solid #1e2435; font-size:0.8rem; }
+.int-balance-row:last-child { border-bottom:none; }
+
+/* EXCEL UPLOAD */
+.excel-upload-label { display:inline-flex; align-items:center; gap:6px; padding:7px 16px; border-radius:6px; font-size:0.8rem; font-weight:600; cursor:pointer; background:#052e16; color:#34d399; border:1px solid #166534; transition:all 0.15s; font-family:inherit; }
+.excel-upload-label:hover { background:#166534; }
+#excel-file-input { display:none; }
 
 /* Pedidos de listas */
 .pedido-total { background:#111827; border:1px solid #1e2435; border-radius:10px; padding:18px 20px; margin-bottom:14px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px; }
@@ -290,16 +324,16 @@ tbody td.cv-cell.estrella.v3p { box-shadow: inset 0 0 0 1px #f59e0b, inset 0 0 7
 /* COTIZADOR */
 .cot-sub-tabs { display:flex; border-bottom:2px solid #1e2435; margin-bottom:20px; }
 .cot-sub-tab { padding:10px 20px; font-size:0.78rem; font-weight:700; cursor:pointer; border:none; background:transparent; color:#64748b; letter-spacing:1px; text-transform:uppercase; border-bottom:3px solid transparent; margin-bottom:-2px; transition:all 0.2s; }
-.cot-sub-tab.active { color:#e63946; border-bottom-color:#e63946; }
+.cot-sub-tab.active { color:#f97316; border-bottom-color:#f97316; }
 .cotiz-layout { display:grid; grid-template-columns:1fr 1fr; gap:20px; }
 @media(max-width:800px){ .cotiz-layout { grid-template-columns:1fr; } }
 .cot-card { background:#111827; border:1px solid #1e2435; border-radius:10px; padding:18px; }
 .cot-card h3 { font-size:0.72rem; font-weight:700; text-transform:uppercase; letter-spacing:1px; color:#64748b; margin-bottom:12px; padding-bottom:7px; border-bottom:1px solid #1e2435; }
 .cot-textarea { width:100%; height:200px; background:#0f172a; border:1px solid #374151; border-radius:6px; color:#e2e8f0; font-size:0.82rem; padding:10px; resize:vertical; font-family:monospace; line-height:1.6; outline:none; }
-.cot-textarea:focus { border-color:#e63946; }
+.cot-textarea:focus { border-color:#f97316; }
 .cot-btn { display:inline-flex; align-items:center; gap:6px; padding:8px 16px; border:none; border-radius:6px; font-size:0.78rem; font-weight:700; cursor:pointer; transition:all 0.15s; font-family:inherit; }
-.cot-btn-red { background:#e63946; color:#fff; }
-.cot-btn-red:hover { background:#c1121f; }
+.cot-btn-red { background:#f97316; color:#fff; }
+.cot-btn-red:hover { background:#fb923c; }
 .cot-btn-ghost { background:transparent; border:1px solid #374151; color:#94a3b8; }
 .cot-btn-ghost:hover { border-color:#64748b; color:#e2e8f0; }
 .cot-btn-green { background:#166534; color:#4ade80; border:1px solid #166534; }
@@ -333,18 +367,90 @@ tbody td.cv-cell.estrella.v3p { box-shadow: inset 0 0 0 1px #f59e0b, inset 0 0 7
 .jug-nombre { flex:1; color:#94a3b8; }
 .jug-pais-tag { font-size:0.62rem; color:#4b5563; }
 .jug-inp { width:55px; padding:3px 6px; background:#0f172a; border:1px solid #374151; border-radius:4px; color:#e2e8f0; font-size:0.75rem; outline:none; font-family:inherit; }
-.jug-inp:focus { border-color:#e63946; }
+.jug-inp:focus { border-color:#f97316; }
 
+
+/* === ESTÉTICA BURBUJA + VIDRIO === */
+
+/* Nav: casi invisible, muy difuminado */
+.nav { background: rgba(6,9,16,0.5) !important; border-bottom-color: rgba(255,255,255,0.05) !important; backdrop-filter: blur(20px); }
+
+/* Stats row: completamente transparente, burbujas individuales sutiles */
+.stats-row { background: transparent !important; border-bottom: none !important; padding: 10px 14px; gap: 8px; }
+.stat-card { background: rgba(255,255,255,0.025) !important; border: 1px solid rgba(255,255,255,0.05) !important; border-right: 1px solid rgba(255,255,255,0.05) !important; border-radius: 18px !important; backdrop-filter: blur(8px); }
+
+/* Barra de controles y leyenda */
+.controls { background: transparent !important; border-bottom-color: rgba(255,255,255,0.04) !important; }
+.legend { border-bottom-color: rgba(255,255,255,0.04) !important; background: transparent !important; }
+
+/* Botones: forma de píldora */
+.btn, .neg-btn, .cot-btn, .nav-btn, .excel-upload-label { border-radius: 999px !important; }
+.ba, .toggle-btn, .saved-badge, .badge { border-radius: 999px !important; }
+
+/* Tarjetas: vidrio muy sutil, casi transparente */
+.neg-card, .alb-card, .ana-card, .cot-card, .cot-precio-card,
+.neg-resumen-general, .neg-gen-stat, .neg-stat,
+.pedido-total, .pedido-detalle, .cot-result-total,
+.int-chip, .stock-pill, .scaja-pill, .pi, .ana-qs,
+#inv-valor-wrap {
+  background: rgba(255,255,255,0.025) !important;
+  border-color: rgba(255,255,255,0.06) !important;
+  border-radius: 20px !important;
+  backdrop-filter: blur(16px);
+  box-shadow: 0 2px 24px rgba(0,0,0,0.18);
+}
+
+/* Tabla: completamente integrada al fondo */
+thead th { background: rgba(255,255,255,0.02) !important; border-color: rgba(255,255,255,0.04) !important; }
+thead th:first-child { background: rgba(0,0,0,0.12) !important; }
+thead th.th-total { background: rgba(96,165,250,0.04) !important; }
+tbody td { border-color: rgba(255,255,255,0.03) !important; }
+tbody td:first-child { background: rgba(0,0,0,0.15) !important; }
+tfoot td { background: rgba(0,0,0,0.15) !important; border-color: rgba(255,255,255,0.04) !important; }
+tfoot td:first-child { background: rgba(0,0,0,0.2) !important; }
+td.col-total { background: rgba(96,165,250,0.04) !important; }
+
+/* Celdas del inventario: translúcidas y suaves */
+tbody td.cv-cell.v0  { background: rgba(30,36,51,0.35) !important; }
+tbody td.cv-cell.v1  { background: rgba(26,58,42,0.5) !important; }
+tbody td.cv-cell.v2  { background: rgba(58,42,0,0.5) !important; }
+tbody td.cv-cell.v3p { background: rgba(58,16,32,0.5) !important; }
+tr.r-00 td { background: rgba(6,11,22,0.3) !important; }
+tr.r-00 td:first-child { background: rgba(6,11,22,0.35) !important; }
+
+/* Inputs: fondo muy oscuro translúcido */
+.neg-inp, .neg-sel, .alb-inp, .jug-inp, .qi-cell-input,
+.price-inp-wrap, .cot-pinp-wrap, .cot-textarea {
+  background: rgba(0,0,0,0.15) !important;
+  border-color: rgba(255,255,255,0.06) !important;
+  border-radius: 12px !important;
+}
+.cot-textarea { border-radius: 16px !important; }
+
+/* Containers secundarios */
+.info-box { background: rgba(0,0,0,0.12) !important; border-left-color: #f97316 !important; }
+.cot-warn, .pedido-warn { background: rgba(124,45,18,0.3) !important; border-radius: 16px !important; }
+.cot-confirm-bar, .pedido-confirm-bar { background: rgba(0,0,0,0.1) !important; border-color: rgba(255,255,255,0.06) !important; border-radius: 18px !important; }
+
+/* Hover de fila de tabla: más sutil */
+tbody tr:hover td { background: rgba(255,255,255,0.03) !important; }
+
+/* Tooltips */
+#toast { border-radius: 16px !important; backdrop-filter: blur(12px); }
+#col-tooltip, #stk-tooltip { background: rgba(10,15,26,0.85) !important; border-color: rgba(255,255,255,0.08) !important; border-radius: 14px !important; backdrop-filter: blur(16px); }
+
+/* Barras de progreso */
+.prob-bar-bg, .alb-bar, .alb-fill, .prob-bar-fill { border-radius: 999px !important; }
 </style>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js"></script>
 </head>
 <body>
 
 <div class="nav">
   <button class="nav-btn active" onclick="showPage('p-inv',this)">📦 Inventario</button>
   <button class="nav-btn" onclick="showPage('p-neg',this)">💰 Compras</button>
-  <button class="nav-btn" onclick="showPage('p-ana',this)">📊 Análisis</button>
   <button class="nav-btn" onclick="showPage('p-cotiz',this)">🧾 Cotizador</button>
   <div class="sync-indicator" id="sync-ind">
     <span class="sync-dot"></span>
@@ -376,7 +482,10 @@ tbody td.cv-cell.estrella.v3p { box-shadow: inset 0 0 0 1px #f59e0b, inset 0 0 7
 </div>
 
 <div class="controls">
-  <button class="btn btn-red"   onclick="exportCSV()">⬇ Exportar CSV</button>
+  <button class="btn btn-red" onclick="exportCSV()">⬇ Exportar CSV</button>
+  <label class="excel-upload-label">📊 Subir Excel
+    <input id="excel-file-input" type="file" accept=".xlsx,.xls,.csv" onchange="excelUpload(this)">
+  </label>
   <span class="saved-badge" id="save-badge">💾 Guardado automático</span>
 </div>
 
@@ -385,7 +494,7 @@ tbody td.cv-cell.estrella.v3p { box-shadow: inset 0 0 0 1px #f59e0b, inset 0 0 7
   <span class="leg"><span class="dot" style="background:#2d3748"></span>0</span>
   <span class="leg"><span class="dot" style="background:#e2e8f0"></span>1</span>
   <span class="leg"><span class="dot" style="background:#f59e0b"></span>2</span>
-  <span class="leg"><span class="dot" style="background:#e63946"></span>3+</span>
+  <span class="leg"><span class="dot" style="background:#f97316"></span>3+</span>
   <span style="width:1px;background:#1e2435;margin:0 4px"></span>
   <span class="leg"><span class="dot" style="background:rgba(167,139,250,0.6)"></span>#1 Escudos FOIL</span>
   <span class="leg"><span class="dot" style="background:rgba(251,146,60,0.6)"></span>#13 Fotos grupales</span>
@@ -412,9 +521,7 @@ tbody td.cv-cell.estrella.v3p { box-shadow: inset 0 0 0 1px #f59e0b, inset 0 0 7
   <!-- SUB-TABS -->
   <div class="neg-tabs">
     <button class="neg-tab active" onclick="negTab('cajas',this)">📦 Cajas</button>
-    <button class="neg-tab" onclick="negTab('alb',this)">📒 Álbumes</button>
-    <button class="neg-tab" onclick="negTab('est',this)">🎴 Estampas sueltas</button>
-    <button class="neg-tab" onclick="negTab('listas',this)">📋 Pedidos de listas</button>
+    <button class="neg-tab" onclick="negTab('ana',this)">📊 Análisis</button>
   </div>
 
   <!-- ======= CAJAS ======= -->
@@ -471,172 +578,54 @@ tbody td.cv-cell.estrella.v3p { box-shadow: inset 0 0 0 1px #f59e0b, inset 0 0 7
     <div id="resumen-cajas" class="neg-resumen"></div>
   </div>
 
-  <!-- ======= ÁLBUMES ======= -->
-  <div id="neg-alb" class="neg-section" style="display:none">
-    <!-- STOCK -->
-    <div id="stock-alb-display" style="display:flex;gap:18px;flex-wrap:wrap;margin-bottom:14px"></div>
-    <div class="neg-2col">
-      <div class="neg-card">
-        <div class="neg-card-title">⚙️ Precios</div>
-        <div class="price-row"><label>Costo Pasta Blanda</label><div class="price-inp-wrap"><span class="price-pre">Q</span><input class="price-inp" id="pc-alb-b" type="number" min="0" step="0.5" value="25"></div></div>
-        <div class="price-row"><label>Costo Pasta Dura</label><div class="price-inp-wrap"><span class="price-pre">Q</span><input class="price-inp" id="pc-alb-d" type="number" min="0" step="0.5" value="35"></div></div>
-        <div class="price-row"><label>Venta Pasta Blanda</label><div class="price-inp-wrap"><span class="price-pre">Q</span><input class="price-inp" id="pv-alb-b" type="number" min="0" step="0.5" value="40"></div></div>
-        <div class="price-row"><label>Venta Pasta Dura</label><div class="price-inp-wrap"><span class="price-pre">Q</span><input class="price-inp" id="pv-alb-d" type="number" min="0" step="0.5" value="55"></div></div>
-      </div>
-      <div class="neg-card">
-        <div class="neg-card-title">📥 Compra / 📤 Venta de álbumes</div>
-        <div class="form-row"><label>Tipo</label>
-          <select class="neg-sel" id="alb-tipo"><option value="b">Pasta Blanda</option><option value="d">Pasta Dura</option></select></div>
-        <div class="form-row"><label>Cantidad</label><input class="neg-inp" id="alb-qty" type="number" min="1" value="1"></div>
-        <div class="form-row"><label>Precio unitario</label><div class="price-inp-wrap"><span class="price-pre">Q</span><input class="neg-inp" id="alb-price" type="number" min="0" step="0.5" placeholder="Auto"></div></div>
-        <div class="form-row"><label>Nota</label><input class="neg-inp" id="alb-note" type="text" placeholder="Opcional"></div>
-        <div style="display:flex;gap:8px;margin-top:6px">
-          <button class="neg-btn buy" style="flex:1" onclick="negAlbReg('compra')">+ Compra</button>
-          <button class="neg-btn sell" style="flex:1" onclick="negAlbReg('venta')">− Venta</button>
-        </div>
+  <!-- Cajas: ajustes y resumen (se ocultan al cambiar a Análisis) -->
+  <div id="neg-cajas-extra">
+    <!-- AJUSTES MANUALES -->
+    <div class="neg-resumen-general" style="margin-top:16px">
+      <h3>⚙️ Ajustes Manuales</h3>
+      <p style="font-size:0.75rem;color:#64748b;margin-bottom:12px">Para gastos o ingresos que no pasaron por el sistema. Se suman al resumen general.</p>
+      <div id="adj-lista" style="margin-bottom:10px"></div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
+        <input id="adj-desc" class="neg-inp" style="flex:2;min-width:140px" type="text" placeholder="Descripción (ej: transporte)">
+        <input id="adj-monto" class="neg-inp" style="flex:1;min-width:100px" type="number" step="0.01" placeholder="Monto">
+        <select id="adj-tipo" class="neg-inp" style="flex:1;min-width:100px">
+          <option value="gasto">Gasto</option>
+          <option value="ingreso">Ingreso</option>
+        </select>
+        <button class="neg-btn buy" style="white-space:nowrap" onclick="adjAgregar()">+ Agregar</button>
       </div>
     </div>
-    <div class="neg-card" style="margin-top:14px">
-      <div class="neg-card-title">📋 Historial álbumes</div>
-      <div class="neg-hist" id="hist-alb"></div>
-    </div>
-    <div id="resumen-alb" class="neg-resumen"></div>
+    <!-- RESUMEN GENERAL -->
+    <div id="resumen-general" class="neg-resumen-general"></div>
   </div>
 
-  <!-- ======= ESTAMPAS SUELTAS ======= -->
-  <div id="neg-est" class="neg-section" style="display:none">
-    <div class="neg-2col">
-      <div class="neg-card">
-        <div class="neg-card-title">⚙️ Precios estampa suelta</div>
-        <div class="price-row"><label>Costo unitario</label><div class="price-inp-wrap"><span class="price-pre">Q</span><input class="price-inp" id="pc-estampa" type="number" min="0" step="0.25" value="0.3"></div></div>
-        <div class="price-row"><label>Venta unitaria</label><div class="price-inp-wrap"><span class="price-pre">Q</span><input class="price-inp" id="pv-estampa" type="number" min="0" step="0.25" value="1"></div></div>
-      </div>
-      <div class="neg-card">
-        <div class="neg-card-title">📥 Compra / 📤 Venta de estampa suelta</div>
-        <div class="form-row"><label>País</label><select class="neg-sel" id="est-buy-pais"></select></div>
-        <div class="form-row"><label>Estampa # (1-20)</label><input class="neg-inp" id="est-buy-num" type="number" min="1" max="20" placeholder="1-20"></div>
-        <div class="form-row"><label>Cantidad</label><input class="neg-inp" id="est-buy-qty" type="number" min="1" value="1"></div>
-        <div class="form-row"><label>Precio unitario</label><div class="price-inp-wrap"><span class="price-pre">Q</span><input class="neg-inp" id="est-buy-price" type="number" min="0" step="0.25" placeholder="Auto"></div></div>
-        <div class="form-row"><label>Nota / Comprador</label><input class="neg-inp" id="est-buy-note" type="text" placeholder="Opcional"></div>
-        <div style="display:flex;gap:8px;margin-top:6px">
-          <button class="neg-btn buy" style="flex:1" onclick="negEstReg('compra')">+ Compra</button>
-          <button class="neg-btn sell" style="flex:1" onclick="negEstReg('venta')">− Venta</button>
+  <!-- ANÁLISIS (sub-tab) -->
+  <div id="neg-ana" class="neg-section" style="display:none">
+    <div class="ana-wrap" style="padding:0">
+      <div class="ana-stats-row" id="ana-quick"></div>
+      <div class="cards-grid">
+        <div class="ana-card ana-card-wide"><h3>📊 Progreso por país</h3><div id="paises-comp"></div></div>
+        <div class="ana-card ana-card-wide"><h3>🔁 Top repetidas (para vender)</h3><table class="rank-table rank-table-lg" id="rank-rep"></table></div>
+        <div class="ana-card"><h3>❌ Países sin ninguna estampa</h3><div id="paises-cero"></div></div>
+        <div class="ana-card"><h3>💰 Valor estimado</h3><div class="info-box" id="inv-valor"></div></div>
+        <div class="ana-card">
+          <h3>🎲 Matemática del sobre</h3>
+          <div class="info-box">
+            <strong>7 estampas/sobre · 104 sobres/caja</strong><br>
+            • Una estampa específica: <strong>1/980 ≈ 0.10%</strong><br>
+            • FWC especiales (19): <strong>~2%</strong> por sobre<br>
+            • Escudos FOIL #1 (49): <strong>~5%</strong> por sobre<br>
+            • Fotos grupales #13 (49): <strong>~5%</strong> por sobre<br>
+            • Jugadores normales: <strong>~88%</strong><br><br>
+            Para completar: <strong>~140–160 sobres</strong>.<br>
+            Las FWC son las más difíciles: solo 19 de 980.
+          </div>
         </div>
       </div>
-    </div>
-    <div class="neg-card" style="margin-top:14px">
-      <div class="neg-card-title">📋 Historial estampas sueltas</div>
-      <div class="neg-hist" id="hist-est"></div>
-    </div>
-    <div id="resumen-est" class="neg-resumen"></div>
-  </div>
-
-  <!-- ======= PEDIDOS DE LISTAS ======= -->
-  <div id="neg-listas" class="neg-section" style="display:none">
-    <div class="neg-2col">
-      <div class="neg-card">
-        <div class="neg-card-title">📋 Pega la lista del cliente</div>
-        <p style="font-size:0.72rem;color:#64748b;margin-bottom:8px;line-height:1.6">
-          Formatos: <code style="background:#0f172a;padding:1px 5px;border-radius:3px;color:#60a5fa">ARG 14</code> · 
-          <code style="background:#0f172a;padding:1px 5px;border-radius:3px;color:#60a5fa">ARG-14</code> · 
-          <code style="background:#0f172a;padding:1px 5px;border-radius:3px;color:#60a5fa">ARG 14 x2</code>
-        </p>
-        <textarea id="lista-pedido-input" style="width:100%;height:200px;background:#0f172a;border:1px solid #374151;border-radius:6px;color:#e2e8f0;font-size:0.82rem;padding:10px;resize:vertical;font-family:monospace;line-height:1.6;outline:none" placeholder="ARG 14&#10;BRA 1&#10;ESP 14 x2&#10;..."></textarea>
-        <div style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap">
-          <button class="neg-btn buy" onclick="cotizarPedido()">⚡ Calcular precio</button>
-          <button class="neg-btn" style="background:#1e2435;color:#94a3b8;border:1px solid #374151" onclick="limpiarPedido()">✕ Limpiar</button>
-        </div>
-      </div>
-      <div class="neg-card" id="lista-precios-config">
-        <div class="neg-card-title">💲 Precios del pedido</div>
-        <p style="font-size:0.72rem;color:#64748b;margin-bottom:10px">Se leen del cotizador si están guardados, o usa estos defaults:</p>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;font-size:0.75rem" id="lista-precios-grid">
-          <!-- Se genera con JS -->
-        </div>
-        <div style="margin-top:10px;font-size:0.72rem;color:#64748b">
-          Para configurar precios detallados ve al 
-          <a href="cotizador_listas.html" target="_blank" style="color:#e63946">Cotizador de Listas ↗</a>
-        </div>
-      </div>
-    </div>
-
-    <!-- Resultado del cotizado -->
-    <div id="lista-resultado" style="margin-top:14px">
-      <div class="neg-empty">Pega una lista y presiona "Calcular precio"</div>
+      <div class="cards-grid" id="ana-extra" style="margin-top:14px"></div>
     </div>
   </div>
 
-  <!-- AJUSTES MANUALES -->
-  <div class="neg-resumen-general" style="margin-top:16px">
-    <h3>⚙️ Ajustes Manuales</h3>
-    <p style="font-size:0.75rem;color:#64748b;margin-bottom:12px">Para gastos o ingresos que no pasaron por el sistema. Se suman al resumen general.</p>
-    <div id="adj-lista" style="margin-bottom:10px"></div>
-    <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
-      <input id="adj-desc" class="neg-inp" style="flex:2;min-width:140px" type="text" placeholder="Descripción (ej: transporte)">
-      <input id="adj-monto" class="neg-inp" style="flex:1;min-width:100px" type="number" step="0.01" placeholder="Monto">
-      <select id="adj-tipo" class="neg-inp" style="flex:1;min-width:100px">
-        <option value="gasto">Gasto</option>
-        <option value="ingreso">Ingreso</option>
-      </select>
-      <button class="neg-btn buy" style="white-space:nowrap" onclick="adjAgregar()">+ Agregar</button>
-    </div>
-  </div>
-
-  <!-- RESUMEN GENERAL -->
-  <div id="resumen-general" class="neg-resumen-general"></div>
-</div>
-</div>
-
-<!-- ===== ANÁLISIS ===== -->
-<div id="p-ana" class="page">
-<div class="ana-wrap">
-  <h2>Análisis de tu Colección</h2>
-  <p class="ana-sub">Estado real de tu inventario, repetidas para vender y valor estimado</p>
-
-  <!-- FILA 1: resumen rápido -->
-  <div class="ana-stats-row" id="ana-quick"></div>
-
-  <div class="cards-grid">
-    <!-- Progreso por país -->
-    <div class="ana-card ana-card-wide"><h3>📊 Progreso por país</h3><div id="paises-comp"></div></div>
-
-    <!-- Top repetidas (para vender) -->
-    <div class="ana-card"><h3>🔁 Top repetidas (para vender)</h3><table class="rank-table" id="rank-rep"></table></div>
-
-    <!-- Países con 0 estampas -->
-    <div class="ana-card"><h3>❌ Países sin ninguna estampa</h3><div id="paises-cero"></div></div>
-
-    <!-- Valor del inventario -->
-    <div class="ana-card"><h3>💰 Valor estimado</h3><div class="info-box" id="inv-valor"></div></div>
-
-    <!-- Precios sugeridos -->
-    <div class="ana-card">
-      <h3>🏷️ Precio de venta sugerido</h3>
-      <div class="precio-grid">
-        <div class="pi"><div class="pi-l">FWC Historia (foil)</div><div class="pi-v r">Q60–120</div></div>
-        <div class="pi"><div class="pi-l">Escudo FOIL #1</div><div class="pi-v r">Q40–80</div></div>
-        <div class="pi"><div class="pi-l">Foto grupal #13</div><div class="pi-v y">Q25–50</div></div>
-        <div class="pi"><div class="pi-l">Estrella mundial ⭐</div><div class="pi-v y">Q30–100</div></div>
-        <div class="pi"><div class="pi-l">Jugador regular</div><div class="pi-v b">Q8–25</div></div>
-        <div class="pi"><div class="pi-l">Repetida común</div><div class="pi-v g">Q4–8</div></div>
-      </div>
-    </div>
-
-    <!-- Matemática del sobre -->
-    <div class="ana-card">
-      <h3>🎲 Matemática del sobre</h3>
-      <div class="info-box">
-        <strong>7 estampas/sobre · 104 sobres/caja</strong><br>
-        • Una estampa específica: <strong>1/980 ≈ 0.10%</strong><br>
-        • FWC especiales (19): <strong>~2%</strong> por sobre<br>
-        • Escudos FOIL #1 (49): <strong>~5%</strong> por sobre<br>
-        • Fotos grupales #13 (49): <strong>~5%</strong> por sobre<br>
-        • Jugadores normales: <strong>~88%</strong><br><br>
-        Para completar: <strong>~140–160 sobres</strong>.<br>
-        Las FWC son las más difíciles: solo 19 de 980.
-      </div>
-    </div>
-  </div>
 </div>
 </div>
 
@@ -708,10 +697,45 @@ const SNAMES = {
 
 function sname(col, row) {
   const d = SNAMES[col];
-  if (d && d[row]) return d[row];
+  if (d && d[row] !== undefined) return d[row];
+  if (row === 0) return col + ' #00';
   if (row === 1) return col + ' - Escudo (FOIL)';
   if (row === 13) return col + ' - Foto Grupal';
   return col + ' #' + row;
+}
+
+// Mapa de nombre de país → código (para parsear listas con nombres completos)
+const NOMBRE_A_COD = (function() {
+  const m = {};
+  const norm = s => s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/\s+/g,' ').trim();
+  Object.entries(PAIS).forEach(([cod, nombre]) => { m[norm(nombre)] = cod; });
+  const extra = {
+    'alemania':'GER','holanda':'NED','paises bajos':'NED','holland':'NED',
+    'england':'ENG','inglaterra':'ENG','brasil':'BRA','espana':'ESP',
+    'sudafrica':'RSA','estados unidos':'USA','republica checa':'CZE',
+    'rd congo':'COD','arabia saudita':'KSA','corea del sur':'KOR',
+    'nueva zelanda':'NZL','cabo verde':'CPV','costa de marfil':'CIV',
+    'bosnia':'BIH','canada':'CAN','mexico':'MEX','panama':'PAN',
+    'tunez':'TUN','turquia':'TUR','iran':'IRN','japon':'JPN',
+    'belgica':'BEL','haiti':'HAI','jordania':'JOR','irak':'IRQ',
+    'noruega':'NOR','suecia':'SWE','suiza':'SUI','senegal':'SEN',
+    'argentina':'ARG','croacia':'CRO','curazao':'CUW','escocia':'SCO',
+    'egipto':'EGY','australia':'AUS','austria':'AUT','colombia':'COL',
+    'paraguay':'PAR','portugal':'POR','qatar':'QAT','ecuador':'ECU',
+    'ghana':'GHA','marruecos':'MAR','uzbekistan':'UZB','ghana':'GHA',
+    'france':'FRA','germany':'GER','brazil':'BRA','spain':'ESP',
+    'croatia':'CRO','netherlands':'NED','sweden':'SWE','switzerland':'SUI',
+    'norway':'NOR','japan':'JPN','korea':'KOR','morocco':'MAR'
+  };
+  Object.entries(extra).forEach(([k,v]) => { m[k] = v; });
+  return m;
+})();
+
+function resolverCodigo(texto) {
+  const up = texto.toUpperCase().trim();
+  if (COLS.includes(up)) return up;
+  const norm = texto.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/\s+/g,' ').trim();
+  return NOMBRE_A_COD[norm] || null;
 }
 
 // Jugadores / estampas con borde dorado
@@ -968,20 +992,22 @@ function flash() {
 }
 
 // Click en celda: +1, doble click: -1, shift+click: -1
-let _dblTimer = null;
+// Detección por tiempo: dos clicks en <300ms en misma celda = resta; de lo contrario suma
+let _lastClickCell = null, _lastClickTime = 0;
 function cycleCell(ri, ci) {
-  if (_dblTimer) return; // ignorar el click que viene con el dblclick
-  _dblTimer = setTimeout(() => {
-    _dblTimer = null;
+  const now = Date.now();
+  const key = ri + '-' + ci;
+  if (now - _lastClickTime < 300 && _lastClickCell === key) {
+    // Doble click rápido → restar
+    _lastClickTime = 0; _lastClickCell = null;
+    changeCell(ri, ci, -1);
+  } else {
+    _lastClickTime = now; _lastClickCell = key;
     const delta = window._shiftDown ? -1 : 1;
     changeCell(ri, ci, delta);
-  }, 220);
+  }
 }
-function dblCell(ri, ci) {
-  clearTimeout(_dblTimer); _dblTimer = 1; // bloquear el click pendiente
-  setTimeout(() => { _dblTimer = null; }, 50);
-  changeCell(ri, ci, -1);
-}
+function dblCell(ri, ci) { /* ya manejado en cycleCell */ }
 
 let _activeRi = null, _activeCi = null;
 let _lastRi = 1, _lastCi = 0;
@@ -1047,8 +1073,8 @@ function handleRowInput(input) {
   const numStr = isNeg ? raw.slice(1) : raw;
   const ri = parseInt(numStr);
 
-  if (isNaN(ri) || ri < 1 || ri > 20) {
-    input.style.borderColor = '#e63946';
+  if (isNaN(ri) || ri < 0 || ri > 20) {
+    input.style.borderColor = '#f97316';
     setTimeout(() => { input.style.borderColor = ''; }, 800);
     input.value = '';
     return;
@@ -1084,8 +1110,8 @@ function handleRowInput(input) {
   flash();
 
   // Feedback visual en el input: parpadeo verde/rojo
-  input.style.borderColor = delta > 0 ? '#34d399' : '#e63946';
-  input.style.color = delta > 0 ? '#34d399' : '#e63946';
+  input.style.borderColor = delta > 0 ? '#34d399' : '#f97316';
+  input.style.color = delta > 0 ? '#34d399' : '#f97316';
   input.value = '';
   setTimeout(() => { input.style.borderColor = ''; input.style.color = ''; }, 600);
 }
@@ -1096,16 +1122,17 @@ function handleRowInput(input) {
 
 function calcStats() {
   let total=0, uniq=0, rep=0, esp=0, maxV=0, maxL='—';
-  for (let r=1; r<=20; r++) {
+  for (let r=0; r<=20; r++) {
     COLS.forEach((col,ci) => {
       const v = data[r]?.[ci] || 0;
       total += v;
-      if (v>0) { uniq++; if (r===1||r===13||ci===0) esp+=v; }
+      if (v>0) { uniq++; if (r===0||r===1||r===13||ci===0) esp+=v; }
       if (v>1) rep+=(v-1);
-      if (v>maxV) { maxV=v; maxL=col+' #'+r; }
+      if (v>maxV) { maxV=v; maxL=col+' #'+(r===0?'00':r); }
     });
   }
-  return {total, uniq, faltan:980-uniq, rep, esp, maxL, maxV};
+  const TOTAL_STICKERS = 980 + COLS.length; // +49 por fila 00 en todos los países
+  return {total, uniq, faltan:TOTAL_STICKERS-uniq, rep, esp, maxL, maxV};
 }
 
 function updateStats() {
@@ -1147,9 +1174,10 @@ function updateCellDOM(ri, ci, v, animate) {
 }
 
 function rebuildTableDOM() {
-  // Fila 0 (solo FWC)
-  updateCellDOM(0, 0, data[0]?.[0]||0, null);
-  const rtel0=document.getElementById('rt-0'); if(rtel0) rtel0.textContent=data[0]?.[0]||0;
+  // Fila 0 (todos los países)
+  COLS.forEach((_,ci) => { updateCellDOM(0, ci, data[0]?.[ci]||0, null); });
+  const rtel0=document.getElementById('rt-0');
+  if(rtel0) rtel0.textContent=COLS.reduce((s,_,i)=>s+(data[0]?.[i]||0),0);
   for (let ri=1; ri<=20; ri++) {
     COLS.forEach((_,ci) => { updateCellDOM(ri, ci, data[ri]?.[ci]||0, null); });
     const rowTot = COLS.reduce((s,_,i)=>s+(data[ri]?.[i]||0),0);
@@ -1161,34 +1189,41 @@ function buildTable() {
   const table = document.getElementById('tabla');
   let h = '<thead><tr><th><div class="th-inner"><span class="th-code">#</span></div></th>';
   COLS.forEach((c,ci) => {
-    const uniq = Object.keys(data).filter(r=>(data[r][ci]||0)>0).length;
-    const tot  = Object.keys(data).reduce((s,r)=>s+(data[r]?.[ci]||0),0);
-    h += `<th class="${tot>0?'th-activo':''}" data-col="${c}" data-uniq="${uniq}">
-      <div class="th-inner"><span class="th-code">${c}</span><span class="th-frac">${uniq}/20</span></div>
+    const isFWC = c==='FWC';
+    const rStart = isFWC ? 0 : 1; // la "00" (ri=0) solo es estampa válida en FWC
+    const maxStk = isFWC ? 21 : 20;
+    let uniq=0, tot=0, val=0;
+    for(let r=rStart;r<=20;r++){
+      const v=data[r]?.[ci]||0;
+      if(v>0){ uniq++; tot+=v; }
+      val+=cotGetPrecio(c,r)*v;
+    }
+    const completo = uniq>=maxStk ? ' ✅' : '';
+    h += `<th class="${tot>0?'th-activo':''}" data-col="${c}" data-uniq="${uniq}" data-tot="${tot}" data-val="${Math.round(val)}" onclick="showColInfo('${c}')" style="cursor:pointer">
+      <div class="th-inner"><span class="th-code">${c}</span><span class="th-frac">${uniq}/${maxStk}${completo}</span></div>
     </th>`;
   });
   h += '<th class="th-total"><div class="th-inner"><span class="th-code">TOT</span></div></th></tr></thead><tbody>';
 
-  // Fila 00
-  h += `<tr class="r-00"><td title="Escribe # estampa + Enter. -N resta. Flechas para moverte.">↵</td>`;
+  // Fila 00 (entrada rápida)
+  h += `<tr class="r-00"><td title="Escribe # estampa + Enter. -N resta. 0 = estampa 00.">↵</td>`;
   COLS.forEach((col,ci) => {
     h += `<td class="${ci===0?'col-fwc':''}"><input class="qi-cell-input" data-ci="${ci}" data-col="${col}" placeholder="#"></td>`;
   });
   h += `<td></td></tr>`;
 
-  // Fila 0 solo para FWC (Portada Álbum)
+  // Fila 0 (estampa 00) — clickeable para TODOS los países
   h += `<tr class="r-1"><td>00</td>`;
+  const rowTot0 = COLS.reduce((s,_,i)=>s+(data[0]?.[i]||0),0);
   COLS.forEach((col,ci) => {
-    if(ci===0) {
-      const v=data[0]?.[0]||0; const vc=cvClass(v);
-      h += `<td class="cv-cell ${vc} col-fwc" id="td-0-0" data-ri="0" data-ci="0" data-col="FWC" onclick="cycleCell(0,0)" ondblclick="dblCell(0,0)">
-        <div class="cv-wrap"><span class="${v===0?'cv z':'cv'}" id="cv-0-0">${v}</span></div>
-      </td>`;
-    } else {
-      h += `<td class="cv-cell z" style="opacity:0.15">—</td>`;
-    }
+    const v=data[0]?.[ci]||0; const vc=cvClass(v);
+    const fwc=ci===0?' col-fwc':'';
+    const est=isEstrella(col,0)?' estrella':'';
+    h += `<td class="cv-cell ${vc}${fwc}${est}" id="td-0-${ci}" data-ri="0" data-ci="${ci}" data-col="${col}" onclick="cycleCell(0,${ci})" ondblclick="dblCell(0,${ci})">
+      <div class="cv-wrap"><span class="${v===0?'cv z':'cv'}" id="cv-0-${ci}">${v}</span></div>
+    </td>`;
   });
-  h += `<td class="col-total" id="rt-0">${data[0]?.[0]||0}</td></tr>`;
+  h += `<td class="col-total" id="rt-0">${rowTot0}</td></tr>`;
 
   for (let ri=1; ri<=20; ri++) {
     const rc = ri===1?'r-1':ri===13?'r-13':'';
@@ -1328,10 +1363,42 @@ function getNegPrice(id) {
 function negTab(which, btn) {
   document.querySelectorAll('.neg-tab').forEach(b=>b.classList.remove('active'));
   btn.classList.add('active');
-  document.getElementById('neg-cajas').style.display  = which==='cajas'?'':'none';
-  document.getElementById('neg-alb').style.display    = which==='alb'?'':'none';
-  document.getElementById('neg-est').style.display    = which==='est'?'':'none';
-  document.getElementById('neg-listas').style.display = which==='listas'?'':'none';
+  const cajas = document.getElementById('neg-cajas');
+  const cajasExtra = document.getElementById('neg-cajas-extra');
+  const ana = document.getElementById('neg-ana');
+  if(cajas) cajas.style.display = which==='cajas' ? '' : 'none';
+  if(cajasExtra) cajasExtra.style.display = which==='cajas' ? '' : 'none';
+  if(ana) ana.style.display = which==='ana' ? '' : 'none';
+  if(which==='ana') { try { buildAnalysis(); } catch(e) { console.error('buildAnalysis error:',e); } }
+}
+
+function showColInfo(col) {
+  cotCargar();
+  const ci = COLS.indexOf(col);
+  const nombre = PAIS[col] || col;
+  const isFWC = col==='FWC';
+  const rStart = isFWC ? 0 : 1;
+  const maxStk = isFWC ? 21 : 20;
+  let uniq=0, tot=0, val=0;
+  for(let r=rStart;r<=20;r++){
+    const v=data[r]?.[ci]||0;
+    if(v>0){uniq++;tot+=v;}
+    val+=cotGetPrecio(col,r)*v;
+  }
+  const th = document.querySelector(`thead th[data-col="${col}"]`);
+  if(th){
+    th.setAttribute('data-val', Math.round(val));
+    th.setAttribute('data-uniq', uniq);
+    th.setAttribute('data-tot', tot);
+  }
+  const tip = document.getElementById('col-tooltip');
+  if(tip){
+    tip.innerHTML = `<strong>${nombre}</strong>${uniq>=maxStk?' <span style="color:#34d399">✅ COMPLETO</span>':''}<br>
+      <span style="color:#94a3b8;font-size:0.7rem">${uniq}/${maxStk} conseguidas · Total: ${tot} estampas</span><br>
+      <span style="color:#f59e0b;font-size:0.72rem">Valor estimado: Q${Math.round(val)}</span>`;
+    tip.style.display='block';
+    setTimeout(()=>tip.style.display='none', 2500);
+  }
 }
 
 
@@ -1527,16 +1594,13 @@ function renderNeg() {
   }
 
   const cajaTxs = negData.txs.filter(t=>t.cat==='caja');
-  const albTxs  = negData.txs.filter(t=>t.cat==='alb');
   const estTxs  = negData.txs.filter(t=>t.cat==='est');
+  const intTxs  = negData.txs.filter(t=>t.cat==='intercambio');
 
-  const hc = document.getElementById('hist-cajas'); if(hc) hc.innerHTML = histHTML(cajaTxs);
-  const ha = document.getElementById('hist-alb');   if(ha) ha.innerHTML = histHTML(albTxs);
-  const he = document.getElementById('hist-est');   if(he) he.innerHTML = histHTML(estTxs);
+  const hc = document.getElementById('hist-cajas');
+  if(hc) hc.innerHTML = histHTML(cajaTxs);
 
   renderStockCajas();
-  renderResumen('alb', albTxs);
-  renderResumen('est', estTxs);
   renderResumenCajas(cajaTxs);
   adjRender();
   renderResumenGeneral();
@@ -1631,82 +1695,158 @@ function initNegSelects() {
 // ============================================================
 
 function buildAnalysis() {
+  cotCargar(); // Cargar precios del cotizador
   const s = calcStats();
+  const TOTAL = 980 + COLS.length;
+  const pctComp = ((s.uniq/TOTAL)*100).toFixed(1);
 
-  // ── Resumen rápido ──────────────────────────────────────────
-  const pctComp = ((s.uniq/980)*100).toFixed(1);
   document.getElementById('ana-quick').innerHTML = `
     <div class="ana-qs"><div class="ana-qs-v" style="color:#60a5fa">${s.total}</div><div class="ana-qs-l">Total estampas</div></div>
     <div class="ana-qs"><div class="ana-qs-v" style="color:#34d399">${s.uniq}</div><div class="ana-qs-l">Únicas (${pctComp}%)</div></div>
-    <div class="ana-qs"><div class="ana-qs-v" style="color:#e63946">${s.faltan}</div><div class="ana-qs-l">Te faltan</div></div>
+    <div class="ana-qs"><div class="ana-qs-v" style="color:#f97316">${s.faltan}</div><div class="ana-qs-l">Te faltan</div></div>
     <div class="ana-qs"><div class="ana-qs-v" style="color:#f59e0b">${s.rep}</div><div class="ana-qs-l">Repetidas (para vender)</div></div>
     <div class="ana-qs"><div class="ana-qs-v" style="color:#a78bfa">${s.esp}</div><div class="ana-qs-l">Especiales conseguidas</div></div>`;
 
-  // ── Progreso por país (todas) ────────────────────────────────
+  // Progreso por país
   const paisData = COLS.map((col,ci)=>{
-    const got = 0; // contar filas 1-20 con v>0
+    const isFWC = col==='FWC';
+    const rStart = isFWC ? 0 : 1; // la "00" (ri=0) solo es estampa válida en FWC
+    const maxStk = isFWC ? 21 : 20;
     let g=0;
-    for(let r=1;r<=20;r++) if((data[r]?.[ci]||0)>0) g++;
-    return {col, name:(PAIS[col]||col).substring(0,20), got:g};
+    for(let r=rStart;r<=20;r++) if((data[r]?.[ci]||0)>0) g++;
+    return {col, name:(PAIS[col]||col).substring(0,20), got:g, maxStk};
   }).sort((a,b)=>b.got-a.got);
   document.getElementById('paises-comp').innerHTML = paisData.map(p=>{
-    const pct = Math.round(p.got/20*100);
-    const col = pct>=80?'#34d399':pct>=60?'#86efac':pct>=40?'#f59e0b':pct>=20?'#fb923c':'#60a5fa';
-    return `<div class="prob-row"><div class="prob-label"><span style="color:#94a3b8">${p.name}</span><span style="color:#e2e8f0;font-weight:600">${p.got}/20</span></div><div class="prob-bar-bg"><div class="prob-bar-fill" style="width:${pct}%;background:${col}"></div></div></div>`;
+    const pct = Math.round(p.got/p.maxStk*100);
+    const color = pct>=95?'#34d399':pct>=70?'#86efac':pct>=40?'#f59e0b':pct>=20?'#fb923c':'#60a5fa';
+    const full = p.got>=p.maxStk?' ✅':'';
+    return `<div class="prob-row"><div class="prob-label"><span style="color:#94a3b8">${p.name}${full}</span><span style="color:#e2e8f0;font-weight:600">${p.got}/${p.maxStk}</span></div><div class="prob-bar-bg"><div class="prob-bar-fill" style="width:${pct}%;background:${color}"></div></div></div>`;
   }).join('') || '<p style="color:#4b5563;font-size:0.78rem">Sin datos aún</p>';
 
-  // ── Top repetidas ────────────────────────────────────────────
+  // Top repetidas — usando precios del cotizador
   let cells=[];
-  for(let r=1;r<=20;r++) COLS.forEach((col,ci)=>{
+  for(let r=0;r<=20;r++) COLS.forEach((col,ci)=>{
     const v=data[r]?.[ci]||0;
-    if(v>1) cells.push({l:sname(col,r), col, r, v, esp:isEstrella(col,r)});
+    if(v>1) cells.push({l:sname(col,r), col, r, v, esp:isEstrella(col,r), precio:cotGetPrecio(col,r), valRep:v*cotGetPrecio(col,r)});
   });
   cells.sort((a,b)=>b.v-a.v);
-  document.getElementById('rank-rep').innerHTML = cells.slice(0,15).length
-    ? `<thead><tr><th>#</th><th>Estampa</th><th>Tienes</th><th>Vender</th></tr></thead><tbody>`+
-      cells.slice(0,15).map((c,i)=>{
-        const star = c.esp ? ' ⭐' : '';
-        const sell = c.v - 1;
-        return `<tr><td style="color:#64748b">${i+1}</td><td class="rn">${c.l.length>28?c.l.slice(0,27)+'…':c.l}${star}</td><td style="color:#60a5fa">×${c.v}</td><td style="color:#34d399">+${sell}</td></tr>`;
+  document.getElementById('rank-rep').innerHTML = cells.slice(0,20).length
+    ? `<thead><tr><th>#</th><th>Estampa</th><th>Total</th><th>Valor total</th></tr></thead><tbody>`+
+      cells.slice(0,20).map((c,i)=>{
+        const star = c.esp?' ⭐':'';
+        return `<tr><td style="color:#64748b">${i+1}</td><td class="rn">${c.l.length>32?c.l.slice(0,31)+'…':c.l}${star}</td><td style="color:#60a5fa">×${c.v}</td><td style="color:#f59e0b">Q${c.valRep.toFixed(0)}</td></tr>`;
       }).join('')+'</tbody>'
-    : '<tr><td colspan="4" style="color:#4b5563;padding:16px;text-align:center">Sin repetidas aún — ¡empieza a registrar!</td></tr>';
+    : '<tr><td colspan="4" style="color:#4b5563;padding:16px;text-align:center">Sin repetidas aún</td></tr>';
 
-  // ── Países sin ninguna estampa ───────────────────────────────
+  // Países sin ninguna estampa
   const sinNada = COLS.filter((col,ci)=>{
-    for(let r=1;r<=20;r++) if((data[r]?.[ci]||0)>0) return false;
+    for(let r=0;r<=20;r++) if((data[r]?.[ci]||0)>0) return false;
     return true;
   });
   document.getElementById('paises-cero').innerHTML = sinNada.length
-    ? `<p style="color:#64748b;font-size:0.72rem;margin-bottom:8px">Te faltan estampas de ${sinNada.length} países:</p>`+
+    ? `<p style="color:#64748b;font-size:0.72rem;margin-bottom:8px">Sin estampas de ${sinNada.length} países:</p>`+
       sinNada.map(col=>`<span style="display:inline-block;background:#1e2435;border:1px solid #374151;border-radius:4px;padding:3px 8px;margin:3px;font-size:0.72rem;color:#94a3b8">${col} — ${(PAIS[col]||col).substring(0,15)}</span>`).join('')
     : '<p style="color:#34d399;font-size:0.78rem">🎉 ¡Tienes al menos una estampa de cada país!</p>';
 
-  // ── Valor estimado ───────────────────────────────────────────
-  // Calcular especiales (FWC + escudos foil + fotos grupales + estrellas)
-  let repComunes=0, repEsp=0, repFoil=0;
-  for(let r=1;r<=20;r++) COLS.forEach((col,ci)=>{
-    const v=(data[r]?.[ci]||0);
-    if(v<2) return;
-    const extra=v-1;
-    if(col==='FWC') repFoil+=extra;
-    else if(r===1) repFoil+=extra;
-    else if(isEstrella(col,r)) repEsp+=extra;
-    else repComunes+=extra;
+  // Valor estimado — conectado a precios del cotizador
+  let catRep={fwc:0,escudo:0,foto:0,estrella:0,jug:0};
+  let catRepQ={fwc:0,escudo:0,foto:0,estrella:0,jug:0};
+  let masValRep=null, masValRepQ=0;
+  for(let r=0;r<=20;r++) COLS.forEach((col,ci)=>{
+    const v=data[r]?.[ci]||0; if(v<2) return;
+    const extra=v-1, precio=cotGetPrecio(col,r), sub=precio*extra;
+    const tipo=cotGetTipo(col,r);
+    if(col==='FWC'){catRep.fwc+=extra;catRepQ.fwc+=sub;}
+    else if(r===0||r===1){catRep.escudo+=extra;catRepQ.escudo+=sub;}
+    else if(r===13){catRep.foto+=extra;catRepQ.foto+=sub;}
+    else if(tipo==='estrella'){catRep.estrella+=extra;catRepQ.estrella+=sub;}
+    else{catRep.jug+=extra;catRepQ.jug+=sub;}
+    if(sub>masValRepQ){masValRepQ=sub;masValRep={nombre:sname(col,r),v,extra,precio,sub};}
   });
-  const valFoil  = repFoil  * 60;   // Q60 promedio foil
-  const valEsp   = repEsp   * 35;   // Q35 promedio estrella
-  const valComun = repComunes * 6;  // Q6 promedio común
-  const valTotal = valFoil + valEsp + valComun;
-  document.getElementById('inv-valor').innerHTML =
-    `<div style="margin-bottom:10px">
+  const valTotal=Object.values(catRepQ).reduce((a,b)=>a+b,0);
+  document.getElementById('inv-valor').innerHTML=`
+    <div style="margin-bottom:10px">
       <strong style="color:#e2e8f0">Repetidas disponibles para vender:</strong><br>
-      <span style="color:#a78bfa">FOIL/especiales:</span> ${repFoil} estampas → <strong style="color:#a78bfa">~Q${valFoil}</strong><br>
-      <span style="color:#f59e0b">Estrellas:</span> ${repEsp} estampas → <strong style="color:#f59e0b">~Q${valEsp}</strong><br>
-      <span style="color:#60a5fa">Comunes:</span> ${repComunes} estampas → <strong style="color:#60a5fa">~Q${valComun}</strong>
+      ${catRep.fwc?`<span style="color:#a78bfa">FWC:</span> ${catRep.fwc} → <strong style="color:#a78bfa">Q${catRepQ.fwc.toFixed(0)}</strong><br>`:''}
+      ${catRep.escudo?`<span style="color:#60a5fa">Escudos/00:</span> ${catRep.escudo} → <strong style="color:#60a5fa">Q${catRepQ.escudo.toFixed(0)}</strong><br>`:''}
+      ${catRep.foto?`<span style="color:#fb923c">Fotos:</span> ${catRep.foto} → <strong style="color:#fb923c">Q${catRepQ.foto.toFixed(0)}</strong><br>`:''}
+      ${catRep.estrella?`<span style="color:#fbbf24">Estrellas:</span> ${catRep.estrella} → <strong style="color:#fbbf24">Q${catRepQ.estrella.toFixed(0)}</strong><br>`:''}
+      ${catRep.jug?`<span style="color:#64748b">Jugadores:</span> ${catRep.jug} → <strong style="color:#94a3b8">Q${catRepQ.jug.toFixed(0)}</strong>`:''}
     </div>
     <div style="border-top:1px solid #374151;padding-top:10px">
-      <strong style="font-size:1.1rem;color:#34d399">Total estimado: ~Q${valTotal}</strong><br>
-      <span style="color:#4b5563;font-size:0.7rem">Basado en precios de mercado guatemalteco (Q4-8 común, Q30-100 estrella, Q40-120 foil)</span>
+      <strong style="font-size:1.1rem;color:#34d399">Total estimado: ~Q${valTotal.toFixed(0)}</strong>
+      ${masValRep?`<br><span style="color:#f59e0b;font-size:0.71rem">Más valiosa: ${masValRep.nombre} ×${masValRep.extra} rep. = Q${masValRep.sub.toFixed(0)}</span>`:''}
+      <br><span style="color:#4b5563;font-size:0.68rem">Según precios del Cotizador</span>
+    </div>`;
+
+  // Tarjetas extra
+  const anaExtra = document.getElementById('ana-extra');
+  if(!anaExtra) return;
+
+  // Desglose por categoría (lo que tengo)
+  let catTodo={fwc:{u:0,t:0},escudo:{u:0,t:0},foto:{u:0,t:0},estrella:{u:0,t:0},jug:{u:0,t:0}};
+  for(let r=0;r<=20;r++) COLS.forEach((col,ci)=>{
+    const v=data[r]?.[ci]||0; if(!v) return;
+    const tipo=cotGetTipo(col,r);
+    if(col==='FWC'){catTodo.fwc.u++;catTodo.fwc.t+=v;}
+    else if(r===0||r===1){catTodo.escudo.u++;catTodo.escudo.t+=v;}
+    else if(r===13){catTodo.foto.u++;catTodo.foto.t+=v;}
+    else if(tipo==='estrella'){catTodo.estrella.u++;catTodo.estrella.t+=v;}
+    else{catTodo.jug.u++;catTodo.jug.t+=v;}
+  });
+
+  // Top estampas más valiosas que tengo
+  let allItems=[];
+  for(let r=0;r<=20;r++) COLS.forEach((col,ci)=>{
+    const v=data[r]?.[ci]||0; if(!v) return;
+    const precio=cotGetPrecio(col,r);
+    allItems.push({nombre:sname(col,r),v,precio,val:precio*v,col,r});
+  });
+  allItems.sort((a,b)=>b.val-a.val);
+
+  // Top repetidas por valor
+  let repItems=[...cells].sort((a,b)=>b.valRep-a.valRep);
+
+  // Top 1 repetida por país
+  let topPais=[];
+  COLS.forEach((col,ci)=>{
+    let best=null,bestV=0;
+    for(let r=0;r<=20;r++){const v=data[r]?.[ci]||0;if(v>bestV){bestV=v;best={col,r,v,nombre:sname(col,r)};}}
+    if(best&&bestV>1) topPais.push(best);
+  });
+  topPais.sort((a,b)=>b.v-a.v);
+
+  anaExtra.innerHTML=`
+    <div class="ana-card">
+      <h3>📦 Desglose por categoría</h3>
+      <table class="rank-table"><thead><tr><th>Categoría</th><th>Únicas</th><th>Total</th><th>Repet.</th></tr></thead><tbody>
+        <tr><td style="color:#a78bfa">🏆 FWC</td><td>${catTodo.fwc.u}/21</td><td class="rn">${catTodo.fwc.t}</td><td style="color:#f59e0b">${catTodo.fwc.t-catTodo.fwc.u}</td></tr>
+        <tr><td style="color:#60a5fa">🛡️ Escudos &amp; #00</td><td>${catTodo.escudo.u}/${(COLS.length-1)*2}</td><td class="rn">${catTodo.escudo.t}</td><td style="color:#f59e0b">${catTodo.escudo.t-catTodo.escudo.u}</td></tr>
+        <tr><td style="color:#fb923c">📸 Fotos grupales</td><td>${catTodo.foto.u}/${COLS.length-1}</td><td class="rn">${catTodo.foto.t}</td><td style="color:#f59e0b">${catTodo.foto.t-catTodo.foto.u}</td></tr>
+        <tr><td style="color:#fbbf24">⭐ Estrellas</td><td>${catTodo.estrella.u}</td><td class="rn">${catTodo.estrella.t}</td><td style="color:#f59e0b">${catTodo.estrella.t-catTodo.estrella.u}</td></tr>
+        <tr><td style="color:#64748b">👤 Jugadores</td><td>${catTodo.jug.u}</td><td class="rn">${catTodo.jug.t}</td><td style="color:#f59e0b">${catTodo.jug.t-catTodo.jug.u}</td></tr>
+      </tbody></table>
+    </div>
+
+    <div class="ana-card">
+      <h3>💎 Estampas más valiosas (por valor total)</h3>
+      <table class="rank-table"><thead><tr><th>#</th><th>Estampa</th><th>Cant.</th><th>Valor total</th></tr></thead><tbody>
+        ${allItems.slice(0,10).map((it,i)=>`<tr><td style="color:#64748b">${i+1}</td><td class="rn" style="font-size:0.72rem">${it.nombre.length>24?it.nombre.slice(0,23)+'…':it.nombre}</td><td style="color:#60a5fa">×${it.v}</td><td style="color:#f59e0b">Q${it.val.toFixed(0)}</td></tr>`).join('')||'<tr><td colspan="4" style="color:#4b5563;padding:12px;text-align:center">Sin datos</td></tr>'}
+      </tbody></table>
+    </div>
+
+    <div class="ana-card">
+      <h3>💰 Top repetidas por valor a vender</h3>
+      <table class="rank-table"><thead><tr><th>#</th><th>Estampa</th><th>Rep.</th><th>Valor rep.</th></tr></thead><tbody>
+        ${repItems.slice(0,10).map((c,i)=>`<tr><td style="color:#64748b">${i+1}</td><td class="rn" style="font-size:0.72rem">${c.l.length>24?c.l.slice(0,23)+'…':c.l}${c.esp?' ⭐':''}</td><td style="color:#34d399">+${c.v-1}</td><td style="color:#f59e0b">Q${c.valRep.toFixed(0)}</td></tr>`).join('')||'<tr><td colspan="4" style="color:#4b5563;padding:12px;text-align:center">Sin repetidas</td></tr>'}
+      </tbody></table>
+    </div>
+
+    <div class="ana-card">
+      <h3>🔁 Más repetida por país</h3>
+      <table class="rank-table"><thead><tr><th>País</th><th>Estampa</th><th>Cant.</th></tr></thead><tbody>
+        ${topPais.slice(0,12).map(it=>`<tr><td style="color:#64748b;font-size:0.7rem">${(PAIS[it.col]||it.col).substring(0,12)}</td><td class="rn" style="font-size:0.72rem">${it.nombre.length>22?it.nombre.slice(0,21)+'…':it.nombre}</td><td style="color:#f59e0b">×${it.v}</td></tr>`).join('')||'<tr><td colspan="3" style="color:#4b5563;padding:12px;text-align:center">Sin repetidas</td></tr>'}
+      </tbody></table>
     </div>`;
 }
 
@@ -1715,7 +1855,6 @@ function showPage(id, btn) {
   document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
   document.getElementById(id).classList.add('active');
   btn.classList.add('active');
-  if (id==='p-ana') { try { buildAnalysis(); } catch(e) { console.error('buildAnalysis error:',e); } }
   if (id==='p-neg') { try { renderNeg(); } catch(e) { console.error('renderNeg error:',e); } }
   if (id==='p-cotiz') { try { cotInit(); } catch(e) { console.error('cotInit error:',e); } }
 }
@@ -1801,6 +1940,12 @@ window.negTab           = negTab;
 window.negAlbReg        = negAlbReg;
 window.negEstReg        = negEstReg;
 window.negDelTx         = negDelTx;
+window.intActivarDinero = intActivarDinero;
+window.intCalcular      = intCalcular;
+window.intConfirmar     = intConfirmar;
+window.intLimpiar       = intLimpiar;
+window.excelUpload      = excelUpload;
+window.showColInfo      = showColInfo;
 // ============================================================
 // PEDIDOS DE LISTAS — cotizar y confirmar venta
 // ============================================================
@@ -1934,7 +2079,7 @@ function cotizarPedido() {
     const suficiente = stockActual >= qty;
     if (!suficiente) sinStock.push(col + ' #' + ri + ' (tienes ' + stockActual + ', piden ' + qty + ')');
     okItems.push(suficiente);
-    const stockColor = stockActual === 0 ? '#e63946' : stockActual < qty ? '#f59e0b' : '#34d399';
+    const stockColor = stockActual === 0 ? '#f97316' : stockActual < qty ? '#f59e0b' : '#34d399';
     return `<tr>
       <td style="color:#64748b">${col} #${ri}</td>
       <td>${sname(col, ri)}</td>
@@ -2166,9 +2311,6 @@ window.markLastEdited = markLastEdited;
 })();
 
 
-// ARRANCAR
-initFirebase();
-
 function resetTodo() {
   if (!confirm('¿Borrar TODOS los datos del inventario? Esto no se puede deshacer.')) return;
   localStorage.removeItem('mundial2026_est');
@@ -2269,33 +2411,52 @@ function cotGetTipo(col, ri) {
   return 'jugNorm';
 }
 
+function _parsearLinea(linea) {
+  const clean = linea.replace(/[^ -~a-zA-ZÀ-ɏ:\d,\s\-_x×*]/g,'').trim();
+  if(!clean) return null;
+  let qty=1;
+  let qc=clean.replace(/[x×*]\s*(\d+)\s*$/i,(_,n)=>{qty=parseInt(n)||1;return '';}).trim();
+  let col=null,ri=null,m;
+  m=qc.match(/^([A-Za-z]{2,3})[\s\-_](\d{1,2})$/);
+  if(m){col=resolverCodigo(m[1]);ri=parseInt(m[2]);}
+  if(!col){m=qc.match(/^(\d{1,2})[\s\-_]([A-Za-z]{2,3})$/);if(m){col=resolverCodigo(m[2]);ri=parseInt(m[1]);}}
+  if(!col){m=qc.match(/^([A-Za-z]{2,3})(\d{1,2})$/);if(m){col=resolverCodigo(m[1]);ri=parseInt(m[2]);}}
+  if(!col){m=qc.match(/^([A-Za-zÀ-ɏ\s]{3,25})\s+(\d{1,2})$/);if(m){col=resolverCodigo(m[1].trim());ri=parseInt(m[2]);}}
+  if(!col||ri===null||ri<0||ri>20) return null;
+  return {col,ri,qty};
+}
+
 function cotParsear(texto) {
   const items=[]; const errs=[];
-  texto.trim().split('\n').forEach((linea,idx) => {
+  texto.trim().split('\n').forEach((linea) => {
     linea=linea.trim(); if(!linea) return;
-    // Quitar emojis: solo conservar ASCII imprimible y letras acentuadas basicas
-    const clean = linea.replace(/[^\u0020-\u007Ea-zA-ZA-z\u00C0-\u024F:\d,\s\-_x]/g,'').trim();
-    // Formato "COD: 1, 5, 9" o "COD algo: 1, 5"
-    const mColon = clean.match(/^([A-Z]{2,3})[^:]*:\s*(.+)$/i);
-    if (mColon) {
-      const col = mColon[1].toUpperCase();
-      if (!COLS.includes(col)) { errs.push('Linea '+(idx+1)+': "'+col+'" no reconocido'); return; }
-      const nums = mColon[2].match(/\d{1,2}/g);
-      if (!nums) { errs.push('Linea '+(idx+1)+': sin numeros'); return; }
-      nums.forEach(n => { let ri=parseInt(n); const minRi=(col==='FWC')?0:1; if(ri<minRi||ri>20){errs.push('Linea '+(idx+1)+': #'+ri+' fuera de rango');return;} items.push({col,ri,qty:1}); });
+    // Ignorar líneas que claramente no son estampas
+    if(/^https?:\/\//i.test(linea)) return;
+    if(/^(me faltan|tengo de más|tengo de mas|descarga|figuritas app|album|álbum)/i.test(linea.trim())) return;
+    const clean = linea.replace(/[^ -~a-zA-ZÀ-ɏ:\d,\s\-_x×*]/g,'').trim();
+    if(!clean) return;
+    // Formato con dos puntos: "ARG: 1, 2, 3" o "ARG key: 1 2 3"
+    const mColon = clean.match(/^([A-Za-z]{2,3})[^:]*:\s*(.+)$/i);
+    if(mColon){
+      const col=resolverCodigo(mColon[1]);
+      if(!col) return;
+      const nums=mColon[2].match(/\d{1,2}/g);
+      if(!nums) return;
+      nums.forEach(n=>{const ri=parseInt(n);if(ri>=0&&ri<=20)items.push({col,ri,qty:1});});
       return;
     }
-    // Formato clasico: "ARG 14", "ARG-14", "14 ARG", "ARG14", con "x2" opcional
-    let qty=1;
-    const qc=clean.replace(/[x×*]\s*(\d+)/i,(_,n)=>{qty=parseInt(n)||1;return '';}).trim();
-    let col=null,ri=null;
-    let m=qc.match(/^([A-Z]{2,3})[\s\-_](\d{1,2})$/i); if(m){col=m[1].toUpperCase();ri=parseInt(m[2]);}
-    if(!col){m=qc.match(/^(\d{1,2})[\s\-_]([A-Z]{2,3})$/i);if(m){col=m[2].toUpperCase();ri=parseInt(m[1]);}}
-    if(!col){m=qc.match(/^([A-Z]{2,3})(\d{1,2})$/i);if(m){col=m[1].toUpperCase();ri=parseInt(m[2]);}}
-    if(!col||!COLS.includes(col)){errs.push('Linea '+(idx+1)+': "'+clean+'" no reconocido');return;}
-    const minRi=(col==='FWC')?0:1;
-    if(ri===null||ri===undefined||ri<minRi||ri>20){errs.push('Linea '+(idx+1)+': #'+ri+' fuera de rango');return;}
-    items.push({col,ri,qty});
+    // Formato múltiple sin dos puntos: "ARG 1 5 12" o "ARG 1, 5, 12"
+    const mMulti=clean.match(/^([A-Za-z]{2,3})\s+([\d,\s]+)$/i);
+    if(mMulti){
+      const col=resolverCodigo(mMulti[1]);
+      if(col){
+        const nums=mMulti[2].match(/\d{1,2}/g);
+        if(nums&&nums.length>1){nums.forEach(n=>{const ri=parseInt(n);if(ri>=0&&ri<=20)items.push({col,ri,qty:1});});return;}
+      }
+    }
+    // Formato estándar: "ARG 14" o "ARG14 x2" (una por línea)
+    const r=_parsearLinea(linea);
+    if(r) items.push(r);
   });
   return {items,errs};
 }
@@ -2319,7 +2480,7 @@ function cotCotizar() {
     const sub=precio*qty;
     total+=sub;
     if(stk<qty) sinStk.push(col+' #'+ri);
-    const sc=stk===0?'#e63946':stk<qty?'#f59e0b':'#34d399';
+    const sc=stk===0?'#f97316':stk<qty?'#f59e0b':'#34d399';
     const nombre=sname(col,ri);
     const etiq=qty>1?` x${qty}`:'';
     // Clasificar
@@ -2402,9 +2563,7 @@ function cotShowTab(id,btn) {
   if(!el){ console.error('cotShowTab: no element with id=',id); return; }
   el.style.display='block';
   btn.classList.add('active');
-  if(id==='cot-p-precios') cotRenderTabPrecios();
-  else if(id==='cot-p-estrellas') cotRenderTabEstrellas();
-  else if(id==='cot-p-equipos') cotRenderTabEquipos();
+  if(id==='cot-p-config'){ cotRenderTabPrecios(); cotRenderTabEstrellas(); cotRenderTabEquipos(); }
 }
 
 function cotRenderTabPrecios() {
@@ -2516,6 +2675,180 @@ function cotSetJugPrecio(nombre, val) {
   cotGuardar();
 }
 
+// ===================== INTERCAMBIO =====================
+function intParseLista(texto) {
+  return cotParsear(texto).items;
+}
+
+function intResumenLista(items) {
+  const cats = {};
+  let total = 0;
+  for (const {col, ri, qty} of items) {
+    const ci = COLS.indexOf(col);
+    if (ci < 0) continue;
+    const precio = cotGetPrecio(col, ri);
+    const tipo = cotGetTipo(col, ri);
+    total += precio * qty;
+    cats[tipo] = (cats[tipo] || {qty:0, val:0});
+    cats[tipo].qty += qty;
+    cats[tipo].val += precio * qty;
+  }
+  return {total, cats};
+}
+
+function intActivarDinero() {
+  const inp = document.getElementById('int-dinero-monto');
+  if (inp) { inp.focus(); inp.select(); }
+}
+
+function intCalcular() {
+  cotCargar();
+  const txtDamos = (document.getElementById('int-lista-damos') || {}).value || '';
+  const txtRec   = (document.getElementById('int-lista-recibimos') || {}).value || '';
+  const itemsDamos = intParseLista(txtDamos);
+  const itemsRec   = intParseLista(txtRec);
+  const resDamos = intResumenLista(itemsDamos);
+  const resRec   = intResumenLista(itemsRec);
+
+  const dineroMonto = parseFloat((document.getElementById('int-dinero-monto') || {}).value) || 0;
+  const dineroDirEl = document.getElementById('int-dinero-dir');
+  const dineroDir   = dineroDirEl ? dineroDirEl.value : 'recibimos';
+
+  let valorDamos = resDamos.total;
+  let valorRec   = resRec.total;
+  if (dineroMonto > 0) {
+    if (dineroDir === 'recibimos') valorRec += dineroMonto;
+    else valorDamos += dineroMonto;
+  }
+
+  const diff = valorRec - valorDamos;
+
+  const mkList = (items, resum) => {
+    if (!items.length) return '<p style="color:#64748b;font-size:0.85em">Lista vacía</p>';
+    let html = '<ul style="margin:4px 0;padding-left:18px;font-size:0.85em">';
+    for (const {col, ri, qty} of items) {
+      const ci = COLS.indexOf(col);
+      const precio = ci >= 0 ? cotGetPrecio(col, ri) : 0;
+      const nm = sname(ci >= 0 ? ci : 0, ri);
+      html += '<li>' + (qty > 1 ? qty + 'x ' : '') + nm + ' — Q' + precio.toLocaleString() + (qty > 1 ? ' c/u = Q' + (precio * qty).toLocaleString() : '') + '</li>';
+    }
+    html += '</ul>';
+    return html;
+  };
+
+  let catHTML = '';
+  const allCats = new Set([...Object.keys(resDamos.cats), ...Object.keys(resRec.cats)]);
+  for (const cat of allCats) {
+    const d = resDamos.cats[cat] || {qty:0,val:0};
+    const r = resRec.cats[cat]   || {qty:0,val:0};
+    catHTML += '<div class="int-chip"><span style="font-weight:600">' + cat + '</span><span style="color:#94a3b8;font-size:0.8em">Damos: ' + d.qty + ' (Q' + d.val.toLocaleString() + ') | Recibimos: ' + r.qty + ' (Q' + r.val.toLocaleString() + ')</span></div>';
+  }
+
+  const color = diff >= 0 ? '#34d399' : '#f87171';
+  const sign  = diff >= 0 ? '+' : '';
+
+  const res = document.getElementById('int-resultado');
+  if (!res) return;
+  res.innerHTML =
+    '<div class="int-balance-row" style="margin-bottom:10px;gap:8px">' +
+      '<div class="cot-card" style="flex:1"><h4 style="color:#f87171;margin:0 0 6px">📤 Damos — Q' + resDamos.total.toLocaleString() + (dineroMonto>0&&dineroDir==='damos'?' + Q'+dineroMonto.toLocaleString()+' efectivo':'') + '</h4>' + mkList(itemsDamos) + '</div>' +
+      '<div class="cot-card" style="flex:1"><h4 style="color:#34d399;margin:0 0 6px">📥 Recibimos — Q' + resRec.total.toLocaleString() + (dineroMonto>0&&dineroDir==='recibimos'?' + Q'+dineroMonto.toLocaleString()+' efectivo':'') + '</h4>' + mkList(itemsRec) + '</div>' +
+    '</div>' +
+    (catHTML ? '<div style="margin-bottom:10px"><strong style="font-size:0.85em;color:#94a3b8">Desglose por categoría:</strong><div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:6px">' + catHTML + '</div></div>' : '') +
+    '<div class="int-balance-row" style="padding:12px 16px;background:#0f172a;border-radius:8px;align-items:center;border:1px solid #1e2435">' +
+      '<span style="color:#94a3b8">Balance del intercambio:</span>' +
+      '<span style="font-size:1.25em;font-weight:700;color:' + color + '">' + sign + 'Q' + Math.abs(diff).toLocaleString() + (diff >= 0 ? ' a nuestro favor ✅' : ' en contra ⚠️') + '</span>' +
+    '</div>' +
+    '<div style="display:flex;gap:8px;margin-top:12px">' +
+      '<button class="cot-btn cot-btn-red" onclick="intConfirmar()">✅ Confirmar intercambio</button>' +
+      '<button class="cot-btn cot-btn-ghost" onclick="intLimpiar()">🗑 Limpiar</button>' +
+    '</div>';
+
+  window._intPendiente = {itemsDamos, itemsRec, valorDamos, valorRec, diff, dineroMonto, dineroDir};
+}
+
+function intConfirmar() {
+  if (!window._intPendiente) { alert('Primero calcula el intercambio'); return; }
+  const {itemsDamos, itemsRec, valorDamos, valorRec, diff, dineroMonto, dineroDir} = window._intPendiente;
+
+  for (const {col, ri, qty} of itemsDamos) {
+    const ci = COLS.indexOf(col);
+    if (ci < 0) continue;
+    if (!data[ri]) data[ri] = {};
+    data[ri][ci] = Math.max(0, (data[ri][ci] || 0) - qty);
+  }
+  for (const {col, ri, qty} of itemsRec) {
+    const ci = COLS.indexOf(col);
+    if (ci < 0) continue;
+    if (!data[ri]) data[ri] = {};
+    data[ri][ci] = (data[ri][ci] || 0) + qty;
+  }
+
+  const nota = 'Intercambio: damos Q' + valorDamos.toLocaleString() + ' | recibimos Q' + valorRec.toLocaleString() +
+    (dineroMonto > 0 ? ' + Q' + dineroMonto.toLocaleString() + ' efectivo ' + (dineroDir === 'recibimos' ? 'recibido' : 'dado') : '');
+
+  if (!negData.txs) negData.txs = [];
+  negData.txs.unshift({cat:'intercambio', ts:Date.now(), nota, valorDamos, valorRec, diff});
+
+  saveData();
+  buildTable();
+  renderNeg();
+  intLimpiar();
+  alert('✅ Intercambio registrado y inventario actualizado');
+}
+
+function intLimpiar() {
+  const d = document.getElementById('int-lista-damos');
+  const r = document.getElementById('int-lista-recibimos');
+  const res = document.getElementById('int-resultado');
+  const cash = document.getElementById('int-dinero-monto');
+  if (d) d.value = '';
+  if (r) r.value = '';
+  if (res) res.innerHTML = '<div class="cot-empty">Pega las listas y presiona Calcular intercambio</div>';
+  if (cash) cash.value = '0';
+  window._intPendiente = null;
+}
+
+// ===================== EXCEL UPLOAD =====================
+function excelUpload(input) {
+  const file = input.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    try {
+      const wb = XLSX.read(e.target.result, {type: 'array'});
+      const ws = wb.Sheets[wb.SheetNames[0]];
+      const rows = XLSX.utils.sheet_to_json(ws, {header: 1});
+      let added = 0;
+      for (const row of rows) {
+        for (const cell of row) {
+          if (!cell) continue;
+          const parsed = _parsearLinea(String(cell).trim());
+          if (!parsed) continue;
+          const {col, ri, qty} = parsed;
+          const ci = COLS.indexOf(col);
+          if (ci < 0) continue;
+          if (!data[ri]) data[ri] = {};
+          data[ri][ci] = (data[ri][ci] || 0) + qty;
+          added++;
+        }
+      }
+      if (added === 0) {
+        alert('No se encontraron estampas válidas en el Excel.\nAsegúrate de que cada celda tenga formato: "ARG 5" o "Argentina 5"');
+      } else {
+        saveData();
+        buildTable();
+        alert('✅ Se agregaron ' + added + ' entradas del Excel al inventario');
+      }
+    } catch(err) {
+      alert('Error al leer el Excel: ' + err.message);
+    }
+    input.value = '';
+  };
+  reader.readAsArrayBuffer(file);
+}
+
+
 let _cotInitDone = false;
 function cotInit() {
   cotCargar();
@@ -2546,6 +2879,17 @@ window.cotSetJugPrecioIdx=cotSetJugPrecioIdx;
 window.cotToggleEstrella=cotToggleEstrella;
 window.cotSetJugPrecio=cotSetJugPrecio;
 
+
+// ARRANCAR
+initFirebase();
+
+// Registrar Service Worker (PWA)
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('./sw.js').catch(() => {});
+  });
+}
+
 </script>
 
 <!-- ===== COTIZADOR DE LISTAS ===== -->
@@ -2553,9 +2897,7 @@ window.cotSetJugPrecio=cotSetJugPrecio;
 <div style="padding:20px 28px 40px">
   <div class="cot-sub-tabs">
     <button class="cot-sub-tab active" onclick="cotShowTab('cot-p-cotizar',this)">🧾 Cotizar lista</button>
-    <button class="cot-sub-tab" onclick="cotShowTab('cot-p-precios',this)">💲 Precios</button>
-    <button class="cot-sub-tab" onclick="cotShowTab('cot-p-estrellas',this)">⭐ Estrellas</button>
-    <button class="cot-sub-tab" onclick="cotShowTab('cot-p-equipos',this)">🏆 Equipos</button>
+    <button class="cot-sub-tab" onclick="cotShowTab('cot-p-config',this)">⚙️ Configuración</button>
   </div>
 
   <!-- COTIZAR -->
@@ -2569,6 +2911,7 @@ window.cotSetJugPrecio=cotSetJugPrecio;
           <div style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap">
             <button class="cot-btn cot-btn-red" onclick="cotCotizar()">⚡ Cotizar lista</button>
             <button class="cot-btn cot-btn-ghost" onclick="cotLimpiar()">✕ Limpiar</button>
+            <button id="int-toggle-btn" class="cot-btn cot-btn-ghost" onclick="(function(b){const p=document.getElementById('int-panel');const open=p.style.display==='none';p.style.display=open?'block':'none';b.style.color=open?'#f97316':'#94a3b8';b.style.borderColor=open?'#f97316':'#334155';})(this)">🔄 Intercambio</button>
           </div>
         </div>
         <div class="cot-card" style="margin-top:12px">
@@ -2579,19 +2922,47 @@ window.cotSetJugPrecio=cotSetJugPrecio;
         <div class="cot-empty">🧾 Pega una lista y presiona <strong>Cotizar</strong></div>
       </div>
     </div>
-  </div>
 
-  <!-- PRECIOS BASE -->
-  <div class="cot-sub-page" id="cot-p-precios" style="display:none;margin-top:16px">
-    <div class="cot-precio-card" style="max-width:500px">
-      <h3>💲 Precios base por categoría</h3>
-      <div id="cot-base-precios"></div>
+    <div id="int-panel" style="display:none;margin-top:16px">
+      <div class="int-section">
+        <div class="cot-card">
+          <h3>📤 Lista que DAMOS (resta del inventario)</h3>
+          <p style="font-size:0.72rem;color:#64748b;margin-bottom:8px">Formatos: ARG 14 · ARG-14 · Argentina 14 · ARG 14 x2</p>
+          <textarea class="cot-textarea" id="int-lista-damos" placeholder="ARG 14&#10;BRA 1&#10;..."></textarea>
+        </div>
+        <div class="cot-card">
+          <h3>📥 Lista que RECIBIMOS (suma al inventario)</h3>
+          <p style="font-size:0.72rem;color:#64748b;margin-bottom:8px">Formatos: ARG 14 · ARG-14 · Argentina 14 · ARG 14 x2</p>
+          <textarea class="cot-textarea" id="int-lista-recibimos" placeholder="ESP 15&#10;FRA 3&#10;..."></textarea>
+        </div>
+      </div>
+      <div class="cot-card" style="margin-bottom:14px">
+        <h3>💵 Venta — dinero adicional</h3>
+        <div style="display:flex;align-items:center;gap:10px;margin-top:8px">
+          <select id="int-dinero-dir" style="display:none"><option value="recibimos">recibimos</option></select>
+          <span style="font-size:0.8rem;color:#64748b">Recibimos</span>
+          <div style="display:flex;align-items:center;background:#0f172a;border:1px solid #374151;border-radius:5px;overflow:hidden">
+            <span style="padding:0 8px;color:#64748b;background:#1e2435;border-right:1px solid #374151;font-size:0.8rem;line-height:34px">Q</span>
+            <input id="int-dinero-monto" type="number" min="0" step="1" value="0" style="width:90px;background:transparent;border:none;color:#e2e8f0;font-size:0.85rem;padding:6px 10px;outline:none;font-family:inherit">
+          </div>
+          <span style="font-size:0.75rem;color:#4b5563">adicionales (0 si es estampa por estampa)</span>
+        </div>
+      </div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px">
+        <button class="cot-btn cot-btn-red" onclick="intCalcular()">⚡ Calcular intercambio</button>
+        <button class="cot-btn cot-btn-ghost" onclick="intLimpiar()">✕ Limpiar</button>
+      </div>
+      <div id="int-resultado"><div class="cot-empty">Pega las listas y presiona Calcular intercambio</div></div>
     </div>
   </div>
 
-  <!-- ESTRELLAS + PRECIO INDIVIDUAL -->
-  <div class="cot-sub-page" id="cot-p-estrellas" style="display:none;margin-top:16px">
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;flex-wrap:wrap">
+  <!-- CONFIGURACIÓN (Precios + Estrellas + Equipos juntos) -->
+  <div class="cot-sub-page" id="cot-p-config" style="display:none;margin-top:16px">
+    <div class="cot-precio-card" style="max-width:500px;margin-bottom:20px">
+      <h3>💲 Precios base por categoría</h3>
+      <div id="cot-base-precios"></div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:20px">
       <div class="cot-precio-card">
         <h3>⭐ Marcar jugadores estrella</h3>
         <p style="font-size:0.72rem;color:#64748b;margin-bottom:10px">Dorado = precio estrella. Clic para marcar o desmarcar.</p>
@@ -2603,10 +2974,6 @@ window.cotSetJugPrecio=cotSetJugPrecio;
         <div id="cot-jug-precios"></div>
       </div>
     </div>
-  </div>
-
-  <!-- EQUIPOS IMPORTANTES -->
-  <div class="cot-sub-page" id="cot-p-equipos" style="display:none;margin-top:16px">
     <div class="cot-precio-card">
       <h3>🏆 Equipos importantes — clic para marcar/desmarcar</h3>
       <p style="font-size:0.72rem;color:#64748b;margin-bottom:10px">Verde = importante (precio diferenciado en escudos, fotos y jugadores).</p>
@@ -2619,3 +2986,5 @@ window.cotSetJugPrecio=cotSetJugPrecio;
 
 </body>
 </html>
+
+
