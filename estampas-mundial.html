@@ -43,9 +43,39 @@ body { font-family: 'Inter', sans-serif; background: #0a0e1a; color: #e2e8f0; mi
 .sync-indicator.error { color: #f97316; }
 .sync-indicator.error .sync-dot { background: #f97316; }
 @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
-.header { background: linear-gradient(135deg, #f97316 0%, #ea580c 40%, #0a0e1a 100%); padding: 18px 28px; display: flex; align-items: center; gap: 14px; flex-wrap: wrap; margin: 12px 14px; border-radius: 24px; }
-.header h1 { font-family: 'Bebas Neue', sans-serif; font-size: 2.2rem; letter-spacing: 3px; color: #fff; }
-.header .sub { font-size: 0.78rem; color: rgba(255,255,255,0.7); margin-top: 2px; }
+.header { background: linear-gradient(135deg, #f97316 0%, #ea580c 40%, #0a0e1a 100%); padding: 10px 16px; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin: 8px 10px; border-radius: 16px; }
+.header h1 { font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem; letter-spacing: 3px; color: #fff; }
+.header .sub { font-size: 0.72rem; color: rgba(255,255,255,0.7); margin-top: 1px; }
+@media (max-width: 600px) { .header { padding: 7px 12px; margin: 5px 8px; border-radius: 12px; } .header h1 { font-size: 1.2rem; } }
+
+/* Nav fijo abajo en móvil */
+@media (max-width: 600px) {
+  .nav {
+    position: fixed !important;
+    bottom: 0; left: 0; right: 0;
+    z-index: 999;
+    border-bottom: none !important;
+    border-top: 1px solid rgba(249,115,22,0.35) !important;
+    padding-bottom: env(safe-area-inset-bottom);
+    justify-content: space-around;
+  }
+  .nav-btn {
+    flex: 1;
+    text-align: center;
+    padding: 12px 6px 10px !important;
+    font-size: 0.68rem !important;
+    border-bottom: none !important;
+    border-top: 2px solid transparent;
+    margin-bottom: 0 !important;
+    margin-top: 0 !important;
+  }
+  .nav-btn.active {
+    border-top-color: #f97316;
+    border-bottom-color: transparent !important;
+  }
+  .sync-indicator { display: none; }
+  body { padding-bottom: 60px; }
+}
 .badge { background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3); border-radius: 20px; padding: 4px 12px; font-size: 0.73rem; color: #fff; white-space: nowrap; }
 
 .stats-row { display: flex; background: #111827; border-bottom: 1px solid #1e2435; flex-wrap: wrap; }
@@ -449,9 +479,9 @@ tbody tr:hover td { background: rgba(255,255,255,0.03) !important; }
 <body>
 
 <div class="nav">
-  <button class="nav-btn active" onclick="showPage('p-inv',this)">📦 Inventario</button>
-  <button class="nav-btn" onclick="showPage('p-neg',this)">💰 Compras</button>
-  <button class="nav-btn" onclick="showPage('p-cotiz',this)">🧾 Cotizador</button>
+  <button class="nav-btn active" onclick="showPage('p-inv',this)">Inventario</button>
+  <button class="nav-btn" onclick="showPage('p-neg',this)">Compras</button>
+  <button class="nav-btn" onclick="showPage('p-cotiz',this)">Cotizador</button>
   <div class="sync-indicator" id="sync-ind">
     <span class="sync-dot"></span>
     <span id="sync-txt">Offline</span>
@@ -476,14 +506,14 @@ tbody tr:hover td { background: rgba(255,255,255,0.03) !important; }
   <div class="stat-card sc-total" ><div class="sc-v" id="s-total">0</div><div class="sc-l">En inventario</div></div>
   <div class="stat-card sc-conseg"><div class="sc-v" id="s-conseg">0</div><div class="sc-l">Conseguidas (únicas)</div></div>
   <div class="stat-card sc-faltan"><div class="sc-v" id="s-faltan">980</div><div class="sc-l">No conseguidas</div></div>
-  <div class="stat-card sc-rep"   ><div class="sc-v" id="s-repet">0</div><div class="sc-l">Repetidas</div></div>
+  <div class="stat-card sc-rep"   ><div class="sc-v" id="s-repet">0</div><div class="sc-l">Para vender</div></div>
   <div class="stat-card sc-esp"   ><div class="sc-v" id="s-esp">0</div><div class="sc-l">Especiales</div></div>
   <div class="stat-card sc-mas"   ><div class="sc-v" id="s-mas">—</div><div class="sc-l">Más repetida</div></div>
 </div>
 
 <div class="controls">
   <button class="btn btn-red" onclick="exportCSV()">⬇ Exportar CSV</button>
-  <label class="excel-upload-label">📊 Subir Excel
+  <label class="excel-upload-label">Subir Excel
     <input id="excel-file-input" type="file" accept=".xlsx,.xls,.csv" onchange="excelUpload(this)">
   </label>
   <span class="saved-badge" id="save-badge">💾 Guardado automático</span>
@@ -507,7 +537,7 @@ tbody tr:hover td { background: rgba(255,255,255,0.03) !important; }
 
 <!-- Valor estimado del inventario -->
 <div id="inv-valor-wrap" style="margin:24px 28px 32px;background:#111827;border:1px solid #1e2435;border-radius:12px;padding:20px 24px">
-  <div style="font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:2px;color:#64748b;margin-bottom:14px">💰 VALOR ESTIMADO DEL INVENTARIO</div>
+  <div style="font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:2px;color:#64748b;margin-bottom:14px">VALOR ESTIMADO DEL INVENTARIO</div>
   <div id="inv-valor-grid" style="display:flex;flex-wrap:wrap;gap:12px"></div>
   <div style="margin-top:14px;font-size:0.7rem;color:#374151">Calculado con los precios configurados en el Cotizador. Actualiza automáticamente al cambiar precios.</div>
 </div>
@@ -520,8 +550,8 @@ tbody tr:hover td { background: rgba(255,255,255,0.03) !important; }
 
   <!-- SUB-TABS -->
   <div class="neg-tabs">
-    <button class="neg-tab active" onclick="negTab('cajas',this)">📦 Cajas</button>
-    <button class="neg-tab" onclick="negTab('ana',this)">📊 Análisis</button>
+    <button class="neg-tab active" onclick="negTab('cajas',this)">Cajas</button>
+    <button class="neg-tab" onclick="negTab('ana',this)">Análisis</button>
   </div>
 
   <!-- ======= CAJAS ======= -->
@@ -533,7 +563,7 @@ tbody tr:hover td { background: rgba(255,255,255,0.03) !important; }
     <div class="neg-2col">
       <!-- PRECIOS -->
       <div class="neg-card">
-        <div class="neg-card-title">⚙️ Precios</div>
+        <div class="neg-card-title">Precios</div>
         <div class="price-row"><label>Costo caja (tuyo)</label><div class="price-inp-wrap"><span class="price-pre">Q</span><input class="price-inp" id="pc-caja" type="number" min="0" step="1" value="180"></div></div>
         <div class="price-row"><label>Venta caja completa</label><div class="price-inp-wrap"><span class="price-pre">Q</span><input class="price-inp" id="pv-caja" type="number" min="0" step="1" value="250"></div></div>
         <div class="price-row"><label>Venta sobre suelto</label><div class="price-inp-wrap"><span class="price-pre">Q</span><input class="price-inp" id="pv-sobre" type="number" min="0" step="0.5" value="3"></div></div>
@@ -542,7 +572,7 @@ tbody tr:hover td { background: rgba(255,255,255,0.03) !important; }
 
       <!-- REGISTRAR COMPRA DE CAJAS -->
       <div class="neg-card">
-        <div class="neg-card-title">📥 Registrar compra de cajas</div>
+        <div class="neg-card-title">Registrar compra de cajas</div>
         <div class="form-row"><label>Cajas para vender completas</label><input class="neg-inp" id="caja-buy-vender" type="number" min="0" value="0" placeholder="0"></div>
         <div class="form-row"><label>Cajas para vender por sobres</label><input class="neg-inp" id="caja-buy-sobres" type="number" min="0" value="0" placeholder="0"></div>
         <div class="form-row"><label>Cajas para abrir (colección)</label><input class="neg-inp" id="caja-buy-colec" type="number" min="0" value="0" placeholder="0"></div>
@@ -555,14 +585,14 @@ tbody tr:hover td { background: rgba(255,255,255,0.03) !important; }
     <!-- VENTAS -->
     <div class="neg-2col" style="margin-top:14px">
       <div class="neg-card">
-        <div class="neg-card-title">📤 Vender caja completa</div>
+        <div class="neg-card-title">Vender caja completa</div>
         <div class="form-row"><label>Cantidad</label><input class="neg-inp" id="caja-sell-qty" type="number" min="1" value="1"></div>
         <div class="form-row"><label>Precio unitario</label><div class="price-inp-wrap"><span class="price-pre">Q</span><input class="neg-inp" id="caja-sell-price" type="number" min="0" step="1" placeholder="Auto"></div></div>
         <div class="form-row"><label>Comprador</label><input class="neg-inp" id="caja-sell-note" type="text" placeholder="Opcional"></div>
         <button class="neg-btn sell" onclick="cajasSellCaja()">− Vender caja</button>
       </div>
       <div class="neg-card">
-        <div class="neg-card-title">📤 Vender sobres sueltos</div>
+        <div class="neg-card-title">Vender sobres sueltos</div>
         <div class="form-row"><label>Sobres</label><input class="neg-inp" id="sobre-sell-qty" type="number" min="1" value="1"></div>
         <div class="form-row"><label>Precio por sobre</label><div class="price-inp-wrap"><span class="price-pre">Q</span><input class="neg-inp" id="sobre-sell-price" type="number" min="0" step="0.5" placeholder="Auto"></div></div>
         <div class="form-row"><label>Comprador</label><input class="neg-inp" id="sobre-sell-note" type="text" placeholder="Opcional"></div>
@@ -572,7 +602,7 @@ tbody tr:hover td { background: rgba(255,255,255,0.03) !important; }
 
     <!-- HISTORIAL CAJAS -->
     <div class="neg-card" style="margin-top:14px">
-      <div class="neg-card-title">📋 Historial de cajas</div>
+      <div class="neg-card-title">Historial de cajas</div>
       <div class="neg-hist" id="hist-cajas"></div>
     </div>
     <div id="resumen-cajas" class="neg-resumen"></div>
@@ -582,7 +612,7 @@ tbody tr:hover td { background: rgba(255,255,255,0.03) !important; }
   <div id="neg-cajas-extra">
     <!-- AJUSTES MANUALES -->
     <div class="neg-resumen-general" style="margin-top:16px">
-      <h3>⚙️ Ajustes Manuales</h3>
+      <h3>Ajustes Manuales</h3>
       <p style="font-size:0.75rem;color:#64748b;margin-bottom:12px">Para gastos o ingresos que no pasaron por el sistema. Se suman al resumen general.</p>
       <div id="adj-lista" style="margin-bottom:10px"></div>
       <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
@@ -604,12 +634,13 @@ tbody tr:hover td { background: rgba(255,255,255,0.03) !important; }
     <div class="ana-wrap" style="padding:0">
       <div class="ana-stats-row" id="ana-quick"></div>
       <div class="cards-grid">
-        <div class="ana-card ana-card-wide"><h3>📊 Progreso por país</h3><div id="paises-comp"></div></div>
-        <div class="ana-card ana-card-wide"><h3>🔁 Top repetidas (para vender)</h3><table class="rank-table rank-table-lg" id="rank-rep"></table></div>
-        <div class="ana-card"><h3>❌ Países sin ninguna estampa</h3><div id="paises-cero"></div></div>
-        <div class="ana-card"><h3>💰 Valor estimado</h3><div class="info-box" id="inv-valor"></div></div>
+        <div class="ana-card"><h3>Progreso por país</h3><div id="paises-comp"></div></div>
+        <div class="ana-card"><h3>Países sin ninguna estampa</h3><div id="paises-cero"></div></div>
+        <div class="ana-card"><h3 id="faltan-title">No tengo ninguna</h3><p id="faltan-sub" style="font-size:0.72rem;color:#64748b;margin-bottom:10px"></p><div id="faltan-list" style="max-height:300px;overflow-y:auto"></div></div>
+        <div class="ana-card"><h3>Top para vender</h3><div style="max-height:240px;overflow-y:auto"><table class="rank-table" id="rank-rep"></table></div></div>
+        <div class="ana-card"><h3>Valor estimado</h3><div class="info-box" id="inv-valor"></div></div>
         <div class="ana-card">
-          <h3>🎲 Matemática del sobre</h3>
+          <h3>Matemática del sobre</h3>
           <div class="info-box">
             <strong>7 estampas/sobre · 104 sobres/caja</strong><br>
             • Una estampa específica: <strong>1/980 ≈ 0.10%</strong><br>
@@ -1124,14 +1155,15 @@ function calcStats() {
   let total=0, uniq=0, rep=0, esp=0, maxV=0, maxL='—';
   for (let r=0; r<=20; r++) {
     COLS.forEach((col,ci) => {
+      if (r===20 && ci===0) return; // FWC solo va 0-19
       const v = data[r]?.[ci] || 0;
       total += v;
       if (v>0) { uniq++; if (r===0||r===1||r===13||ci===0) esp+=v; }
-      if (v>1) rep+=(v-1);
+      if (v>0) rep+=v;
       if (v>maxV) { maxV=v; maxL=col+' #'+(r===0?'00':r); }
     });
   }
-  const TOTAL_STICKERS = 980 + COLS.length; // +49 por fila 00 en todos los países
+  const TOTAL_STICKERS = 979 + COLS.length; // FWC 0-19 = 20 est., no 21 // +49 por fila 00 en todos los países
   return {total, uniq, faltan:TOTAL_STICKERS-uniq, rep, esp, maxL, maxV};
 }
 
@@ -1191,14 +1223,14 @@ function buildTable() {
   COLS.forEach((c,ci) => {
     const isFWC = c==='FWC';
     const rStart = isFWC ? 0 : 1; // la "00" (ri=0) solo es estampa válida en FWC
-    const maxStk = isFWC ? 21 : 20;
+    const maxStk = 20;
     let uniq=0, tot=0, val=0;
     for(let r=rStart;r<=20;r++){
       const v=data[r]?.[ci]||0;
       if(v>0){ uniq++; tot+=v; }
       val+=cotGetPrecio(c,r)*v;
     }
-    const completo = uniq>=maxStk ? ' ✅' : '';
+    const completo = uniq>=maxStk ? ' ' : '';
     h += `<th class="${tot>0?'th-activo':''}" data-col="${c}" data-uniq="${uniq}" data-tot="${tot}" data-val="${Math.round(val)}" onclick="showColInfo('${c}')" style="cursor:pointer">
       <div class="th-inner"><span class="th-code">${c}</span><span class="th-frac">${uniq}/${maxStk}${completo}</span></div>
     </th>`;
@@ -1350,7 +1382,7 @@ function adjRender() {
       <span style="color:${a.tipo==='ingreso'?'#34d399':'#f87171'};font-weight:700;margin:0 12px">
         ${a.tipo==='ingreso'?'+':'-'}Q${a.monto.toFixed(2)}
       </span>
-      <button onclick="adjEliminar(${a.id})" style="background:none;border:none;color:#64748b;cursor:pointer;font-size:1rem">✕</button>
+      <button onclick="adjEliminar(${a.id})" style="background:none;border:none;color:#64748b;cursor:pointer;font-size:1rem">X</button>
     </div>`).join('');
 }
 
@@ -1378,9 +1410,10 @@ function showColInfo(col) {
   const nombre = PAIS[col] || col;
   const isFWC = col==='FWC';
   const rStart = isFWC ? 0 : 1;
-  const maxStk = isFWC ? 21 : 20;
+  const maxStk = 20;
+  const rEnd1 = isFWC ? 19 : 20;
   let uniq=0, tot=0, val=0;
-  for(let r=rStart;r<=20;r++){
+  for(let r=rStart;r<=rEnd1;r++){
     const v=data[r]?.[ci]||0;
     if(v>0){uniq++;tot+=v;}
     val+=cotGetPrecio(col,r)*v;
@@ -1393,7 +1426,7 @@ function showColInfo(col) {
   }
   const tip = document.getElementById('col-tooltip');
   if(tip){
-    tip.innerHTML = `<strong>${nombre}</strong>${uniq>=maxStk?' <span style="color:#34d399">✅ COMPLETO</span>':''}<br>
+    tip.innerHTML = `<strong>${nombre}</strong>${uniq>=maxStk?' <span style="color:#34d399">COMPLETO</span>':''}<br>
       <span style="color:#94a3b8;font-size:0.7rem">${uniq}/${maxStk} conseguidas · Total: ${tot} estampas</span><br>
       <span style="color:#f59e0b;font-size:0.72rem">Valor estimado: Q${Math.round(val)}</span>`;
     tip.style.display='block';
@@ -1578,7 +1611,7 @@ function renderNeg() {
                onblur="notarTx(${t.id}, this.value)"
                style="width:90px;background:#0f172a;border:1px solid #374151;color:#e2e8f0;padding:3px 6px;border-radius:4px;font-size:0.75rem">
         <span class="neg-hist-date">${t.date}</span>
-        <span class="neg-hist-del" onclick="negDelTx(${t.id})" title="Eliminar">✕</span>
+        <span class="neg-hist-del" onclick="negDelTx(${t.id})" title="Eliminar">X</span>
       </div>`;
     return `
       <div class="neg-hist-row">
@@ -1586,7 +1619,7 @@ function renderNeg() {
         <span class="neg-hist-desc" style="flex:1">${t.desc}</span>
         <span class="neg-hist-price">${fmt(t.price * t.qty)}</span>
         <span class="neg-hist-date">${t.date}</span>
-        <span class="neg-hist-del" onclick="negDelTx(${t.id})" title="Eliminar">✕</span>
+        <span class="neg-hist-del" onclick="negDelTx(${t.id})" title="Eliminar">X</span>
       </div>`;
   }
   function histHTML(txs) {
@@ -1711,32 +1744,32 @@ function buildAnalysis() {
   const paisData = COLS.map((col,ci)=>{
     const isFWC = col==='FWC';
     const rStart = isFWC ? 0 : 1; // la "00" (ri=0) solo es estampa válida en FWC
-    const maxStk = isFWC ? 21 : 20;
+    const maxStk = 20;
+    const rEnd2 = isFWC ? 19 : 20;
     let g=0;
-    for(let r=rStart;r<=20;r++) if((data[r]?.[ci]||0)>0) g++;
+    for(let r=rStart;r<=rEnd2;r++) if((data[r]?.[ci]||0)>0) g++;
     return {col, name:(PAIS[col]||col).substring(0,20), got:g, maxStk};
   }).sort((a,b)=>b.got-a.got);
-  document.getElementById('paises-comp').innerHTML = paisData.map(p=>{
-    const pct = Math.round(p.got/p.maxStk*100);
-    const color = pct>=95?'#34d399':pct>=70?'#86efac':pct>=40?'#f59e0b':pct>=20?'#fb923c':'#60a5fa';
-    const full = p.got>=p.maxStk?' ✅':'';
-    return `<div class="prob-row"><div class="prob-label"><span style="color:#94a3b8">${p.name}${full}</span><span style="color:#e2e8f0;font-weight:600">${p.got}/${p.maxStk}</span></div><div class="prob-bar-bg"><div class="prob-bar-fill" style="width:${pct}%;background:${color}"></div></div></div>`;
-  }).join('') || '<p style="color:#4b5563;font-size:0.78rem">Sin datos aún</p>';
+  document.getElementById('paises-comp').innerHTML = '<div style="display:grid;grid-template-columns:1fr 1fr;gap:0 12px">'+
+    paisData.map(p=>{
+      const c = p.got>=p.maxStk?'#34d399':p.got===0?'#ef4444':'#94a3b8';
+      return `<div style="display:flex;justify-content:space-between;align-items:center;padding:2px 0;border-bottom:1px solid #1a2030"><span style="color:#94a3b8;font-size:0.69rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100px">${p.name}</span><span style="color:${c};font-size:0.69rem;font-weight:700;margin-left:4px;white-space:nowrap">${p.got}/${p.maxStk}</span></div>`;
+    }).join('')+'</div>' || '<p style="color:#4b5563;font-size:0.78rem">Sin datos aún</p>';
 
   // Top repetidas — usando precios del cotizador
   let cells=[];
   for(let r=0;r<=20;r++) COLS.forEach((col,ci)=>{
     const v=data[r]?.[ci]||0;
-    if(v>1) cells.push({l:sname(col,r), col, r, v, esp:isEstrella(col,r), precio:cotGetPrecio(col,r), valRep:v*cotGetPrecio(col,r)});
+    if(v>0) cells.push({l:sname(col,r), col, r, v, esp:isEstrella(col,r), precio:cotGetPrecio(col,r), valRep:v*cotGetPrecio(col,r)});
   });
   cells.sort((a,b)=>b.v-a.v);
   document.getElementById('rank-rep').innerHTML = cells.slice(0,20).length
     ? `<thead><tr><th>#</th><th>Estampa</th><th>Total</th><th>Valor total</th></tr></thead><tbody>`+
       cells.slice(0,20).map((c,i)=>{
-        const star = c.esp?' ⭐':'';
+        const star = c.esp?'':'';
         return `<tr><td style="color:#64748b">${i+1}</td><td class="rn">${c.l.length>32?c.l.slice(0,31)+'…':c.l}${star}</td><td style="color:#60a5fa">×${c.v}</td><td style="color:#f59e0b">Q${c.valRep.toFixed(0)}</td></tr>`;
       }).join('')+'</tbody>'
-    : '<tr><td colspan="4" style="color:#4b5563;padding:16px;text-align:center">Sin repetidas aún</td></tr>';
+    : '<tr><td colspan="4" style="color:#4b5563;padding:16px;text-align:center">Sin estampas aún</td></tr>';
 
   // Países sin ninguna estampa
   const sinNada = COLS.filter((col,ci)=>{
@@ -1746,15 +1779,15 @@ function buildAnalysis() {
   document.getElementById('paises-cero').innerHTML = sinNada.length
     ? `<p style="color:#64748b;font-size:0.72rem;margin-bottom:8px">Sin estampas de ${sinNada.length} países:</p>`+
       sinNada.map(col=>`<span style="display:inline-block;background:#1e2435;border:1px solid #374151;border-radius:4px;padding:3px 8px;margin:3px;font-size:0.72rem;color:#94a3b8">${col} — ${(PAIS[col]||col).substring(0,15)}</span>`).join('')
-    : '<p style="color:#34d399;font-size:0.78rem">🎉 ¡Tienes al menos una estampa de cada país!</p>';
+    : '<p style="color:#34d399;font-size:0.78rem">¡Tienes al menos una estampa de cada país!</p>';
 
   // Valor estimado — conectado a precios del cotizador
   let catRep={fwc:0,escudo:0,foto:0,estrella:0,jug:0};
   let catRepQ={fwc:0,escudo:0,foto:0,estrella:0,jug:0};
   let masValRep=null, masValRepQ=0;
   for(let r=0;r<=20;r++) COLS.forEach((col,ci)=>{
-    const v=data[r]?.[ci]||0; if(v<2) return;
-    const extra=v-1, precio=cotGetPrecio(col,r), sub=precio*extra;
+    const v=data[r]?.[ci]||0; if(v<1) return;
+    const extra=v, precio=cotGetPrecio(col,r), sub=precio*extra;
     const tipo=cotGetTipo(col,r);
     if(col==='FWC'){catRep.fwc+=extra;catRepQ.fwc+=sub;}
     else if(r===0||r===1){catRep.escudo+=extra;catRepQ.escudo+=sub;}
@@ -1766,7 +1799,7 @@ function buildAnalysis() {
   const valTotal=Object.values(catRepQ).reduce((a,b)=>a+b,0);
   document.getElementById('inv-valor').innerHTML=`
     <div style="margin-bottom:10px">
-      <strong style="color:#e2e8f0">Repetidas disponibles para vender:</strong><br>
+      <strong style="color:#e2e8f0">Total disponible para vender:</strong><br>
       ${catRep.fwc?`<span style="color:#a78bfa">FWC:</span> ${catRep.fwc} → <strong style="color:#a78bfa">Q${catRepQ.fwc.toFixed(0)}</strong><br>`:''}
       ${catRep.escudo?`<span style="color:#60a5fa">Escudos/00:</span> ${catRep.escudo} → <strong style="color:#60a5fa">Q${catRepQ.escudo.toFixed(0)}</strong><br>`:''}
       ${catRep.foto?`<span style="color:#fb923c">Fotos:</span> ${catRep.foto} → <strong style="color:#fb923c">Q${catRepQ.foto.toFixed(0)}</strong><br>`:''}
@@ -1775,7 +1808,7 @@ function buildAnalysis() {
     </div>
     <div style="border-top:1px solid #374151;padding-top:10px">
       <strong style="font-size:1.1rem;color:#34d399">Total estimado: ~Q${valTotal.toFixed(0)}</strong>
-      ${masValRep?`<br><span style="color:#f59e0b;font-size:0.71rem">Más valiosa: ${masValRep.nombre} ×${masValRep.extra} rep. = Q${masValRep.sub.toFixed(0)}</span>`:''}
+      ${masValRep?`<br><span style="color:#f59e0b;font-size:0.71rem">Más valiosa: ${masValRep.nombre} ×${masValRep.v} unid. = Q${masValRep.sub.toFixed(0)}</span>`:''}
       <br><span style="color:#4b5563;font-size:0.68rem">Según precios del Cotizador</span>
     </div>`;
 
@@ -1812,42 +1845,84 @@ function buildAnalysis() {
   COLS.forEach((col,ci)=>{
     let best=null,bestV=0;
     for(let r=0;r<=20;r++){const v=data[r]?.[ci]||0;if(v>bestV){bestV=v;best={col,r,v,nombre:sname(col,r)};}}
-    if(best&&bestV>1) topPais.push(best);
+    if(best&&bestV>0) topPais.push(best);
   });
   topPais.sort((a,b)=>b.v-a.v);
 
+  // Card: 10+ copias del inventario
+  const rep10hits=[];
+  for(let r=0;r<=20;r++) COLS.forEach((col,ci)=>{
+    if(r===20&&ci===0) return;
+    const v=data[r]?.[ci]||0;
+    if(v>=10) rep10hits.push({col,r,v});
+  });
+  rep10hits.sort((a,b)=>b.v-a.v);
+
   anaExtra.innerHTML=`
     <div class="ana-card">
-      <h3>📦 Desglose por categoría</h3>
-      <table class="rank-table"><thead><tr><th>Categoría</th><th>Únicas</th><th>Total</th><th>Repet.</th></tr></thead><tbody>
-        <tr><td style="color:#a78bfa">🏆 FWC</td><td>${catTodo.fwc.u}/21</td><td class="rn">${catTodo.fwc.t}</td><td style="color:#f59e0b">${catTodo.fwc.t-catTodo.fwc.u}</td></tr>
-        <tr><td style="color:#60a5fa">🛡️ Escudos &amp; #00</td><td>${catTodo.escudo.u}/${(COLS.length-1)*2}</td><td class="rn">${catTodo.escudo.t}</td><td style="color:#f59e0b">${catTodo.escudo.t-catTodo.escudo.u}</td></tr>
-        <tr><td style="color:#fb923c">📸 Fotos grupales</td><td>${catTodo.foto.u}/${COLS.length-1}</td><td class="rn">${catTodo.foto.t}</td><td style="color:#f59e0b">${catTodo.foto.t-catTodo.foto.u}</td></tr>
-        <tr><td style="color:#fbbf24">⭐ Estrellas</td><td>${catTodo.estrella.u}</td><td class="rn">${catTodo.estrella.t}</td><td style="color:#f59e0b">${catTodo.estrella.t-catTodo.estrella.u}</td></tr>
-        <tr><td style="color:#64748b">👤 Jugadores</td><td>${catTodo.jug.u}</td><td class="rn">${catTodo.jug.t}</td><td style="color:#f59e0b">${catTodo.jug.t-catTodo.jug.u}</td></tr>
+      <h3>Tenés 10+ copias (${rep10hits.length})</h3>
+      <div style="max-height:240px;overflow-y:auto">
+        ${rep10hits.length
+          ? rep10hits.map(h=>`<div style="display:flex;justify-content:space-between;align-items:center;padding:2px 0;border-bottom:1px solid #1a2030"><span style="font-family:monospace;font-size:0.72rem;color:#e2e8f0">${h.col} ${h.r}</span><span style="font-size:0.72rem;font-weight:700;color:#f97316;user-select:none">×${h.v}</span></div>`).join('')
+          : '<p style="color:#4b5563;font-size:0.78rem">Ninguna estampa con 10+ copias aún</p>'}
+      </div>
+    </div>
+
+    <div class="ana-card">
+      <h3>Desglose por categoría</h3>
+      <table class="rank-table"><thead><tr><th>Categoría</th><th>Únicas</th><th>Para vender</th></tr></thead><tbody>
+        <tr><td style="color:#a78bfa">FWC</td><td>${catTodo.fwc.u}/21</td><td class="rn" style="color:#f59e0b">${catTodo.fwc.t}</td></tr>
+        <tr><td style="color:#60a5fa">Escudos &amp; #00</td><td>${catTodo.escudo.u}/${(COLS.length-1)*2}</td><td class="rn" style="color:#f59e0b">${catTodo.escudo.t}</td></tr>
+        <tr><td style="color:#fb923c">Fotos grupales</td><td>${catTodo.foto.u}/${COLS.length-1}</td><td class="rn" style="color:#f59e0b">${catTodo.foto.t}</td></tr>
+        <tr><td style="color:#fbbf24">Estrellas</td><td>${catTodo.estrella.u}</td><td class="rn" style="color:#f59e0b">${catTodo.estrella.t}</td></tr>
+        <tr><td style="color:#64748b">Jugadores</td><td>${catTodo.jug.u}</td><td class="rn" style="color:#f59e0b">${catTodo.jug.t}</td></tr>
       </tbody></table>
     </div>
 
     <div class="ana-card">
-      <h3>💎 Estampas más valiosas (por valor total)</h3>
-      <table class="rank-table"><thead><tr><th>#</th><th>Estampa</th><th>Cant.</th><th>Valor total</th></tr></thead><tbody>
-        ${allItems.slice(0,10).map((it,i)=>`<tr><td style="color:#64748b">${i+1}</td><td class="rn" style="font-size:0.72rem">${it.nombre.length>24?it.nombre.slice(0,23)+'…':it.nombre}</td><td style="color:#60a5fa">×${it.v}</td><td style="color:#f59e0b">Q${it.val.toFixed(0)}</td></tr>`).join('')||'<tr><td colspan="4" style="color:#4b5563;padding:12px;text-align:center">Sin datos</td></tr>'}
-      </tbody></table>
+      <h3>Estampas más valiosas</h3>
+      <div style="max-height:240px;overflow-y:auto">
+        <table class="rank-table"><thead><tr><th>#</th><th>Estampa</th><th>Cant.</th><th>Valor</th></tr></thead><tbody>
+          ${allItems.slice(0,15).map((it,i)=>`<tr><td style="color:#64748b">${i+1}</td><td class="rn" style="font-size:0.72rem">${it.nombre.length>24?it.nombre.slice(0,23)+'…':it.nombre}</td><td style="color:#60a5fa">×${it.v}</td><td style="color:#f59e0b">Q${it.val.toFixed(0)}</td></tr>`).join('')||'<tr><td colspan="4" style="color:#4b5563;padding:12px;text-align:center">Sin datos</td></tr>'}
+        </tbody></table>
+      </div>
     </div>
 
     <div class="ana-card">
-      <h3>💰 Top repetidas por valor a vender</h3>
-      <table class="rank-table"><thead><tr><th>#</th><th>Estampa</th><th>Rep.</th><th>Valor rep.</th></tr></thead><tbody>
-        ${repItems.slice(0,10).map((c,i)=>`<tr><td style="color:#64748b">${i+1}</td><td class="rn" style="font-size:0.72rem">${c.l.length>24?c.l.slice(0,23)+'…':c.l}${c.esp?' ⭐':''}</td><td style="color:#34d399">+${c.v-1}</td><td style="color:#f59e0b">Q${c.valRep.toFixed(0)}</td></tr>`).join('')||'<tr><td colspan="4" style="color:#4b5563;padding:12px;text-align:center">Sin repetidas</td></tr>'}
-      </tbody></table>
-    </div>
-
-    <div class="ana-card">
-      <h3>🔁 Más repetida por país</h3>
-      <table class="rank-table"><thead><tr><th>País</th><th>Estampa</th><th>Cant.</th></tr></thead><tbody>
-        ${topPais.slice(0,12).map(it=>`<tr><td style="color:#64748b;font-size:0.7rem">${(PAIS[it.col]||it.col).substring(0,12)}</td><td class="rn" style="font-size:0.72rem">${it.nombre.length>22?it.nombre.slice(0,21)+'…':it.nombre}</td><td style="color:#f59e0b">×${it.v}</td></tr>`).join('')||'<tr><td colspan="3" style="color:#4b5563;padding:12px;text-align:center">Sin repetidas</td></tr>'}
-      </tbody></table>
+      <h3>Más estampas por país</h3>
+      <div style="max-height:240px;overflow-y:auto">
+        <table class="rank-table"><thead><tr><th>País</th><th>Estampa</th><th>Cant.</th></tr></thead><tbody>
+          ${topPais.slice(0,15).map(it=>`<tr><td style="color:#64748b;font-size:0.7rem">${(PAIS[it.col]||it.col).substring(0,12)}</td><td class="rn" style="font-size:0.72rem">${it.nombre.length>22?it.nombre.slice(0,21)+'…':it.nombre}</td><td style="color:#f59e0b">×${it.v}</td></tr>`).join('')||'<tr><td colspan="3" style="color:#4b5563;padding:12px;text-align:center">Sin datos</td></tr>'}
+        </tbody></table>
+      </div>
     </div>`;
+
+  // Estampas que faltan (tengo 0)
+  const faltanPorPais = COLS.map((col,ci) => {
+    const rStart = col==='FWC' ? 0 : 1;
+    const rEnd = col==='FWC' ? 19 : 20;
+    const faltantes = [];
+    for(let r=rStart; r<=rEnd; r++) {
+      if((data[r]?.[ci]||0) === 0) faltantes.push(r);
+    }
+    return {col, faltantes};
+  }).filter(p => p.faltantes.length > 0);
+
+  const faltanTotal = faltanPorPais.reduce((s,p)=>s+p.faltantes.length, 0);
+
+  const faltanHtml = faltanPorPais.map(p =>
+    `<div style="margin-bottom:8px">
+      <span style="color:#60a5fa;font-weight:700;font-size:0.78rem;margin-right:6px">${p.col}</span>
+      <span style="font-family:monospace;font-size:0.78rem;color:#94a3b8">${p.faltantes.join(', ')}</span>
+    </div>`
+  ).join('');
+
+  const faltanTitleEl = document.getElementById('faltan-title');
+  const faltanSubEl   = document.getElementById('faltan-sub');
+  const faltanListEl  = document.getElementById('faltan-list');
+  if(faltanTitleEl) faltanTitleEl.textContent = 'No tengo ninguna ('+faltanTotal+')';
+  if(faltanSubEl)   faltanSubEl.textContent   = faltanPorPais.length+' países con huecos';
+  if(faltanListEl)  faltanListEl.innerHTML    = faltanHtml;
 }
 
 function showPage(id, btn) {
@@ -1905,13 +1980,13 @@ function calcValorInventario() {
     </div>`;
 
   el.innerHTML =
-    chip('🏆 FWC','#a78bfa',cntFWC,totalFWC) +
-    chip('🛡️ Esc. Imp.','#34d399',cntEscImp,totalEscImp) +
-    chip('🛡️ Esc. Norm.','#60a5fa',cntEscNorm,totalEscNorm) +
-    chip('⭐ Estrellas','#fbbf24',cntEst,totalEst) +
-    chip('👤 Normal','#64748b',cntNorm,totalNorm) +
+    chip('FWC','#a78bfa',cntFWC,totalFWC) +
+    chip('Esc. Imp.','#34d399',cntEscImp,totalEscImp) +
+    chip('Esc. Norm.','#60a5fa',cntEscNorm,totalEscNorm) +
+    chip('Estrellas','#fbbf24',cntEst,totalEst) +
+    chip('Normal','#64748b',cntNorm,totalNorm) +
     `<div style="background:#1e1b4b;border:1px solid #4f46e5;border-radius:8px;padding:10px 14px;text-align:center;min-width:90px;align-self:center">
-      <div style="font-size:0.68rem;color:#818cf8;margin-bottom:3px">💰 TOTAL</div>
+      <div style="font-size:0.68rem;color:#818cf8;margin-bottom:3px">TOTAL</div>
       <div style="font-weight:700;color:#a78bfa;font-size:1.2rem">${fmt(totalTodo)}</div>
     </div>`;
 }
@@ -2090,8 +2165,8 @@ function cotizarPedido() {
     </tr>`;
   });
 
-  const errHtml = errores.length ? `<div class="pedido-warn">⚠️ ${errores.join('<br>')}</div>` : '';
-  const stockWarn = sinStock.length ? `<div class="pedido-warn">⚠️ Sin stock suficiente: ${sinStock.join(', ')}</div>` : '';
+  const errHtml = errores.length ? `<div class="pedido-warn">${errores.join('<br>')}</div>` : '';
+  const stockWarn = sinStock.length ? `<div class="pedido-warn">Sin stock suficiente: ${sinStock.join(', ')}</div>` : '';
 
   const allOk = sinStock.length === 0 && items.length > 0;
 
@@ -2104,7 +2179,7 @@ function cotizarPedido() {
       </div>
       <div style="font-size:0.75rem;color:#64748b;text-align:right">
         Precios leídos del Cotizador<br>
-        <span style="color:${allOk?'#34d399':'#f59e0b'}">${allOk?'✅ Stock OK para todo':'⚠️ Stock insuficiente en algunas'}</span>
+        <span style="color:${allOk?'#34d399':'#f59e0b'}">${allOk?'Stock OK para todo':'Stock insuficiente en algunas'}</span>
       </div>
     </div>
 
@@ -2117,13 +2192,13 @@ function cotizarPedido() {
 
     <div class="pedido-confirm-bar">
       <div style="flex:1;min-width:200px">
-        <div style="font-size:0.75rem;color:#34d399;font-weight:700;margin-bottom:4px">✅ Confirmar venta de esta lista</div>
+        <div style="font-size:0.75rem;color:#34d399;font-weight:700;margin-bottom:4px">Confirmar venta de esta lista</div>
         <div style="font-size:0.7rem;color:#64748b">Descuenta del inventario y registra en historial</div>
       </div>
       <input id="pedido-comprador" type="text" placeholder="Nombre del cliente" style="flex:1;min-width:140px">
       <input id="pedido-precio-final" type="number" min="0" step="1" placeholder="Q total (auto: ${totalQ.toFixed(0)})" style="width:160px">
       <button class="neg-btn" style="background:#166534;color:#4ade80;border:1px solid #166534;white-space:nowrap" onclick="confirmarPedido(${totalQ.toFixed(0)})">
-        ✅ Confirmar venta
+        Confirmar venta
       </button>
     </div>`;
 }
@@ -2175,7 +2250,7 @@ function confirmarPedido(totalAuto) {
   document.getElementById('lista-pedido-input').value = '';
   document.getElementById('lista-resultado').innerHTML = `
     <div style="background:#052e16;border:1px solid #166534;border-radius:10px;padding:20px;text-align:center">
-      <div style="font-size:1.8rem;margin-bottom:8px">✅</div>
+      <div style="font-size:1.8rem;margin-bottom:8px"></div>
       <div style="font-size:1rem;font-weight:700;color:#4ade80">Venta confirmada — Q${precioFinal.toFixed(0)}</div>
       <div style="font-size:0.75rem;color:#64748b;margin-top:6px">${totalItems} estampas descontadas del inventario${comprador?' · Cliente: '+comprador:''}</div>
     </div>`;
@@ -2294,7 +2369,7 @@ window.markLastEdited = markLastEdited;
       if(col&&ri){
         const nombre=sname(col,parseInt(ri));
         const v=data[ri]?.[ci]||0;
-        const star=isEstrella(col,parseInt(ri))?' ⭐':'';
+        const star=isEstrella(col,parseInt(ri))?'':'';
         stk.innerHTML='<strong>'+nombre+star+'</strong><br><span style="color:#64748b;font-size:0.68rem">'+(PAIS[col]||col)+' · Estampa #'+ri+' · Tienes: '+v+'</span>';
         stk.style.display='block';
       }
@@ -2308,6 +2383,12 @@ window.markLastEdited = markLastEdited;
     if(e.target.closest('thead th[data-col]')) tip.style.display='none';
     if(e.target.closest('td.cv-cell')) stk.style.display='none';
   });
+  // iPhone: ocultar tooltip al tocar fuera de una celda
+  document.addEventListener('touchstart',e=>{
+    if(!e.target.closest('td.cv-cell')&&!e.target.closest('thead th[data-col]')){
+      tip.style.display='none'; stk.style.display='none';
+    }
+  },{passive:true});
 })();
 
 
@@ -2492,29 +2573,17 @@ function cotCotizar() {
     else { const t=cotGetTipo(col,ri); if(t==='estrella'){cat.estrella+=qty;catQ.estrella+=sub;catItems.estrella.push(nombre+etiq);} else{cat.jugNorm+=qty;catQ.jugNorm+=sub;catItems.jugNorm.push(nombre+etiq);} }
     return `<tr><td style="color:#64748b">${col} #${ri}</td><td>${nombre}</td><td style="text-align:center">${qty}</td><td style="text-align:center;color:${sc}">${stk}</td><td style="text-align:right">Q${precio}</td><td style="text-align:right;font-weight:600;color:#34d399">Q${sub.toFixed(0)}</td></tr>`;
   });
-  const errH=errs.length?`<div class="cot-warn">⚠️ ${errs.join('<br>')}</div>`:'';
-  const stkH=sinStk.length?`<div class="cot-warn">⚠️ Stock insuficiente: ${sinStk.join(', ')}</div>`:'';
+  const errH=errs.length?`<div class="cot-warn">${errs.join('<br>')}</div>`:'';
+  const stkH=sinStk.length?`<div class="cot-warn">Stock insuficiente: ${sinStk.join(', ')}</div>`:'';
   const allOk=sinStk.length===0&&items.length>0;
-  // Llenar card de 10+ en columna izquierda
-  const rep10card=document.getElementById('cot-rep10-card');
-  const rep10el=document.getElementById('cot-rep10');
-  const rep10title=document.getElementById('cot-rep10-title');
-  if(rep10card){
-    if(rep10.length){
-      rep10title.textContent='🔥 De esta lista, ya tenés 10+ copias ('+rep10.length+'):';
-      rep10el.innerHTML='<div style="display:flex;flex-wrap:wrap;gap:6px;user-select:text">'+rep10.map(h=>`<span style="background:#0f172a;border:1px solid #334155;border-radius:5px;padding:3px 8px;font-size:0.78rem;font-weight:700;color:#e2e8f0;letter-spacing:0.5px">${h.col}${String(h.ri).padStart(2,'0')}</span>`).join('')+'</div>';
-      rep10card.style.display='block';
-    } else {
-      rep10card.style.display='none';
-    }
-  }
+
   // Generar chips de resumen (solo categorías con estampas)
   const chips=[
-    {k:'fwc',    label:'🏆 FWC',      color:'#a78bfa'},
-    {k:'escudo', label:'🛡️ Escudos',  color:'#60a5fa'},
-    {k:'foto',   label:'👥 Fotos',    color:'#fb923c'},
-    {k:'estrella',label:'⭐ Estrellas',color:'#fbbf24'},
-    {k:'jugNorm',label:'👤 Normal',   color:'#64748b'},
+    {k:'fwc',    label:'FWC',      color:'#a78bfa'},
+    {k:'escudo', label:'Escudos',  color:'#60a5fa'},
+    {k:'foto',   label:'Fotos',    color:'#fb923c'},
+    {k:'estrella',label:'Estrellas',color:'#fbbf24'},
+    {k:'jugNorm',label:'Normal',   color:'#64748b'},
   ].filter(c=>cat[c.k]>0).map(c=>{
     const lista=catItems[c.k].join(', ');
     return `
@@ -2529,7 +2598,7 @@ function cotCotizar() {
     ${errH}${stkH}
     <div class="cot-result-total">
       <div><div class="cot-total-num">Q${total.toFixed(0)}</div><div style="font-size:0.73rem;color:#64748b">${items.reduce((s,i)=>s+i.qty,0)} estampas · ${items.length} líneas</div></div>
-      <span style="font-size:0.75rem;color:${allOk?'#34d399':'#f59e0b'}">${allOk?'✅ Stock OK':'⚠️ Falta stock en algunas'}</span>
+      <span style="font-size:0.75rem;color:${allOk?'#34d399':'#f59e0b'}">${allOk?'Stock OK':'Stock insuficiente'}</span>
     </div>
     <div style="display:flex;flex-wrap:wrap;gap:8px;margin:10px 0">${chips}</div>
     <div class="cot-card" style="margin-bottom:14px">
@@ -2539,10 +2608,10 @@ function cotCotizar() {
       </table>
     </div>
     <div class="cot-confirm-bar">
-      <div style="flex:1"><div style="font-size:0.75rem;color:#34d399;font-weight:700">✅ Confirmar venta</div><div style="font-size:0.68rem;color:#64748b">Descuenta del inventario y registra en historial</div></div>
+      <div style="flex:1"><div style="font-size:0.75rem;color:#34d399;font-weight:700">Confirmar venta</div><div style="font-size:0.68rem;color:#64748b">Descuenta del inventario y registra en historial</div></div>
       <input id="cot-comprador" type="text" placeholder="Nombre del cliente" style="background:#0f172a;border:1px solid #374151;border-radius:5px;color:#e2e8f0;padding:6px 10px;outline:none;font-family:inherit;font-size:0.78rem;flex:1;min-width:130px">
       <input id="cot-precio-final" type="number" min="0" placeholder="Q total (auto: ${total.toFixed(0)})" style="background:#0f172a;border:1px solid #374151;border-radius:5px;color:#e2e8f0;padding:6px 10px;outline:none;font-family:inherit;font-size:0.78rem;width:150px">
-      <button class="cot-btn cot-btn-green" onclick="cotConfirmar(${total.toFixed(0)})">✅ Confirmar</button>
+      <button class="cot-btn cot-btn-green" onclick="cotConfirmar(${total.toFixed(0)})">Confirmar</button>
     </div>`;
 }
 
@@ -2562,13 +2631,13 @@ function cotConfirmar(autoTotal) {
   saveNeg(); renderNeg();
   _cotItems=[];
   document.getElementById('cot-lista-input').value='';
-  document.getElementById('cot-resultado').innerHTML=`<div style="background:#052e16;border:1px solid #166534;border-radius:10px;padding:20px;text-align:center"><div style="font-size:1.6rem;margin-bottom:6px">✅</div><div style="color:#4ade80;font-weight:700">Venta confirmada — Q${precioFinal.toFixed(0)}</div><div style="font-size:0.73rem;color:#64748b;margin-top:4px">${totalItems} estampas descontadas${comprador?' · '+comprador:''}</div></div>`;
+  document.getElementById('cot-resultado').innerHTML=`<div style="background:#052e16;border:1px solid #166534;border-radius:10px;padding:20px;text-align:center"><div style="font-size:1.6rem;margin-bottom:6px"></div><div style="color:#4ade80;font-weight:700">Venta confirmada — Q${precioFinal.toFixed(0)}</div><div style="font-size:0.73rem;color:#64748b;margin-top:4px">${totalItems} estampas descontadas${comprador?' · '+comprador:''}</div></div>`;
 }
 
 function cotLimpiar() {
   document.getElementById('cot-lista-input').value='';
-  document.getElementById('cot-resultado').innerHTML='<div class="cot-empty">🧾 Pega una lista y presiona Cotizar</div>';
-  const c=document.getElementById('cot-rep10-card'); if(c) c.style.display='none';
+  document.getElementById('cot-resultado').innerHTML='<div class="cot-empty">Pega una lista y presiona Cotizar</div>';
+
   _cotItems=[];
 }
 
@@ -2733,10 +2802,10 @@ function intCalcular() {
 
   const CAT_META = {
     fwc:     {icon:'🏆', color:'#a78bfa'},
-    escudo:  {icon:'🛡️', color:'#60a5fa'},
-    foto:    {icon:'👥', color:'#fb923c'},
-    estrella:{icon:'⭐', color:'#fbbf24'},
-    normal:  {icon:'👤', color:'#64748b'},
+    escudo:  {icon:'', color:'#60a5fa'},
+    foto:    {icon:'', color:'#fb923c'},
+    estrella:{icon:'', color:'#fbbf24'},
+    normal:  {icon:'', color:'#64748b'},
   };
   const allCatKeys = [...new Set([...Object.keys(resDamos.cats), ...Object.keys(resRec.cats)])];
   const catChips = allCatKeys.map(k => {
@@ -2769,12 +2838,12 @@ function intCalcular() {
     </div>
     <div id="int-balance-display" style="display:flex;align-items:center;justify-content:space-between;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.05);border-radius:999px;padding:4px 14px;margin-bottom:10px">
       <span style="font-size:0.67rem;color:#4b5563">Q${resDamos.total.toFixed(0)} → Q${resRec.total.toFixed(0)}</span>
-      <span style="font-size:0.8rem;font-weight:700;color:${col0}">${sign0}Q${Math.abs(diff0).toFixed(0)} ${diff0>=0?'✅':'⚠️'}</span>
+      <span style="font-size:0.8rem;font-weight:700;color:${col0}">${sign0}Q${Math.abs(diff0).toFixed(0)} ${diff0>=0?'':''}</span>
     </div>
     <div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap">
       <input id="int-cliente" type="text" placeholder="Nombre" class="neg-inp" style="flex:1;min-width:90px;font-size:0.73rem;padding:5px 10px;border-radius:10px">
-      <button class="cot-btn cot-btn-red" style="font-size:0.73rem;padding:5px 12px" onclick="intConfirmar()">✅</button>
-      <button class="cot-btn cot-btn-ghost" style="font-size:0.73rem;padding:5px 10px" onclick="intLimpiar()">✕</button>
+      <button class="cot-btn cot-btn-red" style="font-size:0.73rem;padding:5px 12px" onclick="intConfirmar()"></button>
+      <button class="cot-btn cot-btn-ghost" style="font-size:0.73rem;padding:5px 10px" onclick="intLimpiar()">X</button>
     </div>`;
 
   window._intPendiente = {itemsDamos, itemsRec, resDamosTotal: resDamos.total, resRecTotal: resRec.total};
@@ -2795,7 +2864,7 @@ function intUpdateBalance() {
   const balEl = document.getElementById('int-balance-display');
   if (vdEl) vdEl.textContent = 'Q' + vD.toFixed(0);
   if (vrEl) vrEl.textContent = 'Q' + vR.toFixed(0);
-  if (balEl) balEl.innerHTML = `<span style="font-size:0.67rem;color:#4b5563">Q${vD.toFixed(0)} → Q${vR.toFixed(0)}</span><span style="font-size:0.8rem;font-weight:700;color:${color}">${sign}Q${Math.abs(diff).toFixed(0)} ${diff>=0?'✅':'⚠️'}</span>`;
+  if (balEl) balEl.innerHTML = `<span style="font-size:0.67rem;color:#4b5563">Q${vD.toFixed(0)} → Q${vR.toFixed(0)}</span><span style="font-size:0.8rem;font-weight:700;color:${color}">${sign}Q${Math.abs(diff).toFixed(0)} ${diff>=0?'':''}</span>`;
 }
 
 function intConfirmar() {
@@ -2830,7 +2899,7 @@ function intConfirmar() {
   negData.txs.unshift({cat:'intercambio', ts:Date.now(), nota, valorDamos, valorRec, diff});
 
   saveLocal(); buildAll(); renderNeg(); intLimpiar();
-  alert('✅ Intercambio registrado y inventario actualizado');
+  alert('Intercambio registrado y inventario actualizado');
 }
 
 function intLimpiar() {
@@ -2839,7 +2908,7 @@ function intLimpiar() {
   if (d) d.value = '';
   if (r) r.value = '';
   const cotRes = document.getElementById('cot-resultado');
-  if (cotRes) cotRes.innerHTML = '<div class="cot-empty">🧾 Pega una lista y presiona <strong>Cotizar</strong></div>';
+  if (cotRes) cotRes.innerHTML = '<div class="cot-empty">Pega una lista y presiona <strong>Cotizar</strong></div>';
   window._intPendiente = null;
 }
 
@@ -2872,7 +2941,7 @@ function excelUpload(input) {
       } else {
         saveData();
         buildTable();
-        alert('✅ Se agregaron ' + added + ' entradas del Excel al inventario');
+        alert('Se agregaron ' + added + ' entradas del Excel al inventario');
       }
     } catch(err) {
       alert('Error al leer el Excel: ' + err.message);
@@ -2884,28 +2953,6 @@ function excelUpload(input) {
 
 
 let _cotInitDone = false;
-function renderRep10() {
-  const el   = document.getElementById('cot-rep10');
-  const card = document.getElementById('cot-rep10-card');
-  if (!el) return;
-  const hits = [];
-  for (let r = 0; r <= 20; r++) {
-    COLS.forEach((col, ci) => {
-      const v = data[r]?.[ci] || 0;
-      if (v >= 10) hits.push({ col, r, v, name: sname(col, r) });
-    });
-  }
-  hits.sort((a, b) => b.v - a.v);
-  if (hits.length === 0) { if (card) card.style.display = 'none'; return; }
-  if (card) card.style.display = 'block';
-  el.innerHTML = hits.map(h =>
-    `<div style="display:flex;justify-content:space-between;align-items:center;padding:5px 0;border-bottom:1px solid #1e2435">
-      <span style="font-size:0.76rem;color:#94a3b8"><span style="color:#60a5fa;font-weight:700;margin-right:4px">${h.col}</span>${h.name}</span>
-      <span style="font-size:0.85rem;font-weight:700;color:#f97316;min-width:36px;text-align:right">×${h.v}</span>
-    </div>`
-  ).join('');
-}
-
 function cotInit() {
   cotCargar();
   // Renderizar inmediatamente con datos locales (no esperar Supabase)
@@ -2917,8 +2964,7 @@ function cotInit() {
   }
   const total=data?Object.values(data).reduce((s,r)=>Array.isArray(r)?s+r.reduce((a,b)=>a+b,0):s,0):0;
   const el=document.getElementById('cot-inv-status');
-  if(el) el.textContent=total>0?'✅ Inventario conectado — '+total+' estampas':'⚠️ Sin estampas en inventario aún';
-  renderRep10();
+  if(el) el.textContent=total>0?'Inventario conectado — '+total+' estampas':'Sin estampas en inventario aún';
 }
 
 function cotToggleDetalle(id) {
@@ -2953,8 +2999,8 @@ if ('serviceWorker' in navigator) {
 <div id="p-cotiz" class="page">
 <div style="padding:20px 28px 40px">
   <div class="cot-sub-tabs">
-    <button class="cot-sub-tab active" onclick="cotShowTab('cot-p-cotizar',this)">🧾 Cotizar lista</button>
-    <button class="cot-sub-tab" onclick="cotShowTab('cot-p-config',this)">⚙️ Configuración</button>
+    <button class="cot-sub-tab active" onclick="cotShowTab('cot-p-cotizar',this)">Cotizar lista</button>
+    <button class="cot-sub-tab" onclick="cotShowTab('cot-p-config',this)">Configuración</button>
   </div>
 
   <!-- COTIZAR -->
@@ -2962,44 +3008,41 @@ if ('serviceWorker' in navigator) {
     <div class="cotiz-layout" style="margin-top:16px">
       <div>
         <div class="cot-card">
-          <h3>📋 Pega la lista del cliente</h3>
+          <h3>Pega la lista del cliente</h3>
           <p style="font-size:0.72rem;color:#64748b;margin-bottom:8px;line-height:1.6">Formatos: <code style="background:#0f172a;padding:1px 5px;border-radius:3px;color:#60a5fa">ARG 14</code> · <code style="background:#0f172a;padding:1px 5px;border-radius:3px;color:#60a5fa">ARG-14</code> · <code style="background:#0f172a;padding:1px 5px;border-radius:3px;color:#60a5fa">ARG 14 x2</code></p>
           <textarea class="cot-textarea" id="cot-lista-input" placeholder="ARG 14&#10;BRA 1&#10;FWC 3&#10;ESP 14 x2&#10;MEX 15&#10;..."></textarea>
           <div style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap">
-            <button class="cot-btn cot-btn-red" onclick="cotCotizar()">⚡ Cotizar lista</button>
-            <button class="cot-btn cot-btn-ghost" onclick="cotLimpiar()">✕ Limpiar</button>
-            <button id="int-toggle-btn" class="cot-btn cot-btn-ghost" onclick="(function(b){const p=document.getElementById('int-panel');const open=p.style.display==='none';p.style.display=open?'block':'none';b.style.color=open?'#f97316':'#94a3b8';b.style.borderColor=open?'#f97316':'#334155';})(this)">🔄 Intercambio</button>
+            <button class="cot-btn cot-btn-red" onclick="cotCotizar()">Cotizar lista</button>
+            <button class="cot-btn cot-btn-ghost" onclick="cotLimpiar()">Limpiar</button>
+            <button id="int-toggle-btn" class="cot-btn cot-btn-ghost" onclick="(function(b){const p=document.getElementById('int-panel');const open=p.style.display==='none';p.style.display=open?'block':'none';b.style.color=open?'#f97316':'#94a3b8';b.style.borderColor=open?'#f97316':'#334155';})(this)">Intercambio</button>
           </div>
         </div>
         <div class="cot-card" style="margin-top:12px">
           <div id="cot-inv-status" style="font-size:0.75rem;color:#64748b"></div>
         </div>
-        <div id="cot-rep10-card" style="display:none;margin-top:12px;background:rgba(249,115,22,0.08);border:1px solid rgba(249,115,22,0.35);border-radius:10px;padding:10px 14px">
-          <div id="cot-rep10-title" style="font-size:0.75rem;font-weight:700;color:#f97316;margin-bottom:8px"></div>
-          <div id="cot-rep10"></div>
-        </div>
+
       </div>
       <div id="cot-resultado" style="min-height:200px">
-        <div class="cot-empty">🧾 Pega una lista y presiona <strong>Cotizar</strong></div>
+        <div class="cot-empty">Pega una lista y presiona <strong>Cotizar</strong></div>
       </div>
     </div>
 
     <div id="int-panel" style="display:none;margin-top:16px">
       <div class="int-section">
         <div class="cot-card">
-          <h3>📤 Lista que DAMOS (resta del inventario)</h3>
+          <h3>Lista que DAMOS (resta del inventario)</h3>
           <p style="font-size:0.72rem;color:#64748b;margin-bottom:8px">Formatos: ARG 14 · ARG-14 · Argentina 14 · ARG 14 x2</p>
           <textarea class="cot-textarea" id="int-lista-damos" placeholder="ARG 14&#10;BRA 1&#10;..."></textarea>
         </div>
         <div class="cot-card">
-          <h3>📥 Lista que RECIBIMOS (suma al inventario)</h3>
+          <h3>Lista que RECIBIMOS (suma al inventario)</h3>
           <p style="font-size:0.72rem;color:#64748b;margin-bottom:8px">Formatos: ARG 14 · ARG-14 · Argentina 14 · ARG 14 x2</p>
           <textarea class="cot-textarea" id="int-lista-recibimos" placeholder="ESP 15&#10;FRA 3&#10;..."></textarea>
         </div>
       </div>
       <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:4px">
-        <button class="cot-btn cot-btn-red" onclick="intCalcular()">⚡ Calcular</button>
-        <button class="cot-btn cot-btn-ghost" onclick="intLimpiar()">✕</button>
+        <button class="cot-btn cot-btn-red" onclick="intCalcular()">Calcular</button>
+        <button class="cot-btn cot-btn-ghost" onclick="intLimpiar()">X</button>
       </div>
     </div>
   </div>
@@ -3007,23 +3050,23 @@ if ('serviceWorker' in navigator) {
   <!-- CONFIGURACIÓN (Precios + Estrellas + Equipos juntos) -->
   <div class="cot-sub-page" id="cot-p-config" style="display:none;margin-top:16px">
     <div class="cot-precio-card" style="max-width:500px;margin-bottom:20px">
-      <h3>💲 Precios base por categoría</h3>
+      <h3>Precios base por categoría</h3>
       <div id="cot-base-precios"></div>
     </div>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:20px">
       <div class="cot-precio-card">
-        <h3>⭐ Marcar jugadores estrella</h3>
+        <h3>Marcar jugadores estrella</h3>
         <p style="font-size:0.72rem;color:#64748b;margin-bottom:10px">Dorado = precio estrella. Clic para marcar o desmarcar.</p>
-        <div id="cot-estrellas-toggle" style="display:flex;flex-wrap:wrap;gap:5px"></div>
+        <div id="cot-estrellas-toggle" style="display:flex;flex-wrap:wrap;gap:5px;max-height:200px;overflow-y:auto"></div>
       </div>
       <div class="cot-precio-card">
-        <h3>💲 Precio individual por jugador</h3>
+        <h3>Precio individual por jugador</h3>
         <p style="font-size:0.72rem;color:#64748b;margin-bottom:10px">Deja vacío = usar precio de categoría. Tiene prioridad máxima.</p>
-        <div id="cot-jug-precios"></div>
+        <div id="cot-jug-precios" style="max-height:240px;overflow-y:auto"></div>
       </div>
     </div>
     <div class="cot-precio-card">
-      <h3>🏆 Equipos importantes — clic para marcar/desmarcar</h3>
+      <h3>Equipos importantes — clic para marcar/desmarcar</h3>
       <p style="font-size:0.72rem;color:#64748b;margin-bottom:10px">Verde = importante (precio diferenciado en escudos, fotos y jugadores).</p>
       <div id="cot-equipos-toggle" style="display:flex;flex-wrap:wrap;gap:6px"></div>
     </div>
