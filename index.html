@@ -588,6 +588,18 @@ tbody tr:hover td { background: rgba(255,255,255,0.03) !important; }
       </div>
     </div>
 
+    <!-- AJUSTE RÁPIDO DE STOCK -->
+    <div class="neg-card" style="margin-top:14px">
+      <div class="neg-card-title">⚙ Ajuste de stock actual</div>
+      <p style="font-size:0.72rem;color:#64748b;margin-bottom:10px">Pone cuántos tenés en este momento y el sistema se actualiza solo. Dejá vacío lo que no querés cambiar.</p>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:10px">
+        <div><label style="font-size:0.72rem;color:#94a3b8;display:block;margin-bottom:4px">Cajas para vender</label><input class="neg-inp" id="aj-vender" type="number" min="0" placeholder="Actual"></div>
+        <div><label style="font-size:0.72rem;color:#94a3b8;display:block;margin-bottom:4px">Sobres sueltos</label><input class="neg-inp" id="aj-sobres" type="number" min="0" placeholder="Actual"></div>
+        <div><label style="font-size:0.72rem;color:#94a3b8;display:block;margin-bottom:4px">Cajas colección</label><input class="neg-inp" id="aj-colec" type="number" min="0" placeholder="Actual"></div>
+      </div>
+      <button class="neg-btn" style="background:#1e3a5f;color:#60a5fa;border:1px solid #2563eb;width:100%" onclick="cajasAjustarStock()">✓ Actualizar stock</button>
+    </div>
+
     <!-- VENTAS -->
     <div class="neg-2col" style="margin-top:14px">
       <div class="neg-card">
@@ -1490,9 +1502,6 @@ function cajasSellCaja() {
   const price   = parseFloat(priceEl.value) || getNegPrice('pv-caja');
   const note    = document.getElementById('caja-sell-note').value.trim();
   priceEl.value = ''; document.getElementById('caja-sell-note').value='';
-  // Verificar stock
-  const stk = cajasStock();
-  if (stk.vender < qty) { alert('Solo tienes '+stk.vender+' cajas para vender completas'); return; }
   negData.txs.unshift({ id:Date.now(), cat:'caja', tipo:'venta', dest:'vender', qty, price, desc:'Venta caja completa × '+qty+(note?' — '+note:''), date:today() });
   saveNeg(); renderNeg(); flash();
 }
@@ -1504,26 +1513,57 @@ function cajasSellSobre() {
   const price   = parseFloat(priceEl.value) || getNegPrice('pv-sobre');
   const note    = document.getElementById('sobre-sell-note').value.trim();
   priceEl.value = ''; document.getElementById('sobre-sell-note').value='';
-  // Verificar sobres disponibles (cajas dest=sobres * 104 - sobres vendidos)
-  const stk = cajasStock();
-  if (stk.sobresDisp < qty) { alert('Solo tienes '+stk.sobresDisp+' sobres disponibles'); return; }
   negData.txs.unshift({ id:Date.now(), cat:'caja', tipo:'venta', dest:'sobres', qty, price, desc:'Venta sobres × '+qty+(note?' — '+note:''), date:today() });
+  saveNeg(); renderNeg(); flash();
+}
+
+function cajasAjustarStock() {
+  const stk = cajasStock();
+  const valV = document.getElementById('aj-vender').value;
+  const valS = document.getElementById('aj-sobres').value;
+  const valC = document.getElementById('aj-colec').value;
+  const now  = Date.now();
+  let cambios = 0;
+  if (valV !== '') {
+    const delta = (parseInt(valV)||0) - stk.vender;
+    if (delta !== 0) {
+      negData.txs.unshift({ id:now+1, cat:'caja', tipo:'ajuste', dest:'vender', qty:delta, price:0, desc:'Ajuste stock cajas para vender → '+(parseInt(valV)||0), date:today() });
+      cambios++;
+    }
+  }
+  if (valS !== '') {
+    const delta = (parseInt(valS)||0) - stk.sobresDisp;
+    if (delta !== 0) {
+      negData.txs.unshift({ id:now+2, cat:'caja', tipo:'ajuste', dest:'sobres-delta', qty:delta, price:0, desc:'Ajuste stock sobres sueltos → '+(parseInt(valS)||0), date:today() });
+      cambios++;
+    }
+  }
+  if (valC !== '') {
+    const delta = (parseInt(valC)||0) - stk.colec;
+    if (delta !== 0) {
+      negData.txs.unshift({ id:now+3, cat:'caja', tipo:'ajuste', dest:'colec', qty:delta, price:0, desc:'Ajuste stock cajas colección → '+(parseInt(valC)||0), date:today() });
+      cambios++;
+    }
+  }
+  ['aj-vender','aj-sobres','aj-colec'].forEach(id=>{ const el=document.getElementById(id); if(el) el.value=''; });
+  if (cambios===0) { alert('No hay cambios — los valores ingresados ya coinciden con el stock actual'); return; }
   saveNeg(); renderNeg(); flash();
 }
 
 function cajasStock() {
   const cajaTxs = negData.txs.filter(t=>t.cat==='caja');
-  // Cajas para vender completas
-  const compVender = cajaTxs.filter(t=>t.tipo==='compra'&&t.dest==='vender').reduce((s,t)=>s+(+t.qty||0),0);
+  // Cajas para vender (compras + ajustes - ventas)
+  const compVender = cajaTxs.filter(t=>(t.tipo==='compra'||t.tipo==='ajuste')&&t.dest==='vender').reduce((s,t)=>s+(+t.qty||0),0);
   const ventVender = cajaTxs.filter(t=>t.tipo==='venta'&&t.dest==='vender').reduce((s,t)=>s+(+t.qty||0),0);
-  // Cajas para sobres
-  const compSobres = cajaTxs.filter(t=>t.tipo==='compra'&&t.dest==='sobres').reduce((s,t)=>s+(+t.qty||0),0);
-  const ventSobres = cajaTxs.filter(t=>t.tipo==='venta'&&t.dest==='sobres').reduce((s,t)=>s+(+t.qty||0),0); // sobres vendidos
-  const cajasAbiertas = compSobres; // cajas ya abiertas para sobres
-  const sobresDisp = cajasAbiertas * 104 - ventSobres;
-  // Cajas para colección
-  const compColec = cajaTxs.filter(t=>t.tipo==='compra'&&t.dest==='colec').reduce((s,t)=>s+(+t.qty||0),0);
-  return { vender: compVender - ventVender, sobresDisp: Math.max(0,sobresDisp), colec: compColec, cajasAbiertas, compSobres };
+  // Sobres: cajas abiertas × 104 - vendidos + ajustes directos
+  const compSobres  = cajaTxs.filter(t=>t.tipo==='compra'&&t.dest==='sobres').reduce((s,t)=>s+(+t.qty||0),0);
+  const ventSobres  = cajaTxs.filter(t=>t.tipo==='venta'&&t.dest==='sobres').reduce((s,t)=>s+(+t.qty||0),0);
+  const ajSobres    = cajaTxs.filter(t=>t.tipo==='ajuste'&&t.dest==='sobres-delta').reduce((s,t)=>s+(+t.qty||0),0);
+  const cajasAbiertas = compSobres;
+  const sobresDisp  = cajasAbiertas * 104 - ventSobres + ajSobres;
+  // Cajas colección (compras + ajustes)
+  const compColec = cajaTxs.filter(t=>(t.tipo==='compra'||t.tipo==='ajuste')&&t.dest==='colec').reduce((s,t)=>s+(+t.qty||0),0);
+  return { vender: compVender - ventVender, sobresDisp: Math.max(0, sobresDisp), colec: compColec, cajasAbiertas, compSobres };
 }
 
 
@@ -2285,6 +2325,7 @@ function limpiarPedido() {
 window.cajasReg         = cajasReg;
 window.cajasSellCaja    = cajasSellCaja;
 window.cajasSellSobre   = cajasSellSobre;
+window.cajasAjustarStock= cajasAjustarStock;
 window.completarTx      = completarTx;
 window.notarTx          = notarTx;
 
