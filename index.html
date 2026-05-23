@@ -3072,13 +3072,6 @@ window.cotToggleEstrella=cotToggleEstrella;
 window.cotSetJugPrecio=cotSetJugPrecio;
 
 
-// Ctrl+Enter en cualquier textarea del cotizador/intercambio dispara la acción
-document.addEventListener('keydown', e => {
-  if (!e.ctrlKey || e.key !== 'Enter') return;
-  const id = e.target.id;
-  if (id === 'cot-lista-input') { e.preventDefault(); cotCotizar(); }
-  else if (id === 'int-lista-damos' || id === 'int-lista-recibimos') { e.preventDefault(); intCalcular(); }
-});
 
 // ARRANCAR
 initFirebase();
@@ -3107,7 +3100,7 @@ if ('serviceWorker' in navigator) {
         <div class="cot-card">
           <h3>Pega la lista del cliente</h3>
           <p style="font-size:0.72rem;color:#64748b;margin-bottom:8px;line-height:1.6">Formatos: <code style="background:#0f172a;padding:1px 5px;border-radius:3px;color:#60a5fa">ARG 14</code> · <code style="background:#0f172a;padding:1px 5px;border-radius:3px;color:#60a5fa">ARG-14</code> · <code style="background:#0f172a;padding:1px 5px;border-radius:3px;color:#60a5fa">ARG 14 x2</code></p>
-          <textarea class="cot-textarea" id="cot-lista-input" placeholder="ARG 14&#10;BRA 1&#10;FWC 3&#10;ESP 14 x2&#10;MEX 15&#10;..."></textarea>
+          <textarea class="cot-textarea" id="cot-lista-input" onkeydown="if(event.ctrlKey&&event.key==='Enter'){event.preventDefault();cotCotizar();}" placeholder="ARG 14&#10;BRA 1&#10;FWC 3&#10;ESP 14 x2&#10;MEX 15&#10;..."></textarea>
           <div style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap">
             <button class="cot-btn cot-btn-red" onclick="cotCotizar()">Cotizar lista</button>
             <button class="cot-btn cot-btn-ghost" onclick="cotLimpiar()">Limpiar</button>
@@ -3129,12 +3122,12 @@ if ('serviceWorker' in navigator) {
         <div class="cot-card">
           <h3>Lista que DAMOS (resta del inventario)</h3>
           <p style="font-size:0.72rem;color:#64748b;margin-bottom:8px">Formatos: ARG 14 · ARG-14 · Argentina 14 · ARG 14 x2</p>
-          <textarea class="cot-textarea" id="int-lista-damos" placeholder="ARG 14&#10;BRA 1&#10;..."></textarea>
+          <textarea class="cot-textarea" id="int-lista-damos" onkeydown="if(event.ctrlKey&&event.key==='Enter'){event.preventDefault();intCalcular();}" placeholder="ARG 14&#10;BRA 1&#10;..."></textarea>
         </div>
         <div class="cot-card">
           <h3>Lista que RECIBIMOS (suma al inventario)</h3>
           <p style="font-size:0.72rem;color:#64748b;margin-bottom:8px">Formatos: ARG 14 · ARG-14 · Argentina 14 · ARG 14 x2</p>
-          <textarea class="cot-textarea" id="int-lista-recibimos" placeholder="ESP 15&#10;FRA 3&#10;..."></textarea>
+          <textarea class="cot-textarea" id="int-lista-recibimos" onkeydown="if(event.ctrlKey&&event.key==='Enter'){event.preventDefault();intCalcular();}" placeholder="ESP 15&#10;FRA 3&#10;..."></textarea>
         </div>
       </div>
       <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:10px">
