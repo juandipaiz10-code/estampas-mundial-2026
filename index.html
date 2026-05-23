@@ -588,42 +588,6 @@ tbody tr:hover td { background: rgba(255,255,255,0.03) !important; }
       </div>
     </div>
 
-    <!-- AJUSTE RÁPIDO DE STOCK -->
-    <div class="neg-card" style="margin-top:14px">
-      <div class="neg-card-title">⚙ Ajuste de stock actual</div>
-      <p style="font-size:0.72rem;color:#64748b;margin-bottom:10px">Pone cuántos tenés en este momento y el sistema se actualiza solo. Dejá vacío lo que no querés cambiar.</p>
-      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:10px">
-        <div><label style="font-size:0.72rem;color:#94a3b8;display:block;margin-bottom:4px">Cajas para vender</label><input class="neg-inp" id="aj-vender" type="number" min="0" placeholder="Actual"></div>
-        <div><label style="font-size:0.72rem;color:#94a3b8;display:block;margin-bottom:4px">Sobres sueltos</label><input class="neg-inp" id="aj-sobres" type="number" min="0" placeholder="Actual"></div>
-        <div><label style="font-size:0.72rem;color:#94a3b8;display:block;margin-bottom:4px">Cajas colección</label><input class="neg-inp" id="aj-colec" type="number" min="0" placeholder="Actual"></div>
-      </div>
-      <button class="neg-btn" style="background:#1e3a5f;color:#60a5fa;border:1px solid #2563eb;width:100%" onclick="cajasAjustarStock()">✓ Actualizar stock</button>
-    </div>
-
-    <!-- VENTAS -->
-    <div class="neg-2col" style="margin-top:14px">
-      <div class="neg-card">
-        <div class="neg-card-title">Vender caja completa</div>
-        <div class="form-row"><label>Cantidad</label><input class="neg-inp" id="caja-sell-qty" type="number" min="1" value="1"></div>
-        <div class="form-row"><label>Precio unitario</label><div class="price-inp-wrap"><span class="price-pre">Q</span><input class="neg-inp" id="caja-sell-price" type="number" min="0" step="1" placeholder="Auto"></div></div>
-        <div class="form-row"><label>Comprador</label><input class="neg-inp" id="caja-sell-note" type="text" placeholder="Opcional"></div>
-        <button class="neg-btn sell" onclick="cajasSellCaja()">− Vender caja</button>
-      </div>
-      <div class="neg-card">
-        <div class="neg-card-title">Vender sobres sueltos</div>
-        <div class="form-row"><label>Sobres</label><input class="neg-inp" id="sobre-sell-qty" type="number" min="1" value="1"></div>
-        <div class="form-row"><label>Precio por sobre</label><div class="price-inp-wrap"><span class="price-pre">Q</span><input class="neg-inp" id="sobre-sell-price" type="number" min="0" step="0.5" placeholder="Auto"></div></div>
-        <div class="form-row"><label>Comprador</label><input class="neg-inp" id="sobre-sell-note" type="text" placeholder="Opcional"></div>
-        <button class="neg-btn sell" onclick="cajasSellSobre()">− Vender sobres</button>
-      </div>
-    </div>
-
-    <!-- HISTORIAL CAJAS -->
-    <div class="neg-card" style="margin-top:14px">
-      <div class="neg-card-title">Historial de cajas</div>
-      <div class="neg-hist" id="hist-cajas"></div>
-    </div>
-    <div id="resumen-cajas" class="neg-resumen"></div>
   </div>
 
   <!-- Cajas: ajustes y resumen (se ocultan al cambiar a Análisis) -->
