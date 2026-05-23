@@ -2996,60 +2996,41 @@ function excelUpload(input) {
       const rows = XLSX.utils.sheet_to_json(ws, {header: 1});
       let added = 0;
 
-      // Detectar si es el formato de cuadrícula exportado por la app
-      // (primera fila: ['Tipo', '#', 'FWC', 'MEX', ...])
+      // El Excel debe tener el mismo formato que la cuadrícula del inventario:
+      // Fila 0: ['Tipo', '#', 'FWC', 'MEX', 'USA', ..., 'TOTAL']
+      // Filas 1+: [tipo, ri, val_fwc, val_mex, ..., total]
       const firstRow = rows[0] || [];
-      const isGrid = String(firstRow[0]).trim() === 'Tipo' &&
-                     String(firstRow[1]).trim() === '#' &&
-                     COLS.includes(String(firstRow[2]).trim());
+      // Mapear cada columna del Excel a su índice ci en COLS
+      const colMap = {};
+      for (let c = 2; c < firstRow.length; c++) {
+        const ci = COLS.indexOf(String(firstRow[c]).trim());
+        if (ci >= 0) colMap[c] = ci;
+      }
+      if (Object.keys(colMap).length === 0) {
+        alert('Formato no reconocido.\nEl Excel debe tener el mismo formato que el exportado por la app:\nFila 1: Tipo | # | FWC | MEX | USA | ...');
+        input.value = ''; return;
+      }
 
-      if (isGrid) {
-        // Modo cuadrícula: leer por posición (como está en la tabla)
-        // Mapear columna Excel → índice ci en COLS
-        const colMap = {};
-        for (let c = 2; c < firstRow.length; c++) {
-          const ci = COLS.indexOf(String(firstRow[c]).trim());
-          if (ci >= 0) colMap[c] = ci;
-        }
-        for (let rowIdx = 1; rowIdx < rows.length; rowIdx++) {
-          const row = rows[rowIdx];
-          if (!row || String(row[0]).trim() === 'TOTAL') continue;
-          const ri = parseInt(row[1]);
-          if (!ri || ri < 1 || ri > 20) continue;
-          if (!data[ri]) data[ri] = {};
-          for (const [c, ci] of Object.entries(colMap)) {
-            const val = parseInt(row[c]) || 0;
-            data[ri][ci] = val; // reemplaza (no acumula)
-            if (val > 0) added++;
-          }
-        }
-        if (added === 0) {
-          alert('El Excel de cuadrícula no tenía estampas con cantidad > 0.');
-        } else {
-          saveData(); buildTable();
-          alert('✓ Inventario restaurado desde Excel (' + added + ' celdas con estampas)');
-        }
-      } else {
-        // Modo texto: cada celda debe ser "ARG 5" o "Argentina 5"
-        for (const row of rows) {
-          for (const cell of row) {
-            if (!cell) continue;
-            const parsed = _parsearLinea(String(cell).trim());
-            if (!parsed) continue;
-            const {col, ri, qty} = parsed;
-            const ci = COLS.indexOf(col);
-            if (ci < 0) continue;
-            if (!data[ri]) data[ri] = {};
-            data[ri][ci] = (data[ri][ci] || 0) + qty;
+      for (let rowIdx = 1; rowIdx < rows.length; rowIdx++) {
+        const row = rows[rowIdx];
+        if (!row || String(row[0]).trim() === 'TOTAL') continue;
+        const ri = parseInt(row[1]);
+        if (!ri || ri < 1 || ri > 20) continue;
+        if (!data[ri]) data[ri] = {};
+        for (const [c, ci] of Object.entries(colMap)) {
+          const val = parseInt(row[c]) || 0;
+          if (val > 0) {
+            data[ri][ci] = (data[ri][ci] || 0) + val; // suma al inventario
             added++;
           }
         }
-        if (added === 0) {
-          alert('No se encontraron estampas válidas.\nFormatos soportados:\n• Excel exportado por la app (cuadrícula)\n• Celdas con texto "ARG 5" o "Argentina 5"');
-        } else {
-          saveData(); buildTable();
-          alert('Se agregaron ' + added + ' entradas del Excel al inventario');
-        }
+      }
+
+      if (added === 0) {
+        alert('El Excel no tenía celdas con cantidad mayor a 0.');
+      } else {
+        saveData(); buildTable();
+        alert('✓ Se sumaron ' + added + ' celdas al inventario desde el Excel');
       }
     } catch(err) {
       alert('Error al leer el Excel: ' + err.message);
