@@ -518,7 +518,7 @@ tbody tr:hover td { background: rgba(255,255,255,0.03) !important; }
 </div>
 
 <div class="controls">
-  <button class="btn btn-red" onclick="exportCSV()">⬇ Exportar CSV</button>
+  <button class="btn btn-red" onclick="exportExcel()">⬇ Exportar Excel</button>
   <label class="excel-upload-label">Subir Excel
     <input id="excel-file-input" type="file" accept=".xlsx,.xls,.csv" onchange="excelUpload(this)">
   </label>
@@ -1940,19 +1940,29 @@ function showPage(id, btn) {
   if (id==='p-cotiz') { try { cotInit(); } catch(e) { console.error('cotInit error:',e); } }
 }
 
-function exportCSV() {
-  let lines=['Tipo,#,'+COLS.join(',')+',TOTAL'];
-  for(let r=1;r<=20;r++){
-    const tipo=r===1?'Escudo FOIL':r===13?'Foto Grupal':'Jugador';
-    const row=COLS.map((_,ci)=>data[r]?.[ci]||0);
-    lines.push(tipo+','+r+','+row.join(',')+','+row.reduce((a,b)=>a+b,0));
+function exportExcel() {
+  // Fila de encabezado
+  const header = ['Tipo', '#', ...COLS, 'TOTAL'];
+  const wsData = [header];
+  // Filas de datos (ri 1..20)
+  for (let r = 1; r <= 20; r++) {
+    const tipo = r === 1 ? 'Escudo FOIL' : r === 13 ? 'Foto Grupal' : 'Jugador';
+    const row = COLS.map((_, ci) => data[r]?.[ci] || 0);
+    const total = row.reduce((a, b) => a + b, 0);
+    wsData.push([tipo, r, ...row, total]);
   }
-  const tots=COLS.map((_,ci)=>Object.keys(data).reduce((s,r)=>s+(data[r][ci]||0),0));
-  lines.push('TOTAL,,'+tots.join(',')+','+tots.reduce((a,b)=>a+b,0));
-  const a=document.createElement('a');
-  a.href='data:text/csv;charset=utf-8,'+encodeURIComponent(lines.join('\n'));
-  a.download='estampas_mundial2026.csv'; a.click();
+  // Fila de totales
+  const tots = COLS.map((_, ci) => Object.keys(data).reduce((s, r) => s + (data[r][ci] || 0), 0));
+  wsData.push(['TOTAL', '', ...tots, tots.reduce((a, b) => a + b, 0)]);
+  // Crear workbook con SheetJS
+  const wb = XLSX.utils.book_new();
+  const ws = XLSX.utils.aoa_to_sheet(wsData);
+  // Ancho de columnas para mejor lectura
+  ws['!cols'] = [{ wch: 14 }, { wch: 4 }, ...COLS.map(() => ({ wch: 6 })), { wch: 7 }];
+  XLSX.utils.book_append_sheet(wb, ws, 'Inventario');
+  XLSX.writeFile(wb, 'estampas_mundial2026.xlsx');
 }
+function exportCSV() { exportExcel(); } // compatibilidad
 
 function calcValorInventario() {
   const el = document.getElementById('inv-valor-grid'); if(!el) return;
@@ -2017,6 +2027,7 @@ window.deactivateCell   = _deactivate;
 window.changeCell       = changeCell;
 window.dblCell          = dblCell;
 window.showPage         = showPage;
+window.exportExcel      = exportExcel;
 window.exportCSV        = exportCSV;
 window.setAN            = setAN;
 window.chAlb            = chAlb;
@@ -2984,25 +2995,61 @@ function excelUpload(input) {
       const ws = wb.Sheets[wb.SheetNames[0]];
       const rows = XLSX.utils.sheet_to_json(ws, {header: 1});
       let added = 0;
-      for (const row of rows) {
-        for (const cell of row) {
-          if (!cell) continue;
-          const parsed = _parsearLinea(String(cell).trim());
-          if (!parsed) continue;
-          const {col, ri, qty} = parsed;
-          const ci = COLS.indexOf(col);
-          if (ci < 0) continue;
-          if (!data[ri]) data[ri] = {};
-          data[ri][ci] = (data[ri][ci] || 0) + qty;
-          added++;
+
+      // Detectar si es el formato de cuadrícula exportado por la app
+      // (primera fila: ['Tipo', '#', 'FWC', 'MEX', ...])
+      const firstRow = rows[0] || [];
+      const isGrid = String(firstRow[0]).trim() === 'Tipo' &&
+                     String(firstRow[1]).trim() === '#' &&
+                     COLS.includes(String(firstRow[2]).trim());
+
+      if (isGrid) {
+        // Modo cuadrícula: leer por posición (como está en la tabla)
+        // Mapear columna Excel → índice ci en COLS
+        const colMap = {};
+        for (let c = 2; c < firstRow.length; c++) {
+          const ci = COLS.indexOf(String(firstRow[c]).trim());
+          if (ci >= 0) colMap[c] = ci;
         }
-      }
-      if (added === 0) {
-        alert('No se encontraron estampas válidas en el Excel.\nAsegúrate de que cada celda tenga formato: "ARG 5" o "Argentina 5"');
+        for (let rowIdx = 1; rowIdx < rows.length; rowIdx++) {
+          const row = rows[rowIdx];
+          if (!row || String(row[0]).trim() === 'TOTAL') continue;
+          const ri = parseInt(row[1]);
+          if (!ri || ri < 1 || ri > 20) continue;
+          if (!data[ri]) data[ri] = {};
+          for (const [c, ci] of Object.entries(colMap)) {
+            const val = parseInt(row[c]) || 0;
+            data[ri][ci] = val; // reemplaza (no acumula)
+            if (val > 0) added++;
+          }
+        }
+        if (added === 0) {
+          alert('El Excel de cuadrícula no tenía estampas con cantidad > 0.');
+        } else {
+          saveData(); buildTable();
+          alert('✓ Inventario restaurado desde Excel (' + added + ' celdas con estampas)');
+        }
       } else {
-        saveData();
-        buildTable();
-        alert('Se agregaron ' + added + ' entradas del Excel al inventario');
+        // Modo texto: cada celda debe ser "ARG 5" o "Argentina 5"
+        for (const row of rows) {
+          for (const cell of row) {
+            if (!cell) continue;
+            const parsed = _parsearLinea(String(cell).trim());
+            if (!parsed) continue;
+            const {col, ri, qty} = parsed;
+            const ci = COLS.indexOf(col);
+            if (ci < 0) continue;
+            if (!data[ri]) data[ri] = {};
+            data[ri][ci] = (data[ri][ci] || 0) + qty;
+            added++;
+          }
+        }
+        if (added === 0) {
+          alert('No se encontraron estampas válidas.\nFormatos soportados:\n• Excel exportado por la app (cuadrícula)\n• Celdas con texto "ARG 5" o "Argentina 5"');
+        } else {
+          saveData(); buildTable();
+          alert('Se agregaron ' + added + ' entradas del Excel al inventario');
+        }
       }
     } catch(err) {
       alert('Error al leer el Excel: ' + err.message);
