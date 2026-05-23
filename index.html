@@ -3072,6 +3072,14 @@ window.cotToggleEstrella=cotToggleEstrella;
 window.cotSetJugPrecio=cotSetJugPrecio;
 
 
+// Ctrl+Enter en cualquier textarea del cotizador/intercambio dispara la acción
+document.addEventListener('keydown', e => {
+  if (!e.ctrlKey || e.key !== 'Enter') return;
+  const id = e.target.id;
+  if (id === 'cot-lista-input') { e.preventDefault(); cotCotizar(); }
+  else if (id === 'int-lista-damos' || id === 'int-lista-recibimos') { e.preventDefault(); intCalcular(); }
+});
+
 // ARRANCAR
 initFirebase();
 
