@@ -2810,11 +2810,13 @@ function intCalcular() {
   const sign0 = diff0 >= 0 ? '+' : '';
 
   const CAT_META = {
-    fwc:     {icon:'🏆', label:'FWC',      color:'#a78bfa'},
-    escudo:  {icon:'', label:'Escudo',   color:'#60a5fa'},
-    foto:    {icon:'', label:'Foto',     color:'#fb923c'},
-    estrella:{icon:'', label:'Estrella', color:'#fbbf24'},
-    normal:  {icon:'', label:'Normal',   color:'#64748b'},
+    fwc:     {icon:'🏆', label:'FWC',        color:'#a78bfa'},
+    escudo:  {icon:'🛡',  label:'Escudo',     color:'#60a5fa'},
+    foto:    {icon:'📸',  label:'Foto',       color:'#fb923c'},
+    estrella:{icon:'⭐',  label:'Estrella',   color:'#fbbf24'},
+    normal:  {icon:'👤',  label:'Normal',     color:'#64748b'},
+    jugNorm: {icon:'👤',  label:'Jug. Normal',color:'#64748b'},
+    jugImp:  {icon:'⭐',  label:'Jug. Imp.',  color:'#fbbf24'},
   };
   const allCatKeys = [...new Set([...Object.keys(resDamos.cats), ...Object.keys(resRec.cats)])];
   const catChips = allCatKeys.map(k => {
@@ -2849,11 +2851,11 @@ function intCalcular() {
       <span style="font-size:0.67rem;color:#4b5563">Q${resDamos.total.toFixed(0)} → Q${resRec.total.toFixed(0)}</span>
       <span style="font-size:0.8rem;font-weight:700;color:${col0}">${sign0}Q${Math.abs(diff0).toFixed(0)} ${diff0>=0?'':''}</span>
     </div>
-    <div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap">
-      <input id="int-cliente" type="text" placeholder="Nombre" class="neg-inp" style="flex:1;min-width:90px;font-size:0.73rem;padding:5px 10px;border-radius:10px">
-      <button class="cot-btn cot-btn-red" style="font-size:0.73rem;padding:5px 12px" onclick="intConfirmar()"></button>
-      <button class="cot-btn cot-btn-ghost" style="font-size:0.73rem;padding:5px 10px" onclick="intLimpiar()">X</button>
-    </div>`;
+    <div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap;margin-bottom:8px">
+      <input id="int-cliente" type="text" placeholder="Nombre del comprador (opcional)" class="neg-inp" style="flex:1;min-width:120px;font-size:0.73rem;padding:6px 12px;border-radius:10px">
+      <button class="cot-btn cot-btn-ghost" style="font-size:0.73rem;padding:6px 12px" onclick="intLimpiar()">Cancelar</button>
+    </div>
+    <button class="cot-btn cot-btn-red" style="width:100%;font-size:0.9rem;font-weight:700;padding:12px;border-radius:12px;letter-spacing:0.5px" onclick="intConfirmar()">✅ Realizar intercambio</button>`;
 
   window._intPendiente = {itemsDamos, itemsRec, resDamosTotal: resDamos.total, resRecTotal: resRec.total};
 }
