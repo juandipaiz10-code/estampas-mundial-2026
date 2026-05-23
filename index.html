@@ -1514,15 +1514,15 @@ function cajasSellSobre() {
 function cajasStock() {
   const cajaTxs = negData.txs.filter(t=>t.cat==='caja');
   // Cajas para vender completas
-  const compVender = cajaTxs.filter(t=>t.tipo==='compra'&&t.dest==='vender').reduce((s,t)=>s+t.qty,0);
-  const ventVender = cajaTxs.filter(t=>t.tipo==='venta'&&t.dest==='vender').reduce((s,t)=>s+t.qty,0);
+  const compVender = cajaTxs.filter(t=>t.tipo==='compra'&&t.dest==='vender').reduce((s,t)=>s+(+t.qty||0),0);
+  const ventVender = cajaTxs.filter(t=>t.tipo==='venta'&&t.dest==='vender').reduce((s,t)=>s+(+t.qty||0),0);
   // Cajas para sobres
-  const compSobres = cajaTxs.filter(t=>t.tipo==='compra'&&t.dest==='sobres').reduce((s,t)=>s+t.qty,0);
-  const ventSobres = cajaTxs.filter(t=>t.tipo==='venta'&&t.dest==='sobres').reduce((s,t)=>s+t.qty,0); // sobres vendidos
+  const compSobres = cajaTxs.filter(t=>t.tipo==='compra'&&t.dest==='sobres').reduce((s,t)=>s+(+t.qty||0),0);
+  const ventSobres = cajaTxs.filter(t=>t.tipo==='venta'&&t.dest==='sobres').reduce((s,t)=>s+(+t.qty||0),0); // sobres vendidos
   const cajasAbiertas = compSobres; // cajas ya abiertas para sobres
   const sobresDisp = cajasAbiertas * 104 - ventSobres;
   // Cajas para colección
-  const compColec = cajaTxs.filter(t=>t.tipo==='compra'&&t.dest==='colec').reduce((s,t)=>s+t.qty,0);
+  const compColec = cajaTxs.filter(t=>t.tipo==='compra'&&t.dest==='colec').reduce((s,t)=>s+(+t.qty||0),0);
   return { vender: compVender - ventVender, sobresDisp: Math.max(0,sobresDisp), colec: compColec, cajasAbiertas, compSobres };
 }
 
@@ -1672,8 +1672,8 @@ function renderResumen(cat, txs) {
   const totalComprado = compras.reduce((s,t)=>s+t.price*t.qty, 0);
   const totalVendido  = ventas.reduce((s,t)=>s+t.price*t.qty, 0);
   const ganancia = totalVendido - totalComprado;
-  const unidadesComp = compras.reduce((s,t)=>s+t.qty, 0);
-  const unidadesVend = ventas.reduce((s,t)=>s+t.qty, 0);
+  const unidadesComp = compras.reduce((s,t)=>s+(+t.qty||0), 0);
+  const unidadesVend = ventas.reduce((s,t)=>s+(+t.qty||0), 0);
 
   const el = document.getElementById('resumen-'+cat);
   el.innerHTML = `
@@ -1708,10 +1708,10 @@ function renderResumenGeneral() {
       <div class="neg-gen-stat"><div class="v" style="color:#f87171">${fmt(totalGasTotal)}</div><div class="l">Total gastos</div></div>
       <div class="neg-gen-stat"><div class="v" style="color:${gan>=0?'#34d399':'#f87171'}">${fmt(gan)}</div><div class="l">Restante</div></div>
       <div class="neg-gen-stat"><div class="v" style="color:#f59e0b">${margen}</div><div class="l">Margen</div></div>
-      <div class="neg-gen-stat"><div class="v" style="color:#60a5fa">${compras.reduce((s,t)=>s+t.qty,0)}</div><div class="l">Unidades compradas</div></div>
-      <div class="neg-gen-stat"><div class="v" style="color:#a78bfa">${ventas.reduce((s,t)=>s+t.qty,0)}</div><div class="l">Unidades vendidas</div></div>
+      <div class="neg-gen-stat"><div class="v" style="color:#60a5fa">${compras.reduce((s,t)=>s+(+t.qty||0),0)}</div><div class="l">Unidades compradas</div></div>
+      <div class="neg-gen-stat"><div class="v" style="color:#a78bfa">${ventas.reduce((s,t)=>s+(+t.qty||0),0)}</div><div class="l">Unidades vendidas</div></div>
       <div class="neg-gen-stat"><div class="v" style="color:#fb923c">${txCount}</div><div class="l">Transacciones</div></div>
-      <div class="neg-gen-stat"><div class="v" style="color:#94a3b8">${ventas.filter(t=>t.cat==='alb').reduce((s,t)=>s+t.qty,0)}</div><div class="l">Álbumes vendidos</div></div>
+      <div class="neg-gen-stat"><div class="v" style="color:#94a3b8">${ventas.filter(t=>t.cat==='alb').reduce((s,t)=>s+(+t.qty||0),0)}</div><div class="l">Álbumes vendidos</div></div>
     </div>`;
 }
 
