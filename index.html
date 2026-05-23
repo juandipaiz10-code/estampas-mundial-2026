@@ -2810,18 +2810,18 @@ function intCalcular() {
   const sign0 = diff0 >= 0 ? '+' : '';
 
   const CAT_META = {
-    fwc:     {icon:'🏆', color:'#a78bfa'},
-    escudo:  {icon:'', color:'#60a5fa'},
-    foto:    {icon:'', color:'#fb923c'},
-    estrella:{icon:'', color:'#fbbf24'},
-    normal:  {icon:'', color:'#64748b'},
+    fwc:     {icon:'🏆', label:'FWC',      color:'#a78bfa'},
+    escudo:  {icon:'', label:'Escudo',   color:'#60a5fa'},
+    foto:    {icon:'', label:'Foto',     color:'#fb923c'},
+    estrella:{icon:'', label:'Estrella', color:'#fbbf24'},
+    normal:  {icon:'', label:'Normal',   color:'#64748b'},
   };
   const allCatKeys = [...new Set([...Object.keys(resDamos.cats), ...Object.keys(resRec.cats)])];
   const catChips = allCatKeys.map(k => {
-    const m = CAT_META[k] || {icon:'·', color:'#64748b'};
+    const m = CAT_META[k] || {icon:'·', label:k, color:'#64748b'};
     const d = resDamos.cats[k] || {qty:0};
     const r = resRec.cats[k]   || {qty:0};
-    return `<span style="display:inline-flex;align-items:center;gap:4px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.15);border-radius:6px;padding:5px 10px;font-size:0.78rem;white-space:nowrap">${m.icon}<b style="color:${m.color}">${d.qty}</b><span style="color:#475569">/</span><b style="color:${m.color}">${r.qty}</b></span>`;
+    return `<span style="display:inline-flex;align-items:center;gap:4px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.15);border-radius:6px;padding:5px 10px;font-size:0.78rem;white-space:nowrap">${m.icon}<span style="color:#94a3b8;font-size:0.72rem">${m.label}:</span><b style="color:${m.color}">${d.qty}</b><span style="color:#475569">/</span><b style="color:${m.color}">${r.qty}</b></span>`;
   }).join('');
 
   const res = document.getElementById('cot-resultado');
