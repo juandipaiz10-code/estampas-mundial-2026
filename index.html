@@ -2821,7 +2821,7 @@ function intCalcular() {
     const m = CAT_META[k] || {icon:'·', color:'#64748b'};
     const d = resDamos.cats[k] || {qty:0};
     const r = resRec.cats[k]   || {qty:0};
-    return `<span style="display:inline-flex;align-items:center;gap:3px;background:rgba(255,255,255,0.025);border:1px solid rgba(255,255,255,0.06);border-radius:999px;padding:2px 8px;font-size:0.67rem;white-space:nowrap">${m.icon}<b style="color:${m.color}">${d.qty}</b><span style="color:#374151">/</span><b style="color:${m.color}">${r.qty}</b></span>`;
+    return `<span style="display:inline-flex;align-items:center;gap:4px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.15);border-radius:6px;padding:5px 10px;font-size:0.78rem;white-space:nowrap">${m.icon}<b style="color:${m.color}">${d.qty}</b><span style="color:#475569">/</span><b style="color:${m.color}">${r.qty}</b></span>`;
   }).join('');
 
   const res = document.getElementById('cot-resultado');
