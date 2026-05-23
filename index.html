@@ -2830,18 +2830,33 @@ function intCalcular() {
     </div>`;
   }).join('');
 
-  // Stock check de lo que damos
+  // Stock check + desglose con precios de lo que damos
   const stockRows = itemsDamos.map(({col,ri,qty}) => {
     const ci = COLS.indexOf(col);
     const stock = (data[ri]?.[ci]) || 0;
     const ok = stock >= qty;
     const nombre = sname(col, ri) || `${col} #${ri}`;
+    const precio = cotGetPrecio(col, ri);
+    const sub = precio * qty;
     const color = ok ? '#34d399' : '#f87171';
-    const bg    = ok ? 'rgba(52,211,153,0.05)' : 'rgba(248,113,113,0.08)';
-    const bord  = ok ? 'rgba(52,211,153,0.2)'  : 'rgba(248,113,113,0.25)';
-    return `<div style="display:flex;justify-content:space-between;align-items:center;padding:4px 8px;background:${bg};border:1px solid ${bord};border-radius:6px;font-size:0.72rem">
-      <span style="color:#94a3b8;max-width:150px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${col} #${ri} · ${nombre}</span>
-      <span style="color:${color};font-weight:700;white-space:nowrap;margin-left:8px">${ok?'✓':'✗'} ${stock} en stock (piden ${qty})</span>
+    const bg    = ok ? 'rgba(52,211,153,0.04)' : 'rgba(248,113,113,0.07)';
+    const bord  = ok ? 'rgba(52,211,153,0.18)' : 'rgba(248,113,113,0.22)';
+    return `<div style="display:grid;grid-template-columns:1fr auto auto auto;gap:6px;align-items:center;padding:5px 8px;background:${bg};border:1px solid ${bord};border-radius:6px;font-size:0.72rem">
+      <span style="color:#94a3b8;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${col} #${ri} · ${nombre}</span>
+      <span style="color:${color};font-weight:700">${ok?'✓':'✗'} ${stock}</span>
+      <span style="color:#475569">×${qty}</span>
+      <span style="color:#e2e8f0;font-weight:600">Q${sub.toFixed(0)}</span>
+    </div>`;
+  }).join('');
+  // Desglose de lo que recibimos
+  const recRows = itemsRec.map(({col,ri,qty}) => {
+    const nombre = sname(col, ri) || `${col} #${ri}`;
+    const precio = cotGetPrecio(col, ri);
+    const sub = precio * qty;
+    return `<div style="display:grid;grid-template-columns:1fr auto auto;gap:6px;align-items:center;padding:5px 8px;background:rgba(52,211,153,0.04);border:1px solid rgba(52,211,153,0.12);border-radius:6px;font-size:0.72rem">
+      <span style="color:#94a3b8;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${col} #${ri} · ${nombre}</span>
+      <span style="color:#475569">×${qty}</span>
+      <span style="color:#34d399;font-weight:600">Q${sub.toFixed(0)}</span>
     </div>`;
   }).join('');
   const sinStock = itemsDamos.filter(({col,ri,qty}) => {
@@ -2851,12 +2866,6 @@ function intCalcular() {
   const res = document.getElementById('cot-resultado');
   if (!res) return;
   res.innerHTML = `
-    <div style="margin-bottom:10px">
-      <div style="font-size:0.67rem;font-weight:700;text-transform:uppercase;letter-spacing:0.8px;color:${sinStock>0?'#f87171':'#34d399'};margin-bottom:5px">
-        ${sinStock>0 ? `⚠ ${sinStock} sin suficiente stock` : '✓ Tenés todas las estampas'}
-      </div>
-      <div style="display:flex;flex-direction:column;gap:3px;max-height:160px;overflow-y:auto">${stockRows}</div>
-    </div>
     <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px">
       ${catChips}
     </div>
@@ -2882,7 +2891,16 @@ function intCalcular() {
       <input id="int-cliente" type="text" placeholder="Nombre del comprador (opcional)" class="neg-inp" style="flex:1;min-width:120px;font-size:0.73rem;padding:6px 12px;border-radius:10px">
       <button class="cot-btn cot-btn-ghost" style="font-size:0.73rem;padding:6px 12px" onclick="intLimpiar()">Cancelar</button>
     </div>
-    <button class="cot-btn cot-btn-red" style="width:100%;font-size:0.9rem;font-weight:700;padding:12px;border-radius:12px;letter-spacing:0.5px" onclick="intConfirmar()">Realizar intercambio</button>`;
+    <button class="cot-btn cot-btn-red" style="width:100%;font-size:0.9rem;font-weight:700;padding:12px;border-radius:12px;letter-spacing:0.5px;margin-bottom:14px" onclick="intConfirmar()">Realizar intercambio</button>
+    <div style="border-top:1px solid #1e2435;padding-top:12px">
+      <div style="font-size:0.67rem;font-weight:700;text-transform:uppercase;letter-spacing:0.8px;color:${sinStock>0?'#f87171':'#34d399'};margin-bottom:6px">
+        ${sinStock>0 ? `⚠ ${sinStock} sin suficiente stock` : '✓ Tenés todas las estampas'}
+      </div>
+      <div style="font-size:0.65rem;color:#64748b;margin-bottom:4px;text-transform:uppercase;letter-spacing:0.5px">Lo que das</div>
+      <div style="display:flex;flex-direction:column;gap:3px;max-height:200px;overflow-y:auto;margin-bottom:10px">${stockRows||'<span style="color:#4b5563;font-size:0.72rem">Sin estampas</span>'}</div>
+      ${recRows ? `<div style="font-size:0.65rem;color:#64748b;margin-bottom:4px;text-transform:uppercase;letter-spacing:0.5px">Lo que recibís</div>
+      <div style="display:flex;flex-direction:column;gap:3px;max-height:200px;overflow-y:auto">${recRows}</div>` : ''}
+    </div>`;
 
   window._intPendiente = {itemsDamos, itemsRec, resDamosTotal: resDamos.total, resRecTotal: resRec.total};
 }
