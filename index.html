@@ -2891,15 +2891,18 @@ function intCalcular() {
       <input id="int-cliente" type="text" placeholder="Nombre del comprador (opcional)" class="neg-inp" style="flex:1;min-width:120px;font-size:0.73rem;padding:6px 12px;border-radius:10px">
       <button class="cot-btn cot-btn-ghost" style="font-size:0.73rem;padding:6px 12px" onclick="intLimpiar()">Cancelar</button>
     </div>
-    <button class="cot-btn cot-btn-red" style="width:100%;font-size:0.9rem;font-weight:700;padding:12px;border-radius:12px;letter-spacing:0.5px;margin-bottom:14px" onclick="intConfirmar()">Realizar intercambio</button>
-    <div style="border-top:1px solid #1e2435;padding-top:12px">
+    <button class="cot-btn cot-btn-red" style="width:100%;font-size:0.9rem;font-weight:700;padding:12px;border-radius:12px;letter-spacing:0.5px" onclick="intConfirmar()">Realizar intercambio</button>`;
+
+  const desglose = document.getElementById('int-desglose');
+  if (desglose) desglose.innerHTML = `
+    <div style="border-top:1px solid #1e2435;padding-top:12px;margin-top:4px">
       <div style="font-size:0.67rem;font-weight:700;text-transform:uppercase;letter-spacing:0.8px;color:${sinStock>0?'#f87171':'#34d399'};margin-bottom:6px">
         ${sinStock>0 ? `⚠ ${sinStock} sin suficiente stock` : '✓ Tenés todas las estampas'}
       </div>
       <div style="font-size:0.65rem;color:#64748b;margin-bottom:4px;text-transform:uppercase;letter-spacing:0.5px">Lo que das</div>
-      <div style="display:flex;flex-direction:column;gap:3px;max-height:200px;overflow-y:auto;margin-bottom:10px">${stockRows||'<span style="color:#4b5563;font-size:0.72rem">Sin estampas</span>'}</div>
+      <div style="display:flex;flex-direction:column;gap:3px;max-height:220px;overflow-y:auto;margin-bottom:10px">${stockRows||'<span style="color:#4b5563;font-size:0.72rem">Sin estampas</span>'}</div>
       ${recRows ? `<div style="font-size:0.65rem;color:#64748b;margin-bottom:4px;text-transform:uppercase;letter-spacing:0.5px">Lo que recibís</div>
-      <div style="display:flex;flex-direction:column;gap:3px;max-height:200px;overflow-y:auto">${recRows}</div>` : ''}
+      <div style="display:flex;flex-direction:column;gap:3px;max-height:220px;overflow-y:auto">${recRows}</div>` : ''}
     </div>`;
 
   window._intPendiente = {itemsDamos, itemsRec, resDamosTotal: resDamos.total, resRecTotal: resRec.total};
@@ -2965,6 +2968,8 @@ function intLimpiar() {
   if (r) r.value = '';
   const cotRes = document.getElementById('cot-resultado');
   if (cotRes) cotRes.innerHTML = '<div class="cot-empty">Pega una lista y presiona <strong>Cotizar</strong></div>';
+  const des = document.getElementById('int-desglose');
+  if (des) des.innerHTML = '';
   window._intPendiente = null;
 }
 
@@ -3096,10 +3101,11 @@ if ('serviceWorker' in navigator) {
           <textarea class="cot-textarea" id="int-lista-recibimos" placeholder="ESP 15&#10;FRA 3&#10;..."></textarea>
         </div>
       </div>
-      <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:4px">
+      <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:10px">
         <button class="cot-btn cot-btn-red" onclick="intCalcular()">Calcular</button>
         <button class="cot-btn cot-btn-ghost" onclick="intLimpiar()">X</button>
       </div>
+      <div id="int-desglose"></div>
     </div>
   </div>
 
