@@ -2342,7 +2342,7 @@ function _flushBuf() {
 function markLastEdited(ri, ci) { _lastRi = ri; _lastCi = ci; }
 
 document.addEventListener('keydown', e => {
-  if (e.target.tagName === 'INPUT') return;
+  if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
 
   // Espacio: toggle activación en última celda editada
   if (e.key === ' ') {
