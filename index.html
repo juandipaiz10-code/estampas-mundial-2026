@@ -1538,13 +1538,24 @@ function cajasStock() {
 
 
 function renderStockCajas() {
-  const stk = cajasStock();
   const el = document.getElementById('stock-cajas-display');
   if (!el) return;
+  const all = negData.txs;
+  const compras = all.filter(t=>t.tipo==='compra');
+  const ventas  = all.filter(t=>t.tipo==='venta');
+  const totalC  = compras.reduce((s,t)=>s+(+(t.price)||0)*(+(t.qty)||0), 0);
+  const totalV  = ventas.reduce((s,t)=>s+(+(t.price)||0)*(+(t.qty)||0), 0);
+  const ajustes    = negData.ajustes || [];
+  const adjIng     = ajustes.filter(a=>a.tipo==='ingreso').reduce((s,a)=>s+(+a.monto||0), 0);
+  const adjGas     = ajustes.filter(a=>a.tipo==='gasto').reduce((s,a)=>s+(+a.monto||0), 0);
+  const ingresos   = totalV + adjIng;
+  const gastos     = totalC + adjGas;
+  const ganancia   = ingresos - gastos;
+  const fmt = v => 'Q'+Math.abs(Math.round(v)).toLocaleString();
   el.innerHTML = `
-    <div class="stock-pill"><div class="stock-v ${stk.vender>0?'ok':stk.vender===0?'warn':'err'}">${Math.max(0,stk.vender)}</div><div class="stock-l">Cajas para vender</div></div>
-    <div class="stock-pill"><div class="stock-v ${stk.sobresDisp>0?'ok':stk.sobresDisp===0?'warn':'err'}">${stk.sobresDisp}</div><div class="stock-l">Sobres disponibles</div></div>
-    <div class="stock-pill"><div class="stock-v ok">${stk.colec}</div><div class="stock-l">Cajas colección</div></div>`;
+    <div class="stock-pill" style="flex:1"><div class="stock-v" style="color:#34d399">${fmt(ingresos)}</div><div class="stock-l">Ingresos</div></div>
+    <div class="stock-pill" style="flex:1"><div class="stock-v" style="color:#f87171">${fmt(gastos)}</div><div class="stock-l">Gastos</div></div>
+    <div class="stock-pill" style="flex:1"><div class="stock-v" style="color:${ganancia>=0?'#34d399':'#f87171'}">${ganancia<0?'-':''}${fmt(ganancia)}</div><div class="stock-l">${ganancia>=0?'Ganancia':'Pérdida'}</div></div>`;
 }
 
 function renderResumenCajas(cajaTxs) {
