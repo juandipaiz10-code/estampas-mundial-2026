@@ -2826,12 +2826,36 @@ function intCalcular() {
     return `<span style="display:inline-flex;align-items:center;gap:4px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.15);border-radius:6px;padding:5px 10px;font-size:0.78rem;white-space:nowrap">${m.icon}<span style="color:#94a3b8;font-size:0.72rem">${m.label}:</span><b style="color:${m.color}">${d.qty}</b><span style="color:#475569">/</span><b style="color:${m.color}">${r.qty}</b></span>`;
   }).join('');
 
+  // Stock check de lo que damos
+  const stockRows = itemsDamos.map(({col,ri,qty}) => {
+    const ci = COLS.indexOf(col);
+    const stock = (data[ri]?.[ci]) || 0;
+    const ok = stock >= qty;
+    const nombre = sname(col, ri) || `${col} #${ri}`;
+    const color = ok ? '#34d399' : '#f87171';
+    const bg    = ok ? 'rgba(52,211,153,0.05)' : 'rgba(248,113,113,0.08)';
+    const bord  = ok ? 'rgba(52,211,153,0.2)'  : 'rgba(248,113,113,0.25)';
+    return `<div style="display:flex;justify-content:space-between;align-items:center;padding:4px 8px;background:${bg};border:1px solid ${bord};border-radius:6px;font-size:0.72rem">
+      <span style="color:#94a3b8;max-width:150px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${col} #${ri} · ${nombre}</span>
+      <span style="color:${color};font-weight:700;white-space:nowrap;margin-left:8px">${ok?'✓':'✗'} ${stock} en stock (piden ${qty})</span>
+    </div>`;
+  }).join('');
+  const sinStock = itemsDamos.filter(({col,ri,qty}) => {
+    const ci = COLS.indexOf(col); return ((data[ri]?.[ci])||0) < qty;
+  }).length;
+
   const res = document.getElementById('cot-resultado');
   if (!res) return;
   res.innerHTML = `
-    <div style="display:flex;flex-direction:column;gap:4px;margin-bottom:10px">
+    <div style="display:flex;flex-direction:column;gap:4px;margin-bottom:8px">
       ${catChips}
       <span style="font-size:0.67rem;color:#64748b">${totalDamos+totalRec} estampas en total</span>
+    </div>
+    <div style="margin-bottom:10px">
+      <div style="font-size:0.67rem;font-weight:700;text-transform:uppercase;letter-spacing:0.8px;color:${sinStock>0?'#f87171':'#34d399'};margin-bottom:5px">
+        ${sinStock>0 ? `⚠ ${sinStock} sin suficiente stock` : '✓ Tenés todas las estampas'}
+      </div>
+      <div style="display:flex;flex-direction:column;gap:3px;max-height:160px;overflow-y:auto">${stockRows}</div>
     </div>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px">
       <input id="int-dinero-doy" type="number" min="0" step="1" placeholder="Q di" class="neg-inp" style="font-size:0.82rem;padding:7px 12px;border-radius:12px;text-align:center" oninput="intUpdateBalance()">
