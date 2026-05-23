@@ -1360,6 +1360,12 @@ function loadNeg() {
   try { const s=localStorage.getItem(NEG_KEY); if(s) {
     const d=JSON.parse(s);
     if(!d.ajustes) d.ajustes=[];
+    // Sanear qty y price (pueden venir como strings por bug anterior)
+    d.txs = (d.txs||[]).map(t=>({
+      ...t,
+      qty:   +(t.qty)   || 0,
+      price: +(t.price) || 0,
+    }));
     return d;
   }} catch(e){}
   return { txs: [], ajustes: [] };
@@ -1580,8 +1586,8 @@ function renderStockCajas() {
 function renderResumenCajas(cajaTxs) {
   const compras = cajaTxs.filter(t=>t.tipo==='compra');
   const ventas  = cajaTxs.filter(t=>t.tipo==='venta');
-  const totalComprado = compras.reduce((s,t)=>s+t.price*t.qty, 0);
-  const totalVendido  = ventas.reduce((s,t)=>s+t.price*t.qty, 0);
+  const totalComprado = compras.reduce((s,t)=>s+(+(t.price)||0)*(+(t.qty)||0), 0);
+  const totalVendido  = ventas.reduce((s,t)=>s+(+(t.price)||0)*(+(t.qty)||0), 0);
   const ganancia = totalVendido - totalComprado;
   const el = document.getElementById('resumen-cajas');
   if (!el) return;
@@ -1709,8 +1715,8 @@ function renderStock() {
 function renderResumen(cat, txs) {
   const compras = txs.filter(t=>t.tipo==='compra');
   const ventas  = txs.filter(t=>t.tipo==='venta');
-  const totalComprado = compras.reduce((s,t)=>s+t.price*t.qty, 0);
-  const totalVendido  = ventas.reduce((s,t)=>s+t.price*t.qty, 0);
+  const totalComprado = compras.reduce((s,t)=>s+(+(t.price)||0)*(+(t.qty)||0), 0);
+  const totalVendido  = ventas.reduce((s,t)=>s+(+(t.price)||0)*(+(t.qty)||0), 0);
   const ganancia = totalVendido - totalComprado;
   const unidadesComp = compras.reduce((s,t)=>s+(+t.qty||0), 0);
   const unidadesVend = ventas.reduce((s,t)=>s+(+t.qty||0), 0);
@@ -1729,8 +1735,8 @@ function renderResumenGeneral() {
   const all = negData.txs;
   const compras = all.filter(t=>t.tipo==='compra');
   const ventas  = all.filter(t=>t.tipo==='venta');
-  const totalC  = compras.reduce((s,t)=>s+t.price*t.qty, 0);
-  const totalV  = ventas.reduce((s,t)=>s+t.price*t.qty, 0);
+  const totalC  = compras.reduce((s,t)=>s+(+(t.price)||0)*(+(t.qty)||0), 0);
+  const totalV  = ventas.reduce((s,t)=>s+(+(t.price)||0)*(+(t.qty)||0), 0);
   // Ajustes manuales
   const ajustes = negData.ajustes || [];
   const adjIng  = ajustes.filter(a=>a.tipo==='ingreso').reduce((s,a)=>s+a.monto, 0);
@@ -2295,7 +2301,7 @@ function confirmarPedido(totalAuto) {
   saveLocal(); updateColTots(); updateStats();
 
   // Registrar UNA sola tx de tipo "lista" en historial
-  const totalItems = desglose.reduce((s,i)=>s+(i.qty||0),0);
+  const totalItems = desglose.reduce((s,i)=>s+(+(i.qty)||0),0);
   const desc = 'Venta lista (' + totalItems + ' estampas)' + (comprador ? ' — ' + comprador : '');
   negData.txs.unshift({
     id: ts, cat: 'est', tipo: 'venta', tipoEst: 'lista',
