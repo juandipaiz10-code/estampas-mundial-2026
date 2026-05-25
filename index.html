@@ -554,6 +554,9 @@ tbody tr:hover td { background: rgba(255,255,255,0.03) !important; }
 <div id="p-neg" class="page">
 <div class="neg-wrap">
 
+  <!-- REPORTE DIARIO -->
+  <div id="reporte-diario" style="background:#111827;border:1px solid #1e2435;border-radius:12px;padding:16px 20px;margin-bottom:18px"></div>
+
   <!-- SUB-TABS -->
   <div class="neg-tabs">
     <button class="neg-tab active" onclick="negTab('cajas',this)">Cajas</button>
@@ -1665,6 +1668,86 @@ function renderNeg() {
   adjRender();
   renderResumenGeneral();
   renderStock();
+  renderReporteDiario();
+}
+
+function renderReporteDiario() {
+  const el = document.getElementById('reporte-diario');
+  if (!el) return;
+
+  // Fecha de hoy y ayer en el mismo formato que today()
+  const fmt2 = d => d.toLocaleDateString('es-MX',{day:'2-digit',month:'2-digit',year:'2-digit'});
+  const hoy  = fmt2(new Date());
+  const ayerD = new Date(); ayerD.setDate(ayerD.getDate()-1);
+  const ayer  = fmt2(ayerD);
+
+  // Fecha de cualquier transacción (intercambios usan ts, resto usan date)
+  const txFecha = t => t.cat==='intercambio'
+    ? (t.ts ? fmt2(new Date(t.ts)) : null)
+    : (t.date || null);
+
+  function diaHTML(label, fecha) {
+    const txs    = negData.txs.filter(t => txFecha(t) === fecha);
+    const ventas = txs.filter(t => t.tipo === 'venta');
+    const ints   = txs.filter(t => t.cat === 'intercambio');
+
+    const totalQ   = ventas.reduce((s,t)=>s+(+(t.price)||0)*(+(t.qty)||0), 0);
+    const totalEst = ventas.filter(t=>t.cat==='est').reduce((s,t)=>s+(+(t.qty)||0), 0);
+
+    if (txs.length === 0) return `
+      <div style="flex:1;min-width:220px;opacity:0.5">
+        <div style="font-size:0.68rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#64748b;margin-bottom:8px">${label} · ${fecha}</div>
+        <div style="color:#374151;font-size:0.78rem;text-align:center;padding:14px;border:1px dashed #1e2435;border-radius:8px">Sin transacciones</div>
+      </div>`;
+
+    const filas = [
+      ...ventas.map(t => {
+        const q = +(t.qty)||0, p = +(t.price)||0;
+        const cat = t.cat==='alb'?'📒 ':t.tipoEst==='lista'?'📋 ':'📌 ';
+        return `<div style="display:flex;justify-content:space-between;align-items:center;padding:5px 8px;background:rgba(52,211,153,0.04);border:1px solid rgba(52,211,153,0.1);border-radius:6px;font-size:0.72rem;gap:6px">
+          <span style="color:#94a3b8;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${cat}${t.desc||'—'}</span>
+          ${q>0?`<span style="color:#475569;white-space:nowrap">${q} est.</span>`:''}
+          <span style="color:#34d399;font-weight:700;white-space:nowrap">Q${(p*q).toFixed(0)}</span>
+        </div>`;
+      }),
+      ...ints.map(t => {
+        const diff = (+(t.valorRec)||0)-(+(t.valorDamos)||0);
+        const col  = diff>=0?'#34d399':'#f87171';
+        return `<div style="display:flex;justify-content:space-between;align-items:center;padding:5px 8px;background:rgba(167,139,250,0.05);border:1px solid rgba(167,139,250,0.15);border-radius:6px;font-size:0.72rem;gap:6px">
+          <span style="color:#94a3b8;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">🔄 ${t.nota||'Intercambio'}</span>
+          <span style="color:#475569;white-space:nowrap">Q${(+(t.valorDamos)||0).toFixed(0)}↔Q${(+(t.valorRec)||0).toFixed(0)}</span>
+          <span style="color:${col};font-weight:700;white-space:nowrap">${diff>=0?'+':''}Q${diff.toFixed(0)}</span>
+        </div>`;
+      })
+    ].join('');
+
+    return `
+      <div style="flex:1;min-width:220px">
+        <div style="font-size:0.68rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#f59e0b;margin-bottom:8px">${label} · ${fecha}</div>
+        <div style="display:flex;gap:8px;margin-bottom:8px">
+          <div style="background:#0f172a;border:1px solid #1e2435;border-radius:8px;padding:8px 12px;text-align:center;flex:1">
+            <div style="font-size:1rem;font-weight:700;color:#34d399">Q${totalQ.toFixed(0)}</div>
+            <div style="font-size:0.6rem;color:#64748b;margin-top:2px">Vendido</div>
+          </div>
+          <div style="background:#0f172a;border:1px solid #1e2435;border-radius:8px;padding:8px 12px;text-align:center;flex:1">
+            <div style="font-size:1rem;font-weight:700;color:#60a5fa">${totalEst}</div>
+            <div style="font-size:0.6rem;color:#64748b;margin-top:2px">Estampas</div>
+          </div>
+          ${ints.length>0?`<div style="background:#0f172a;border:1px solid #1e2435;border-radius:8px;padding:8px 12px;text-align:center;flex:1">
+            <div style="font-size:1rem;font-weight:700;color:#a78bfa">${ints.length}</div>
+            <div style="font-size:0.6rem;color:#64748b;margin-top:2px">Intercambios</div>
+          </div>`:''}
+        </div>
+        <div style="display:flex;flex-direction:column;gap:4px">${filas}</div>
+      </div>`;
+  }
+
+  el.innerHTML = `
+    <div style="font-family:'Bebas Neue',sans-serif;font-size:1.2rem;letter-spacing:2px;color:#f59e0b;margin-bottom:12px">📅 Reporte del día</div>
+    <div style="display:flex;gap:18px;flex-wrap:wrap">
+      ${diaHTML('HOY', hoy)}
+      ${diaHTML('AYER', ayer)}
+    </div>`;
 }
 
 function renderStock() {
